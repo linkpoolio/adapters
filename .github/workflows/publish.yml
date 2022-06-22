@@ -1,0 +1,130 @@
+name: Publish Adapter
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  packages:
+    runs-on: ubuntu-latest
+    name: Verify dependency package archives
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Re-download dependencies & verify checksum
+        run: yarn install --check-cache
+
+  run-basic-checks:
+    runs-on: ubuntu-latest
+    name: Run linters
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - run: yarn install
+
+      - run: yarn setup
+
+      - run: yarn lint
+
+      - run: yarn format:check
+
+  matrix-adapters:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.create-matrix.outputs.result }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - run: yarn install
+
+      - run: yarn setup
+
+      - name: Generate job matrix
+        id: create-matrix
+        run: yarn generate:gha:matrix
+
+  build-and-publish:
+    runs-on: ubuntu-latest
+    needs: [run-basic-checks, matrix-adapters]
+    name: Build and Publish (${{ matrix.adapter.shortName }})
+    strategy:
+      max-parallel: 3
+      matrix: ${{fromJson(needs.matrix-adapters.outputs.matrix)}}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Check whether generic adapter changed
+        id: adapter_did_change
+        run: ./.github/scripts/isadapterchange.sh ${{ matrix.adapter.shortName }}
+
+      - name: Checkout the Repo
+        if: steps.adapter_did_change.outputs.result == 'true'
+        uses: actions/checkout@v2
+
+      - name: Checkout the Repo
+        if: steps.adapter_did_change.outputs.result == 'true'
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        if: steps.adapter_did_change.outputs.result == 'true'
+        with:
+          node-version: '16.x'
+
+      - name: Install Yarn Dependencies
+        if: steps.adapter_did_change.outputs.result == 'true'
+        run: yarn
+
+      - name: Setup Adapters
+        if: steps.adapter_did_change.outputs.result == 'true'
+        run: yarn setup
+
+      - name: Generate docker-compose File
+        if: steps.adapter_did_change.outputs.result == 'true'
+        shell: bash
+        run: yarn generate:docker-compose
+
+      - name: Build Docker Image
+        if: steps.adapter_did_change.outputs.result == 'true'
+        shell: bash
+        run: docker-compose -f docker-compose.generated.yaml build ${{ matrix.adapter.name }}
+
+      - name: Login to Public ECR
+        if: steps.adapter_did_change.outputs.result == 'true'
+        uses: docker/login-action@v1
+        with:
+          registry: public.ecr.aws
+          username: ${{ secrets.AWS_ACCESS_KEY }}
+          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy Image
+        if: steps.adapter_did_change.outputs.result == 'true'
+        run: |
+          docker tag ${{ matrix.adapter.image }} public.ecr.aws/${{ secrets.AWS_NAMESPACE }}/${{ matrix.adapter.image }}
+          docker push public.ecr.aws/${{ secrets.AWS_NAMESPACE }}/${{ matrix.adapter.image }}

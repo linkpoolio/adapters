@@ -1,6 +1,6 @@
 # Chainlink NFTBank External Adapter
 
-![1.2.0](https://img.shields.io/github/package-json/v/smartcontractkit/external-adapters-js?filename=packages/sources/nftbank/package.json)
+![1.2.1](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/nftbank/package.json)
 
 The external adapter for [NFTBank](https://nftbank.ai/).
 

@@ -1,59 +1,94 @@
-# Chainlink External Adapter for Tac-index
+# Chainlink External Adapter for TAC Index
 
-[TAC Index](http://tacindex.com/)
+![1.0.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/tac-index/package.json)
 
-[TAC Index API](http://tacindex.com/)
+Base URL https://api.tacindex.com
 
-### Environment Variables
+This document was generated automatically. Please see [README Generator](../../scripts#readme-generator) for more info.
 
-| Required? |      Name      | Description | Options | Defaults to |
-| :-------: | :------------: | :---------: | :-----: | :---------: |
-|    ✅     | `API_USERNAME` | An API key  |         |             |
-|    ✅     | `API_PASSWORD` | An API key  |         |             |
+## Environment Variables
 
----
-
-### Input Parameters
-
-| Required? |   Name   |     Description     |         Options          | Defaults to |
-| :-------: | :------: | :-----------------: | :----------------------: | :---------: |
-|           | endpoint | The endpoint to use | [price](#price-endpoint) |             |
+| Required? |     Name     |   Description   |  Type  | Options | Default |
+| :-------: | :----------: | :-------------: | :----: | :-----: | :-----: |
+|    ✅     | API_USERNAME | An API username | string |         |         |
+|    ✅     | API_PASSWORD | An API password | string |         |         |
 
 ---
 
-## Price Endpoint
+## Input Parameters
 
-This endpoint returns the price of 1 kilogram of freight based on a given route.
+Every EA supports base input parameters from [this list](../../core/bootstrap#base-input-parameters)
+
+| Required? |   Name   |     Description     |  Type  |          Options           | Default |
+| :-------: | :------: | :-----------------: | :----: | :------------------------: | :-----: |
+|           | endpoint | The endpoint to use | string | [price](#example-endpoint) | `price` |
+
+## Example Endpoint
+
+`price` is the only supported name for this endpoint.
 
 ### Input Params
 
-| Required? |    Name    |                   Description                    |        Options         | Defaults to |
-| :-------: | :--------: | :----------------------------------------------: | :--------------------: | :---------: |
-|    ✅     |  `route`   | The route for which we want the price of freight |                        |             |
-|           | `currency` |   The currency for which the price will be in    | `euro`, `usd`, `local` |             |
+| Required? |   Name   | Aliases |                         Description                          |  Type  |        Options         | Default | Depends On | Not Valid With |
+| :-------: | :------: | :-----: | :----------------------------------------------------------: | :----: | :--------------------: | :-----: | :--------: | :------------: |
+|    ✅     |  route   |         | The route for which we want to get the latest freight price. | string |                        |         |            |                |
+|           | currency |         |             The desired currency for the price.              | string | `EURO`, `LOCAL`, `USD` |  `USD`  |            |                |
 
-### Sample Input
+### Example
+
+Request:
 
 ```json
 {
   "id": "1",
   "data": {
-    "route": "HKG-DFW",
+    "endpoint": "price",
+    "route": "HKG-SIN",
     "currency": "usd"
+  },
+  "debug": {
+    "cacheKey": "DSM9o/8muASna6YwevpEKqLcZWs="
   }
 }
 ```
 
-### Sample Output
+Response:
 
 ```json
 {
   "jobRunID": "1",
-  "result": 8.6,
-  "providerStatusCode": 200,
-  "statusCode": 200,
   "data": {
-    "result": 8.6
-  }
+    "payload": [
+      {
+        "route_code": "HKG-SIN",
+        "route_type": "origin-destination",
+        "route_description": "Hong Kong to Singapore",
+        "origin": {
+          "code": "HKG",
+          "name": "Hong Kong",
+          "type": "city"
+        },
+        "destination": {
+          "code": "SIN",
+          "name": "Singapore",
+          "type": "city"
+        },
+        "date": "2022-02-21",
+        "index_name": "ANP MAWB",
+        "usd": "2.88",
+        "euro": "2.54",
+        "local": "22.47",
+        "local_currency": "HKD"
+      }
+    ],
+    "result": 2.88
+  },
+  "result": 2.88,
+  "statusCode": 200,
+  "providerStatusCode": 200
 }
 ```
+
+---
+
+MIT License

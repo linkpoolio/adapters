@@ -1,145 +1,216 @@
-name: Build LinkPool
+name: Build and Test
 
 on:
   pull_request: ~
   push:
     branches:
-      - develop-lp
-      - chore/sc-*/develop-lp-rebase-*
+      - master
+      - develop
 jobs:
   packages:
-    if: ${{ github.repository_owner  == 'linkpoolio' }}
     runs-on: ubuntu-latest
     name: Verify dependency package archives
     steps:
       - uses: actions/checkout@v2
+
       - uses: actions/setup-node@v2
         with:
           node-version: '16.x'
+
       - name: Install Yarn
         run: npm install -g yarn
+
       - name: Re-download dependencies & verify checksum
         run: yarn install --check-cache
 
   run-basic-checks:
-    if: ${{ github.repository_owner  == 'linkpoolio' }}
     runs-on: ubuntu-latest
-    name: Run linters and unit tests
+    name: Run linters
     steps:
       - uses: actions/checkout@v2
+
       - uses: actions/setup-node@v2
         with:
           node-version: '16.x'
+
       - name: Install Yarn
         run: npm install -g yarn
+
       - run: yarn install
+
       - run: yarn setup
+
       - run: yarn lint
+
       - run: yarn format:check
 
   matrix-adapters:
-    if: ${{ github.repository_owner  == 'linkpoolio' }}
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.create-matrix.outputs.result }}
     steps:
       - uses: actions/checkout@v2
+
       - uses: actions/setup-node@v2
         with:
           node-version: '16.x'
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - run: yarn install
+
+      - run: yarn setup
+
       - name: Generate job matrix
         id: create-matrix
         run: yarn generate:gha:matrix
 
-  test-linkpool-utils-unit:
-    if: ${{ github.repository_owner  == 'linkpoolio' }}
+  test-shared-unit:
     runs-on: ubuntu-latest
     needs: [run-basic-checks]
-    name: (linkpool) Unit test utils
+    name: Unit test (shared)
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout the Repo
+        uses: actions/checkout@v2
+
       - uses: actions/setup-node@v2
         with:
           node-version: '16.x'
-      - name: Check if package has unit tests
-        id: adapter_has_unit_tests
-        run: ./.github/scripts/hastests.sh utils linkpool unit
+
       - name: Install yarn deps
-        if: steps.adapter_has_unit_tests.outputs.result == 'true'
         run: yarn
+
       - name: Setup yarn
-        if: steps.adapter_has_unit_tests.outputs.result == 'true'
         run: yarn setup
-      - name: Run Unit Tests
-        if: steps.adapter_has_unit_tests.outputs.result == 'true'
-        run: yarn test ./packages/linkpool/utils/test/unit
+
+      - name: Run Shared Unit Tests
+        run: yarn test ./packages/shared/test/unit
 
   test-adapters-unit:
-    if: ${{ github.repository_owner  == 'linkpoolio' }}
     runs-on: ubuntu-latest
     needs: [run-basic-checks, matrix-adapters]
-    name: (${{ matrix.adapter.type }}) Unit test ${{ matrix.adapter.name }} adapter
+    name: Unit test (${{ matrix.adapter.shortName }})
     strategy:
+      max-parallel: 10
       matrix: ${{fromJson(needs.matrix-adapters.outputs.matrix)}}
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Check whether generic adapter changed
+        id: adapter_did_change
+        run: ./.github/scripts/isadapterchange.sh ${{ matrix.adapter.shortName }}
+
+      - name: Checkout the Repo
+        if: steps.adapter_did_change.outputs.result == 'true'
+        uses: actions/checkout@v2
+
       - uses: actions/setup-node@v2
+        if: steps.adapter_did_change.outputs.result == 'true'
         with:
           node-version: '16.x'
+
       - name: Check if adapter has unit tests
+        if: steps.adapter_did_change.outputs.result == 'true'
         id: adapter_has_unit_tests
-        run: ./.github/scripts/hastests.sh ${{ matrix.adapter.name }} ${{ matrix.adapter.type }} unit
+        run: ./.github/scripts/hastests.sh ${{ matrix.adapter.shortName }} unit
+
       - name: Install yarn deps
-        if: steps.adapter_has_unit_tests.outputs.result == 'true'
+        if: steps.adapter_did_change.outputs.result == 'true' && steps.adapter_has_unit_tests.outputs.result == 'true'
         run: yarn
+
       - name: Setup yarn
-        if: steps.adapter_has_unit_tests.outputs.result == 'true'
+        if: steps.adapter_did_change.outputs.result == 'true' && steps.adapter_has_unit_tests.outputs.result == 'true'
         run: yarn setup
+
       - name: Run Unit Tests
-        if: steps.adapter_has_unit_tests.outputs.result == 'true'
-        run: yarn test ./packages/${{ matrix.adapter.type }}/${{ matrix.adapter.name }}/test/unit
+        if: steps.adapter_did_change.outputs.result == 'true' && steps.adapter_has_unit_tests.outputs.result == 'true'
+        run: yarn test ./packages/${{ matrix.adapter.shortName }}/test/unit
 
   test-adapters-integration:
-    if: ${{ github.repository_owner  == 'linkpoolio' }}
     runs-on: ubuntu-latest
     needs: [run-basic-checks, matrix-adapters]
-    name: (${{ matrix.adapter.type }}) Integration Test ${{ matrix.adapter.name }} adapter
+    name: Integration test (${{ matrix.adapter.shortName }})
     strategy:
+      max-parallel: 10
       matrix: ${{fromJson(needs.matrix-adapters.outputs.matrix)}}
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Check whether generic adapter changed
+        id: adapter_did_change
+        run: ./.github/scripts/isadapterchange.sh ${{ matrix.adapter.shortName }}
+
+      - name: Checkout the Repo
+        if: steps.adapter_did_change.outputs.result == 'true'
+        uses: actions/checkout@v2
+
       - uses: actions/setup-node@v2
+        if: steps.adapter_did_change.outputs.result == 'true'
         with:
           node-version: '16.x'
+
       - name: Check if adapter has integration tests
+        if: steps.adapter_did_change.outputs.result == 'true'
         id: adapter_has_integration_tests
-        run: ./.github/scripts/hastests.sh ${{ matrix.adapter.name }} ${{ matrix.adapter.type }} integration
+        run: ./.github/scripts/hastests.sh ${{ matrix.adapter.shortName }} integration
+
       - name: Install yarn deps
-        if: steps.adapter_has_integration_tests.outputs.result == 'true'
+        if: steps.adapter_did_change.outputs.result == 'true' && steps.adapter_has_integration_tests.outputs.result == 'true'
         run: yarn
+
       - name: Setup yarn
-        if: steps.adapter_has_integration_tests.outputs.result == 'true'
+        if: steps.adapter_did_change.outputs.result == 'true' && steps.adapter_has_integration_tests.outputs.result == 'true'
         run: yarn setup
+
       - name: Run Unit Tests
-        if: steps.adapter_has_integration_tests.outputs.result == 'true'
-        run: yarn test ./packages/${{ matrix.adapter.type }}/${{ matrix.adapter.name }}/test/integration
+        if: steps.adapter_did_change.outputs.result == 'true' && steps.adapter_has_integration_tests.outputs.result == 'true'
+        run: yarn test ./packages/${{ matrix.adapter.shortName }}/test/integration
 
   build-adapters:
-    if: ${{ github.repository_owner  == 'linkpoolio' }}
     runs-on: ubuntu-latest
     needs: [run-basic-checks, matrix-adapters]
-    name: (${{ matrix.adapter.type }}) Build ${{ matrix.adapter.name }}-adapter adapter
+    name: Build (${{ matrix.adapter.name }})
     strategy:
+      max-parallel: 3
       matrix: ${{fromJson(needs.matrix-adapters.outputs.matrix)}}
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Check whether generic adapter changed
+        id: adapter_did_change
+        run: ./.github/scripts/isadapterchange.sh ${{ matrix.adapter.shortName }}
+
+      - name: Checkout the Repo
+        if: steps.adapter_did_change.outputs.result == 'true'
+        uses: actions/checkout@v2
+
       - uses: actions/setup-node@v2
+        if: steps.adapter_did_change.outputs.result == 'true'
         with:
           node-version: '16.x'
+
       - name: Install yarn deps
+        if: steps.adapter_did_change.outputs.result == 'true'
         run: yarn
+
       - name: Setup yarn
+        if: steps.adapter_did_change.outputs.result == 'true'
         run: yarn setup
+
       - name: Generate docker-compose file
+        if: steps.adapter_did_change.outputs.result == 'true'
         run: yarn generate:docker-compose
-      - run: docker-compose -f docker-compose.generated.yaml build ${{ matrix.adapter.name }}-adapter
+
+      - name: Build docker image
+        if: steps.adapter_did_change.outputs.result == 'true'
+        run: docker-compose -f docker-compose.generated.yaml build ${{ matrix.adapter.name }}

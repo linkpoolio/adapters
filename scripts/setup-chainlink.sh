@@ -13,7 +13,7 @@ info() {
 gitstatus=$(git status | awk 'NR==2')
 if [[ $gitstatus != "nothing to commit, working tree clean" ]]; then
   echo "$(tput setaf 3)⚠️  It is recommended to run this script with a clean git working tree$(tput setaf 7)"
-  # exit 1
+  exit 1
 fi
 
 
@@ -43,13 +43,63 @@ do
   nextVersion="${version%$'\n'}"
   versions+=($nextVersion)
 
+  # Checkout repo version
+  cd setup-chainlink.tmp
+  git -c advice.detachedHead=false checkout tags/$nextVersion
+  cd ..
+
+  # Copy bootstrap/schemas/env.json to package
+  cp "./setup-chainlink.tmp/packages/core/bootstrap/schemas/env.json" "$path/env.bootstrap.json"
+
+  # Get vendor JSONs
+  vendorBase="./setup-chainlink.tmp/packages/core"
+  bootstrapPath="${vendorBase}/bootstrap/package.json"
+  testHelpersPath="${vendorBase}/test-helpers/package.json"
+  factoriesPath="${vendorBase}/factories/package.json"
+
+  bootstrapJSON=$(cat $bootstrapPath)
+  testHelpersJSON=$(cat $testHelpersPath)
+  factoriesJSON=$(cat $factoriesPath)
+
   # Get package.json
   packageJsonPath="${path}package.json"
   packageJson=$(cat $packageJsonPath)
 
-  # Generate new package.json that replaces "workspace" references to local references
+  # Generate new package.json that
+  #  a) replaces "workspace" references to local references, and
+  #  b) copies vendor library deps to package.json
+
   node > package.json.tmp <<EOF
     let data = $packageJson
+
+    const exclude = [
+      '@chainlink/ea-bootstrap',
+      '@chainlink/ea-test-helpers',
+      '@chainlink/ea-factories',
+      '@chainlink/types',
+      'tslib',
+    ]
+
+    const vendorDeps = []
+
+    const setVendorDeps = (({ dependencies, devDependencies }) => {
+      Object.keys(dependencies).map((key) => {
+        if (!exclude.includes(key)) {
+          vendorDeps.push({ key, type: 'dependencies', value: dependencies[key] })
+        }
+      })
+      Object.keys(devDependencies).map((key) => {
+        if (!exclude.includes(key)) {
+          vendorDeps.push({ key, type: 'devDependencies', value: devDependencies[key] })
+        }
+      })
+    })
+
+    setVendorDeps($factoriesJSON)
+    setVendorDeps($testHelpersJSON)
+    setVendorDeps($bootstrapJSON)
+
+    vendorDeps.map(({ key, type, value }) => data[type][key] = value)
 
     const libraries = [
       {
@@ -97,12 +147,6 @@ EOF
 
   # Cleanup
   rm package.json.tmp
-
-  # Copy bootstrap/schemas/env.json to package
-  cd setup-chainlink.tmp
-  git -c advice.detachedHead=false checkout tags/$nextVersion
-  cd ..
-  cp "./setup-chainlink.tmp/packages/core/bootstrap/schemas/env.json" "$path/env.bootstrap.json"
 done
 
 # Step 2: Setup local vendor directory with .chainlink versions

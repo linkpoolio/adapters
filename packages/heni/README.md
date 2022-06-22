@@ -1,47 +1,69 @@
-# Chainlink External Adapter for Heni
+# @chainlink/heni-adapter env var schema
 
-### Environment Variables
+![1.0.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/heni/package.json)
 
-| Required? |  Name   |                            Description                             | Options | Defaults to |
-| :-------: | :-----: | :----------------------------------------------------------------: | :-----: | :---------: |
-|           | API_KEY | An API key that can be obtained from [here](https://www.heni.com/) |         |             |
+Base URL https://api.nftoracle.heni.com/
 
----
+This document was generated automatically. Please see [README Generator](../../scripts#readme-generator) for more info.
 
-### Input Parameters
+## Environment Variables
 
-| Required? |   Name   |     Description     |         Options          | Defaults to |
-| :-------: | :------: | :-----------------: | :----------------------: | :---------: |
-|           | endpoint | The endpoint to use | [price](#price-endpoint) |    price    |
+| Required? |  Name   | Description |  Type  | Options | Default |
+| :-------: | :-----: | :---------: | :----: | :-----: | :-----: |
+|    ✅     | API_KEY |             | string |         |         |
 
 ---
+
+## Input Parameters
+
+Every EA supports base input parameters from [this list](../../core/bootstrap#base-input-parameters)
+
+| Required? |   Name   |     Description     |  Type  |         Options          | Default |
+| :-------: | :------: | :-----------------: | :----: | :----------------------: | :-----: |
+|           | endpoint | The endpoint to use | string | [price](#price-endpoint) | `price` |
 
 ## Price Endpoint
 
-The endpoint returns and index price which represents a TWAP of the sale prices of the last 15 sales of NFTs in a collection.
+`price` is the only supported name for this endpoint.
 
-### Sample Input
+### Input Params
+
+There are no input parameters for this endpoint.
+
+### Example
+
+Request:
 
 ```json
 {
   "id": "1",
   "data": {
     "endpoint": "price"
+  },
+  "debug": {
+    "cacheKey": "VrI9ktHz2Gp7oHbb2+1HMGmvh5k="
   }
 }
 ```
 
-### Sample Output
-
-The output price is multiplied by 10^9 and is in ETH.
+Response:
 
 ```json
 {
   "jobRunID": "1",
-  "result": 4962921295,
-  "statusCode": 200,
   "data": {
-    "result": 4962921295
-  }
+    "price": "5.069164497",
+    "last_updated": "2022-02-04T13:55:27+00:00",
+    "last_sale_time": "2022-02-04T10:47:07+00:00",
+    "GITSHA": "171b8a4feff9ae020efab1ad96c784d51be95c34",
+    "result": 5069164497
+  },
+  "result": 5069164497,
+  "statusCode": 200,
+  "providerStatusCode": 200
 }
 ```
+
+---
+
+MIT License

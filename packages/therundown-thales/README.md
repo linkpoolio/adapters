@@ -1,6 +1,6 @@
 # Chainlink External Adapter for TheRundown Thales
 
-![1.3.3](https://img.shields.io/github/package-json/v/smartcontractkit/external-adapters-js?filename=packages/sources/therundown-thales/package.json)
+![1.3.4](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/therundown-thales/package.json)
 
 Base URL https://therundown-therundown-v1.p.rapidapi.com/
 

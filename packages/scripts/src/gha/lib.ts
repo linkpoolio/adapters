@@ -19,7 +19,9 @@ export async function getJobMatrix(): Promise<JobMatrix> {
   const adapter = Object.entries(dockerfile.services).map(([k, v]) => {
     return {
       name: k,
+      shortName: k.replace("-adapter",""),
       type: v.build.labels[DockerLabels.EA_TYPE],
+      image: v.image,
     }
   })
 

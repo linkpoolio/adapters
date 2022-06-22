@@ -41,7 +41,7 @@ exports[`execute statistic endpoint error calls when successfully requests the A
 Object {
   "error": Object {
     "feedID": "{\\"data\\":{\\"endpoint\\":\\"statistics\\",\\"assetAddress\\":\\"0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb\\"}}",
-    "message": "Unexpected error occurred forming the result from the API response. Error: invalid BigNumber string (argument=\\"value\\", value=\\"potato\\", code=INVALID_ARGUMENT, version=bignumber/5.6.0)",
+    "message": "Unexpected error occurred forming the result from the API response. Error: invalid BigNumber string (argument=\\"value\\", value=\\"potato\\", code=INVALID_ARGUMENT, version=bignumber/5.6.2)",
     "name": "AdapterError",
     "url": "https:/api.upshot.io/v1/collections/contractaddress/0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb",
   },

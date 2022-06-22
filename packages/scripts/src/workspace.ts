@@ -42,7 +42,7 @@ export function getWorkspacePackages(additionalTypes: string[] = []): WorkspaceP
         version: pkg.version,
       }
     })
-    .filter((v) => adapterTypes.includes(v.type))
+    .filter((v) => adapterTypes.includes(v.type) && v.descopedName !== 'adapters' && v.descopedName !== 'shared')
     .map((p) => {
       let tsconf: TsConfig | undefined
       try {

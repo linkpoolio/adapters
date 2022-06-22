@@ -1,6 +1,7 @@
 # Build artifacts
 packages/**/*.zip
 dist
+packages/**/bundle
 **/tsconfig.tsbuildinfo
 .DS_Store
 

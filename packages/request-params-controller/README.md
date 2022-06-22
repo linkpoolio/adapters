@@ -1,62 +1,119 @@
 # Chainlink External Adapter to control optional request parameters
 
-An adapter that helps TOML jobspec tasks dealing with optional request parameters not present in the request parameters (`cborparse` task output).
+![1.0.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/request-params-controller/package.json)
 
-**BE AWARE**: run this adapter with caching, rate limiting and cache warming features disabled:
+This document was generated automatically. Please see [README Generator](../../scripts#readme-generator) for more info.
 
-- `CACHE_ENABLED=false`
-- `RATE_LIMIT_ENABLED=false`
-- `WARMUP_ENABLED=false`
+## Environment Variables
 
-### Input Parameters
-
-| Required? |   Name   |     Description     |                             Options                              | Defaults to |
-| :-------: | :------: | :-----------------: | :--------------------------------------------------------------: | :---------: |
-|           | endpoint | The endpoint to use | [request-params-controller](#request-params-controller-endpoint) |             |
+There are no environment variables for this adapter.
 
 ---
 
-## Request-params-controller Endpoint
+## Input Parameters
 
-Sets to `default` (e.g. `null`) the optional parameters (in `optionalParams`) that don't exist in `params` (a JSON object, e.g. `cborparse` task output).
+Every EA supports base input parameters from [this list](../../core/bootstrap#base-input-parameters)
 
-This endpoint output is not returned as `result`.
+| Required? |   Name   |     Description     |  Type  |                            Options                             |           Default           |
+| :-------: | :------: | :-----------------: | :----: | :------------------------------------------------------------: | :-------------------------: |
+|           | endpoint | The endpoint to use | string | [request-params-controller](#requestparamscontroller-endpoint) | `request-params-controller` |
+
+## RequestParamsController Endpoint
+
+`request-params-controller` is the only supported name for this endpoint.
 
 ### Input Params
 
-| Required? |       Name       |                                                                Description                                                                 | Options | Defaults to |
-| :-------: | :--------------: | :----------------------------------------------------------------------------------------------------------------------------------------: | :-----: | :---------: |
-|    ✅     |     `params`     |                      A map containing the request parameters (i.e. the JSON object returned by the `cborparse` task)                       |         |             |
-|    ✅     | `optionalParams` | An array that contains the optional request parameters names. These will be set to the `default` value if they are not present in `params` |         |             |
-|           |    `default`     |                    The value an optional parameter will be set to if it is not present in `params`. Defaults to `null`                     |         |             |
+| Required? |      Name      | Aliases |                                                                Description                                                                 |  Type  | Options | Default | Depends On | Not Valid With |
+| :-------: | :------------: | :-----: | :----------------------------------------------------------------------------------------------------------------------------------------: | :----: | :-----: | :-----: | :--------: | :------------: |
+|    ✅     |     params     |         |                      A map containing the request parameters (i.e. the JSON object returned by the `cborparse` task)                       | object |         |         |            |                |
+|    ✅     | optionalParams |         | An array that contains the optional request parameters names. These will be set to the `default` value if they are not present in `params` | array  |         |         |            |                |
+|           |    default     |         |                    The value an optional parameter will be set to if it is not present in `params`. Defaults to `null`                     |        |         |         |            |                |
 
-### Sample Input
+### Example
+
+Request:
 
 ```json
 {
   "id": "1",
   "data": {
+    "endpoint": "request-params-controller",
     "params": {
-      "endpoint": "location-current-conditions",
-      "lat": 40.78136100040876,
-      "lon": -77.89687509335249
+      "param1": "value1",
+      "param2": 777.77,
+      "param3": ["linkpool"],
+      "param4": true
     },
-    "optionalParams": ["units"]
+    "optionalParams": ["param2", "param5", "param6"]
+  },
+  "debug": {
+    "cacheKey": "VKYAw8zJMe0PZsCDtPpDxpwdFyw="
   }
 }
 ```
 
-### Sample Output
+Response:
 
 ```json
 {
   "jobRunID": "1",
   "data": {
-    "endpoint": "location-current-conditions",
-    "lat": 40.78136100040876,
-    "lon": -77.89687509335249,
-    "units": null
+    "param1": "value1",
+    "param2": 777.77,
+    "param3": ["linkpool"],
+    "param4": true,
+    "param5": null,
+    "param6": null
   },
   "statusCode": 200
 }
 ```
+
+<details>
+<summary>Additional Examples</summary>
+
+Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "request-params-controller",
+    "params": {
+      "param1": "value1",
+      "param2": 777.77,
+      "param3": ["linkpool"],
+      "param4": true
+    },
+    "optionalParams": ["param2", "param5", "param6"],
+    "default": 42
+  },
+  "debug": {
+    "cacheKey": "Xz80cAjA2fSmO5zSqsbbU4JGccU="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "param1": "value1",
+    "param2": 777.77,
+    "param3": ["linkpool"],
+    "param4": true,
+    "param5": 42,
+    "param6": 42
+  },
+  "statusCode": 200
+}
+```
+
+</details>
+
+---
+
+MIT License

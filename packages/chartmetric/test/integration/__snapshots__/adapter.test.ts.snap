@@ -34,7 +34,7 @@ exports[`execute statistics endpoint error calls when successfully requests the 
 Object {
   "error": Object {
     "feedID": "{\\"data\\":{\\"endpoint\\":\\"statistics\\",\\"artistId\\":439}}",
-    "message": "Unexpected error encoding the statistics: {\\"youtube\\":\\"yup\\",\\"spotify\\":0,\\"tiktok\\":3200000}. Reason: Error: invalid BigNumber string (argument=\\"value\\", value=\\"yup\\", code=INVALID_ARGUMENT, version=bignumber/5.6.0)",
+    "message": "Unexpected error encoding the statistics: {\\"youtube\\":\\"yup\\",\\"spotify\\":0,\\"tiktok\\":3200000}. Reason: Error: invalid BigNumber string (argument=\\"value\\", value=\\"yup\\", code=INVALID_ARGUMENT, version=bignumber/5.6.2)",
     "name": "AdapterError",
     "url": "https:/api.chartmetric.com/api/artist/439",
   },
