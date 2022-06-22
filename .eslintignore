@@ -1,13 +1,18 @@
-# don't ever lint node_modules
+# Dependencies
 node_modules
-# don't lint build output (make sure it's set to your correct build folder name)
-dist
-# don't ever lint vendor
-vendor
-
-# don't lint nyc coverage output
-coverage
-
 .yarn
-.vscode
+.pnp.cjs
+.pnp.loader.mjs
+
+# Build Assets
+dist
+vendor
+packages/**/bundle
 packages/scripts
+
+# Config files
+.vscode
+.github
+coverage
+docker*
+grafana

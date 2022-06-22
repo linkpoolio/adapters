@@ -1,10 +1,9 @@
 #!/bin/bash
 
 adapter=$1
-type=$2
-test=$3
+test=$2
 
-if [ -d ./packages/${type}/${adapter}/test/${test} ]
+if [ -d ./packages/${adapter}/test/${test} ]
 then
   echo "::set-output name=result::true"
   exit 0;

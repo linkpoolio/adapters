@@ -1,0 +1,177 @@
+name: Test
+
+on:
+  pull_request: ~
+
+jobs:
+  packages:
+    runs-on: ubuntu-latest
+    name: Verify dependency package archives
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - name: Re-download dependencies & verify checksum
+        run: yarn install --check-cache
+
+  run-basic-checks:
+    runs-on: ubuntu-latest
+    name: Run linters
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - run: yarn
+
+      - run: yarn setup
+
+      - run: yarn lint
+
+      - run: yarn format:check
+
+  matrix-adapters:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.create-matrix.outputs.result }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - run: yarn
+
+      - name: Generate job matrix
+        id: create-matrix
+        run: yarn generate:gha:matrix
+
+  test-shared-unit:
+    runs-on: ubuntu-latest
+    needs: [run-basic-checks]
+    name: Unit test (shared)
+    steps:
+      - name: Checkout the Repo
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install yarn deps
+        run: yarn
+
+      - name: Setup yarn
+        run: yarn setup
+
+      - name: Run Shared Unit Tests
+        run: yarn test ./packages/shared/test/unit
+
+  test-adapters-unit:
+    runs-on: ubuntu-latest
+    needs: [run-basic-checks, matrix-adapters]
+    name: Unit test (${{ matrix.adapter.shortName }})
+    strategy:
+      matrix: ${{fromJson(needs.matrix-adapters.outputs.matrix)}}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Check whether generic adapter changed
+        id: adapter_did_change
+        run: ./.github/scripts/isadapterchange.sh ${{ matrix.adapter.shortName }}
+
+      - uses: actions/setup-node@v2
+        if: steps.adapter_did_change.outputs.result == 'true'
+        with:
+          node-version: '16.x'
+
+      - name: Check if adapter has unit tests
+        if: steps.adapter_did_change.outputs.result == 'true'
+        id: adapter_has_unit_tests
+        run: ./.github/scripts/hastests.sh ${{ matrix.adapter.shortName }} unit
+
+      - uses: actions/cache@v2
+        if: steps.adapter_did_change.outputs.result == 'true'
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install yarn deps
+        if: steps.adapter_did_change.outputs.result == 'true' && steps.adapter_has_unit_tests.outputs.result == 'true'
+        run: yarn
+
+      - name: Setup yarn
+        if: steps.adapter_did_change.outputs.result == 'true' && steps.adapter_has_unit_tests.outputs.result == 'true'
+        run: yarn setup
+
+      - name: Run Unit Tests
+        if: steps.adapter_did_change.outputs.result == 'true' && steps.adapter_has_unit_tests.outputs.result == 'true'
+        run: yarn test ./packages/${{ matrix.adapter.shortName }}/test/unit
+
+  test-adapters-integration:
+    runs-on: ubuntu-latest
+    needs: [run-basic-checks, matrix-adapters]
+    name: Integration test (${{ matrix.adapter.shortName }})
+    strategy:
+      matrix: ${{fromJson(needs.matrix-adapters.outputs.matrix)}}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Check whether generic adapter changed
+        id: adapter_did_change
+        run: ./.github/scripts/isadapterchange.sh ${{ matrix.adapter.shortName }}
+
+      - uses: actions/setup-node@v2
+        if: steps.adapter_did_change.outputs.result == 'true'
+        with:
+          node-version: '16.x'
+
+      - name: Check if adapter has integration tests
+        if: steps.adapter_did_change.outputs.result == 'true'
+        id: adapter_has_integration_tests
+        run: ./.github/scripts/hastests.sh ${{ matrix.adapter.shortName }} integration
+
+      - uses: actions/cache@v2
+        if: steps.adapter_did_change.outputs.result == 'true'
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install yarn deps
+        if: steps.adapter_did_change.outputs.result == 'true' && steps.adapter_has_integration_tests.outputs.result == 'true'
+        run: yarn
+
+      - name: Setup yarn
+        if: steps.adapter_did_change.outputs.result == 'true' && steps.adapter_has_integration_tests.outputs.result == 'true'
+        run: yarn setup
+
+      - name: Run Unit Tests
+        if: steps.adapter_did_change.outputs.result == 'true' && steps.adapter_has_integration_tests.outputs.result == 'true'
+        run: yarn test ./packages/${{ matrix.adapter.shortName }}/test/integration

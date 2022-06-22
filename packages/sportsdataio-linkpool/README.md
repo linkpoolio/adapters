@@ -1,6 +1,6 @@
 # Chainlink External Adapter for Sportsdataio (LinkPool version)
 
-![1.0.1](https://img.shields.io/github/package-json/v/smartcontractkit/external-adapters-js?filename=packages/sources/sportsdataio-linkpool/package.json)
+![1.0.1](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/sportsdataio-linkpool/package.json)
 
 Adapter got get data from Sportsdata.io
 

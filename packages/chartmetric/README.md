@@ -1,6 +1,6 @@
 # Chainlink External Adapter for Chartmetric
 
-![1.0.0](https://img.shields.io/github/package-json/v/smartcontractkit/external-adapters-js?filename=packages/sources/chartmetric/package.json)
+![1.0.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/chartmetric/package.json)
 
 Chartmetric provides data and statistics for music artists.
 

@@ -1,127 +1,646 @@
-# Generic External Adapter
+# @chainlink/generic-adapter env var schema
 
-An EA for almost any API
+![1.0.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/generic/package.json)
 
-### Environment Variables
+This document was generated automatically. Please see [README Generator](../../scripts#readme-generator) for more info.
 
-The Generic External Adapter is built on top of the EA core framework, supporting its [environment variables](../../core/bootstrap/README.md).
+## Environment Variables
 
-**TO BE AWARE:** the adapter configuration set via the environment variables listed below is constant at run time
-
-| Required? |        Name         |                                                                                                                   Description                                                                                                                   |                               Options                               | Defaults to |
-| :-------: | :-----------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------: | :---------: |
-|           |  `GENERIC_PREFIX`   | It forces to look up any of the environment variables listed below prefixed with `<GENERIC_PREFIX value>_`. For instance, `GENERIC_PREFIX = 'A_PREFIX'` will make the adapter look up `A_PREFIX_GENERIC_BASE_URL` instead of `GENERIC_BASE_URL` |                                                                     |             |
-|    ✅     | `GENERIC_BASE_URL`  |                                                                                                     The consistent part of the API address                                                                                                      |                                                                     |             |
-|           | `GENERIC_AUTH_TYPE` |               The authorization type of the API. Additional environment variables may involved/required depending on its value See [Environment Variables Per Authorization Type](#environment-variables-per-authorization-type)                | See [Supported Authorization Types](#supported-authorization-types) |  `no_auth`  |
-
-#### Supported Authorization Types
-
-|       Name       |     Value      |                                          Description                                          |
-| :--------------: | :------------: | :-------------------------------------------------------------------------------------------: |
-|     API Key      |   `api_key`    | Either sets the authorization header: `<Key> <Value>`, or the query parameter `<key>=<value>` |
-|    Basic Auth    |  `basic_auth`  |         Sets the authorization header: `Basic <Base64 encoded username and password>`         |
-|   Bearer Token   | `bearer_token` |                    Sets the authorization header: `Bearer <Your API key>`                     |
-|      Custom      |    `custom`    |                  Allows to set any request header, query parameter, and body                  |
-| No authorization |   `no_auth`    |                   Does not set any request header, query parameter or body                    |
-
-### Environment Variables Per Authorization Type
-
-**TO BE AWARE:** the adapter configuration set via the environment variables listed below is constant at run time
-
-#### API Key
-
-| Required? |                Name                 |                                                              Description                                                              |        Options        | Defaults to |
-| :-------: | :---------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: | :-------------------: | :---------: |
-|    ✅     |   `GENERIC_AUTH_CREDENTIALS_KEY`    |                                                           The API key name                                                            |                       |             |
-|    ✅     |  `GENERIC_AUTH_CREDENTIALS_VALUE`   |                                                           The API key value                                                           |                       |             |
-|    ✅     | `GENERIC_AUTH_CREDENTIALS_LOCATION` | The location of the key-value pair. `headers` sets it in the request headers, whilst `params` sets it in the request query parameters | `headers` or `params` |             |
-
-#### Basic Auth
-
-| Required? |                Name                 |       Description        | Options | Defaults to |
-| :-------: | :---------------------------------: | :----------------------: | :-----: | :---------: |
-|    ✅     | `GENERIC_AUTH_CREDENTIALS_USERNAME` | The API login `username` |         |             |
-|    ✅     | `GENERIC_AUTH_CREDENTIALS_PASSWORD` | The API login `password` |         |             |
-
-#### Bearer Token
-
-| Required? |               Name               |         Description          | Options | Defaults to |
-| :-------: | :------------------------------: | :--------------------------: | :-----: | :---------: |
-|    ✅     | `GENERIC_AUTH_CREDENTIALS_TOKEN` | The API authentication token |         |             |
-
-#### Custom
-
-| Required? |          Name          |                                                             Description                                                             | Options | Defaults to |
-| :-------: | :--------------------: | :---------------------------------------------------------------------------------------------------------------------------------: | :-----: | :---------: |
-|           | `GENERIC_AUTH_HEADERS` |    The API authentication headers in a JSON object as string. Expected format is `{ "header1": "value1", "header2": "value2" }`     |         |    `{}`     |
-|           | `GENERIC_AUTH_PARAMS`  | The API authentication query parameters in a JSON object as string. Expected format is `{ "param1": "value1", "param2": "value2" }` |         |    `{}`     |
-|           |  `GENERIC_AUTH_DATA`   |        The API authentication body in a JSON object as string. Expected format is `{ "data1": <value1>, "data2": <value2> }`        |         |    `{}`     |
-
-#### No Authorization
-
-N/A
+| Required? |       Name       | Description | Type | Options | Default |
+| :-------: | :--------------: | :---------: | :--: | :-----: | :-----: |
+|    ✅     | GENERIC_BASE_URL |             |      |         |         |
 
 ---
 
-### Input Parameters
+## Input Parameters
 
-| Required? |    Name    |     Description     |                   Options                    |    Defaults to    |
-| :-------: | :--------: | :-----------------: | :------------------------------------------: | :---------------: |
-|           | `endpoint` | The endpoint to use | [generic-request](#generic-request-endpoint) | `generic-request` |
+Every EA supports base input parameters from [this list](../../core/bootstrap#base-input-parameters)
 
----
+| Required? |   Name   |     Description     |  Type  |                   Options                   |      Default      |
+| :-------: | :------: | :-----------------: | :----: | :-----------------------------------------: | :---------------: |
+|           | endpoint | The endpoint to use | string | [generic-request](#genericrequest-endpoint) | `generic-request` |
 
-## Generic Request Endpoint
+## GenericRequest Endpoint
 
-Requests almost any API
+`generic-request` is the only supported name for this endpoint.
 
 ### Input Params
 
-More information regarding each parameter can be found in the [Axios Request Config Docs](https://axios-http.com/docs/req_config)
+| Required? |  Name   | Aliases | Description | Type | Options | Default | Depends On | Not Valid With |
+| :-------: | :-----: | :-----: | :---------: | :--: | :-----: | :-----: | :--------: | :------------: |
+|           | method  |         |             |      |         |         |            |                |
+|           |   url   |         |             |      |         |         |            |                |
+|           | headers |         |             |      |         |         |            |                |
+|           | params  |         |             |      |         |         |            |                |
+|           |  data   |         |             |      |         |         |            |                |
 
-| Required? |   Name    |                                                    Description                                                     |                               Options                               | Defaults to |
-| :-------: | :-------: | :----------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------: | :---------: |
-|           | `method`  |                                                 The request method                                                 | `get`, `head`, `post`, `put`, `delete`, `options`, `trace`, `patch` |    `get`    |
-|           |   `url`   |                       The relative URL part appended to the base URL (in `GENERIC_BASE_URL`)                       |                                                                     |     `/`     |
-|           | `headers` |                         The custom headers to be sent with the request (as a JSON object)                          |                                                                     |    `{}`     |
-|           | `params`  |                        The query parameters to be sent with the request (as a JSON object)                         |                                                                     |    `{}`     |
-|           |  `data`   | The data to be sent as the request body (as a JSON object). Only applicable to `PUT`, `POST`, `DELETE` and `PATCH` |                                                                     |    `{}`     |
+### Example
 
-### Sample Input
-
-Set first the required generic env vars:
-
-```shell
-GENERIC_BASE_URL='https://min-api.cryptocompare.com'
-```
+Request:
 
 ```json
 {
   "id": "1",
   "data": {
-    "url": "/data/price",
+    "endpoint": "generic-request",
+    "method": "post",
+    "url": "/subpath",
+    "headers": {
+      "Header-1": "hvalue1",
+      "Header-2": "hvalue2"
+    },
     "params": {
-      "fsym": "link",
-      "tsyms": "eth"
+      "param1": "pvalue1",
+      "param2": "pvalue2"
+    },
+    "data": {
+      "data1": "dvalue1",
+      "data2": ["dvalue2a", "dvalue2b"]
     }
+  },
+  "debug": {
+    "cacheKey": "hZ95pTIL9tKhkimX2aAwihJO5zM="
   }
 }
 ```
 
-### Sample Output
+Response:
 
 ```json
 {
-  "jobRunID": 1,
-  "result": {
-    "ETH": 0.005298
-  },
+  "jobRunID": "1",
   "data": {
-    "ETH": 0.005298,
+    "value": 42.777,
     "result": {
-      "ETH": 0.005298
+      "value": 42.777
     }
+  },
+  "result": {
+    "value": 42.777
   },
   "statusCode": 200
 }
 ```
+
+<details>
+<summary>Additional Examples</summary>
+
+Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "generic-request",
+    "method": "post",
+    "url": "/subpath",
+    "headers": {
+      "Header-1": "hvalue1",
+      "Header-2": "hvalue2"
+    },
+    "params": {
+      "param1": "pvalue1",
+      "param2": "pvalue2"
+    },
+    "data": {
+      "data1": "dvalue1",
+      "data2": ["dvalue2a", "dvalue2b"]
+    }
+  },
+  "debug": {
+    "cacheKey": "hZ95pTIL9tKhkimX2aAwihJO5zM="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "data": [
+      {
+        "value": 42.777
+      }
+    ],
+    "result": [
+      {
+        "value": 42.777
+      }
+    ]
+  },
+  "result": [
+    {
+      "value": 42.777
+    }
+  ],
+  "statusCode": 200
+}
+```
+
+Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "generic-request",
+    "method": "post",
+    "url": "/subpath",
+    "headers": {
+      "Header-1": "hvalue1",
+      "Header-2": "hvalue2"
+    },
+    "params": {
+      "param1": "pvalue1",
+      "param2": "pvalue2"
+    },
+    "data": {
+      "data1": "dvalue1",
+      "data2": ["dvalue2a", "dvalue2b"]
+    }
+  },
+  "debug": {
+    "cacheKey": "hZ95pTIL9tKhkimX2aAwihJO5zM="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "value": 42.777,
+    "result": {
+      "value": 42.777
+    }
+  },
+  "result": {
+    "value": 42.777
+  },
+  "statusCode": 200
+}
+```
+
+Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "generic-request",
+    "method": "post",
+    "url": "/subpath",
+    "headers": {
+      "Header-1": "hvalue1",
+      "Header-2": "hvalue2"
+    },
+    "params": {
+      "param1": "pvalue1",
+      "param2": "pvalue2"
+    },
+    "data": {
+      "data1": "dvalue1",
+      "data2": ["dvalue2a", "dvalue2b"]
+    }
+  },
+  "debug": {
+    "cacheKey": "hZ95pTIL9tKhkimX2aAwihJO5zM="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "data": [
+      {
+        "value": 42.777
+      }
+    ],
+    "result": [
+      {
+        "value": 42.777
+      }
+    ]
+  },
+  "result": [
+    {
+      "value": 42.777
+    }
+  ],
+  "statusCode": 200
+}
+```
+
+Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "generic-request",
+    "method": "post",
+    "url": "/subpath",
+    "headers": {
+      "Header-1": "hvalue1",
+      "Header-2": "hvalue2"
+    },
+    "params": {
+      "param1": "pvalue1",
+      "param2": "pvalue2"
+    },
+    "data": {
+      "data1": "dvalue1",
+      "data2": ["dvalue2a", "dvalue2b"]
+    }
+  },
+  "debug": {
+    "cacheKey": "hZ95pTIL9tKhkimX2aAwihJO5zM="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "value": 42.777,
+    "result": {
+      "value": 42.777
+    }
+  },
+  "result": {
+    "value": 42.777
+  },
+  "statusCode": 200
+}
+```
+
+Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "generic-request",
+    "method": "post",
+    "url": "/subpath",
+    "headers": {
+      "Header-1": "hvalue1",
+      "Header-2": "hvalue2"
+    },
+    "params": {
+      "param1": "pvalue1",
+      "param2": "pvalue2"
+    },
+    "data": {
+      "data1": "dvalue1",
+      "data2": ["dvalue2a", "dvalue2b"]
+    }
+  },
+  "debug": {
+    "cacheKey": "hZ95pTIL9tKhkimX2aAwihJO5zM="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "data": [
+      {
+        "value": 42.777
+      }
+    ],
+    "result": [
+      {
+        "value": 42.777
+      }
+    ]
+  },
+  "result": [
+    {
+      "value": 42.777
+    }
+  ],
+  "statusCode": 200
+}
+```
+
+Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "generic-request",
+    "method": "post",
+    "url": "/subpath",
+    "headers": {
+      "Header-1": "hvalue1",
+      "Header-2": "hvalue2"
+    },
+    "params": {
+      "param1": "pvalue1",
+      "param2": "pvalue2"
+    },
+    "data": {
+      "data1": "dvalue1",
+      "data2": ["dvalue2a", "dvalue2b"]
+    }
+  },
+  "debug": {
+    "cacheKey": "hZ95pTIL9tKhkimX2aAwihJO5zM="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "value": 42.777,
+    "result": {
+      "value": 42.777
+    }
+  },
+  "result": {
+    "value": 42.777
+  },
+  "statusCode": 200
+}
+```
+
+Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "generic-request",
+    "method": "post",
+    "url": "/subpath",
+    "headers": {
+      "Header-1": "hvalue1",
+      "Header-2": "hvalue2"
+    },
+    "params": {
+      "param1": "pvalue1",
+      "param2": "pvalue2"
+    },
+    "data": {
+      "data1": "dvalue1",
+      "data2": ["dvalue2a", "dvalue2b"]
+    }
+  },
+  "debug": {
+    "cacheKey": "hZ95pTIL9tKhkimX2aAwihJO5zM="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "data": [
+      {
+        "value": 42.777
+      }
+    ],
+    "result": [
+      {
+        "value": 42.777
+      }
+    ]
+  },
+  "result": [
+    {
+      "value": 42.777
+    }
+  ],
+  "statusCode": 200
+}
+```
+
+Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "generic-request",
+    "method": "post",
+    "url": "/subpath",
+    "headers": {
+      "Header-3": "hvalue3",
+      "Header-4": "hvalue4"
+    },
+    "params": {
+      "param3": "pvalue3",
+      "param4": "pvalue4"
+    },
+    "data": {
+      "data3": "dvalue3",
+      "data4": ["dvalue4a", "dvalue4b"]
+    }
+  },
+  "debug": {
+    "cacheKey": "8g/7IJqCZuA/GipyUOWJBAi8+dE="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "value": 42.777,
+    "result": {
+      "value": 42.777
+    }
+  },
+  "result": {
+    "value": 42.777
+  },
+  "statusCode": 200
+}
+```
+
+Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "generic-request",
+    "method": "post",
+    "url": "/subpath",
+    "headers": {
+      "Header-3": "hvalue3",
+      "Header-4": "hvalue4"
+    },
+    "params": {
+      "param3": "pvalue3",
+      "param4": "pvalue4"
+    },
+    "data": {
+      "data3": "dvalue3",
+      "data4": ["dvalue4a", "dvalue4b"]
+    }
+  },
+  "debug": {
+    "cacheKey": "8g/7IJqCZuA/GipyUOWJBAi8+dE="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "data": [
+      {
+        "value": 42.777
+      }
+    ],
+    "result": [
+      {
+        "value": 42.777
+      }
+    ]
+  },
+  "result": [
+    {
+      "value": 42.777
+    }
+  ],
+  "statusCode": 200
+}
+```
+
+Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "generic-request",
+    "method": "post",
+    "url": "/subpath",
+    "headers": {
+      "Header-1": "hvalue1",
+      "Header-2": "hvalue2"
+    },
+    "params": {
+      "param1": "pvalue1",
+      "param2": "pvalue2"
+    },
+    "data": {
+      "data1": "dvalue1",
+      "data2": ["dvalue2a", "dvalue2b"]
+    }
+  },
+  "debug": {
+    "cacheKey": "hZ95pTIL9tKhkimX2aAwihJO5zM="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "value": 42.777,
+    "result": {
+      "value": 42.777
+    }
+  },
+  "result": {
+    "value": 42.777
+  },
+  "statusCode": 200
+}
+```
+
+Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "generic-request",
+    "method": "post",
+    "url": "/subpath",
+    "headers": {
+      "Header-1": "hvalue1",
+      "Header-2": "hvalue2"
+    },
+    "params": {
+      "param1": "pvalue1",
+      "param2": "pvalue2"
+    },
+    "data": {
+      "data1": "dvalue1",
+      "data2": ["dvalue2a", "dvalue2b"]
+    }
+  },
+  "debug": {
+    "cacheKey": "hZ95pTIL9tKhkimX2aAwihJO5zM="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "data": [
+      {
+        "value": 42.777
+      }
+    ],
+    "result": [
+      {
+        "value": 42.777
+      }
+    ]
+  },
+  "result": [
+    {
+      "value": 42.777
+    }
+  ],
+  "statusCode": 200
+}
+```
+
+</details>
+
+---
+
+MIT License

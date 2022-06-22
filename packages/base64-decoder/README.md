@@ -1,6 +1,6 @@
 # Base64 Decoder Adapter
 
-![1.0.0](https://img.shields.io/github/package-json/v/smartcontractkit/external-adapters-js?filename=packages/sources/base64-decoder/package.json)
+![1.0.1](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/base64-decoder/package.json)
 
 This adapter decodes from base64 and outputs the result.
 
