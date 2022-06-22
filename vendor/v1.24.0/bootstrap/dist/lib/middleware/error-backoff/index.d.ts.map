@@ -1,0 +1,1 @@
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../src/lib/middleware/error-backoff/index.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAE,MAAM,kBAAkB,CAAA;AAC7C,OAAO,EAAE,KAAK,EAAE,MAAM,OAAO,CAAA;AAC7B,OAAO,EAGL,aAAa,EAEd,MAAM,WAAW,CAAA;AAOlB,OAAO,KAAK,OAAO,MAAM,WAAW,CAAA;AACpC,OAAO,KAAK,OAAO,MAAM,WAAW,CAAA;AAEpC,eAAO,MAAM,gBAAgB;;+CACS,UA6CnC,CAAA"}

@@ -1,0 +1,3 @@
+{
+  "blacklist": ["scripts", "shared", "tsconfig.json", "tsconfig.base.json"]
+}

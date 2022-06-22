@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute base64-decoder endpoint success calls decodes the input from base64 1`] = `
+Object {
+  "data": Object {
+    "result": "0xed5af388653567af2f388e6224dc7c4b3241c544",
+  },
+  "jobRunID": "1",
+  "result": "0xed5af388653567af2f388e6224dc7c4b3241c544",
+  "statusCode": 200,
+}
+`;

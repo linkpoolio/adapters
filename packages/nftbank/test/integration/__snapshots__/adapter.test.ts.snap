@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute estimate endpoint success calls returns the estimate price 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "_id": "1",
+        "estimate": Array [
+          Object {
+            "currency_symbol": "ETH",
+            "estimate_price": 100,
+          },
+          Object {
+            "currency_symbol": "USD",
+            "estimate_price": 200,
+          },
+        ],
+      },
+    ],
+    "result": 10000000000000000,
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": 10000000000000000,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute floor-price endpoint success calls returns Azuki's floor price in USD 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "_id": "1",
+        "floor_price": Array [
+          Object {
+            "currency_symbol": "ETH",
+            "floor_price": 12,
+          },
+          Object {
+            "currency_symbol": "USD",
+            "floor_price": 23951.237809862814,
+          },
+        ],
+      },
+    ],
+    "result": 2395123780986282,
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": 2395123780986282,
+  "statusCode": 200,
+}
+`;

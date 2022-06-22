@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute request-params-controller endpoint success calls sets to 'default' value any optional parameter no present in 'params' 1`] = `
+Object {
+  "data": Object {
+    "param1": "value1",
+    "param2": 777.77,
+    "param3": Array [
+      "linkpool",
+    ],
+    "param4": true,
+    "param5": 42,
+    "param6": 42,
+  },
+  "jobRunID": "1",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute request-params-controller endpoint success calls sets to null any optional parameter no present in 'params' 1`] = `
+Object {
+  "data": Object {
+    "param1": "value1",
+    "param2": 777.77,
+    "param3": Array [
+      "linkpool",
+    ],
+    "param4": true,
+    "param5": null,
+    "param6": null,
+  },
+  "jobRunID": "1",
+  "statusCode": 200,
+}
+`;

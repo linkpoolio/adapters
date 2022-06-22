@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.rateLimitCreditsSpentTotal = void 0;
+const tslib_1 = require("tslib");
+const client = tslib_1.__importStar(require("prom-client"));
+exports.rateLimitCreditsSpentTotal = new client.Counter({
+    name: 'rate_limit_credits_spent_total',
+    help: 'The number of data provider credits the adapter is consuming',
+    labelNames: ['participant_id', 'feed_id', 'experimental'],
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWV0cmljcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NyYy9saWIvbWlkZGxld2FyZS9yYXRlLWxpbWl0L21ldHJpY3MudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLDREQUFxQztBQUV4QixRQUFBLDBCQUEwQixHQUFHLElBQUksTUFBTSxDQUFDLE9BQU8sQ0FBQztJQUMzRCxJQUFJLEVBQUUsZ0NBQWdDO0lBQ3RDLElBQUksRUFBRSw4REFBOEQ7SUFDcEUsVUFBVSxFQUFFLENBQUMsZ0JBQWdCLEVBQUUsU0FBUyxFQUFFLGNBQWMsQ0FBVTtDQUNuRSxDQUFDLENBQUEiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgKiBhcyBjbGllbnQgZnJvbSAncHJvbS1jbGllbnQnXG5cbmV4cG9ydCBjb25zdCByYXRlTGltaXRDcmVkaXRzU3BlbnRUb3RhbCA9IG5ldyBjbGllbnQuQ291bnRlcih7XG4gIG5hbWU6ICdyYXRlX2xpbWl0X2NyZWRpdHNfc3BlbnRfdG90YWwnLFxuICBoZWxwOiAnVGhlIG51bWJlciBvZiBkYXRhIHByb3ZpZGVyIGNyZWRpdHMgdGhlIGFkYXB0ZXIgaXMgY29uc3VtaW5nJyxcbiAgbGFiZWxOYW1lczogWydwYXJ0aWNpcGFudF9pZCcsICdmZWVkX2lkJywgJ2V4cGVyaW1lbnRhbCddIGFzIGNvbnN0LFxufSlcbiJdfQ==

@@ -1,0 +1,60 @@
+{
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./anchain"
+    },
+    {
+      "path": "./base64-decoder"
+    },
+    {
+      "path": "./chartmetric"
+    },
+    {
+      "path": "./crd-network"
+    },
+    {
+      "path": "./enetscores"
+    },
+    {
+      "path": "./generic"
+    },
+    {
+      "path": "./heni"
+    },
+    {
+      "path": "./linkpool"
+    },
+    {
+      "path": "./nftbank"
+    },
+    {
+      "path": "./request-params-controller"
+    },
+    {
+      "path": "./shared"
+    },
+    {
+      "path": "./solipay"
+    },
+    {
+      "path": "./sportsdataio-linkpool"
+    },
+    {
+      "path": "./tac-index"
+    },
+    {
+      "path": "./therundown"
+    },
+    {
+      "path": "./therundown-thales"
+    },
+    {
+      "path": "./upshot"
+    },
+    {
+      "path": "./wavebridge"
+    }
+  ]
+}

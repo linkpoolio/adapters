@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute auth endpoint error calls when successfully requests the API should throw and exception if the response format is unexpected 1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"auth\\"}}",
+    "message": "Missing 'refreshtoken' in response 'data': {\\"expires_in\\":3600,\\"refresh_token\\":\\"REFRESH_TOKEN\\",\\"scope\\":\\"api\\"}",
+    "name": "AdapterError",
+    "url": "https:/api.chartmetric.com/api/token",
+  },
+  "jobRunID": "1",
+  "status": "errored",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute auth endpoint success calls returns the authentication token 1`] = `
+Object {
+  "data": Object {
+    "expires_in": 3600,
+    "refresh_token": "REFRESH_TOKEN",
+    "result": "chartmetricAuthToken",
+    "scope": "api",
+    "token": "chartmetricAuthToken",
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": "chartmetricAuthToken",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute statistics endpoint error calls when successfully requests the API should throw and exception if the response format is unexpected 1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"statistics\\",\\"artistId\\":439}}",
+    "message": "Unexpected error encoding the statistics: {\\"youtube\\":\\"yup\\",\\"spotify\\":0,\\"tiktok\\":3200000}. Reason: Error: invalid BigNumber string (argument=\\"value\\", value=\\"yup\\", code=INVALID_ARGUMENT, version=bignumber/5.6.0)",
+    "name": "AdapterError",
+    "url": "https:/api.chartmetric.com/api/artist/439",
+  },
+  "jobRunID": "1",
+  "status": "errored",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute statistics endpoint success calls returns the statistics 1`] = `
+Object {
+  "data": Object {
+    "obj": Object {
+      "cm_statistics": Object {
+        "sp_followers": 77777,
+        "tiktok_followers": 777777,
+        "ycs_subscribers": 777777,
+      },
+    },
+    "result": "0x00000000000bde31000000000000000000000000000bde310000000000000000",
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": "0x00000000000bde31000000000000000000000000000bde310000000000000000",
+  "statusCode": 200,
+}
+`;

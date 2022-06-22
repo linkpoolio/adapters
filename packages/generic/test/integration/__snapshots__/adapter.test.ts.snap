@@ -1,0 +1,241 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`endpoint: generic-request authorization type: api_key success calls returns the expected result, when credentials location is 'headers', and API 'response.data' is a JSON object 1`] = `
+Object {
+  "data": Object {
+    "result": Object {
+      "value": 42.777,
+    },
+    "value": 42.777,
+  },
+  "jobRunID": "1",
+  "result": Object {
+    "value": 42.777,
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`endpoint: generic-request authorization type: api_key success calls returns the expected result, when credentials location is 'headers', and API 'response.data' is not a JSON object 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "value": 42.777,
+      },
+    ],
+    "result": Array [
+      Object {
+        "value": 42.777,
+      },
+    ],
+  },
+  "jobRunID": "1",
+  "result": Array [
+    Object {
+      "value": 42.777,
+    },
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`endpoint: generic-request authorization type: api_key success calls returns the expected result, when credentials location is 'params', and API 'response.data' is a JSON object 1`] = `
+Object {
+  "data": Object {
+    "result": Object {
+      "value": 42.777,
+    },
+    "value": 42.777,
+  },
+  "jobRunID": "1",
+  "result": Object {
+    "value": 42.777,
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`endpoint: generic-request authorization type: api_key success calls returns the expected result, when credentials location is 'params', and API 'response.data' is not a JSON object 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "value": 42.777,
+      },
+    ],
+    "result": Array [
+      Object {
+        "value": 42.777,
+      },
+    ],
+  },
+  "jobRunID": "1",
+  "result": Array [
+    Object {
+      "value": 42.777,
+    },
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`endpoint: generic-request authorization type: basic_auth success calls returns the expected result, when API 'response.data' is a JSON object 1`] = `
+Object {
+  "data": Object {
+    "result": Object {
+      "value": 42.777,
+    },
+    "value": 42.777,
+  },
+  "jobRunID": "1",
+  "result": Object {
+    "value": 42.777,
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`endpoint: generic-request authorization type: basic_auth success calls returns the expected result, when API 'response.data' is not a JSON object 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "value": 42.777,
+      },
+    ],
+    "result": Array [
+      Object {
+        "value": 42.777,
+      },
+    ],
+  },
+  "jobRunID": "1",
+  "result": Array [
+    Object {
+      "value": 42.777,
+    },
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`endpoint: generic-request authorization type: bearer_token success calls returns the expected result, when API 'response.data' is a JSON object 1`] = `
+Object {
+  "data": Object {
+    "result": Object {
+      "value": 42.777,
+    },
+    "value": 42.777,
+  },
+  "jobRunID": "1",
+  "result": Object {
+    "value": 42.777,
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`endpoint: generic-request authorization type: bearer_token success calls returns the expected result, when API 'response.data' is not a JSON object 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "value": 42.777,
+      },
+    ],
+    "result": Array [
+      Object {
+        "value": 42.777,
+      },
+    ],
+  },
+  "jobRunID": "1",
+  "result": Array [
+    Object {
+      "value": 42.777,
+    },
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`endpoint: generic-request authorization type: custom success calls returns the expected result, when API 'response.data' is a JSON object 1`] = `
+Object {
+  "data": Object {
+    "result": Object {
+      "value": 42.777,
+    },
+    "value": 42.777,
+  },
+  "jobRunID": "1",
+  "result": Object {
+    "value": 42.777,
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`endpoint: generic-request authorization type: custom success calls returns the expected result, when API 'response.data' is not a JSON object 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "value": 42.777,
+      },
+    ],
+    "result": Array [
+      Object {
+        "value": 42.777,
+      },
+    ],
+  },
+  "jobRunID": "1",
+  "result": Array [
+    Object {
+      "value": 42.777,
+    },
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`endpoint: generic-request authorization type: no_auth success calls returns the expected result, when API 'response.data' is a JSON object 1`] = `
+Object {
+  "data": Object {
+    "result": Object {
+      "value": 42.777,
+    },
+    "value": 42.777,
+  },
+  "jobRunID": "1",
+  "result": Object {
+    "value": 42.777,
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`endpoint: generic-request authorization type: no_auth success calls returns the expected result, when API 'response.data' is not a JSON object 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "value": 42.777,
+      },
+    ],
+    "result": Array [
+      Object {
+        "value": 42.777,
+      },
+    ],
+  },
+  "jobRunID": "1",
+  "result": Array [
+    Object {
+      "value": 42.777,
+    },
+  ],
+  "statusCode": 200,
+}
+`;

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute price endpoint success calls returns the correct result 1`] = `
+Object {
+  "data": Object {
+    "GITSHA": "171b8a4feff9ae020efab1ad96c784d51be95c34",
+    "last_sale_time": "2022-02-04T10:47:07+00:00",
+    "last_updated": "2022-02-04T13:55:27+00:00",
+    "price": "5.069164497",
+    "result": 5069164497,
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": 5069164497,
+  "statusCode": 200,
+}
+`;

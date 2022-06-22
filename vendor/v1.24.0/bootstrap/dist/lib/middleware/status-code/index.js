@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.withStatusCode = void 0;
+const withStatusCode = async (execute, context) => async (input) => {
+    const { statusCode, data, ...rest } = await execute(input, context);
+    if (data && typeof data === 'object' && data.statusCode)
+        data.statusCode = statusCode;
+    return { ...rest, statusCode, data };
+};
+exports.withStatusCode = withStatusCode;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi9zcmMvbGliL21pZGRsZXdhcmUvc3RhdHVzLWNvZGUvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBRU8sTUFBTSxjQUFjLEdBQWUsS0FBSyxFQUFFLE9BQU8sRUFBRSxPQUFPLEVBQUUsRUFBRSxDQUFDLEtBQUssRUFBRSxLQUFLLEVBQUUsRUFBRTtJQUNwRixNQUFNLEVBQUUsVUFBVSxFQUFFLElBQUksRUFBRSxHQUFHLElBQUksRUFBRSxHQUFHLE1BQU0sT0FBTyxDQUFDLEtBQUssRUFBRSxPQUFPLENBQUMsQ0FBQTtJQUNuRSxJQUFJLElBQUksSUFBSSxPQUFPLElBQUksS0FBSyxRQUFRLElBQUksSUFBSSxDQUFDLFVBQVU7UUFBRSxJQUFJLENBQUMsVUFBVSxHQUFHLFVBQVUsQ0FBQTtJQUNyRixPQUFPLEVBQUUsR0FBRyxJQUFJLEVBQUUsVUFBVSxFQUFFLElBQUksRUFBRSxDQUFBO0FBQ3RDLENBQUMsQ0FBQTtBQUpZLFFBQUEsY0FBYyxrQkFJMUIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgdHlwZSB7IE1pZGRsZXdhcmUgfSBmcm9tICdAY2hhaW5saW5rL3R5cGVzJ1xuXG5leHBvcnQgY29uc3Qgd2l0aFN0YXR1c0NvZGU6IE1pZGRsZXdhcmUgPSBhc3luYyAoZXhlY3V0ZSwgY29udGV4dCkgPT4gYXN5bmMgKGlucHV0KSA9PiB7XG4gIGNvbnN0IHsgc3RhdHVzQ29kZSwgZGF0YSwgLi4ucmVzdCB9ID0gYXdhaXQgZXhlY3V0ZShpbnB1dCwgY29udGV4dClcbiAgaWYgKGRhdGEgJiYgdHlwZW9mIGRhdGEgPT09ICdvYmplY3QnICYmIGRhdGEuc3RhdHVzQ29kZSkgZGF0YS5zdGF0dXNDb2RlID0gc3RhdHVzQ29kZVxuICByZXR1cm4geyAuLi5yZXN0LCBzdGF0dXNDb2RlLCBkYXRhIH1cbn1cbiJdfQ==

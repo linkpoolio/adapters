@@ -1,0 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.make = void 0;
+// TODO make new Config type for implementation factories
+const make = () => {
+    return {}; // Placeholder
+};
+exports.make = make;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJpY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvZmFjdG9yaWVzL3ByaWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUNBLHlEQUF5RDtBQUNsRCxNQUFNLElBQUksR0FBMkIsR0FBRyxFQUFFO0lBQy9DLE9BQU8sRUFBYSxDQUFBLENBQUMsY0FBYztBQUNyQyxDQUFDLENBQUE7QUFGWSxRQUFBLElBQUksUUFFaEIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb25maWcsIEV4ZWN1dGUsIEV4ZWN1dGVGYWN0b3J5IH0gZnJvbSAnQGNoYWlubGluay90eXBlcydcbi8vIFRPRE8gbWFrZSBuZXcgQ29uZmlnIHR5cGUgZm9yIGltcGxlbWVudGF0aW9uIGZhY3Rvcmllc1xuZXhwb3J0IGNvbnN0IG1ha2U6IEV4ZWN1dGVGYWN0b3J5PENvbmZpZz4gPSAoKSA9PiB7XG4gIHJldHVybiB7fSBhcyBFeGVjdXRlIC8vIFBsYWNlaG9sZGVyXG59XG4iXX0=

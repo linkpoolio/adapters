@@ -1,0 +1,274 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute auth endpoint success calls returns the authToken 1`] = `
+Object {
+  "data": Object {
+    "data": Object {
+      "authToken": "wavebridgeAuthToken",
+    },
+    "result": "wavebridgeAuthToken",
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": "wavebridgeAuthToken",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute cms-daily endpoint success calls returns the CMX Index filtering by 'date' 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "composition": Array [
+          Object {
+            "name": "BTC",
+            "rank": 1,
+            "weight": 54.873713,
+          },
+          Object {
+            "name": "ETH",
+            "rank": 2,
+            "weight": 25.502233,
+          },
+          Object {
+            "name": "BNB",
+            "rank": 3,
+            "weight": 5.24509,
+          },
+          Object {
+            "name": "SOL",
+            "rank": 4,
+            "weight": 2.845259,
+          },
+          Object {
+            "name": "ADA",
+            "rank": 5,
+            "weight": 3.005794,
+          },
+          Object {
+            "name": "XRP",
+            "rank": 6,
+            "weight": 2.442481,
+          },
+          Object {
+            "name": "LUNA",
+            "rank": 7,
+            "weight": 1.988302,
+          },
+          Object {
+            "name": "DOT",
+            "rank": 8,
+            "weight": 1.626205,
+          },
+          Object {
+            "name": "DOGE",
+            "rank": 9,
+            "weight": 1.472873,
+          },
+          Object {
+            "name": "MATIC",
+            "rank": 10,
+            "weight": 0.998051,
+          },
+        ],
+        "date": "2022-01-20T23:59:00.000+00:00",
+        "generateTime": 1643069420187,
+        "index": 7905.795728282094,
+        "indexSymbol": "CMX10",
+        "rate": 0.88778923,
+        "type": "market",
+      },
+    ],
+    "message": "",
+    "result": 7905.795728282094,
+    "status": "",
+    "statusCode": 200,
+    "success": true,
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": 7905.795728282094,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute cms-daily endpoint success calls returns the CMX Index from yesterday's close 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "composition": Array [
+          Object {
+            "name": "BTC",
+            "rank": 1,
+            "weight": 57.248883,
+          },
+          Object {
+            "name": "ETH",
+            "rank": 2,
+            "weight": 23.932082,
+          },
+          Object {
+            "name": "BNB",
+            "rank": 3,
+            "weight": 5.115494,
+          },
+          Object {
+            "name": "SOL",
+            "rank": 4,
+            "weight": 2.458589,
+          },
+          Object {
+            "name": "ADA",
+            "rank": 5,
+            "weight": 2.991151,
+          },
+          Object {
+            "name": "XRP",
+            "rank": 6,
+            "weight": 2.407212,
+          },
+          Object {
+            "name": "LUNA",
+            "rank": 7,
+            "weight": 1.97885,
+          },
+          Object {
+            "name": "DOT",
+            "rank": 8,
+            "weight": 1.474918,
+          },
+          Object {
+            "name": "DOGE",
+            "rank": 9,
+            "weight": 1.50895,
+          },
+          Object {
+            "name": "MATIC",
+            "rank": 10,
+            "weight": 0.883871,
+          },
+        ],
+        "date": "2022-01-24T23:59:00.000+00:00",
+        "generateTime": 1643069420187,
+        "index": 6788.998389966489,
+        "indexSymbol": "CMX10",
+        "rate": 0.88778923,
+        "type": "market",
+      },
+    ],
+    "message": "",
+    "result": 6788.998389966489,
+    "status": "",
+    "statusCode": 200,
+    "success": true,
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": 6788.998389966489,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute kimp-daily endpoint error calls success calls returns the KIMP Index filtering by 'date' 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "composition": Array [
+          Object {
+            "name": "BTCKRW_RX",
+          },
+          Object {
+            "name": "BTCUSD_RX",
+          },
+        ],
+        "date": "2022-01-20T23:59:00.000+00:00",
+        "generateTime": 1643069420187,
+        "index": 2.733898,
+        "indexSymbol": "KIMP_BTC_DX",
+        "rate": 1190.4,
+        "type": "market",
+      },
+    ],
+    "message": "",
+    "result": 2.733898,
+    "status": "",
+    "statusCode": 200,
+    "success": true,
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": 2.733898,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute kimp-daily endpoint error calls success calls returns the KIMP Index from yesterday's close 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "composition": Array [
+          Object {
+            "name": "BTCKRW_RX",
+          },
+          Object {
+            "name": "BTCUSD_RX",
+          },
+        ],
+        "date": "2022-01-24T23:59:00.000+00:00",
+        "generateTime": 1643069420187,
+        "index": 2.271584,
+        "indexSymbol": "KIMP_BTC_DX",
+        "rate": 1194.2,
+        "type": "market",
+      },
+    ],
+    "message": "",
+    "result": 2.271584,
+    "status": "",
+    "statusCode": 200,
+    "success": true,
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": 2.271584,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute kimp-realtime endpoint error calls success calls returns the KIMP Realtime Index 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "composition": Array [
+          Object {
+            "name": "BTCUSD_RTX",
+          },
+          Object {
+            "name": "BTCKRW_RTX",
+          },
+        ],
+        "date": "2022-01-27T14:12:09.000+00:00",
+        "generateTime": 1643292729001,
+        "index": 2.09032,
+        "indexSymbol": "KIMP_BTC_RTX",
+        "rate": 1203.5,
+        "type": "market",
+      },
+    ],
+    "message": "",
+    "result": 2.09032,
+    "status": "",
+    "statusCode": 200,
+    "success": true,
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": 2.09032,
+  "statusCode": 200,
+}
+`;

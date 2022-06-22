@@ -1,0 +1,991 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`job matrix generation should generate a job matrix consumable by gha 1`] = `
+Object {
+  "adapter": Array [
+    Object {
+      "name": "apy-finance-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "augur-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "bitcoin-json-rpc-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "bob-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "crypto-volatility-index-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "defi-pulse-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "dns-record-check-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "dxdao-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "google-weather-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "linear-finance-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "market-closure-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "medianizer-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "outlier-detection-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "proof-of-reserves-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "reference-transform-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "synth-index-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "the-graph-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "token-allocation-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "vesper-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "example-composite-adapter",
+      "type": "examples",
+    },
+    Object {
+      "name": "example-source-adapter",
+      "type": "examples",
+    },
+    Object {
+      "name": "1forge-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "alphachain-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "alphavantage-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "amberdata-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "anyblock-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "binance-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "binance-dex-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "bitex-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "bitso-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "blockchain.com-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "blockchair-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "blockcypher-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "blockstream-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "bravenewcoin-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "btc.com-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "cache.gold-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "cfbenchmarks-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coinapi-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coinbase-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coincodex-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coingecko-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coinlore-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coinmarketcap-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coinmetrics-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coinpaprika-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coinranking-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "covid-tracker-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "cryptoapis-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "cryptoapis-v2-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "cryptocompare-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "cryptoid-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "cryptomkt-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "currencylayer-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "curve-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "deribit-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "dns-query-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "dwolla-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "dxfeed-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "dxfeed-secondary-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "enzyme-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "eodhistoricaldata-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "etherchain-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "etherscan-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "ethgasstation-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "ethgaswatch-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "expert-car-broker-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "fcsapi-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "finage-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "finnhub-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "fixer-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "fmpcloud-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "genesis-volatility-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "geodb-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "google-bigquery-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "graphql-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "iex-cloud-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "intrinio-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "json-rpc-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "kaiko-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "layer2-sequencer-health-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "lcx-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "linkpool-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "lition-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "marketstack-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "messari-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "metalsapi-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "mycryptoapi-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "ncfx-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "nikkei-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "nomics-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "oilpriceapi-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "openexchangerates-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "orchid-bandwidth-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "paxos-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "paypal-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "poa-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "polygon-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "reduce-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "renvm-address-set-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "satoshitango-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "sochain-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "sportsdataio-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "stasis-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "synthetix-debt-pool-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "taapi-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "therundown-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "tiingo-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "tradermade-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "tradingeconomics-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "trueusd-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "twelvedata-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "unibit-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "upvest-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "wbtc-address-set-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "wootrade-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "xbto-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "agoric-adapter",
+      "type": "targets",
+    },
+    Object {
+      "name": "conflux-adapter",
+      "type": "targets",
+    },
+    Object {
+      "name": "dydx-stark-adapter",
+      "type": "targets",
+    },
+    Object {
+      "name": "ethwrite-adapter",
+      "type": "targets",
+    },
+    Object {
+      "name": "harmony-adapter",
+      "type": "targets",
+    },
+  ],
+}
+`;
+
+exports[`job matrix generation should generate a job matrix suitable for pushing to ecr 1`] = `
+Object {
+  "adapter": Array [
+    Object {
+      "name": "apy-finance-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "augur-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "bitcoin-json-rpc-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "bob-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "crypto-volatility-index-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "defi-pulse-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "dns-record-check-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "dxdao-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "google-weather-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "linear-finance-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "market-closure-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "medianizer-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "outlier-detection-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "proof-of-reserves-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "reference-transform-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "synth-index-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "the-graph-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "token-allocation-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "vesper-adapter",
+      "type": "composites",
+    },
+    Object {
+      "name": "example-composite-adapter",
+      "type": "examples",
+    },
+    Object {
+      "name": "example-source-adapter",
+      "type": "examples",
+    },
+    Object {
+      "name": "1forge-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "alphachain-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "alphavantage-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "amberdata-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "anyblock-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "binance-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "binance-dex-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "bitex-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "bitso-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "blockchain.com-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "blockchair-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "blockcypher-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "blockstream-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "bravenewcoin-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "btc.com-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "cache.gold-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "cfbenchmarks-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coinapi-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coinbase-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coincodex-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coingecko-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coinlore-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coinmarketcap-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coinmetrics-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coinpaprika-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "coinranking-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "covid-tracker-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "cryptoapis-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "cryptoapis-v2-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "cryptocompare-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "cryptoid-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "cryptomkt-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "currencylayer-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "curve-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "deribit-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "dns-query-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "dwolla-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "dxfeed-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "dxfeed-secondary-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "enzyme-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "eodhistoricaldata-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "etherchain-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "etherscan-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "ethgasstation-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "ethgaswatch-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "expert-car-broker-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "fcsapi-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "finage-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "finnhub-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "fixer-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "fmpcloud-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "genesis-volatility-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "geodb-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "google-bigquery-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "graphql-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "iex-cloud-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "intrinio-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "json-rpc-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "kaiko-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "layer2-sequencer-health-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "lcx-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "linkpool-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "lition-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "marketstack-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "messari-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "metalsapi-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "mycryptoapi-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "ncfx-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "nikkei-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "nomics-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "oilpriceapi-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "openexchangerates-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "orchid-bandwidth-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "paxos-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "paypal-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "poa-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "polygon-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "reduce-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "renvm-address-set-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "satoshitango-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "sochain-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "sportsdataio-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "stasis-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "synthetix-debt-pool-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "taapi-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "therundown-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "tiingo-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "tradermade-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "tradingeconomics-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "trueusd-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "twelvedata-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "unibit-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "upvest-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "wbtc-address-set-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "wootrade-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "xbto-adapter",
+      "type": "sources",
+    },
+    Object {
+      "name": "agoric-adapter",
+      "type": "targets",
+    },
+    Object {
+      "name": "conflux-adapter",
+      "type": "targets",
+    },
+    Object {
+      "name": "dydx-stark-adapter",
+      "type": "targets",
+    },
+    Object {
+      "name": "ethwrite-adapter",
+      "type": "targets",
+    },
+    Object {
+      "name": "harmony-adapter",
+      "type": "targets",
+    },
+  ],
+}
+`;

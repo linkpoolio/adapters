@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute price endpoint success calls returns the price 1`] = `
+Object {
+  "data": Object {
+    "payload": Array [
+      Object {
+        "date": "2022-02-21",
+        "destination": Object {
+          "code": "SIN",
+          "name": "Singapore",
+          "type": "city",
+        },
+        "euro": "2.54",
+        "index_name": "ANP MAWB",
+        "local": "22.47",
+        "local_currency": "HKD",
+        "origin": Object {
+          "code": "HKG",
+          "name": "Hong Kong",
+          "type": "city",
+        },
+        "route_code": "HKG-SIN",
+        "route_description": "Hong Kong to Singapore",
+        "route_type": "origin-destination",
+        "usd": "2.88",
+      },
+    ],
+    "result": 2.88,
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": 2.88,
+  "statusCode": 200,
+}
+`;

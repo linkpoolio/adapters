@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute address-info endpoint success calls returns the CRD Network API response data 1`] = `
+Object {
+  "data": Object {
+    "kycId": "LAlfLGjYRsi28KdxaS2ffw",
+    "kycLevel": 0,
+    "object": "0xff71f5d9b8f8b4886eb7224af5d03000839bc527",
+    "objectType": "address",
+    "result": Object {
+      "kycId": "0x4c416c664c476a5952736932384b6478615332666677",
+      "kycLevel": 0,
+      "object": "0xff71f5d9b8f8b4886eb7224af5d03000839bc527",
+      "objectType": "address",
+    },
+  },
+  "jobRunID": "1",
+  "result": Object {
+    "kycId": "0x4c416c664c476a5952736932384b6478615332666677",
+    "kycLevel": 0,
+    "object": "0xff71f5d9b8f8b4886eb7224af5d03000839bc527",
+    "objectType": "address",
+  },
+  "statusCode": 200,
+}
+`;

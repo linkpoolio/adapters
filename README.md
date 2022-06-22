@@ -1,0 +1,311 @@
+# LinkPool Adapters (TypeScript)
+
+This repository contains the source code for LinkPool external adapters. If you would like to contribute, please see the [Contributing](./CONTRIBUTING.md) page for more details.
+
+## Table of Contents
+
+1. [Getting Started](#Getting-Started)
+2. [How to Run](#How-to-Run)
+3. [Testing](#Testing)
+4. [Deployment](#Deployment)
+5. [Advanced Features](#Advanced-Features)
+
+## Getting Started
+
+### Requirements
+
+- Yarn
+
+### Preinstall
+
+```sh
+$ yarn setup:chainlink
+```
+
+Configured Chainlink dependencies for all workspaces.
+
+### Install
+
+```sh
+$ yarn
+```
+
+Installs the dependencies for all workspaces.
+
+### Setup
+
+```sh
+$ yarn setup
+```
+
+Runs the setup step for all adapters. Typically this step just compiles TypeScript, but may involve other tasks.
+
+### Folder Structure
+
+```
+╠═.github - scripts automatically ran by the CI/CD workflow
+║
+╠═.husky - git hooks
+║
+╠═.vscode - code editor specific configuration
+║
+╠═.yarn - yarn 2 dependencies
+║
+╚═packages
+    ║
+    ╠══ scripts - additional Node.js scripts for mono-repository management
+    ║
+    ╠══ * - adapters that read data from a data provider's API.
+```
+
+## How to Run
+
+External adapters should be run as long-lived processes, either directly as [HTTP Server](#run-as-http-server), [Docker Container](#run-as-docker-container), or [Single-Command Docker App](#single-command-docker-app). Each adapter may have configuration that is required to be supplied through environment variables.
+
+### Configuration
+
+There may be required environment variables that must be provided to run an External Adapter. Please see the respective adapter's README for more specific information on the External Adapter that you would like to run.
+
+Every External Adapter has some optional environment variables for customizing behavior and turning on advanced features. More documentation for these can be seen in the `vendor/$version/bootstrap/README.md`library for each package.
+
+### Run as HTTP server
+
+Use the start command while in the directory of the adapter that you would like to run. For example:
+
+```sh
+$ cd packages/generic
+$ yarn start
+```
+
+### Run as Docker Container
+
+1. All of the external-adapters have a service that is created when the repo's docker-compose file is generated.
+
+This can be done by running the following command in the root of the repository:
+
+```sh
+$ yarn generate:docker-compose
+```
+
+2. Next create a container image. Use the generated `docker-compose.generated.yaml` file along with `docker-compose build`.
+
+```sh
+$ docker-compose -f docker-compose.generated.yaml build [adapter-name]
+```
+
+Where `[adapter-name]` is replaced with the following:
+
+|   Parameter    |                                        Description                                        |                                       Options                                        |
+| :------------: | :---------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
+| `adapter-name` | name of the external adapter package, usually the folder name with `-adapter` as a suffix | See `docker-compose.generated.yaml` for list of services that can be used as options |
+
+For example the `generic` external adapter uses `generic-adapter`:
+
+```sh
+$ docker-compose -f docker-compose.generated.yaml build generic-adapter
+```
+
+3. Then run it with:
+
+```sh
+$ docker-compose -f docker-compose.generated.yaml run -p 8080:8080 -e API_KEY='YOUR_API_KEY' generic-adapter
+```
+
+Environment files can also be passed through a file:
+
+```
+$ docker run -p 8080:8080 --env-file="~/PATH_TO_ENV" -it proof-of-reserves-adapter:latest
+```
+
+### Single-Command Docker App
+
+This command will start all of your external adapters with performance features enabled and with pre-defined metrics charts for each EA on a single server.
+
+The first step will be to load up all of the environment variables that are needed across all of the External Adapters that will be ran. These can either be already be loaded into the environment or supplied to the startup script as a text file.
+
+Starting from the root of the repository:
+
+1. Ensure that the project is setup and that the docker-compose file has been generated
+
+```sh
+$ yarn && yarn setup && yarn generate:docker-compose
+```
+
+2. Use the startup script by supplying every External Adapter that you would like to run and monitor.
+
+The adapter will have the format of `[[ADAPTER NAME]]-adapter`.
+
+For example:
+
+```sh
+$ cd grafana && ./scripts/compose.sh generic-adapter
+```
+
+3. The running services can be found at the following ports:
+
+- External Adapters - search `docker-compose.generated.yaml` for the name of your EA. The port it is running on will be found as the first number before the colon under `ports`.
+
+```yml
+generic-adapter:
+  image: generic-adapter:0.0.4
+  ports:
+    - 8112:8080 <----------- The first number before the colon here
+  build:
+    context: ..
+    dockerfile: ./Dockerfile
+    labels:
+      com.chainlinklabs.external-adapter-type: sources
+  environment:
+    - EA_PORT=${EA_PORT}
+```
+
+- Prometheus - http://localhost:9090/graph
+- Grafana - http://localhost:3000/
+
+  The default login is:
+
+  - Username: admin
+  - Password: admin
+
+## Testing
+
+In order to test adapters locally, you may need to set environment variables such as `$API_KEY`. These can be found in the `README.md` for every adapter.
+
+Make sure you run these commands from the ROOT of this monorepo.
+
+```sh
+# Build all packages
+$ yarn setup
+
+# Run all unit tests
+$ yarn test:unit
+
+# Run all integration tests
+$ yarn test:integration
+
+$ export adapter=myadapter # Your adapter name, generic, etc
+
+# Run integration tests for that adapter
+$ yarn test $adapter/test/integration
+
+# Run unit tests for that adapter
+$ yarn test $adapter/test/unit
+
+# Run a specific test for that adapter
+$ yarn test $adapter/test/unit/my-specific-test.test.ts
+
+# Run a tests in watch mode, re-running tests that have code changes or dependency changes in them
+$ yarn test --watch $adapter/test/unit
+```
+
+## Deployment
+
+### Container Images
+
+Images are being published to LinkPool's private AWS ECR repositories:
+`TODO: insert link here`
+
+## Advanced Features
+
+<details>
+<summary>Performance and Caching</summary>
+
+The following section details mechanisms that reduce the number of API calls made from external adapters. It is highly recommended to turn on the following three middlewares.
+
+#### Caching
+
+Caching allows for the EA to store successful responses and facilitate faster future response times. See `vendor/$version/bootstrap/README.md#caching`.
+
+> ### ⚠️ Note
+>
+> Please check and ensure caching is allowed and not in violation of the Terms of Service of the data provider's API. Disable caching flags if it is not supported by the specified API provider's TOS.
+
+Caching is enabled by default. It can be turned off using:
+
+```sh
+$ export CACHE_ENABLED=false
+```
+
+#### Rate Limiting
+
+The Rate Limit middleware prevents hitting rate limit issues with data providers. This is done by adjusting how long a request lives in the cache based on the available capacity of your API subscription plan. The cache must be enabled to use this middleware. See `vendor/$version/bootstrap/README.md#rate-limit` for more information.
+
+Rate Limiting is enabled by default. It can be turned off using:
+
+```sh
+$ export RATE_LIMIT_ENABLED=false
+```
+
+There are two options for defining API subscription capacity:
+
+1. Manual setting (example shown for limit at 10 requests/minute)
+
+```sh
+$ export RATE_LIMIT_CAPACITY=60
+```
+
+2. Limits by provider data (example for generic free tier)
+
+```sh
+$ export RATE_LIMIT_API_PROVIDER=generic RATE_LIMIT_API_TIER=free
+```
+
+The `RATE_LIMIT_API_PROVIDER` environment variable is optional as when not given it will derive from the running adapter.
+
+Preset tiers/plans can be found `vendor/$version/bootstrap/dist/lib/config/provider-limits/index.js` and use the corresponding `provider` and `tierName`.
+
+#### Cache Warming
+
+When a new unique request comes in to an EA the Cache Warming middleware will begin polling the API on an interval ensure that data is always ready to be served and is as fresh as possible. The cache must be enabled to use this middleware. See `vendor/$version/bootstrap/README.md#cache-warmer` for more information.
+
+Cache Warming is enabled by default. It can be turned off using:
+
+```sh
+$ export WARMUP_ENABLED=false
+```
+
+The cache will begin polling once the first request has been received.
+It will also attempt to use batch requests to save API credits when possible.
+
+</details>
+
+<details>
+<summary>Multiple API Key Support</summary>
+
+In order to use multiple API keys for an adapter, simply comma delimit the keys where you define the environment variable. This will work for an arbitrary number of keys.
+
+```sh
+$ export API_KEY=myapikey1,myapikey2,myapikey3
+```
+
+The external adapter will then randomly rotate the keys. Over time this should balance out the number of requests between each of the API keys.
+
+</details>
+
+<details>
+<summary>Bridge URL Query String Parameters</summary>
+
+Additional input parameters can be passed to an External Adapter through the Bridge URL that is specified when connecting an External Adapter to the core node.
+
+This is useful in scenarios where when running multiple External Adapters to service a job spec there is a single External Adapter's behavior needs to be customized without affecting the others.
+
+</details>
+
+<details>
+<summary>Ticker Overrides</summary>
+
+There are cases where a certain data provider might have different ticker symbol to represent a cryptocurrency, often when there are multiple cryptocurrencies that share the same ticker.
+
+To help query the correct symbols the External Adapter request can contain an object of symbol overrides named `overrides`:
+
+```json
+"overrides": {
+      "generic": {
+        "RAI": "RAI2"
+      }
+    },
+```
+
+In the above example when the `generic` External Adapter is requested with a `base` of `RAI` the ticker will be changed to `RAI2`.
+
+</details>

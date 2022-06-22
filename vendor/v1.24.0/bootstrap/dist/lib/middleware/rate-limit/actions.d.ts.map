@@ -1,0 +1,1 @@
+{"version":3,"file":"actions.d.ts","sourceRoot":"","sources":["../../../../src/lib/middleware/rate-limit/actions.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,eAAe,EAAE,MAAM,kBAAkB,CAAA;AAElE,OAAO,EAAE,UAAU,EAAmB,MAAM,aAAa,CAAA;AAEzD,MAAM,WAAW,gCAAiC,SAAQ,UAAU;IAClE,KAAK,EAAE,cAAc,CAAA;IACrB,QAAQ,EAAE,eAAe,CAAA;CAC1B;AAED,eAAO,MAAM,0BAA0B,oMAKtC,CAAA"}

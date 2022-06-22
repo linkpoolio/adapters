@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute schedule endpoint error calls when successfully requests the Enetscores API throws an error if 'events' format is not an object (create market) 1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"schedule\\",\\"market\\":0,\\"leagueId\\":47,\\"date\\":1650067200}}",
+    "message": "Could not retrieve valid data: {\\"events\\":[\\"event1\\"]}",
+    "name": "AdapterError",
+    "url": "https:/eapi.enetpulse.com/event/daily/",
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "status": "errored",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute schedule endpoint error calls when successfully requests the Enetscores API throws an error if 'events' format is not an object (resolve market) 1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"schedule\\",\\"market\\":1,\\"leagueId\\":47,\\"date\\":1650067200}}",
+    "message": "Could not retrieve valid data: {\\"events\\":[\\"event1\\"]}",
+    "name": "AdapterError",
+    "url": "https:/eapi.enetpulse.com/event/daily/",
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "status": "errored",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute schedule endpoint success calls when API response has events and market is 0 (create) returns an array with the expected games encoded 1`] = `
+Object {
+  "data": Object {
+    "result": Array [
+      "0x0037169500626406600f4d616e636865737465722043697479576174666f7264",
+      "0x0037169d006263e33807417273656e616c4d616e6368657374657220556e69746564",
+    ],
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": Array [
+    "0x0037169500626406600f4d616e636865737465722043697479576174666f7264",
+    "0x0037169d006263e33807417273656e616c4d616e6368657374657220556e69746564",
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`execute schedule endpoint success calls when API response has events and market is 1 (resolve) returns an array with the expected game encoded (filtering by gameIds) 1`] = `
+Object {
+  "data": Object {
+    "result": Array [
+      "0x0037168e010066696e6973686564",
+    ],
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": Array [
+    "0x0037168e010066696e6973686564",
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`execute schedule endpoint success calls when API response has events and market is 1 (resolve) returns an array with the expected games encoded 1`] = `
+Object {
+  "data": Object {
+    "result": Array [
+      "0x0037168d000166696e6973686564",
+      "0x0037168e010066696e6973686564",
+    ],
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": Array [
+    "0x0037168d000166696e6973686564",
+    "0x0037168e010066696e6973686564",
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`execute schedule endpoint success calls when API response has no events returns an empy array (create market) 1`] = `
+Object {
+  "data": Object {
+    "result": Array [],
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": Array [],
+  "statusCode": 200,
+}
+`;
+
+exports[`execute schedule endpoint success calls when API response has no events returns an empy array (resolve market) 1`] = `
+Object {
+  "data": Object {
+    "result": Array [],
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": Array [],
+  "statusCode": 200,
+}
+`;

@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute contains-most-visited-location endpoint success calls returns a valid result 1`] = `
+Object {
+  "data": Object {
+    "message": "Valid",
+    "res": true,
+    "result": Object {
+      "message": "Valid",
+      "res": true,
+      "valid": true,
+    },
+    "valid": true,
+  },
+  "jobRunID": "1",
+  "result": Object {
+    "message": "Valid",
+    "res": true,
+    "valid": true,
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`execute contains-most-visited-location endpoint success calls returns an invalid result 1`] = `
+Object {
+  "data": Object {
+    "message": "Non-Solipay Address",
+    "res": true,
+    "result": Object {
+      "message": "Non-Solipay Address",
+      "res": true,
+      "valid": false,
+    },
+    "valid": false,
+  },
+  "jobRunID": "1",
+  "result": Object {
+    "message": "Non-Solipay Address",
+    "res": true,
+    "valid": false,
+  },
+  "statusCode": 200,
+}
+`;

@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute category endpoint error calls when successfully requests the API should throw and exception if the response format is unexpected 1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"category\\",\\"address\\":\\"0xed5af388653567af2f388e6224dc7c4b3241c544\\",\\"chainId\\":1}}",
+    "message": "Unexpected error reading categories: 77. Expecting an array.",
+    "name": "AdapterError",
+    "url": "https:/bei.anchainai.com/api/address_label",
+  },
+  "jobRunID": "1",
+  "status": "errored",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute category endpoint error calls when unsuccessfully requests the API should throw and exception 1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"category\\",\\"address\\":\\"0xed5af388653567af2f388e6224dc7c4b3241c544\\",\\"chainId\\":1}}",
+    "message": "Request failed with status code 500",
+    "name": "AdapterError",
+    "url": "https:/bei.anchainai.com/api/address_label",
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 500,
+  "status": "errored",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute category endpoint success calls returns the correct result 1`] = `
+Object {
+  "data": Object {
+    "data": Object {
+      "0xed5af388653567af2f388e6224dc7c4b3241c544": Object {
+        "is_address_valid": true,
+        "self": Object {
+          "category": Array [
+            "token",
+            "wallet",
+          ],
+          "detail": Array [
+            "token:Azuki (AZUKI)",
+            "wallet:Azuki",
+          ],
+        },
+      },
+    },
+    "err_msg": "",
+    "result": 4,
+    "status": 200,
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": 4,
+  "statusCode": 200,
+}
+`;
