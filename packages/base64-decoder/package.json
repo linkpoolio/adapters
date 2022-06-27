@@ -1,6 +1,6 @@
 {
   "name": "@chainlink/base64-decoder-adapter",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Chainlink base64-decoder adapter.",
   "keywords": [
     "Chainlink",

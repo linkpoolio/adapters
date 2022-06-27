@@ -1,6 +1,6 @@
 {
   "name": "@chainlink/tac-index-adapter",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Chainlink tac-index adapter.",
   "keywords": [
     "Chainlink",
