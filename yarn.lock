@@ -1625,65 +1625,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@chainlink/coinmetrics-adapter@workspace:packages/coinmetrics":
-  version: 0.0.0-use.local
-  resolution: "@chainlink/coinmetrics-adapter@workspace:packages/coinmetrics"
-  dependencies:
-    "@chainlink/ea-bootstrap": "file:../../vendor/v1.23.0/bootstrap"
-    "@chainlink/ea-test-helpers": "file:../../vendor/v1.23.0/test-helpers"
-    "@chainlink/types": "file:../../vendor/v1.23.0/types/@chainlink"
-    "@node-redis/client": 1.0.6
-    "@reduxjs/toolkit": ^1.6.1
-    "@types/chainlink__ea-bootstrap": "file:../../vendor/v1.23.0/bootstrap"
-    "@types/express": 4.17.13
-    "@types/fast-redact": 3.0.1
-    "@types/jest": 27.0.3
-    "@types/lodash": 4.14.182
-    "@types/lru-cache": 5.1.1
-    "@types/node": 16.11.33
-    "@types/object-hash": 2.1.1
-    "@types/object-path": 0.11.1
-    "@types/pino": 6.3.12
-    "@types/pino-pretty": 4.7.5
-    "@types/promise-timeout": 1.3.0
-    "@types/redux-logger": 3.0.9
-    "@types/remote-redux-devtools": 0.5.5
-    "@types/sinon": 10.0.11
-    "@types/supertest": 2.0.11
-    "@types/uuid": 8.3.4
-    "@types/ws": 7.4.7
-    ajv: ^8.6.2
-    axios: ^0.24.0
-    decimal.js: ^10.3.1
-    ethers: ^5.4.6
-    express: ^4.17.1
-    fast-redact: ^3.0.1
-    hardhat: 2.9.3
-    lodash: ^4.17.21
-    lru-cache: ^6.0.0
-    mock-socket: 9.1.3
-    nock: 13.2.4
-    object-hash: ^2.2.0
-    object-path: ^0.11.5
-    pino: ^6.13.0
-    pino-pretty: ^5.1.3
-    prom-client: ^13.2.0
-    promise-timeout: ^1.3.0
-    redis: ^4.0.0
-    redux: ^4.1.1
-    redux-logger: ^3.0.6
-    redux-observable: ^1.2.0
-    remote-redux-devtools: ^0.5.16
-    rxjs: ^6.6.3
-    sinon: 12.0.1
-    supertest: 6.2.2
-    tslib: ^2.3.1
-    typescript: 4.3.5
-    uuid: ^8.3.0
-    ws: ^7.4.4
-  languageName: unknown
-  linkType: soft
-
 "@chainlink/crd-network-adapter@workspace:packages/crd-network":
   version: 0.0.0-use.local
   resolution: "@chainlink/crd-network-adapter@workspace:packages/crd-network"
@@ -1923,37 +1864,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40chainlink%2Fcoinmetrics-adapter%40workspace%3Apackages%2Fcoinmetrics":
-  version: 2.4.0
-  resolution: "@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=835051&locator=%40chainlink%2Fcoinmetrics-adapter%40workspace%3Apackages%2Fcoinmetrics"
-  dependencies:
-    "@reduxjs/toolkit": ^1.6.1
-    ajv: ^8.6.2
-    axios: ^0.24.0
-    decimal.js: ^10.3.1
-    express: ^4.17.1
-    fast-redact: ^3.0.1
-    lodash: ^4.17.21
-    lru-cache: ^6.0.0
-    object-hash: ^2.2.0
-    object-path: ^0.11.5
-    pino: ^6.13.0
-    pino-pretty: ^5.1.3
-    prom-client: ^13.2.0
-    promise-timeout: ^1.3.0
-    redis: ^4.0.0
-    redux: ^4.1.1
-    redux-logger: ^3.0.6
-    redux-observable: ^1.2.0
-    remote-redux-devtools: ^0.5.16
-    rxjs: ^6.6.3
-    tslib: ^2.1.0
-    uuid: ^8.3.0
-    ws: ^7.4.4
-  checksum: 4ea16fe28c9a8e9505603101b00b7b08c806478922c5155c6f6183811080d9eb22d25ec085e59cefc4bf85f84645268142fedba970d64308b4246c53dd48e125
-  languageName: node
-  linkType: hard
-
 "@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40chainlink%2Fcrd-network-adapter%40workspace%3Apackages%2Fcrd-network":
   version: 2.4.0
   resolution: "@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=835051&locator=%40chainlink%2Fcrd-network-adapter%40workspace%3Apackages%2Fcrd-network"
@@ -2050,37 +1960,6 @@ __metadata:
 "@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40chainlink%2Fenetscores-adapter%40workspace%3Apackages%2Fenetscores":
   version: 2.4.0
   resolution: "@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=835051&locator=%40chainlink%2Fenetscores-adapter%40workspace%3Apackages%2Fenetscores"
-  dependencies:
-    "@reduxjs/toolkit": ^1.6.1
-    ajv: ^8.6.2
-    axios: ^0.24.0
-    decimal.js: ^10.3.1
-    express: ^4.17.1
-    fast-redact: ^3.0.1
-    lodash: ^4.17.21
-    lru-cache: ^6.0.0
-    object-hash: ^2.2.0
-    object-path: ^0.11.5
-    pino: ^6.13.0
-    pino-pretty: ^5.1.3
-    prom-client: ^13.2.0
-    promise-timeout: ^1.3.0
-    redis: ^4.0.0
-    redux: ^4.1.1
-    redux-logger: ^3.0.6
-    redux-observable: ^1.2.0
-    remote-redux-devtools: ^0.5.16
-    rxjs: ^6.6.3
-    tslib: ^2.1.0
-    uuid: ^8.3.0
-    ws: ^7.4.4
-  checksum: 4ea16fe28c9a8e9505603101b00b7b08c806478922c5155c6f6183811080d9eb22d25ec085e59cefc4bf85f84645268142fedba970d64308b4246c53dd48e125
-  languageName: node
-  linkType: hard
-
-"@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40chainlink%2Fgalaxis-adapter%40workspace%3Apackages%2Fgalaxis":
-  version: 2.4.0
-  resolution: "@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=835051&locator=%40chainlink%2Fgalaxis-adapter%40workspace%3Apackages%2Fgalaxis"
   dependencies:
     "@reduxjs/toolkit": ^1.6.1
     ajv: ^8.6.2
@@ -2388,68 +2267,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40chainlink%2Ftiingo-adapter%40workspace%3Apackages%2Ftiingo":
-  version: 2.4.0
-  resolution: "@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=835051&locator=%40chainlink%2Ftiingo-adapter%40workspace%3Apackages%2Ftiingo"
-  dependencies:
-    "@reduxjs/toolkit": ^1.6.1
-    ajv: ^8.6.2
-    axios: ^0.24.0
-    decimal.js: ^10.3.1
-    express: ^4.17.1
-    fast-redact: ^3.0.1
-    lodash: ^4.17.21
-    lru-cache: ^6.0.0
-    object-hash: ^2.2.0
-    object-path: ^0.11.5
-    pino: ^6.13.0
-    pino-pretty: ^5.1.3
-    prom-client: ^13.2.0
-    promise-timeout: ^1.3.0
-    redis: ^4.0.0
-    redux: ^4.1.1
-    redux-logger: ^3.0.6
-    redux-observable: ^1.2.0
-    remote-redux-devtools: ^0.5.16
-    rxjs: ^6.6.3
-    tslib: ^2.1.0
-    uuid: ^8.3.0
-    ws: ^7.4.4
-  checksum: 4ea16fe28c9a8e9505603101b00b7b08c806478922c5155c6f6183811080d9eb22d25ec085e59cefc4bf85f84645268142fedba970d64308b4246c53dd48e125
-  languageName: node
-  linkType: hard
-
-"@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40chainlink%2Ftradermade-adapter%40workspace%3Apackages%2Ftradermade":
-  version: 2.4.0
-  resolution: "@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=835051&locator=%40chainlink%2Ftradermade-adapter%40workspace%3Apackages%2Ftradermade"
-  dependencies:
-    "@reduxjs/toolkit": ^1.6.1
-    ajv: ^8.6.2
-    axios: ^0.24.0
-    decimal.js: ^10.3.1
-    express: ^4.17.1
-    fast-redact: ^3.0.1
-    lodash: ^4.17.21
-    lru-cache: ^6.0.0
-    object-hash: ^2.2.0
-    object-path: ^0.11.5
-    pino: ^6.13.0
-    pino-pretty: ^5.1.3
-    prom-client: ^13.2.0
-    promise-timeout: ^1.3.0
-    redis: ^4.0.0
-    redux: ^4.1.1
-    redux-logger: ^3.0.6
-    redux-observable: ^1.2.0
-    remote-redux-devtools: ^0.5.16
-    rxjs: ^6.6.3
-    tslib: ^2.1.0
-    uuid: ^8.3.0
-    ws: ^7.4.4
-  checksum: 4ea16fe28c9a8e9505603101b00b7b08c806478922c5155c6f6183811080d9eb22d25ec085e59cefc4bf85f84645268142fedba970d64308b4246c53dd48e125
-  languageName: node
-  linkType: hard
-
 "@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40chainlink%2Fupshot-adapter%40workspace%3Apackages%2Fupshot":
   version: 2.4.0
   resolution: "@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=835051&locator=%40chainlink%2Fupshot-adapter%40workspace%3Apackages%2Fupshot"
@@ -2667,15 +2484,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers::locator=%40chainlink%2Fcoinmetrics-adapter%40workspace%3Apackages%2Fcoinmetrics":
-  version: 1.2.0
-  resolution: "@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers#../../vendor/v1.23.0/test-helpers::hash=185c72&locator=%40chainlink%2Fcoinmetrics-adapter%40workspace%3Apackages%2Fcoinmetrics"
-  dependencies:
-    tslib: ^2.3.1
-  checksum: cb51672a69b5943991bd4b5d5c6129e45ce270c6b9dc8f89855e1bbd5df494aeec45d6e8e128d069b8498feb27255ab8d1f7efdb79cedc4700e6e9d660834016
-  languageName: node
-  linkType: hard
-
 "@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers::locator=%40chainlink%2Fcrd-network-adapter%40workspace%3Apackages%2Fcrd-network":
   version: 1.2.0
   resolution: "@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers#../../vendor/v1.23.0/test-helpers::hash=185c72&locator=%40chainlink%2Fcrd-network-adapter%40workspace%3Apackages%2Fcrd-network"
@@ -2697,15 +2505,6 @@ __metadata:
 "@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers::locator=%40chainlink%2Fenetscores-adapter%40workspace%3Apackages%2Fenetscores":
   version: 1.2.0
   resolution: "@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers#../../vendor/v1.23.0/test-helpers::hash=185c72&locator=%40chainlink%2Fenetscores-adapter%40workspace%3Apackages%2Fenetscores"
-  dependencies:
-    tslib: ^2.3.1
-  checksum: cb51672a69b5943991bd4b5d5c6129e45ce270c6b9dc8f89855e1bbd5df494aeec45d6e8e128d069b8498feb27255ab8d1f7efdb79cedc4700e6e9d660834016
-  languageName: node
-  linkType: hard
-
-"@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers::locator=%40chainlink%2Fgalaxis-adapter%40workspace%3Apackages%2Fgalaxis":
-  version: 1.2.0
-  resolution: "@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers#../../vendor/v1.23.0/test-helpers::hash=185c72&locator=%40chainlink%2Fgalaxis-adapter%40workspace%3Apackages%2Fgalaxis"
   dependencies:
     tslib: ^2.3.1
   checksum: cb51672a69b5943991bd4b5d5c6129e45ce270c6b9dc8f89855e1bbd5df494aeec45d6e8e128d069b8498feb27255ab8d1f7efdb79cedc4700e6e9d660834016
@@ -2793,24 +2592,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers::locator=%40chainlink%2Ftiingo-adapter%40workspace%3Apackages%2Ftiingo":
-  version: 1.2.0
-  resolution: "@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers#../../vendor/v1.23.0/test-helpers::hash=185c72&locator=%40chainlink%2Ftiingo-adapter%40workspace%3Apackages%2Ftiingo"
-  dependencies:
-    tslib: ^2.3.1
-  checksum: cb51672a69b5943991bd4b5d5c6129e45ce270c6b9dc8f89855e1bbd5df494aeec45d6e8e128d069b8498feb27255ab8d1f7efdb79cedc4700e6e9d660834016
-  languageName: node
-  linkType: hard
-
-"@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers::locator=%40chainlink%2Ftradermade-adapter%40workspace%3Apackages%2Ftradermade":
-  version: 1.2.0
-  resolution: "@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers#../../vendor/v1.23.0/test-helpers::hash=185c72&locator=%40chainlink%2Ftradermade-adapter%40workspace%3Apackages%2Ftradermade"
-  dependencies:
-    tslib: ^2.3.1
-  checksum: cb51672a69b5943991bd4b5d5c6129e45ce270c6b9dc8f89855e1bbd5df494aeec45d6e8e128d069b8498feb27255ab8d1f7efdb79cedc4700e6e9d660834016
-  languageName: node
-  linkType: hard
-
 "@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers::locator=%40chainlink%2Fupshot-adapter%40workspace%3Apackages%2Fupshot":
   version: 1.2.0
   resolution: "@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers#../../vendor/v1.23.0/test-helpers::hash=185c72&locator=%40chainlink%2Fupshot-adapter%40workspace%3Apackages%2Fupshot"
@@ -2884,67 +2665,6 @@ __metadata:
     sinon: 12.0.1
     supertest: 6.2.2
     tslib: ^2.3.3
-    typescript: 4.3.5
-    uuid: ^8.3.0
-    ws: ^7.4.4
-  languageName: unknown
-  linkType: soft
-
-"@chainlink/galaxis-adapter@workspace:packages/galaxis":
-  version: 0.0.0-use.local
-  resolution: "@chainlink/galaxis-adapter@workspace:packages/galaxis"
-  dependencies:
-    "@chainlink/ea-bootstrap": "file:../../vendor/v1.23.0/bootstrap"
-    "@chainlink/ea-test-helpers": "file:../../vendor/v1.23.0/test-helpers"
-    "@chainlink/types": "file:../../vendor/v1.23.0/types/@chainlink"
-    "@ethercards/ec-util": ^1.0.1
-    "@node-redis/client": 1.0.6
-    "@reduxjs/toolkit": ^1.6.1
-    "@types/chainlink__ea-bootstrap": "file:../../vendor/v1.23.0/bootstrap"
-    "@types/express": 4.17.13
-    "@types/fast-redact": 3.0.1
-    "@types/jest": 27.0.3
-    "@types/lodash": 4.14.182
-    "@types/lru-cache": 5.1.1
-    "@types/node": 16.11.33
-    "@types/object-hash": 2.1.1
-    "@types/object-path": 0.11.1
-    "@types/pino": 6.3.12
-    "@types/pino-pretty": 4.7.5
-    "@types/promise-timeout": 1.3.0
-    "@types/redux-logger": 3.0.9
-    "@types/remote-redux-devtools": 0.5.5
-    "@types/sinon": 10.0.11
-    "@types/supertest": 2.0.11
-    "@types/uuid": 8.3.4
-    "@types/ws": 7.4.7
-    ajv: ^8.6.2
-    axios: ^0.24.0
-    decimal.js: ^10.3.1
-    ethers: ^5.5.1
-    express: ^4.17.1
-    fast-redact: ^3.0.1
-    hardhat: 2.9.3
-    lodash: ^4.17.21
-    lru-cache: ^6.0.0
-    mock-socket: 9.1.3
-    moment: ^2.29.2
-    nock: 13.2.4
-    object-hash: ^2.2.0
-    object-path: ^0.11.5
-    pino: ^6.13.0
-    pino-pretty: ^5.1.3
-    prom-client: ^13.2.0
-    promise-timeout: ^1.3.0
-    redis: ^4.0.0
-    redux: ^4.1.1
-    redux-logger: ^3.0.6
-    redux-observable: ^1.2.0
-    remote-redux-devtools: ^0.5.16
-    rxjs: ^6.6.3
-    sinon: 12.0.1
-    supertest: 6.2.2
-    tslib: ^2.3.1
     typescript: 4.3.5
     uuid: ^8.3.0
     ws: ^7.4.4
@@ -3483,122 +3203,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@chainlink/tiingo-adapter@workspace:packages/tiingo":
-  version: 0.0.0-use.local
-  resolution: "@chainlink/tiingo-adapter@workspace:packages/tiingo"
-  dependencies:
-    "@chainlink/ea-bootstrap": "file:../../vendor/v1.23.0/bootstrap"
-    "@chainlink/ea-test-helpers": "file:../../vendor/v1.23.0/test-helpers"
-    "@chainlink/types": "file:../../vendor/v1.23.0/types/@chainlink"
-    "@node-redis/client": 1.0.6
-    "@reduxjs/toolkit": ^1.6.1
-    "@types/chainlink__ea-bootstrap": "file:../../vendor/v1.23.0/bootstrap"
-    "@types/express": 4.17.13
-    "@types/fast-redact": 3.0.1
-    "@types/jest": 27.0.3
-    "@types/lodash": 4.14.182
-    "@types/lru-cache": 5.1.1
-    "@types/node": 16.11.33
-    "@types/object-hash": 2.1.1
-    "@types/object-path": 0.11.1
-    "@types/pino": 6.3.12
-    "@types/pino-pretty": 4.7.5
-    "@types/promise-timeout": 1.3.0
-    "@types/redux-logger": 3.0.9
-    "@types/remote-redux-devtools": 0.5.5
-    "@types/sinon": 10.0.11
-    "@types/supertest": 2.0.11
-    "@types/uuid": 8.3.4
-    "@types/ws": 7.4.7
-    ajv: ^8.6.2
-    axios: ^0.24.0
-    decimal.js: ^10.3.1
-    express: ^4.17.1
-    fast-redact: ^3.0.1
-    hardhat: 2.9.3
-    lodash: ^4.17.21
-    lru-cache: ^6.0.0
-    mock-socket: 9.1.3
-    nock: 13.2.4
-    object-hash: ^2.2.0
-    object-path: ^0.11.5
-    pino: ^6.13.0
-    pino-pretty: ^5.1.3
-    prom-client: ^13.2.0
-    promise-timeout: ^1.3.0
-    redis: ^4.0.0
-    redux: ^4.1.1
-    redux-logger: ^3.0.6
-    redux-observable: ^1.2.0
-    remote-redux-devtools: ^0.5.16
-    rxjs: ^6.6.3
-    sinon: 12.0.1
-    supertest: 6.2.2
-    tslib: ^2.3.1
-    typescript: 4.3.5
-    uuid: ^8.3.0
-    ws: ^7.4.4
-  languageName: unknown
-  linkType: soft
-
-"@chainlink/tradermade-adapter@workspace:packages/tradermade":
-  version: 0.0.0-use.local
-  resolution: "@chainlink/tradermade-adapter@workspace:packages/tradermade"
-  dependencies:
-    "@chainlink/ea-bootstrap": "file:../../vendor/v1.23.0/bootstrap"
-    "@chainlink/ea-test-helpers": "file:../../vendor/v1.23.0/test-helpers"
-    "@chainlink/types": "file:../../vendor/v1.23.0/types/@chainlink"
-    "@node-redis/client": 1.0.6
-    "@reduxjs/toolkit": ^1.6.1
-    "@types/chainlink__ea-bootstrap": "file:../../vendor/v1.23.0/bootstrap"
-    "@types/express": 4.17.13
-    "@types/fast-redact": 3.0.1
-    "@types/jest": 27.0.3
-    "@types/lodash": 4.14.182
-    "@types/lru-cache": 5.1.1
-    "@types/node": 16.11.33
-    "@types/object-hash": 2.1.1
-    "@types/object-path": 0.11.1
-    "@types/pino": 6.3.12
-    "@types/pino-pretty": 4.7.5
-    "@types/promise-timeout": 1.3.0
-    "@types/redux-logger": 3.0.9
-    "@types/remote-redux-devtools": 0.5.5
-    "@types/sinon": 10.0.11
-    "@types/supertest": 2.0.11
-    "@types/uuid": 8.3.4
-    "@types/ws": 7.4.7
-    ajv: ^8.6.2
-    axios: ^0.24.0
-    decimal.js: ^10.3.1
-    express: ^4.17.1
-    fast-redact: ^3.0.1
-    hardhat: 2.9.3
-    lodash: ^4.17.21
-    lru-cache: ^6.0.0
-    mock-socket: 9.1.3
-    nock: 13.2.4
-    object-hash: ^2.2.0
-    object-path: ^0.11.5
-    pino: ^6.13.0
-    pino-pretty: ^5.1.3
-    prom-client: ^13.2.0
-    promise-timeout: ^1.3.0
-    redis: ^4.0.0
-    redux: ^4.1.1
-    redux-logger: ^3.0.6
-    redux-observable: ^1.2.0
-    remote-redux-devtools: ^0.5.16
-    rxjs: ^6.6.3
-    sinon: 12.0.1
-    supertest: 6.2.2
-    tslib: ^2.3.1
-    typescript: 4.3.5
-    uuid: ^8.3.0
-    ws: ^7.4.4
-  languageName: unknown
-  linkType: soft
-
 "@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink::locator=%40chainlink%2Faccuweather-adapter%40workspace%3Apackages%2Faccuweather":
   version: 1.1.0
   resolution: "@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink#../../vendor/v1.23.0/types/@chainlink::hash=cd9ecc&locator=%40chainlink%2Faccuweather-adapter%40workspace%3Apackages%2Faccuweather"
@@ -3627,13 +3231,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink::locator=%40chainlink%2Fcoinmetrics-adapter%40workspace%3Apackages%2Fcoinmetrics":
-  version: 1.1.0
-  resolution: "@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink#../../vendor/v1.23.0/types/@chainlink::hash=cd9ecc&locator=%40chainlink%2Fcoinmetrics-adapter%40workspace%3Apackages%2Fcoinmetrics"
-  checksum: 67e4ae1d9d5088fdb8273f84e57bfe1bf9603b27e9ce0060d357b29396817be8963ce601db2ac2aeb50d92897420c034797cea2034c7d7877945ad3fdb7df59c
-  languageName: node
-  linkType: hard
-
 "@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink::locator=%40chainlink%2Fcrd-network-adapter%40workspace%3Apackages%2Fcrd-network":
   version: 1.1.0
   resolution: "@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink#../../vendor/v1.23.0/types/@chainlink::hash=cd9ecc&locator=%40chainlink%2Fcrd-network-adapter%40workspace%3Apackages%2Fcrd-network"
@@ -3658,13 +3255,6 @@ __metadata:
 "@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink::locator=%40chainlink%2Fenetscores-adapter%40workspace%3Apackages%2Fenetscores":
   version: 1.1.0
   resolution: "@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink#../../vendor/v1.23.0/types/@chainlink::hash=cd9ecc&locator=%40chainlink%2Fenetscores-adapter%40workspace%3Apackages%2Fenetscores"
-  checksum: 67e4ae1d9d5088fdb8273f84e57bfe1bf9603b27e9ce0060d357b29396817be8963ce601db2ac2aeb50d92897420c034797cea2034c7d7877945ad3fdb7df59c
-  languageName: node
-  linkType: hard
-
-"@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink::locator=%40chainlink%2Fgalaxis-adapter%40workspace%3Apackages%2Fgalaxis":
-  version: 1.1.0
-  resolution: "@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink#../../vendor/v1.23.0/types/@chainlink::hash=cd9ecc&locator=%40chainlink%2Fgalaxis-adapter%40workspace%3Apackages%2Fgalaxis"
   checksum: 67e4ae1d9d5088fdb8273f84e57bfe1bf9603b27e9ce0060d357b29396817be8963ce601db2ac2aeb50d92897420c034797cea2034c7d7877945ad3fdb7df59c
   languageName: node
   linkType: hard
@@ -3728,20 +3318,6 @@ __metadata:
 "@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink::locator=%40chainlink%2Ftherundown-thales-adapter%40workspace%3Apackages%2Ftherundown-thales":
   version: 1.1.0
   resolution: "@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink#../../vendor/v1.23.0/types/@chainlink::hash=cd9ecc&locator=%40chainlink%2Ftherundown-thales-adapter%40workspace%3Apackages%2Ftherundown-thales"
-  checksum: 67e4ae1d9d5088fdb8273f84e57bfe1bf9603b27e9ce0060d357b29396817be8963ce601db2ac2aeb50d92897420c034797cea2034c7d7877945ad3fdb7df59c
-  languageName: node
-  linkType: hard
-
-"@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink::locator=%40chainlink%2Ftiingo-adapter%40workspace%3Apackages%2Ftiingo":
-  version: 1.1.0
-  resolution: "@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink#../../vendor/v1.23.0/types/@chainlink::hash=cd9ecc&locator=%40chainlink%2Ftiingo-adapter%40workspace%3Apackages%2Ftiingo"
-  checksum: 67e4ae1d9d5088fdb8273f84e57bfe1bf9603b27e9ce0060d357b29396817be8963ce601db2ac2aeb50d92897420c034797cea2034c7d7877945ad3fdb7df59c
-  languageName: node
-  linkType: hard
-
-"@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink::locator=%40chainlink%2Ftradermade-adapter%40workspace%3Apackages%2Ftradermade":
-  version: 1.1.0
-  resolution: "@chainlink/types@file:../../vendor/v1.23.0/types/@chainlink#../../vendor/v1.23.0/types/@chainlink::hash=cd9ecc&locator=%40chainlink%2Ftradermade-adapter%40workspace%3Apackages%2Ftradermade"
   checksum: 67e4ae1d9d5088fdb8273f84e57bfe1bf9603b27e9ce0060d357b29396817be8963ce601db2ac2aeb50d92897420c034797cea2034c7d7877945ad3fdb7df59c
   languageName: node
   linkType: hard
@@ -4158,23 +3734,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethercards/ec-util@npm:^1.0.1":
-  version: 1.0.4
-  resolution: "@ethercards/ec-util@npm:1.0.4"
-  dependencies:
-    "@ethersproject/bignumber": ^5.4.0
-    "@ethersproject/bytes": ^5.4.0
-    bitwise: ^2.1.0
-    braces: ">=2.3.1"
-    diff: ^5.0.0
-    glob-parent: ">=5.1.2"
-    is-svg: ">=4.2.2"
-    js-yaml: ">=3.13.1"
-    lodash.template: ">=4.5.0"
-  checksum: c6f58be70ec910ae7de689cf0a2ce5e83a258fdf67384b06f97d21d72c0b537ce0c49bc9e1edef86c91518e3646be131b19a0c3f034d7d475f838d5334aac17d
-  languageName: node
-  linkType: hard
-
 "@ethereumjs/block@npm:^3.5.0, @ethereumjs/block@npm:^3.6.0, @ethereumjs/block@npm:^3.6.2, @ethereumjs/block@npm:^3.6.3":
   version: 3.6.3
   resolution: "@ethereumjs/block@npm:3.6.3"
@@ -4333,7 +3892,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/bignumber@npm:5.6.2, @ethersproject/bignumber@npm:^5.4.0, @ethersproject/bignumber@npm:^5.6.2":
+"@ethersproject/bignumber@npm:5.6.2, @ethersproject/bignumber@npm:^5.6.2":
   version: 5.6.2
   resolution: "@ethersproject/bignumber@npm:5.6.2"
   dependencies:
@@ -4344,7 +3903,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/bytes@npm:5.6.1, @ethersproject/bytes@npm:^5.4.0, @ethersproject/bytes@npm:^5.6.1":
+"@ethersproject/bytes@npm:5.6.1, @ethersproject/bytes@npm:^5.6.1":
   version: 5.6.1
   resolution: "@ethersproject/bytes@npm:5.6.1"
   dependencies:
@@ -5628,37 +5187,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40chainlink%2Fcoinmetrics-adapter%40workspace%3Apackages%2Fcoinmetrics":
-  version: 2.4.0
-  resolution: "@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=c8c2ed&locator=%40chainlink%2Fcoinmetrics-adapter%40workspace%3Apackages%2Fcoinmetrics"
-  dependencies:
-    "@reduxjs/toolkit": ^1.6.1
-    ajv: ^8.6.2
-    axios: ^0.24.0
-    decimal.js: ^10.3.1
-    express: ^4.17.1
-    fast-redact: ^3.0.1
-    lodash: ^4.17.21
-    lru-cache: ^6.0.0
-    object-hash: ^2.2.0
-    object-path: ^0.11.5
-    pino: ^6.13.0
-    pino-pretty: ^5.1.3
-    prom-client: ^13.2.0
-    promise-timeout: ^1.3.0
-    redis: ^4.0.0
-    redux: ^4.1.1
-    redux-logger: ^3.0.6
-    redux-observable: ^1.2.0
-    remote-redux-devtools: ^0.5.16
-    rxjs: ^6.6.3
-    tslib: ^2.1.0
-    uuid: ^8.3.0
-    ws: ^7.4.4
-  checksum: 282629e138722dfa10db80ac4531e859783c671bec3555b422fc4d50ba8807d04e387acae47381e9b82d3787ddd7ccc6a2aacfed5b31d090a1118640375aded6
-  languageName: node
-  linkType: hard
-
 "@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40chainlink%2Fcrd-network-adapter%40workspace%3Apackages%2Fcrd-network":
   version: 2.4.0
   resolution: "@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=c8c2ed&locator=%40chainlink%2Fcrd-network-adapter%40workspace%3Apackages%2Fcrd-network"
@@ -5755,37 +5283,6 @@ __metadata:
 "@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40chainlink%2Fenetscores-adapter%40workspace%3Apackages%2Fenetscores":
   version: 2.4.0
   resolution: "@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=c8c2ed&locator=%40chainlink%2Fenetscores-adapter%40workspace%3Apackages%2Fenetscores"
-  dependencies:
-    "@reduxjs/toolkit": ^1.6.1
-    ajv: ^8.6.2
-    axios: ^0.24.0
-    decimal.js: ^10.3.1
-    express: ^4.17.1
-    fast-redact: ^3.0.1
-    lodash: ^4.17.21
-    lru-cache: ^6.0.0
-    object-hash: ^2.2.0
-    object-path: ^0.11.5
-    pino: ^6.13.0
-    pino-pretty: ^5.1.3
-    prom-client: ^13.2.0
-    promise-timeout: ^1.3.0
-    redis: ^4.0.0
-    redux: ^4.1.1
-    redux-logger: ^3.0.6
-    redux-observable: ^1.2.0
-    remote-redux-devtools: ^0.5.16
-    rxjs: ^6.6.3
-    tslib: ^2.1.0
-    uuid: ^8.3.0
-    ws: ^7.4.4
-  checksum: 282629e138722dfa10db80ac4531e859783c671bec3555b422fc4d50ba8807d04e387acae47381e9b82d3787ddd7ccc6a2aacfed5b31d090a1118640375aded6
-  languageName: node
-  linkType: hard
-
-"@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40chainlink%2Fgalaxis-adapter%40workspace%3Apackages%2Fgalaxis":
-  version: 2.4.0
-  resolution: "@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=c8c2ed&locator=%40chainlink%2Fgalaxis-adapter%40workspace%3Apackages%2Fgalaxis"
   dependencies:
     "@reduxjs/toolkit": ^1.6.1
     ajv: ^8.6.2
@@ -6065,68 +5562,6 @@ __metadata:
 "@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40chainlink%2Ftherundown-thales-adapter%40workspace%3Apackages%2Ftherundown-thales":
   version: 2.4.0
   resolution: "@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=c8c2ed&locator=%40chainlink%2Ftherundown-thales-adapter%40workspace%3Apackages%2Ftherundown-thales"
-  dependencies:
-    "@reduxjs/toolkit": ^1.6.1
-    ajv: ^8.6.2
-    axios: ^0.24.0
-    decimal.js: ^10.3.1
-    express: ^4.17.1
-    fast-redact: ^3.0.1
-    lodash: ^4.17.21
-    lru-cache: ^6.0.0
-    object-hash: ^2.2.0
-    object-path: ^0.11.5
-    pino: ^6.13.0
-    pino-pretty: ^5.1.3
-    prom-client: ^13.2.0
-    promise-timeout: ^1.3.0
-    redis: ^4.0.0
-    redux: ^4.1.1
-    redux-logger: ^3.0.6
-    redux-observable: ^1.2.0
-    remote-redux-devtools: ^0.5.16
-    rxjs: ^6.6.3
-    tslib: ^2.1.0
-    uuid: ^8.3.0
-    ws: ^7.4.4
-  checksum: 282629e138722dfa10db80ac4531e859783c671bec3555b422fc4d50ba8807d04e387acae47381e9b82d3787ddd7ccc6a2aacfed5b31d090a1118640375aded6
-  languageName: node
-  linkType: hard
-
-"@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40chainlink%2Ftiingo-adapter%40workspace%3Apackages%2Ftiingo":
-  version: 2.4.0
-  resolution: "@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=c8c2ed&locator=%40chainlink%2Ftiingo-adapter%40workspace%3Apackages%2Ftiingo"
-  dependencies:
-    "@reduxjs/toolkit": ^1.6.1
-    ajv: ^8.6.2
-    axios: ^0.24.0
-    decimal.js: ^10.3.1
-    express: ^4.17.1
-    fast-redact: ^3.0.1
-    lodash: ^4.17.21
-    lru-cache: ^6.0.0
-    object-hash: ^2.2.0
-    object-path: ^0.11.5
-    pino: ^6.13.0
-    pino-pretty: ^5.1.3
-    prom-client: ^13.2.0
-    promise-timeout: ^1.3.0
-    redis: ^4.0.0
-    redux: ^4.1.1
-    redux-logger: ^3.0.6
-    redux-observable: ^1.2.0
-    remote-redux-devtools: ^0.5.16
-    rxjs: ^6.6.3
-    tslib: ^2.1.0
-    uuid: ^8.3.0
-    ws: ^7.4.4
-  checksum: 282629e138722dfa10db80ac4531e859783c671bec3555b422fc4d50ba8807d04e387acae47381e9b82d3787ddd7ccc6a2aacfed5b31d090a1118640375aded6
-  languageName: node
-  linkType: hard
-
-"@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40chainlink%2Ftradermade-adapter%40workspace%3Apackages%2Ftradermade":
-  version: 2.4.0
-  resolution: "@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=c8c2ed&locator=%40chainlink%2Ftradermade-adapter%40workspace%3Apackages%2Ftradermade"
   dependencies:
     "@reduxjs/toolkit": ^1.6.1
     ajv: ^8.6.2
@@ -7561,13 +6996,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bitwise@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "bitwise@npm:2.1.0"
-  checksum: 9d97c4d96dd8bd244d8e41a5e0e328e18b79588beb916d789054e5d07bf7ba0196d54d1afbd8e5f6d5d12bce25926df953d0bd5dac5beff0ee6f92c8772c7ce2
-  languageName: node
-  linkType: hard
-
 "blakejs@npm:^1.1.0":
   version: 1.2.1
   resolution: "blakejs@npm:1.2.1"
@@ -7643,15 +7071,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"braces@npm:>=2.3.1, braces@npm:^3.0.2, braces@npm:~3.0.2":
-  version: 3.0.2
-  resolution: "braces@npm:3.0.2"
-  dependencies:
-    fill-range: ^7.0.1
-  checksum: e2a8e769a863f3d4ee887b5fe21f63193a891c68b612ddb4b68d82d1b5f3ff9073af066c343e9867a393fe4c2555dcb33e89b937195feb9c1613d259edfcd459
-  languageName: node
-  linkType: hard
-
 "braces@npm:^2.3.1, braces@npm:^2.3.2":
   version: 2.3.2
   resolution: "braces@npm:2.3.2"
@@ -7667,6 +7086,15 @@ __metadata:
     split-string: ^3.0.2
     to-regex: ^3.0.1
   checksum: e30dcb6aaf4a31c8df17d848aa283a65699782f75ad61ae93ec25c9729c66cf58e66f0000a9fec84e4add1135bb7da40f7cb9601b36bebcfa9ca58e8d5c07de0
+  languageName: node
+  linkType: hard
+
+"braces@npm:^3.0.2, braces@npm:~3.0.2":
+  version: 3.0.2
+  resolution: "braces@npm:3.0.2"
+  dependencies:
+    fill-range: ^7.0.1
+  checksum: e2a8e769a863f3d4ee887b5fe21f63193a891c68b612ddb4b68d82d1b5f3ff9073af066c343e9867a393fe4c2555dcb33e89b937195feb9c1613d259edfcd459
   languageName: node
   linkType: hard
 
@@ -9351,7 +8779,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ethers@npm:^5.4.6, ethers@npm:^5.5.0, ethers@npm:^5.5.1, ethers@npm:^5.5.2, ethers@npm:^5.6.2, ethers@npm:^5.6.4, ethers@npm:^5.6.5":
+"ethers@npm:^5.5.0, ethers@npm:^5.5.2, ethers@npm:^5.6.2, ethers@npm:^5.6.4, ethers@npm:^5.6.5":
   version: 5.6.9
   resolution: "ethers@npm:5.6.9"
   dependencies:
@@ -9648,17 +9076,6 @@ __metadata:
   version: 2.1.1
   resolution: "fast-safe-stringify@npm:2.1.1"
   checksum: a851cbddc451745662f8f00ddb622d6766f9bd97642dabfd9a405fb0d646d69fc0b9a1243cbf67f5f18a39f40f6fa821737651ff1bceeba06c9992ca2dc5bd3d
-  languageName: node
-  linkType: hard
-
-"fast-xml-parser@npm:^3.19.0":
-  version: 3.21.1
-  resolution: "fast-xml-parser@npm:3.21.1"
-  dependencies:
-    strnum: ^1.0.4
-  bin:
-    xml2js: cli.js
-  checksum: 73b9c907a424cc2f9b11a8a2f1b7448d936f1db6fa574b85cbe4be9739c2f77d99a827bb27d738a0db0047b20c71a5d663f64937fbdb9c38977fc6cd145221d2
   languageName: node
   linkType: hard
 
@@ -10128,15 +9545,6 @@ __metadata:
   version: 2.0.6
   resolution: "get-value@npm:2.0.6"
   checksum: 5c3b99cb5398ea8016bf46ff17afc5d1d286874d2ad38ca5edb6e87d75c0965b0094cb9a9dddef2c59c23d250702323539a7fbdd870620db38c7e7d7ec87c1eb
-  languageName: node
-  linkType: hard
-
-"glob-parent@npm:>=5.1.2":
-  version: 6.0.2
-  resolution: "glob-parent@npm:6.0.2"
-  dependencies:
-    is-glob: ^4.0.3
-  checksum: c13ee97978bef4f55106b71e66428eb1512e71a7466ba49025fc2aec59a5bfb0954d5abd58fc5ee6c9b076eef4e1f6d3375c2e964b88466ca390da4419a786a8
   languageName: node
   linkType: hard
 
@@ -10933,7 +10341,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-glob@npm:^4.0.0, is-glob@npm:^4.0.1, is-glob@npm:^4.0.3, is-glob@npm:~4.0.1":
+"is-glob@npm:^4.0.0, is-glob@npm:^4.0.1, is-glob@npm:~4.0.1":
   version: 4.0.3
   resolution: "is-glob@npm:4.0.3"
   dependencies:
@@ -11036,15 +10444,6 @@ __metadata:
   dependencies:
     better-path-resolve: 1.0.0
   checksum: 31029a383972bff4cc4f1bd1463fd04dde017e0a04ae3a6f6e08124a90c6c4656312d593101b0f38805fa3f3c8f6bc4583524bbf72c50784fa5ca0d3e5a76279
-  languageName: node
-  linkType: hard
-
-"is-svg@npm:>=4.2.2":
-  version: 4.3.2
-  resolution: "is-svg@npm:4.3.2"
-  dependencies:
-    fast-xml-parser: ^3.19.0
-  checksum: b3bce2395e25a0127e65e33fbfd8654225c303f7b45005af8eea69cc0870e252d8a01d62fd333c27247eadd38720b5459d623c292e02c14e328bf4970da891c7
   languageName: node
   linkType: hard
 
@@ -11682,7 +11081,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:4.1.0, js-yaml@npm:>=3.13.1, js-yaml@npm:^4.1.0":
+"js-yaml@npm:4.1.0, js-yaml@npm:^4.1.0":
   version: 4.1.0
   resolution: "js-yaml@npm:4.1.0"
   dependencies:
@@ -12165,13 +11564,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash._reinterpolate@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "lodash._reinterpolate@npm:3.0.0"
-  checksum: 06d2d5f33169604fa5e9f27b6067ed9fb85d51a84202a656901e5ffb63b426781a601508466f039c720af111b0c685d12f1a5c14ff8df5d5f27e491e562784b2
-  languageName: node
-  linkType: hard
-
 "lodash.camelcase@npm:^4.3.0":
   version: 4.3.0
   resolution: "lodash.camelcase@npm:4.3.0"
@@ -12232,25 +11624,6 @@ __metadata:
   version: 4.4.0
   resolution: "lodash.startcase@npm:4.4.0"
   checksum: c03a4a784aca653845fe09d0ef67c902b6e49288dc45f542a4ab345a9c406a6dc194c774423fa313ee7b06283950301c1221dd2a1d8ecb2dac8dfbb9ed5606b5
-  languageName: node
-  linkType: hard
-
-"lodash.template@npm:>=4.5.0":
-  version: 4.5.0
-  resolution: "lodash.template@npm:4.5.0"
-  dependencies:
-    lodash._reinterpolate: ^3.0.0
-    lodash.templatesettings: ^4.0.0
-  checksum: ca64e5f07b6646c9d3dbc0fe3aaa995cb227c4918abd1cef7a9024cd9c924f2fa389a0ec4296aa6634667e029bc81d4bbdb8efbfde11df76d66085e6c529b450
-  languageName: node
-  linkType: hard
-
-"lodash.templatesettings@npm:^4.0.0":
-  version: 4.2.0
-  resolution: "lodash.templatesettings@npm:4.2.0"
-  dependencies:
-    lodash._reinterpolate: ^3.0.0
-  checksum: 863e025478b092997e11a04e9d9e735875eeff1ffcd6c61742aa8272e3c2cddc89ce795eb9726c4e74cef5991f722897ff37df7738a125895f23fc7d12a7bb59
   languageName: node
   linkType: hard
 
@@ -12833,13 +12206,6 @@ __metadata:
     q: ~2.0
     websocket: ^1.0.30
   checksum: 44815efcaaa50806b35dba5e128a2fa1e33f145ff334f6ef873567745a022bbbbf539bbb5ef9e710a18fa011389f65a62c85b886b91095c6c661c00a4ca2aac4
-  languageName: node
-  linkType: hard
-
-"moment@npm:^2.29.2":
-  version: 2.29.3
-  resolution: "moment@npm:2.29.3"
-  checksum: 2e780e36d9a1823c08a1b6313cbb08bd01ecbb2a9062095820a34f42c878991ccba53abaa6abb103fd5c01e763724f295162a8c50b7e95b4f1c992ef0772d3f0
   languageName: node
   linkType: hard
 
@@ -15325,13 +14691,6 @@ __metadata:
   version: 3.1.1
   resolution: "strip-json-comments@npm:3.1.1"
   checksum: 492f73e27268f9b1c122733f28ecb0e7e8d8a531a6662efbd08e22cccb3f9475e90a1b82cab06a392f6afae6d2de636f977e231296400d0ec5304ba70f166443
-  languageName: node
-  linkType: hard
-
-"strnum@npm:^1.0.4":
-  version: 1.0.5
-  resolution: "strnum@npm:1.0.5"
-  checksum: 651b2031db5da1bf4a77fdd2f116a8ac8055157c5420f5569f64879133825915ad461513e7202a16d7fec63c54fd822410d0962f8ca12385c4334891b9ae6dd2
   languageName: node
   linkType: hard
 

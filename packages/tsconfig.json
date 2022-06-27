@@ -21,16 +21,10 @@
       "path": "./crd-network"
     },
     {
-      "path": "./coinmetrics"
-    },
-    {
       "path": "./dns-query"
     },
     {
       "path": "./enetscores"
-    },
-    {
-      "path": "./galaxis"
     },
     {
       "path": "./generic"
@@ -58,12 +52,6 @@
     },
     {
       "path": "./therundown-thales"
-    },
-    {
-      "path": "./tiingo"
-    },
-    {
-      "path": "./tradermade"
     },
     {
       "path": "./upshot"
