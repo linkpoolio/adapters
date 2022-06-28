@@ -22,6 +22,7 @@ export async function getJobMatrix(): Promise<JobMatrix> {
       shortName: k.replace("-adapter",""),
       type: v.build.labels[DockerLabels.EA_TYPE],
       image: v.image,
+      public: v.build.args.public == 1,
     }
   })
 
