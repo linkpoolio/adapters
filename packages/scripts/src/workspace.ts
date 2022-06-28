@@ -34,12 +34,14 @@ export function getWorkspacePackages(additionalTypes: string[] = []): WorkspaceP
     .map(({ location, name }: WorkspacePackage) => {
       const pkg: { version: string } = getJsonFile(join(location, 'package.json'))
       const dir2 = location.split('/')[1]
+
       return {
         location,
         name,
         descopedName: name.replace(scope, '').replace(scope2, ''),
         type: dir2 == 'scripts' ? dir2 : 'sources',
         version: pkg.version,
+        public: pkg.config?.public ? 1 : 0,
       }
     })
     .filter((v) => adapterTypes.includes(v.type) && v.descopedName !== 'adapters' && v.descopedName !== 'shared')

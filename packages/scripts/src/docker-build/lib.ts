@@ -91,6 +91,7 @@ async function makeDockerComposeFile(
           args: {
             location: next.location,
             package: next.name,
+            public: next.public,
           },
           labels: {
             [DockerLabels.EA_TYPE]: next.type,

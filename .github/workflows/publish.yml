@@ -79,11 +79,16 @@ jobs:
           DOCKER_BUILDKIT: 1
         run: docker-compose -f docker-compose.generated.yaml build ${{ matrix.adapter.name }}
 
-      - name: Login to Private ECR
+      - name: Set Publish URL
+        if: steps.adapter_did_change.outputs.result == 'true'
+        id: set_publish_url
+        run: ./.github/scripts/setpublishurl.sh ${{ secrets.AWS_NAMESPACE }} ${{ matrix.adapter.public }}
+
+      - name: Login to ECR
         if: steps.adapter_did_change.outputs.result == 'true'
         uses: docker/login-action@v1
         with:
-          registry: ${{ secrets.AWS_NAMESPACE }}.dkr.ecr.us-east-1.amazonaws.com
+          registry: ${{ steps.set_publish_url.outputs.registry }}
           username: ${{ secrets.AWS_ACCESS_KEY }}
           password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         env:
@@ -92,5 +97,5 @@ jobs:
       - name: Deploy Image
         if: steps.adapter_did_change.outputs.result == 'true'
         run: |
-          docker tag ${{ matrix.adapter.image }} ${{ secrets.AWS_NAMESPACE }}.dkr.ecr.us-east-1.amazonaws.com/${{ matrix.adapter.image }}
-          docker push ${{ secrets.AWS_NAMESPACE }}.dkr.ecr.us-east-1.amazonaws.com/${{ matrix.adapter.image }}
+          docker tag ${{ matrix.adapter.image }} ${{ steps.set_publish_url.outputs.url }}/${{ matrix.adapter.image }}
+          docker push ${{ steps.set_publish_url.outputs.url }}/${{ matrix.adapter.image }}
