@@ -45,7 +45,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   const assetAddress = validator.validated.data.assetAddress.toLowerCase()
   const marketId = validator.validated.data.marketId
 
-  const url = util.buildUrlPath(`/v1/nft/metrics/:assetAddress&market=:market`, {
+  const url = util.buildUrlPath(`/v1/nft/metrics/:assetAddress?market=:market`, {
     assetAddress,
     market: marketIdToMarket.get(marketId),
   })
