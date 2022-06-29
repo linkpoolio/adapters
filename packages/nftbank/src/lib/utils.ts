@@ -1,5 +1,6 @@
 import type { AssetEstimate, AssetFloorPrice } from './types'
 import { PricingAsset, PricingAssetFactor } from './const'
+import { utils } from 'ethers'
 
 export const getEstimateFor = (pricingAsset: PricingAsset, estimate: AssetEstimate[]): number => {
   const assetEstimate = estimate.find(
@@ -42,4 +43,8 @@ export const getFloorPriceFor = (
     throw new Error(`Price is not a number`)
   }
   return Math.round(price)
+}
+
+export const encodePriceWithDate = (date: number, price: number): string => {
+  return utils.solidityPack(['uint128', 'uint128'], [date, price])
 }

@@ -2,35 +2,33 @@ import { AdapterError, Logger, Requester, util, Validator } from '@chainlink/ea-
 import type { AdapterRequest, Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
 import { join } from 'path'
 
-import { chainId, estimateNftCollection, PricingAsset } from '../const'
-import type { EstimateResponseSchema } from '../types'
-import { getEstimateFor } from '../utils'
+import { chainId, PricingAsset } from '../lib/const'
+import type { EstimateResponseSchema } from '../lib/types'
+import { getEstimateFor } from '../lib/utils'
 
 export const supportedEndpoints = ['estimate']
 
-export const description = `
-### Data Conversions
+const customError = (data: EstimateResponseSchema) => {
+  const isError = !Array.isArray(data.data) || data.data.length > 1
+  if (isError) {
+    Logger.error(
+      `Unexpected 'data' format in response data. Expected an empty Array or an Array with 1 item. Try again with a valid 'assetAddress'.`,
+      { data },
+    )
+  }
+  return isError
+}
 
-Supported NFT Collections (via \`nftCollection\`)
-
-|    Value    |             Name             |
-| :---------: | :--------------------------: |
-|    bayc     | Bored Ape Yacht Club (BAYC)  |
-| cryptopunks |       CryptoPunks (C)        |
-|    mayc     | Mutant Ape Yacht Club (MAYC) |
-|   doodles   |       Doodles (DOODLE)       |
-|  coolcats   |     Cool Cats NFT (COOL)     |
-|    azuki    |        Azuki (AZUKI)         |`
+export const description = `This endpoint returns the complete appraisal value of an NFT collection using Time-Adjusted Market Index in ETH or USD.`
 
 export const inputParameters: InputParameters = {
-  nftCollection: {
-    aliases: ['collection'],
+  assetAddress: {
+    aliases: ['collectionAddress'],
     required: true,
     type: 'string',
-    description: 'The NFT collection to find an estimate in',
-    options: Array.from(estimateNftCollection.keys()),
+    description: 'The NFT collection address to find an estimate in',
   },
-  nftId: {
+  tokenId: {
     aliases: ['id'],
     required: true,
     description: 'The NFT ID to get an estimate for -- bayc (0) or cryptopunks (1)',
@@ -46,17 +44,6 @@ export const inputParameters: InputParameters = {
   },
 }
 
-const customError = (data: EstimateResponseSchema) => {
-  const isError = !Array.isArray(data.data) || data.data.length > 1
-  if (isError) {
-    Logger.error(
-      `Unexpected 'data' format in response data pepe. Expected an empty Array or an Array with 1 item`,
-      { data },
-    )
-  }
-  return isError
-}
-
 export const execute: ExecuteWithConfig<Config> = async (
   request: AdapterRequest,
   _,
@@ -64,14 +51,12 @@ export const execute: ExecuteWithConfig<Config> = async (
 ) => {
   const validator = new Validator(request, inputParameters)
   const jobRunID = validator.validated.data.id
-  const nftId = validator.validated.data.nftId as number
+  const tokenId = validator.validated.data.tokenId as number
   const pricingAsset = validator.validated.data.pricingAsset.toUpperCase() as PricingAsset
-  const nftCollection = estimateNftCollection.get(
-    validator.validated.data.nftCollection as string,
-  ) as string
-  const url = util.buildUrlPath(`estimates-v2/estimates/:nftCollection/:nftId`, {
-    nftCollection,
-    nftId,
+  const assetAddress = validator.validated.data.assetAddress.toLowerCase()
+  const url = util.buildUrlPath(`estimates-v2/estimates/:assetAddress/:tokenId`, {
+    assetAddress,
+    tokenId,
   })
   const params = {
     chainId: chainId.get(1) as string, // NB: ETHEREUM
@@ -86,7 +71,7 @@ export const execute: ExecuteWithConfig<Config> = async (
   } catch (error) {
     throw new AdapterError({
       statusCode: 200,
-      message: `Unexpected error estimating the price of ${nftCollection} in ${pricingAsset}. Reason: ${error}`,
+      message: `Unexpected error estimating the price of ${tokenId} in ${pricingAsset}. Reason: ${error}`,
       cause: error,
       url: join(options.baseURL, options.url),
     })
