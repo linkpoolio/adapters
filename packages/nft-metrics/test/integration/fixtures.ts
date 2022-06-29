@@ -10,7 +10,7 @@ export const mockTamiResponseError = (): nock => {
       'x-secret-key': process.env.SECRET_KEY,
     },
   })
-    .get(`/v1/nft/metrics/0xbce3781ae7ca1a5e050bd9c4c77369867ebc307e&market=AllMarkets`)
+    .get(`/v1/nft/metrics/0xbce3781ae7ca1a5e050bd9c4c77369867ebc307e?market=AllMarkets`)
     .reply(500, {})
 }
 
@@ -22,7 +22,7 @@ export const mockTamiSuccessResponse = (): nock => {
       'x-secret-key': process.env.SECRET_KEY,
     },
   })
-    .get(`/v1/nft/metrics/0xbce3781ae7ca1a5e050bd9c4c77369867ebc307e&market=AllMarkets`)
+    .get(`/v1/nft/metrics/0xbce3781ae7ca1a5e050bd9c4c77369867ebc307e?market=AllMarkets`)
     .reply(200, {
       answer: {
         eth: '145792.4216888684',
