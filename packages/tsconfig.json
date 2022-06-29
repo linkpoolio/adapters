@@ -39,6 +39,9 @@
       "path": "./nftbank"
     },
     {
+      "path": "./nft-metrics"
+    },
+    {
       "path": "./request-params-controller"
     },
     {
