@@ -1,6 +1,6 @@
-import { PricingAsset } from '../../src/const'
-import { AssetEstimate, AssetFloorPrice } from '../../src/types'
-import { getEstimateFor, getFloorPriceFor } from '../../src/utils'
+import { PricingAsset } from '../../src/lib/const'
+import { AssetEstimate, AssetFloorPrice } from '../../src/lib/types'
+import { getEstimateFor, getFloorPriceFor } from '../../src/lib/utils'
 
 describe('utils', () => {
   describe('getEstimateFor', () => {

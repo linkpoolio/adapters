@@ -27,12 +27,41 @@ Object {
 }
 `;
 
+exports[`execute floor-price endpoint success calls returns Azuki's floor price and date packed 1`] = `
+Object {
+  "data": Object {
+    "data": Array [
+      Object {
+        "_id": "1",
+        "estimated_at": "Wed, 29 Jun 2022 04:00:00 GMT",
+        "floor_price": Array [
+          Object {
+            "currency_symbol": "ETH",
+            "floor_price": 12,
+          },
+          Object {
+            "currency_symbol": "USD",
+            "floor_price": 23951.237809862814,
+          },
+        ],
+      },
+    ],
+    "result": 2395123780986282,
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": 2395123780986282,
+  "statusCode": 200,
+}
+`;
+
 exports[`execute floor-price endpoint success calls returns Azuki's floor price in USD 1`] = `
 Object {
   "data": Object {
     "data": Array [
       Object {
         "_id": "1",
+        "estimated_at": "Wed, 29 Jun 2022 04:00:00 GMT",
         "floor_price": Array [
           Object {
             "currency_symbol": "ETH",
