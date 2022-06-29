@@ -3,7 +3,7 @@ import type { AdapterRequest } from '@chainlink/types'
 
 import type { SuiteContext } from './adapter.test'
 import { mockFloorPriceResponseError, mockFloorPriceSuccessResponse } from './fixtures'
-import { chainId, floorPriceNftCollection } from '../../src/const'
+import { chainId } from '../../src/lib/const'
 
 export function testFloorPrice(context: SuiteContext): void {
   const id = '1'
@@ -15,14 +15,11 @@ export function testFloorPrice(context: SuiteContext): void {
           id,
           data: {
             endpoint: 'floor-price',
-            nftCollection: 'azuki',
+            assetAddress: '0xED5AF388653567Af2F388E6224dC7C4b3241C544',
           },
         }
 
-        mockFloorPriceResponseError(
-          floorPriceNftCollection.get(data.data.nftCollection) as string,
-          chainId.get(1) as string,
-        )
+        mockFloorPriceResponseError(chainId.get(1) as string)
 
         const response = await context.req
           .post('/')
@@ -38,20 +35,42 @@ export function testFloorPrice(context: SuiteContext): void {
   })
 
   describe('success calls', () => {
+    // Format 0
     it("returns Azuki's floor price in USD", async () => {
       const data: AdapterRequest = {
         id,
         data: {
           endpoint: 'floor-price',
-          nftCollection: 'azuki',
+          assetAddress: '0xED5AF388653567Af2F388E6224dC7C4b3241C544',
           pricingAsset: 'USD',
         },
       }
 
-      mockFloorPriceSuccessResponse(
-        floorPriceNftCollection.get(data.data.nftCollection) as string,
-        chainId.get(1) as string,
-      )
+      mockFloorPriceSuccessResponse(chainId.get(1) as string)
+
+      const response = await context.req
+        .post('/')
+        .send(data)
+        .set('Accept', '*/*')
+        .set('Content-Type', 'application/json')
+        .expect(200)
+
+      assertSuccess({ expected: 200, actual: response.body.statusCode }, response.body, id)
+      expect(response.body).toMatchSnapshot()
+    })
+    // Format 1
+    it("returns Azuki's floor price and date packed", async () => {
+      const data: AdapterRequest = {
+        id,
+        data: {
+          endpoint: 'floor-price',
+          assetAddress: '0xED5AF388653567Af2F388E6224dC7C4b3241C544',
+          pricingAsset: 'USD',
+          format: 1,
+        },
+      }
+
+      mockFloorPriceSuccessResponse(chainId.get(1) as string)
 
       const response = await context.req
         .post('/')

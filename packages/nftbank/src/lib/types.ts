@@ -45,6 +45,7 @@ export interface AssetFloorPrice {
 
 export interface FloorPriceAssetData extends AssetData {
   floor_price: AssetFloorPrice[]
+  estimated_at: string
 }
 
 export interface FloorPriceResponseSchema {

@@ -3,7 +3,7 @@ import type { AdapterRequest } from '@chainlink/types'
 
 import type { SuiteContext } from './adapter.test'
 import { mockEstimateResponseError, mockEstimateSuccessResponse } from './fixtures'
-import { chainId, estimateNftCollection } from '../../src/const'
+import { chainId } from '../../src/lib/const'
 
 export function testEstimate(context: SuiteContext): void {
   const id = '1'
@@ -15,16 +15,12 @@ export function testEstimate(context: SuiteContext): void {
           id,
           data: {
             endpoint: 'estimate',
-            nftCollection: 'bayc',
-            nftId: 1,
+            assetAddress: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
+            tokenId: 1,
           },
         }
 
-        mockEstimateResponseError(
-          estimateNftCollection.get(data.data.nftCollection) as string,
-          data.data.nftId,
-          chainId.get(1) as string,
-        )
+        mockEstimateResponseError(data.data.tokenId, chainId.get(1) as string)
 
         const response = await context.req
           .post('/')
@@ -45,16 +41,12 @@ export function testEstimate(context: SuiteContext): void {
         id,
         data: {
           endpoint: 'estimate',
-          nftCollection: 'bayc',
-          nftId: 1,
+          assetAddress: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
+          tokenId: 1,
         },
       }
 
-      mockEstimateSuccessResponse(
-        estimateNftCollection.get(data.data.nftCollection) as string,
-        data.data.nftId,
-        chainId.get(1) as string,
-      )
+      mockEstimateSuccessResponse(data.data.tokenId, chainId.get(1) as string)
 
       const response = await context.req
         .post('/')
