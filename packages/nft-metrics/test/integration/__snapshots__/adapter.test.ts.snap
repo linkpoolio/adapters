@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute tami endpoint success calls returns the estimate price 1`] = `
+Object {
+  "data": Object {
+    "answer": Object {
+      "eth": "145792.4216888684",
+      "gwei": "145792421688868.4",
+      "wei": "145792421688868400000000",
+    },
+    "message": "successful",
+    "result": 1.457924216888684e+23,
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": 1.457924216888684e+23,
+  "statusCode": 200,
+}
+`;
