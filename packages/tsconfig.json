@@ -15,6 +15,9 @@
       "path": "./base64-decoder"
     },
     {
+      "path": "./big-mac-index"
+    },
+    {
       "path": "./chartmetric"
     },
     {
