@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute Price endpoint success calls returns the prices 1`] = `
+Object {
+  "data": Object {
+    "dataset": Object {
+      "collapse": null,
+      "data": Array [
+        Array [
+          "2020-07-31",
+          9000,
+          1512,
+          5.95238095238095,
+          1576.1821366024512,
+          4.245,
+          null,
+          null,
+          null,
+          null,
+          null,
+        ],
+        Array [
+          "2020-01-31",
+          6500,
+          1514,
+          4.29326287978864,
+          1146.384479717813,
+          -24.281,
+          null,
+          null,
+          null,
+          null,
+          null,
+        ],
+      ],
+      "database_id": 5330,
+      "order": null,
+    },
+    "result": "0x000000000000000000d37896e2583cd80000000000000000009886ff98c58fc0",
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": "0x000000000000000000d37896e2583cd80000000000000000009886ff98c58fc0",
+  "statusCode": 200,
+}
+`;
