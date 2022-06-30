@@ -108,10 +108,10 @@ Request:
     "endpoint": "floor-price",
     "assetAddress": "0xED5AF388653567Af2F388E6224dC7C4b3241C544",
     "pricingAsset": "USD",
-    "formatId": 0
+    "formatId": 1
   },
   "debug": {
-    "cacheKey": "Ff37eAO10eWTSHvFOr2hhUmfNpI="
+    "cacheKey": "/uWgOlVo1/LVjqliqPFVanvjFcQ="
   }
 }
 ```
@@ -138,9 +138,9 @@ Response:
         ]
       }
     ],
-    "result": 2395123780986282
+    "result": "0x00000000000000000000000062bbce4000000000000000000008825a3628a5aa"
   },
-  "result": 2395123780986282,
+  "result": "0x00000000000000000000000062bbce4000000000000000000008825a3628a5aa",
   "statusCode": 200,
   "providerStatusCode": 200
 }

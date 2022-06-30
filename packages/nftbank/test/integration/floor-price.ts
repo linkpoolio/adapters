@@ -66,7 +66,7 @@ export function testFloorPrice(context: SuiteContext): void {
           endpoint: 'floor-price',
           assetAddress: '0xED5AF388653567Af2F388E6224dC7C4b3241C544',
           pricingAsset: 'USD',
-          format: 1,
+          formatId: 1,
         },
       }
 

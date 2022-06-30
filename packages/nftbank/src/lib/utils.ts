@@ -46,5 +46,5 @@ export const getFloorPriceFor = (
 }
 
 export const encodePriceWithDate = (date: number, price: number): string => {
-  return utils.solidityPack(['uint128', 'uint128'], [date, price])
+  return utils.solidityPack(['uint128', 'uint128'], [date.toString(), price.toString()])
 }
