@@ -68,8 +68,8 @@ describe('execute', () => {
       const formattedPrices = formatPrices(pricesTestCase1)
 
       const expectedPrices = {
-        firstHalfPrice: 32558139534883700,
-        secondHalfPrice: 43132050431320000,
+        firstHalfPrice: 43132050431320000,
+        secondHalfPrice: 32558139534883700,
       }
       expect(formattedPrices).toEqual(expectedPrices)
     })
