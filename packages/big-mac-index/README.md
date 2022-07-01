@@ -1,6 +1,6 @@
 # Big Mac Index Adapter
 
-![2.0.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/big-mac-index/package.json)
+![2.1.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/big-mac-index/package.json)
 
 This is the adapter for the [Big Mac Index](https://www.economist.com/big-mac-index)
 
