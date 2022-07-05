@@ -57,8 +57,8 @@ describe('getGameOdds()', () => {
 
     const expectedGameOdds = {
       gameId: '0x3736313636626436623464653934653131633562643230636466336662313965',
-      homeOdds: -16000,
-      awayOdds: 14000,
+      homeOdds: 0,
+      awayOdds: 0,
       drawOdds: 0,
     }
     expect(gameOdds).toEqual(expectedGameOdds)

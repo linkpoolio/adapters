@@ -7,7 +7,8 @@ import {
   mockScheduleResponseMalformedMarketCreate,
   mockScheduleResponseMalformedMarketResolve,
   mockScheduleResponseSuccessResolve,
-  mockScheduleResponseSuccessCreate,
+  mockScheduleResponseSuccessMarketCreateNoLines,
+  mockScheduleResponseSuccessMarketCreate,
 } from './fixtures'
 
 export function scheduleTests(context: SuiteContext): void {
@@ -51,7 +52,6 @@ export function scheduleTests(context: SuiteContext): void {
           },
         }
         mockScheduleResponseMalformedMarketCreate()
-
         const response = await context.req
           .post('/')
           .send(data)
@@ -59,7 +59,6 @@ export function scheduleTests(context: SuiteContext): void {
           .set('Content-Type', 'application/json')
           .expect('Content-Type', /json/)
           .expect(200)
-
         assertError({ expected: 200, actual: response.statusCode }, response.body, id)
         expect(response.body).toMatchSnapshot()
       })
@@ -74,6 +73,32 @@ export function scheduleTests(context: SuiteContext): void {
           },
         }
         mockScheduleResponseMalformedMarketResolve()
+        const response = await context.req
+          .post('/')
+          .send(data)
+          .set('Accept', '*/*')
+          .set('Content-Type', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+        assertError({ expected: 200, actual: response.statusCode }, response.body, id)
+        expect(response.body).toMatchSnapshot()
+      })
+    })
+  })
+
+  describe('success calls', () => {
+    describe('when successfully requesting Therundown API', () => {
+      it('should return correct endpoint result (case create market with no "lines")', async () => {
+        const data: AdapterRequest = {
+          id,
+          data: {
+            endpoint: 'schedule',
+            sportId: 4,
+            date: 1635529231,
+            market: 'create',
+          },
+        }
+        mockScheduleResponseSuccessMarketCreateNoLines()
 
         const response = await context.req
           .post('/')
@@ -83,14 +108,10 @@ export function scheduleTests(context: SuiteContext): void {
           .expect('Content-Type', /json/)
           .expect(200)
 
-        assertError({ expected: 200, actual: response.statusCode }, response.body, id)
+        assertSuccess({ expected: 200, actual: response.statusCode }, response.body, id)
         expect(response.body).toMatchSnapshot()
       })
-    })
-  })
 
-  describe('success calls', () => {
-    describe('when successfully requesting Therundown API', () => {
       it('should return correct endpoint result (case create market)', async () => {
         const data: AdapterRequest = {
           id,
@@ -101,7 +122,7 @@ export function scheduleTests(context: SuiteContext): void {
             market: 'create',
           },
         }
-        mockScheduleResponseSuccessCreate()
+        mockScheduleResponseSuccessMarketCreate()
 
         const response = await context.req
           .post('/')
