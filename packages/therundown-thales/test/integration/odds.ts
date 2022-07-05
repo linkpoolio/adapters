@@ -5,7 +5,7 @@ import type { SuiteContext } from './adapter.test'
 import {
   mockScheduleResponseError,
   mockScheduleResponseMalformedMarketCreate,
-  mockScheduleResponseSuccessCreate,
+  mockScheduleResponseSuccessMarketCreate,
 } from './fixtures'
 
 export function oddsTests(context: SuiteContext): void {
@@ -73,7 +73,7 @@ export function oddsTests(context: SuiteContext): void {
             date: 1635529231,
           },
         }
-        mockScheduleResponseSuccessCreate()
+        mockScheduleResponseSuccessMarketCreate()
 
         const response = await context.req
           .post('/')
