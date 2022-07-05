@@ -56,3 +56,9 @@ export interface GameOdds {
   drawOdds: number
   gameId: string
 }
+
+export interface Odds {
+  homeOdds: number
+  awayOdds: number
+  drawOdds: number
+}

@@ -1,20 +1,14 @@
 import { utils } from 'ethers'
+import { Logger } from '@chainlink/ea-bootstrap'
 
-import type {
-  GameResolve,
-  GameCreate,
-  Event,
-  GameCreateOdds,
-  Moneyline,
-  GameOdds,
-} from '../lib/types'
+import type { GameResolve, GameCreate, Event, GameOdds, Odds } from '../lib/types'
 import {
   SportId,
   Market,
   statusIdToStatus,
   statusToStatusId,
-  NO_EVENT_ODDS,
   EVENT_ODDS_EXPONENT,
+  NO_EVENT_ODDS,
 } from '../lib/const'
 
 export const throwError = (message: string): never => {
@@ -35,29 +29,6 @@ export const filterEventStatus = (event: Event, statuses: string[]): boolean => 
   return statuses.includes(event.score.event_status)
 }
 
-export const hasOdds = (moneyline: Moneyline): boolean => {
-  return moneyline.moneyline_away !== NO_EVENT_ODDS && moneyline.moneyline_home !== NO_EVENT_ODDS
-}
-
-export const filterOdds = (event: Event): GameCreateOdds => {
-  let homeOdds = 0
-  let awayOdds = 0
-  let drawOdds = 0
-  const odds = Object.values(event.lines)
-  for (const element of odds) {
-    if (hasOdds(element.moneyline)) {
-      homeOdds = element.moneyline.moneyline_home * EVENT_ODDS_EXPONENT
-      awayOdds = element.moneyline.moneyline_away * EVENT_ODDS_EXPONENT
-      drawOdds =
-        element.moneyline.moneyline_draw !== 0.0001
-          ? element.moneyline.moneyline_draw * EVENT_ODDS_EXPONENT
-          : 0
-      break
-    }
-  }
-  return { homeOdds, awayOdds, drawOdds }
-}
-
 /* *** Conversions, encoding and formatting *** */
 
 export const convertEventId = (eventId: string): string => {
@@ -68,21 +39,32 @@ export const convertEventId = (eventId: string): string => {
   throw new Error(`Unexpected 'event_id': ${eventId}. Expected format is 32 bytes long.`)
 }
 
+export const getOdds = (event: Event): Odds => {
+  let homeOdds = 0
+  let awayOdds = 0
+  let drawOdds = 0
+  const lines = event.lines
+  if (!lines || !lines[3]?.moneyline) {
+    Logger.warn({ event }, 'No lines found in event. Defaulting odds to 0.')
+    return { homeOdds, awayOdds, drawOdds }
+  }
+  const rawOdds = event.lines[3]?.moneyline
+  homeOdds =
+    rawOdds.moneyline_home !== NO_EVENT_ODDS ? rawOdds.moneyline_home * EVENT_ODDS_EXPONENT : 0
+  awayOdds =
+    rawOdds.moneyline_away !== NO_EVENT_ODDS ? rawOdds.moneyline_away * EVENT_ODDS_EXPONENT : 0
+  drawOdds =
+    rawOdds.moneyline_draw !== NO_EVENT_ODDS ? rawOdds.moneyline_draw * EVENT_ODDS_EXPONENT : 0
+  return { homeOdds, awayOdds, drawOdds }
+}
+
 export const getGameCreate = (event: Event): GameCreate => {
   const teams =
     event.teams_normalized ??
     throwError(`Missing 'teams_normalized' in event: ${JSON.stringify(event)}`)
 
-  let odds: GameCreateOdds
-  try {
-    odds = filterOdds(event)
-  } catch (error) {
-    throw new Error(
-      `Unexpected error occured while filtering odds for event: ${JSON.stringify(
-        event,
-      )}. Reason: ${error}`,
-    )
-  }
+  const odds = getOdds(event)
+
   const gameCreate = {
     homeTeam: `${teams[1].name} ${teams[1].mascot}`,
     awayTeam: `${teams[0].name} ${teams[0].mascot}`,
@@ -124,16 +106,8 @@ export const getGameResolve = (event: Event): GameResolve => {
 }
 
 export const getGameOdds = (event: Event): GameOdds => {
-  let odds: GameCreateOdds
-  try {
-    odds = filterOdds(event)
-  } catch (error) {
-    throw new Error(
-      `Unexpected error occured while filtering odds for event: ${JSON.stringify(
-        event,
-      )}. Reason: ${error}`,
-    )
-  }
+  const odds = getOdds(event)
+
   const gameOdds = {
     homeOdds: odds.homeOdds,
     awayOdds: odds.awayOdds,
