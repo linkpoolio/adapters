@@ -41,7 +41,7 @@ exports[`execute statistic endpoint error calls when successfully requests the A
 Object {
   "error": Object {
     "feedID": "{\\"data\\":{\\"endpoint\\":\\"statistics\\",\\"assetAddress\\":\\"0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb\\"}}",
-    "message": "Unexpected error occurred forming the result from the API response. Error: invalid BigNumber string (argument=\\"value\\", value=\\"potato\\", code=INVALID_ARGUMENT, version=bignumber/5.6.2)",
+    "message": "Unexpected error occurred forming the result from the API response. Error: Missing 'timestamp' in statistics: {\\"floor\\":\\"potato\\",\\"marketCap\\":\\"hello\\"}",
     "name": "AdapterError",
     "url": "https:/api.upshot.io/v1/collections/contractaddress/0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb",
   },
@@ -64,11 +64,13 @@ Object {
         Object {
           "floor": "66500000000000000000",
           "marketCap": "104534840290605916663324",
+          "timestamp": 1656316168,
         },
       ],
     },
     "message": "collection retrieved successfully",
     "result": Object {
+      "dateAndFloor": "0x00000000000000000000000062b9610800000000000000039adf75aafb7a0000",
       "floorPrice": 66500000000000000000,
       "marketCap": 1.0453484029060591e+23,
       "statistics": "0x00000000000000039adf75aafb7a00000000000000001622d85502fc3d5aae1c",
@@ -78,6 +80,7 @@ Object {
   "jobRunID": "1",
   "providerStatusCode": 200,
   "result": Object {
+    "dateAndFloor": "0x00000000000000000000000062b9610800000000000000039adf75aafb7a0000",
     "floorPrice": 66500000000000000000,
     "marketCap": 1.0453484029060591e+23,
     "statistics": "0x00000000000000039adf75aafb7a00000000000000001622d85502fc3d5aae1c",

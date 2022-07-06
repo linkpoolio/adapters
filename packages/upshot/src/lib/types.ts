@@ -5,6 +5,7 @@ export interface DataFloorPrice {
 export interface Stat {
   floor: string
   marketCap: string
+  timestamp: number
 }
 
 export interface StatisticsResult {
