@@ -87,7 +87,7 @@ This endpoint returns statistics for an NFT collection in wei:
 1.  Floor price
 2.  Market cap
 3.  Floor price and Market cap packed as bytes32
-4.  Floor price and unix timestamp as bytes32
+4.  Unix timestamp and floor price packed into a bytes32 in that order.
 
 `statistics` is the only supported name for this endpoint.
 

@@ -6,7 +6,7 @@ export const encodeStatistics = (floorPrice: string, marketCap: string): string 
   return utils.solidityPack(['uint128', 'uint128'], [floorPrice, marketCap])
 }
 
-export const encodePriceWithDate = (date: number, price: string): string => {
+export const encodeTimestampWithFloor = (date: number, price: string): string => {
   return utils.solidityPack(['uint128', 'uint128'], [date.toString(), price])
 }
 
@@ -27,7 +27,7 @@ export const parseResult = (rawStatistics: Stat): StatisticsResult => {
     floorPrice: Number(floorPrice),
     marketCap: Number(marketCap),
     statistics: encodeStatistics(floorPrice, marketCap),
-    dateAndFloor: encodePriceWithDate(timestamp, floorPrice),
+    dateAndFloor: encodeTimestampWithFloor(timestamp, floorPrice),
   }
 
   return formattedStatistics
