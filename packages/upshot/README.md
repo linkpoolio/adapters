@@ -1,6 +1,6 @@
 # Chainlink Upshot External Adapter
 
-![1.1.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/upshot/package.json)
+![2.0.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/upshot/package.json)
 
 Base URL https://api.upshot.io
 
@@ -87,6 +87,7 @@ This endpoint returns statistics for an NFT collection in wei:
 1.  Floor price
 2.  Market cap
 3.  Floor price and Market cap packed as bytes32
+4.  Unix timestamp and floor price packed into a bytes32 in that order.
 
 `statistics` is the only supported name for this endpoint.
 
@@ -129,6 +130,7 @@ Response:
       "slug": "cryptopunks",
       "stats": [
         {
+          "timestamp": 1656316168,
           "floor": "66500000000000000000",
           "marketCap": "104534840290605916663324"
         }
@@ -137,13 +139,15 @@ Response:
     "result": {
       "floorPrice": 66500000000000000000,
       "marketCap": 1.0453484029060591e23,
-      "statistics": "0x00000000000000039adf75aafb7a00000000000000001622d85502fc3d5aae1c"
+      "statistics": "0x00000000000000039adf75aafb7a00000000000000001622d85502fc3d5aae1c",
+      "dateAndFloor": "0x00000000000000000000000062b9610800000000000000039adf75aafb7a0000"
     }
   },
   "result": {
     "floorPrice": 66500000000000000000,
     "marketCap": 1.0453484029060591e23,
-    "statistics": "0x00000000000000039adf75aafb7a00000000000000001622d85502fc3d5aae1c"
+    "statistics": "0x00000000000000039adf75aafb7a00000000000000001622d85502fc3d5aae1c",
+    "dateAndFloor": "0x00000000000000000000000062b9610800000000000000039adf75aafb7a0000"
   },
   "statusCode": 200,
   "providerStatusCode": 200

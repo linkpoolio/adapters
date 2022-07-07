@@ -68,6 +68,7 @@ export const mockStatisticsResponseSuccess = (): nock =>
         slug: 'cryptopunks',
         stats: [
           {
+            timestamp: 1656316168,
             floor: '66500000000000000000',
             marketCap: '104534840290605916663324',
           },
