@@ -13,7 +13,7 @@ const customError = (data: ResponseSchema) => {
 }
 
 export const description =
-  'This endpoint returns statistics for an NFT collection in wei: \n 1. Floor price \n 2. Market cap \n 3. Floor price and Market cap packed as bytes32'
+  'This endpoint returns statistics for an NFT collection in wei: \n 1. Floor price \n 2. Market cap \n 3. Floor price and Market cap packed as bytes32 \n 4. Unix timestamp and floor price packed into a bytes32 in that order.'
 
 export const inputParameters: InputParameters = {
   assetAddress: {
