@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute coingecko - coins endpoint success calls returns list of coins 1`] = `
+Object {
+  "data": Array [],
+  "jobRunID": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute coingecko - market endpoint success calls returns list of market detail by coin 1`] = `
+Object {
+  "data": Array [],
+  "jobRunID": 1,
+  "statusCode": 200,
+}
+`;

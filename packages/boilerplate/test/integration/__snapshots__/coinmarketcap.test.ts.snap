@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute coinmarketcap - coins endpoint success calls returns list of coins 1`] = `
+Object {
+  "data": Array [],
+  "jobRunID": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute coinmarketcap - market endpoint success calls returns list of market detail by coin 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "circulatingSupply": 19093768,
+      "marketCap": 389757641667,
+      "marketCapRank": 1,
+      "name": "Bitcoin",
+      "price": 20413,
+      "supply": 21000000,
+      "symbol": "btc",
+    },
+  ],
+  "jobRunID": 1,
+  "statusCode": 200,
+}
+`;
