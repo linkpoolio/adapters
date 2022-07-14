@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute schedule endpoint error calls when successfully requests the AP Sports API (sportsradar). throws an error if 'events' format is missing 'home' (create market) 1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"schedule\\",\\"market\\":0,\\"sportId\\":1,\\"date\\":1650067200}}",
+    "message": "Unexpected error getting the game to be created from event: {\\"game\\":{\\"id\\":\\"32aec692-7974-4d97-b078-45c3c60fe1e0\\",\\"status\\":\\"scheduled\\",\\"scheduled\\":\\"2022-06-22T00:10:00+00:00\\",\\"away\\":{\\"name\\":\\"Blue Jays\\",\\"market\\":\\"Toronto\\",\\"id\\":\\"1d678440-b4b1-4954-9b39-70afb3ebbcfa\\",\\"runs\\":\\"linkpool\\"}}}. Reason: TypeError: Cannot read properties of undefined (reading 'market')",
+    "name": "AdapterError",
+    "url": "https://api.sportradar.us/mlb/trial/v7/en/games/2022/4/16/boxscore.json?api_key=fake-api-key",
+  },
+  "jobRunID": "1",
+  "status": "errored",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute schedule endpoint error calls when successfully requests the AP Sports API (sportsradar). throws an error if 'events' format is missing 'home' (resolve market) 1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"schedule\\",\\"market\\":1,\\"sportId\\":1,\\"date\\":1650067200}}",
+    "message": "Unexpected error getting the game to be resolved from event: {\\"game\\":{\\"id\\":\\"de3ca292-4b6a-4269-8f80-be5c37f366f5\\",\\"status\\":\\"closed\\",\\"scheduled\\":\\"2022-06-22T00:10:00+00:00\\",\\"away\\":{\\"name\\":\\"Royals\\",\\"market\\":\\"Kansas City\\",\\"id\\":\\"1d678440-b4b1-4954-9b39-70afb3ebbcfa\\",\\"runs\\":6}}}. Reason: TypeError: Cannot read properties of undefined (reading 'runs')",
+    "name": "AdapterError",
+    "url": "https://api.sportradar.us/mlb/trial/v7/en/games/2022/4/16/boxscore.json?api_key=fake-api-key",
+  },
+  "jobRunID": "1",
+  "status": "errored",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute schedule endpoint success calls when API response has events and market is 0 (create) returns an array with the expected games encoded 1`] = `
+Object {
+  "data": Object {
+    "result": Array [
+      "0x33326165633639323739373434643937623037383435633363363066653165300062b25dd8114368696361676f20576869746520536f78546f726f6e746f20426c7565204a617973",
+    ],
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": Array [
+    "0x33326165633639323739373434643937623037383435633363363066653165300062b25dd8114368696361676f20576869746520536f78546f726f6e746f20426c7565204a617973",
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`execute schedule endpoint success calls when API response has events and market is 1 (resolve) returns an array with the expected game encoded (filtering by gameIds) 1`] = `
+Object {
+  "data": Object {
+    "result": Array [
+      "0x6465336361323932346236613432363938663830626535633337663336366635070604",
+    ],
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": Array [
+    "0x6465336361323932346236613432363938663830626535633337663336366635070604",
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`execute schedule endpoint success calls when API response has events and market is 1 (resolve) returns an array with the expected games encoded 1`] = `
+Object {
+  "data": Object {
+    "result": Array [
+      "0x3332616563363932373937343464393762303738343563336336306665316530070604",
+      "0x6465336361323932346236613432363938663830626535633337663336366635070604",
+    ],
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": Array [
+    "0x3332616563363932373937343464393762303738343563336336306665316530070604",
+    "0x6465336361323932346236613432363938663830626535633337663336366635070604",
+  ],
+  "statusCode": 200,
+}
+`;
+
+exports[`execute schedule endpoint success calls when API response has no events returns an empty array (create market) 1`] = `
+Object {
+  "data": Object {
+    "result": Array [],
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": Array [],
+  "statusCode": 200,
+}
+`;
+
+exports[`execute schedule endpoint success calls when API response has no events returns an empty array (resolve market) 1`] = `
+Object {
+  "data": Object {
+    "result": Array [],
+  },
+  "jobRunID": "1",
+  "providerStatusCode": 200,
+  "result": Array [],
+  "statusCode": 200,
+}
+`;

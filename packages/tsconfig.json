@@ -12,6 +12,9 @@
       "path": "./anchain"
     },
     {
+      "path": "./ap-sports"
+    },
+    {
       "path": "./base64-decoder"
     },
     {
