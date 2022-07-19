@@ -26,6 +26,6 @@ export const statusToStatusId = new Map(
 )
 
 export const marketResultEncode: Map<Market, string[]> = new Map([
-  [Market.CREATE, ['string', 'uint40', 'uint8', 'string', 'string']],
-  [Market.RESOLVE, ['string', 'uint8', 'uint8', 'uint8']],
+  [Market.CREATE, ['bytes32', 'uint40', 'uint8', 'string', 'string']],
+  [Market.RESOLVE, ['bytes32', 'uint8', 'uint8', 'uint8']],
 ])

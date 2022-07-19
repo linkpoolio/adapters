@@ -1,10 +1,11 @@
 import { AdapterError, Requester, util, Validator } from '@chainlink/ea-bootstrap'
 import type { AdapterRequest, Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
-import { response as responseUtils, enums } from '@linkpool/shared'
+import { response as responseUtils, enums, uuid } from '@linkpool/shared'
 import { utils } from 'ethers'
+import { isUuid } from 'uuidv4'
 
 import { Market, marketResultEncode, sportIdToSport, statusIdToStatus } from '../lib/constants'
-import { getGameCreate, getGameResolve, stringToHex } from '../lib/schedule'
+import { getGameCreate, getGameResolve } from '../lib/schedule'
 import type { GameCreate, GameResolve, ResponseSchema } from '../lib/types'
 
 export const supportedEndpoints = ['schedule']
@@ -48,9 +49,9 @@ export const execute: ExecuteWithConfig<Config> = async (
   const market = validator.validated.data.market as Market
   const sportId = validator.validated.data.sportId
   const gameIds = (validator.validated.data.gameIds || []) as string[]
-  const date = validator.validated.data.date * 1000
+  const dateInput = validator.validated.data.date
   for (const gameId of gameIds) {
-    if (typeof gameId !== 'string' || gameId.length !== 66) {
+    if (!isUuid(uuid.bytes32ToUuid(gameId))) {
       throw new AdapterError({
         jobRunID,
         statusCode: 400,
@@ -58,27 +59,23 @@ export const execute: ExecuteWithConfig<Config> = async (
       })
     }
   }
-  let year: number
-  let month: number
-  let day: number
+  let date: Date
   try {
-    year = new Date(date).getUTCFullYear()
-    month = new Date(date).getUTCMonth() + 1
-    day = new Date(date).getUTCDate()
+    date = new Date(dateInput * 1000)
   } catch (error) {
     throw new AdapterError({
       jobRunID,
       statusCode: 400,
-      message: `Invalid 'date': ${date}. Reason: ${error}`,
+      message: `Invalid 'date': ${dateInput}. Reason: ${error}`,
       cause: error,
     })
   }
 
   const url = util.buildUrlPath('/:sport/trial/v7/en/games/:year/:month/:day/boxscore.json', {
     sport: sportIdToSport.get(sportId),
-    year,
-    month,
-    day,
+    year: date.getUTCFullYear(),
+    month: date.getUTCMonth() + 1,
+    day: date.getUTCDate(),
   })
   const params = {
     ...config.api.params,
@@ -89,7 +86,7 @@ export const execute: ExecuteWithConfig<Config> = async (
   const response = await Requester.request<ResponseSchema>(options)
   const events = response.data.league?.games
 
-  if (!Array.isArray(events) || events === undefined) {
+  if (!Array.isArray(events)) {
     const endpointResponse = responseUtils.generateAxiosResponse([], response.status)
     return Requester.success(jobRunID, endpointResponse, config.verbose)
   }
@@ -147,7 +144,7 @@ export const execute: ExecuteWithConfig<Config> = async (
       .filter(
         (event) =>
           event.game.status !== statusIdToStatus.get(1) &&
-          (gameIds.length ? gameIds.includes(stringToHex(event.game.id)) : true),
+          (gameIds.length ? gameIds.includes(uuid.uuidToBytes32(event.game.id)) : true),
       )
       .map((event) => {
         let gameResolve: GameResolve

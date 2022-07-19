@@ -89,7 +89,7 @@ describe('getGameCreate', () => {
     const gameCreate = getGameCreate(event as Game)
 
     const expectedGameCreate = {
-      gameId: '414040ab1e794637a7be8147dcb92533',
+      gameId: '0x3431343034306162316537393436333761376265383134376463623932353333',
       startTime: 1664643900,
       homeTeam: 'Chicago White Sox',
       awayTeam: 'Toronto Blue Jays',
@@ -122,7 +122,7 @@ describe('getGameResolve', () => {
     const gameResolve = getGameResolve(event as Game)
 
     const expectedGameResolve = {
-      gameId: '32aec69279744d97b07845c3c60fe1e0',
+      gameId: '0x3332616563363932373937343464393762303738343563336336306665316530',
       homeScore: 7,
       awayScore: 6,
       status: 4,

@@ -1,4 +1,4 @@
-import { datetime, errors } from '@linkpool/shared'
+import { datetime, errors, uuid } from '@linkpool/shared'
 
 import { statusToStatusId } from './constants'
 
@@ -7,7 +7,7 @@ import type { Game, GameCreate, GameResolve } from './types'
 export function getGameCreate(game: Game): GameCreate {
   const { home, away } = game
   const gameCreate = {
-    gameId: game.id.replace(/-/g, ''),
+    gameId: uuid.uuidToBytes32(game.id),
     startTime: datetime.iso8061ToTimestamp(game.scheduled),
     homeTeam: `${home.market} ${home.name}`,
     awayTeam: `${away.market} ${away.name}`,
@@ -26,7 +26,7 @@ export function getGameCreate(game: Game): GameCreate {
 export function getGameResolve(game: Game): GameResolve {
   const { home, away } = game
   const gameResolve = {
-    gameId: game.id.replace(/-/g, ''),
+    gameId: uuid.uuidToBytes32(game.id),
     homeScore: home.runs,
     awayScore: away.runs,
     status: statusToStatusId.get(game.status) as number,
