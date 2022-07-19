@@ -8,9 +8,16 @@ confirm() {
   echo "  - $1: $(tput setaf 3)$2$(tput setaf 7)"
 }
 
-sanitize() {
+sanitizeHyphen() {
   hyphenate=$(echo $1 | tr " " -)
   stripchars=$(echo $hyphenate | sed 's/[^a-zA-Z-]//g')
+  lowercase=$(echo $stripchars | tr '[:upper:]' '[:lower:]')
+  echo $lowercase
+}
+
+sanitize() {
+  stripspaces=$(echo $1 | tr " " \t)
+  stripchars=$(echo $stripspaces | sed 's/[^a-zA-Z-]//g')
   lowercase=$(echo $stripchars | tr '[:upper:]' '[:lower:]')
   echo $lowercase
 }
@@ -19,7 +26,7 @@ echo ""
 name="Adapter Name"
 prompt "$name" "NFL analytics => nfl-analytics"
 read NAME
-NAME=$(sanitize "$NAME")
+NAME=$(sanitizeHyphen "$NAME")
 
 echo ""
 dataProvider="Data Provider Name"
@@ -65,6 +72,7 @@ echo ""
 cd packages
 rm -rf boilerplate/dist
 rm -rf boilerplate/node_modules
+rm boilerplate/tsconfig.tsbuildinfo
 cp -rf boilerplate "$NAME"
 
 # Update Package.json
@@ -79,6 +87,9 @@ node > package.json <<EOF
   console.log(JSON.stringify(data, null, 2))
 EOF
 
+MODEL_UC=$(perl -ne 'print ucfirst' <<< $MODEL)
+ENDPOINT_UC=$(perl -ne 'print ucfirst' <<< $ENDPOINT)
+
 # Clean tests
 cd test
 rm -rf integration/coinmarketcap
@@ -86,15 +97,15 @@ rm integration/coinmarketcap.test.ts
 rm unit/market.test.ts
 rm integration/coingecko/market.ts
 rm -rf integration/__snapshots__
-mv integration/coingecko "integration/$NAME"
+mv integration/coingecko "integration/$DATA_PROVIDER"
 mv integration/coingecko.test.ts "integration/$DATA_PROVIDER.test.ts"
-mv "integration/$NAME/coins.ts" "integration/$NAME/$ENDPOINT.ts"
+mv "integration/$DATA_PROVIDER/coins.ts" "integration/$DATA_PROVIDER/$ENDPOINT.ts"
 mv unit/coins.test.ts "unit/$ENDPOINT.test.ts"
 
-echo "export const teamsInput = {
+echo "export const ${ENDPOINT}Input = {
   id: 1,
   data: {
-    endpoint: 'teams',
+    endpoint: '$ENDPOINT',
   },
 }" > integration/common.ts
 
@@ -104,7 +115,7 @@ import type { AddressInfo } from 'net'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
-import { teamsTests } from './$DATA_PROVIDER/$ENDPOINT'
+import { ${ENDPOINT}Tests } from './$DATA_PROVIDER/$ENDPOINT'
 import { server as startServer } from '../../src'
 
 let oldEnv: NodeJS.ProcessEnv
@@ -142,41 +153,42 @@ describe('execute', () => {
     context.server.close(done)
   })
 
-  describe('$DATA_PROVIDER - $ENDPOINT endpoint', () => teamsTests(context))
+  describe('$DATA_PROVIDER - $ENDPOINT endpoint', () => ${ENDPOINT}Tests(context))
 })
 
 " > "integration/$DATA_PROVIDER.test.ts"
 
-sed -i -e "s/coins/$ENDPOINT/g" "integration/$NAME/$ENDPOINT.ts"
-sed -i -e "s/coingecko/$DATA_PROVIDER/g" "integration/$NAME/$ENDPOINT.ts"
-rm "integration/$NAME/$ENDPOINT.ts-e"
+sed -i -e "s/coins/$ENDPOINT/g" "integration/$DATA_PROVIDER/$ENDPOINT.ts"
+sed -i -e "s/Coin/$MODEL_UC/g" "integration/$DATA_PROVIDER/$ENDPOINT.ts"
+sed -i -e "s/coingecko/$DATA_PROVIDER/g" "integration/$DATA_PROVIDER/$ENDPOINT.ts"
+rm "integration/$DATA_PROVIDER/$ENDPOINT.ts-e"
 
 echo "import nock from 'nock'
 
 // TODO: declare api baseUrls for all providers in easily exportable object
 const url = 'https://pro-api.coingecko.com/api/v3'
 
-const teams = [
+const $ENDPOINT = [
   {
     id: 1,
-    name: 'fake-team-1',
+    name: 'fake-$MODEL-1',
   },
   {
     id: 2,
-    name: 'fake-team-2',
+    name: 'fake-$MODEL-2',
   },
   {
     id: 3,
-    name: 'fake-team-3',
+    name: 'fake-$MODEL-3',
   },
 ]
 
 export const mock${MODEL_UC}Success = (): nock => {
-  return nock(url).get(\`/teams/list?x_cg_pro_api_key=\${process.env.API_KEY}\`).reply(200, {
-    data: teams,
+  return nock(url).get(\`/$ENDPOINT/list?x_cg_pro_api_key=\${process.env.API_KEY}\`).reply(200, {
+    data: $ENDPOINT,
   })
 }
-" > "integration/$NAME/fixtures.ts"
+" > "integration/$DATA_PROVIDER/fixtures.ts"
 sed -i -e "s/coins/$ENDPOINT/g" "unit/$ENDPOINT.test.ts"
 rm "unit/$ENDPOINT.test.ts-e"
 
@@ -206,9 +218,6 @@ export default (config: Config) => {
   }
 }
 " > index.ts
-
-MODEL_UC=$(perl -ne 'print ucfirst' <<< $MODEL)
-ENDPOINT_UC=$(perl -ne 'print ucfirst' <<< $ENDPOINT)
 
 echo "import { I$MODEL_UC } from '../models/$MODEL'
 
