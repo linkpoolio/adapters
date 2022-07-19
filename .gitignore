@@ -24,3 +24,6 @@ packages/k6/src/config/http.json
 
 *.tmp
 !vendor/**/**/dist
+
+# Env
+.envrc
