@@ -8,5 +8,4 @@ import * as response from './response'
 import * as selectors from './selectors'
 import * as types from './types'
 
-
 export { datetime, enums, errors, injector, reducers, response, selectors, types, uuid }
