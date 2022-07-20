@@ -8,7 +8,7 @@ describe('bytes32ToUuid()', () => {
 })
 
 describe('uuidToBytes32()', () => {
-  it('converts a uuid bytes32', () => {
+  it('converts a uuid to its bytes32 representation', () => {
     const uuid = uuidToBytes32('b9f2f158-d780-438f-b9eb-f0b30476b86f')
     expect(uuid).toBe('0x6239663266313538643738303433386662396562663062333034373662383666')
   })

@@ -3,6 +3,7 @@ import type { AdapterRequest, Config, ExecuteWithConfig, InputParameters } from 
 import { response as responseUtils, enums, uuid } from '@linkpool/shared'
 import { utils } from 'ethers'
 import { isUuid } from 'uuidv4'
+import { join } from 'path'
 
 import { Market, marketResultEncode, sportIdToSport, statusIdToStatus } from '../lib/constants'
 import { getGameCreate, getGameResolve } from '../lib/schedule'
@@ -106,7 +107,7 @@ export const execute: ExecuteWithConfig<Config> = async (
               event,
             )}. Reason: ${error}`,
             cause: error,
-            url: responseUtils.getRequestUrl(response),
+            url: join(options.baseURL, options.url),
           })
         }
         return gameCreate
@@ -129,7 +130,7 @@ export const execute: ExecuteWithConfig<Config> = async (
             gameCreate,
           )}. Reason: ${error}`,
           cause: error,
-          url: responseUtils.getRequestUrl(response),
+          url: join(options.baseURL, options.url),
         })
       }
       return encodedGameCreate
@@ -158,7 +159,7 @@ export const execute: ExecuteWithConfig<Config> = async (
               event,
             )}. Reason: ${error}`,
             cause: error,
-            url: responseUtils.getRequestUrl(response),
+            url: join(options.baseURL, options.url),
           })
         }
         return gameResolve
@@ -180,7 +181,7 @@ export const execute: ExecuteWithConfig<Config> = async (
             gameResolve,
           )}. Reason: ${error}`,
           cause: error,
-          url: responseUtils.getRequestUrl(response),
+          url: join(options.baseURL, options.url),
         })
       }
       return encodedGameResolve
