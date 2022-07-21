@@ -44,7 +44,7 @@ export function getWorkspacePackages(additionalTypes: string[] = []): WorkspaceP
         public: pkg.config?.public ? 1 : 0,
       }
     })
-    .filter((v) => adapterTypes.includes(v.type) && v.descopedName !== 'adapters' && v.descopedName !== 'shared')
+    .filter((v) => adapterTypes.includes(v.type) && v.descopedName !== 'adapters' && v.descopedName !== 'shared' && v.descopedName !== 'boilerplate')
     .map((p) => {
       let tsconf: TsConfig | undefined
       try {
