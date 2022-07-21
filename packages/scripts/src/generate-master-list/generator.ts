@@ -150,6 +150,7 @@ const getAdapterList = (pathToParent: string, listDescription: string) => {
       n !== 'README.md' &&
       n !== 'scripts' &&
       n !== 'shared' &&
+      n !== 'boilerplate' &&
       n !== 'tsconfig.json' &&
       n !== 'tsconfig.base.json',
   )

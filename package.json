@@ -21,6 +21,7 @@
     "test:integration": "EA_PORT=0 jest integration",
     "test:ci:unit": "jest --coverage unit",
     "test:ci:integration": "EA_PORT=0 jest --coverage integration",
+    "generate:adapter": "./scripts/generate-adapter.sh",
     "generate:docker-compose": "ts-node-transpile-only ./packages/scripts/src/docker-build",
     "generate:gha:matrix": "ts-node-transpile-only ./packages/scripts/src/gha",
     "generate:master-list": "ts-node-transpile-only ./packages/scripts/src/generate-master-list",

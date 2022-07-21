@@ -12,10 +12,16 @@
       "path": "./anchain"
     },
     {
+      "path": "./ap-sports"
+    },
+    {
       "path": "./base64-decoder"
     },
     {
       "path": "./big-mac-index"
+    },
+    {
+      "path": "./boilerplate"
     },
     {
       "path": "./chartmetric"

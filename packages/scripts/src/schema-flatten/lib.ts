@@ -70,7 +70,7 @@ export async function flattenAllSchemas(): Promise<FlattenedSchema[]> {
  */
 function createChainlinkLabsResolver() {
   const schemas = getWorkspacePackages()
-    .filter((p) => p.descopedName != 'shared')
+    .filter((p) => p.descopedName != 'shared' && p.descopedName != 'boilerplate')
     .map((p) => p.environment)
     .filter((schema): schema is Record<string, string> => !!schema)
 

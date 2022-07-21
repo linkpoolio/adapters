@@ -172,6 +172,6 @@ jobs:
         if: steps.adapter_did_change.outputs.result == 'true' && steps.adapter_has_integration_tests.outputs.result == 'true'
         run: yarn setup
 
-      - name: Run Unit Tests
+      - name: Run Integration Tests
         if: steps.adapter_did_change.outputs.result == 'true' && steps.adapter_has_integration_tests.outputs.result == 'true'
         run: yarn test ./packages/${{ matrix.adapter.shortName }}/test/integration
