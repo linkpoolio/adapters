@@ -22,7 +22,7 @@ export const mockScheduleSuccessMalformed = (): nock.Scope =>
                 status: 'scheduled',
 
                 scheduled: '2022-06-22T00:10:00+00:00',
-                // Missing Home
+                // Missing Home.
                 away: {
                   name: 'Blue Jays',
                   market: 'Toronto',
@@ -37,7 +37,7 @@ export const mockScheduleSuccessMalformed = (): nock.Scope =>
                 status: 'closed',
 
                 scheduled: '2022-06-22T00:10:00+00:00',
-                // Missing Home
+                // Missing Home.
                 away: {
                   name: 'Royals',
                   market: 'Kansas City',
