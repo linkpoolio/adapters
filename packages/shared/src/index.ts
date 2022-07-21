@@ -6,5 +6,6 @@ import * as reducers from './reducers'
 import * as response from './response'
 import * as selectors from './selectors'
 import * as types from './types'
+import * as uuid from './uuid'
 
-export { datetime, enums, errors, injector, reducers, response, selectors, types }
+export { datetime, enums, errors, injector, reducers, response, selectors, types, uuid }
