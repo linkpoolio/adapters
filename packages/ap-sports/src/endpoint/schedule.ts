@@ -52,11 +52,11 @@ export const execute: ExecuteWithConfig<Config> = async (
   const gameIds = (validator.validated.data.gameIds || []) as string[]
   const dateInput = validator.validated.data.date
   for (const gameId of gameIds) {
-    if (!isUuid(uuid.bytes32ToUuid(gameId))) {
+    if (gameId.length !== 32) {
       throw new AdapterError({
         jobRunID,
         statusCode: 400,
-        message: `Invalid game ID in 'gameIds': ${gameId}. Reason: invalid type. 'gameIds' is an array of bytes32.`,
+        message: `Invalid game ID in 'gameIds': ${gameId}. Reason: invalid type. 'gameIds' is an array of string IDs.`,
       })
     }
   }
@@ -145,7 +145,7 @@ export const execute: ExecuteWithConfig<Config> = async (
       .filter(
         (event) =>
           event.game.status !== statusIdToStatus.get(1) &&
-          (gameIds.length ? gameIds.includes(uuid.uuidToBytes32(event.game.id)) : true),
+          (gameIds.length ? gameIds.includes(event.game.id.replace(/-/g, '')) : true),
       )
       .map((event) => {
         let gameResolve: GameResolve

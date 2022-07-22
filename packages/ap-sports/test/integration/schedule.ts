@@ -125,7 +125,7 @@ export function scheduleTests(context: SuiteContext): void {
             market: Market.RESOLVE,
             sportId,
             date: 1655777031, // 2022-06-21T00:00:00
-            gameIds: ['0x6465336361323932346236613432363938663830626535633337663336366635'], // UUID: de3ca292-4b6a-4269-8f80-be5c37f366f5
+            gameIds: ['de3ca2924b6a42698f80be5c37f366f5'], // UUID: de3ca292-4b6a-4269-8f80-be5c37f366f5
           },
         }
 

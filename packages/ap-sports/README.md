@@ -199,10 +199,10 @@ Request:
     "market": 1,
     "sportId": 1,
     "date": 1655777031,
-    "gameIds": ["0x6465336361323932346236613432363938663830626535633337663336366635"]
+    "gameIds": ["de3ca2924b6a42698f80be5c37f366f5"]
   },
   "debug": {
-    "cacheKey": "yIQKf5/Y0laeEf1PHm/6x8nwBgs="
+    "cacheKey": "8Gm0jQ++o36cVjapa49ZmOgLT1k="
   }
 }
 ```
