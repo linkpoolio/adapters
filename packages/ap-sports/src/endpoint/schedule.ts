@@ -1,8 +1,7 @@
 import { AdapterError, Requester, util, Validator } from '@chainlink/ea-bootstrap'
 import type { AdapterRequest, Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
-import { response as responseUtils, enums, uuid } from '@linkpool/shared'
+import { response as responseUtils, enums } from '@linkpool/shared'
 import { utils } from 'ethers'
-import { isUuid } from 'uuidv4'
 import { join } from 'path'
 
 import { Market, marketResultEncode, sportIdToSport, statusIdToStatus } from '../lib/constants'
