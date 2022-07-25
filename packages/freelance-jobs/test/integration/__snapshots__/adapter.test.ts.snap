@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute lanceria jobs endpoint error calls returns an error response when the API errors too 1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"jobs\\",\\"jobId\\":1}}",
+    "message": "Unexpected error requesting a job. Reason: AdapterError: Request failed with status code 500",
+    "name": "AdapterError",
+    "url": "https:/api-testnet.lanceria.com/jobRequests/",
+  },
+  "jobRunID": 1,
+  "providerStatusCode": 500,
+  "status": "errored",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute lanceria jobs endpoint error calls success calls returns a single job 1`] = `
+Object {
+  "data": Object {
+    "employer": Object {
+      "address": "0x6613A30A0D7F4011Cb569ca89f5a107cF9A542f2",
+    },
+    "freelancer": Object {
+      "address": "0xbDf9CD30F6201B02F48d94878a86cf9B375f6344",
+    },
+    "id": 1,
+    "payment": Object {
+      "amount": "10000000000000000000",
+      "currency": "LANC",
+    },
+  },
+  "jobRunID": 1,
+  "statusCode": 200,
+}
+`;
