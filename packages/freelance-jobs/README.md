@@ -1,3 +1,3 @@
-# freelance-jobs Adapter
+# Freelance Jobs Adapter
 
 TODO
