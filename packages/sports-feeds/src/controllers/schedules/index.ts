@@ -1,7 +1,7 @@
 import execute from './controller'
-import inputParameters from './input'
+import { inputParameters } from './input'
 
-const supportedEndpoints = ['schedules']
+const supportedEndpoints = ['schedule']
 const endpointResultPaths = {}
 const description = 'This endpoint returns a list of all schedules.'
 

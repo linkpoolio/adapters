@@ -1,30 +1,45 @@
 import { AdapterError, Requester, Validator } from '@chainlink/ea-bootstrap'
 import { Config, ExecuteWithConfig, AdapterRequest } from '@chainlink/types'
-import { selectors, reducers } from '@linkpool/shared'
+import { validateDate } from '../../lib/utils'
 
 import api from '../../api'
-import input from './input'
+import { inputParameters, Market, marketToStatus, validateAndGetStatusIds } from './input'
 
 const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _, config) => {
-  const validator = new Validator(request, input)
+  const validator = new Validator(request, inputParameters)
   const client = api(config)
 
   const jobRunID = validator.validated.id
+  const sportId = validator.validated.data.sportId
+  const dateRaw = validator.validated.data.date
+  const market = validator.validated.data.market
+  // const gameIdsRaw = validator.validated.data.gameIds
+  const statusIdsRaw = validator.validated.data.statusIds
+
+  // let gameIds: string[] = []
+  let statusIds: string[] = []
+  // let date: string
 
   try {
-    let result = await client.schedules.list()
-
-    const filter = validator.validated.data.filter
-    if (filter) {
-      result = selectors.filterKeyValueInArray(result, 'symbol', filter.split(','))
+    const date: string = validateDate(dateRaw)
+    statusIds = validateAndGetStatusIds(statusIdsRaw)
+    if (market === Market.CREATE) {
+      const result = await client.schedules.listSchedule({ sportId, date })
+      return Requester.success(jobRunID, { data: result }, true)
     }
 
-    const parse = validator.validated.data.parse
-    if (parse) {
-      result = reducers.reduceByKeys(result, parse.split(','))
+    if (market === Market.RESOLVE) {
+      let statuses: string[]
+      if (statusIds.length !== 0) {
+        statuses = statusIds.filter(
+          (statusId: string) => !(marketToStatus.get(Market.CREATE) as string[]).includes(statusId),
+        )
+      } else {
+        statuses = marketToStatus.get(Market.RESOLVE) as string[]
+      }
+      const result = await client.schedules.listScores({ sportId, date })
     }
-
-    return Requester.success(jobRunID, { data: result }, true)
+    return Requester.success(jobRunID, { data: [] }, true)
   } catch (error) {
     throw new AdapterError({
       jobRunID,

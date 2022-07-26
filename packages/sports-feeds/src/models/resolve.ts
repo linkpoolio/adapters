@@ -1,17 +1,19 @@
+import { convertEventId } from '../lib/utils'
+import { statusToStatusId } from '../controllers/schedules/input'
+
 export interface IResolve {
-  homeTeam: string
-  awayTeam: string
-  startTime: number
+  homeScore: number
+  awayScore: number
+  statusId: number
   gameId: string
 }
 
-// schedule is the json blob returned to match to the interface that is made here
 const transformer = {
   therundown: (resolve): IResolve => ({
-    homeTeam: resolve.homeTeam,
-    awayTeam: resolve.awayTeam,
-    startTime: resolve.startTime,
-    gameId: resolve.gameId,
+    homeScore: resolve.score?.score_home,
+    awayScore: resolve.score?.score_away,
+    gameId: convertEventId(resolve.event_id),
+    statusId: statusToStatusId.get(resolve.score?.event_status) as number,
   }),
   // sportsdataio: (resolve): IResolve => ({
   //   homeTeam:

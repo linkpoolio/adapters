@@ -4,9 +4,14 @@ import Schedule, { ISchedule } from '../../models/schedule'
 const provider = 'sportsdataio'
 
 export default (fetch): ISchedules => ({
-  list: async (): Promise<ISchedule[]> => {
+  listSchedule: async (): Promise<ISchedule[]> => {
     const response = await fetch({ url: 'schedules/list' })
     const data = response?.data?.length ? response.data : []
-    return Schedule.List(data, provider)
+    return Schedule.ListSchedule(data, provider)
+  },
+  listScores: async (): Promise<ISchedule[]> => {
+    const response = await fetch({ url: 'schedules/list' })
+    const data = response?.data?.length ? response.data : []
+    return Schedule.ListScores(data, provider)
   },
 })

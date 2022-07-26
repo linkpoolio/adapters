@@ -1,12 +1,17 @@
 import { ISchedules } from '../base'
-import Schedule, { ISchedule } from '../../models/schedule'
+import Schedule, { ISchedule, IResolve } from '../../models/schedule'
 
 const provider = 'therundown'
 
 export default (fetch): ISchedules => ({
-  list: async (): Promise<ISchedule[]> => {
-    const response = await fetch({ url: 'schedules/list' })
-    const data = response?.data?.length ? response.data : []
-    return Schedule.List(data, provider)
+  listSchedule: async ({ sportId, date }): Promise<ISchedule[]> => {
+    const response = await fetch({ url: `sports/${sportId}/events/${date}` })
+    const data = response?.data ? response.data.events : []
+    return Schedule.ListSchedule(data, provider)
+  },
+  listScores: async ({ sportId, date }): Promise<IResolve[]> => {
+    const response = await fetch({ url: `sports/${sportId}/events/${date}` })
+    const data = response?.data ? response.data.events : []
+    return Schedule.ListScores(data, provider)
   },
 })

@@ -1,7 +1,8 @@
-import { ISchedule } from '../models/schedule'
+import { ISchedule, IResolve } from '../models/schedule'
 
 export interface ISchedules {
-  list: () => Promise<ISchedule[]>
+  listSchedule: (props: any) => Promise<ISchedule[]>
+  listScores: (props: any) => Promise<IResolve[]>
 }
 
 export interface Base {
