@@ -35,17 +35,19 @@ This endpoint returns the category in which the address queried belongs to.
 |    1    |  Ethereum  |
 |    2    |  Bitcoin   |
 
-
 `category` is the only supported name for this endpoint.
 
 ### Input Params
+
 | Required? |  Name   | Aliases |             Description              |  Type  | Options  | Default | Depends On | Not Valid With |
 | :-------: | :-----: | :-----: | :----------------------------------: | :----: | :------: | :-----: | :--------: | :------------: |
 |    ✅     | address |         | The address which we want to lookup. | string |          |         |            |                |
 |    ✅     | chainId |         |  The blockchain ID of the address.   | number | `1`, `2` |         |            |                |
 
 ### Example
+
 Request:
+
 ```json
 {
   "id": "1",
@@ -59,7 +61,9 @@ Request:
   }
 }
 ```
+
 Response:
+
 ```json
 {
   "jobRunID": "1",
@@ -69,14 +73,8 @@ Response:
     "data": {
       "0xed5af388653567af2f388e6224dc7c4b3241c544": {
         "self": {
-          "category": [
-            "token",
-            "wallet"
-          ],
-          "detail": [
-            "token:Azuki (AZUKI)",
-            "wallet:Azuki"
-          ]
+          "category": ["token", "wallet"],
+          "detail": ["token:Azuki (AZUKI)", "wallet:Azuki"]
         },
         "is_address_valid": true
       }
@@ -90,4 +88,5 @@ Response:
 ```
 
 ---
-MIT License 
+
+MIT License
