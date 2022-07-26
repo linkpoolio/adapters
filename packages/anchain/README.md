@@ -1,6 +1,6 @@
 # Anchain Adapter
 
-![1.0.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/anchain/package.json)
+![2.0.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/anchain/package.json)
 
 The AnChain adapter checks if an address appears in the OFAC Anti-Terrorism/Anti-Money Laundering list and return the category in which the address belongs.
 
@@ -34,26 +34,6 @@ This endpoint returns the category in which the address queried belongs to.
 | :-----: | :--------: |
 |    1    |  Ethereum  |
 |    2    |  Bitcoin   |
-
-| categoryId |    Category    |
-| :--------: | :------------: |
-|     0      |  unaffiliated  |
-|     1      |   app wallet   |
-|     2      |     whale      |
-|     3      |      dapp      |
-|     4      |     token      |
-|     5      |    contract    |
-|     6      |     miner      |
-|     7      |      defi      |
-|     8      |     mixer      |
-|     9      |      bot       |
-|     10     |     hacker     |
-|     11     |      scam      |
-|     12     |   ransomware   |
-|     13     |     abuse      |
-|     14     |    sanction    |
-|     15     | darknet market |
-|     16     |   blackmail    |
 
 `category` is the only supported name for this endpoint.
 
@@ -99,9 +79,9 @@ Response:
         "is_address_valid": true
       }
     },
-    "result": 4
+    "result": "token"
   },
-  "result": 4,
+  "result": "token",
   "statusCode": 200,
   "providerStatusCode": 200
 }
