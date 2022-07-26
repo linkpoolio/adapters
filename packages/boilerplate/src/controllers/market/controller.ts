@@ -4,6 +4,7 @@ import { reducers } from '@linkpool/shared'
 
 import api from '../../api'
 import input from './input'
+import type { IMarket } from '../../models/market'
 
 const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _, config) => {
   const validator = new Validator(request, input)
@@ -18,7 +19,7 @@ const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _,
 
     const parse = validator.validated.data.parse
     if (parse) {
-      result = reducers.reduceByKeys(result, parse.split(','))
+      result = reducers.reduceByKeys(result, parse.split(',')) as IMarket[]
     }
 
     return Requester.success(jobRunID, { data: result }, true)
