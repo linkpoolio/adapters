@@ -1,11 +1,5 @@
 import { Provider } from '../api/constants'
-
-export interface JobRequest {
-  jobId: number
-  amount: string
-  employerAddress: string
-  freelancerAddress: string
-}
+import { LanceriaJobsGetPayload } from '../api/lanceria/types'
 
 export interface IEmployer {
   address: string
@@ -28,23 +22,23 @@ export interface IJob {
 }
 
 const transformer = {
-  lanceria: (jobRequest: JobRequest): IJob => ({
-    id: jobRequest.jobId,
+  [Provider.LANCERIA]: (payload: LanceriaJobsGetPayload): IJob => ({
+    id: payload.jobId,
     employer: {
-      address: jobRequest.employerAddress,
+      address: payload.employerAddress,
     },
     freelancer: {
-      address: jobRequest.freelancerAddress,
+      address: payload.freelancerAddress,
     },
     payment: {
-      amount: jobRequest.amount,
+      amount: payload.amount,
       currency: 'LANC',
     },
   }),
 }
 
-const Single = (jobRequest: JobRequest, provider: Provider): IJob =>
-  transformer[provider](jobRequest)
+const Single = (payload: LanceriaJobsGetPayload, provider: Provider): IJob =>
+  transformer[provider](payload)
 
 export default {
   Single,

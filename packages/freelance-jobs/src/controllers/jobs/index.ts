@@ -1,5 +1,5 @@
 import execute from './controller'
-import inputParameters from './input'
+import { inputParameters } from './input'
 
 const supportedEndpoints = ['jobs']
 const endpointResultPaths = {}

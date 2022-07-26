@@ -3,11 +3,13 @@ import { assertError, assertSuccess } from '@chainlink/ea-test-helpers'
 import type { SuiteContext } from '../adapter.test'
 import { jobsInput } from '../common'
 import { mockJobsSingleError, mockJobsSingleSuccess } from './fixtures'
+import { RequestMethod } from '../../../src/controllers/constants'
 
 export function testJobs(context: SuiteContext): void {
-  describe('error calls', () => {
+  describe('method: get', () => {
     it('returns an error response when the API errors too', async () => {
       const jobsSingleInput = { ...jobsInput }
+      jobsSingleInput.data.method = RequestMethod.GET
       jobsSingleInput.data.jobId = 1
       mockJobsSingleError()
 
@@ -27,27 +29,26 @@ export function testJobs(context: SuiteContext): void {
       expect(response.body).toMatchSnapshot()
     })
 
-    describe('success calls', () => {
-      it('returns a single job', async () => {
-        const jobsSingleInput = { ...jobsInput }
-        jobsSingleInput.data.jobId = 1
-        mockJobsSingleSuccess()
+    it('returns a single job', async () => {
+      const jobsSingleInput = { ...jobsInput }
+      jobsSingleInput.data.method = RequestMethod.GET
+      jobsSingleInput.data.jobId = 1
+      mockJobsSingleSuccess()
 
-        const response = await context.req
-          .post('/')
-          .send(jobsSingleInput)
-          .set('Accept', '*/*')
-          .set('Content-Type', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(200)
+      const response = await context.req
+        .post('/')
+        .send(jobsSingleInput)
+        .set('Accept', '*/*')
+        .set('Content-Type', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
 
-        assertSuccess(
-          { expected: 200, actual: response.body.statusCode },
-          response.body,
-          jobsInput.id,
-        )
-        expect(response.body).toMatchSnapshot()
-      })
+      assertSuccess(
+        { expected: 200, actual: response.body.statusCode },
+        response.body,
+        jobsInput.id,
+      )
+      expect(response.body).toMatchSnapshot()
     })
   })
 }

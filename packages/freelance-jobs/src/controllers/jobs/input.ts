@@ -1,10 +1,13 @@
 import { InputParameters } from '@chainlink/types'
 
-const inputParameters: InputParameters = {
-  jobId: {
-    description: 'The job idenifier',
+import { RequestMethod } from '../constants'
+
+export const sharedInputParameters: InputParameters = {
+  method: {
+    description: 'The endpoint request method',
     required: true,
-    type: 'number',
+    type: 'string',
+    options: [RequestMethod.GET],
   },
   parse: {
     description: 'Properties to return (comma separated)',
@@ -13,4 +16,15 @@ const inputParameters: InputParameters = {
   },
 }
 
-export default inputParameters
+export const getSingleInputParameters: InputParameters = {
+  ...sharedInputParameters,
+  jobId: {
+    description: 'The job identifier',
+    required: true,
+    type: 'number',
+  },
+}
+
+export const inputParameters: InputParameters = {
+  ...getSingleInputParameters,
+}

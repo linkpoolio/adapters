@@ -16,7 +16,6 @@ export interface SuiteContext {
 
 beforeAll(() => {
   oldEnv = JSON.parse(JSON.stringify(process.env))
-  process.env.API_VERBOSE = 'true'
   process.env.CACHE_ENABLED = 'false'
   process.env.WARMUP_ENABLED = 'false'
   process.env.API_PROVIDER = 'lanceria'

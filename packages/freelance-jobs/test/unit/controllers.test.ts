@@ -33,11 +33,23 @@ describe('controllers', () => {
         errorMessage: `Endpoint unsupported_endpoint not supported`,
       },
       {
+        name: 'endpoint method is not supported',
+        testData: {
+          id: jobID,
+          data: {
+            endpoint: 'jobs',
+            method: 'linkpool',
+          },
+        },
+        errorMessage: `method parameter 'linkpool' is not in the set of available options: get`,
+      },
+      {
         name: 'jobId has invalid type',
         testData: {
           id: jobID,
           data: {
             endpoint: 'jobs',
+            method: 'get',
             jobId: 'NaN',
           },
         },
@@ -49,6 +61,7 @@ describe('controllers', () => {
           id: jobID,
           data: {
             endpoint: 'jobs',
+            method: 'get',
             jobId: 1,
             parse: 3,
           },

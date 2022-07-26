@@ -1,7 +1,7 @@
 import { IJob } from '../models/job'
 
 export interface IJobs {
-  single: (props: any) => Promise<IJob>
+  get: (props: any) => Promise<IJob>
 }
 
 export interface Base {
