@@ -6,7 +6,7 @@ export const mockCategoryResponseError = (): nock =>
     encodedQueryParams: true,
   })
     .get(
-      '/api/address_label?proto=ETH&address=0xed5af388653567af2f388e6224dc7c4b3241c544&apikey=fake-api-key',
+      '/api/address_label?proto=eth&address=0xed5af388653567af2f388e6224dc7c4b3241c544&apikey=fake-api-key',
     )
     .reply(500, {})
 
@@ -15,7 +15,7 @@ export const mockCategoryResponseSuccessMalformed = (): nock =>
     encodedQueryParams: true,
   })
     .get(
-      '/api/address_label?proto=ETH&address=0xed5af388653567af2f388e6224dc7c4b3241c544&apikey=fake-api-key',
+      '/api/address_label?proto=eth&address=0xed5af388653567af2f388e6224dc7c4b3241c544&apikey=fake-api-key',
     )
     .reply(200, {
       status: 200,
@@ -36,7 +36,7 @@ export const mockCategoryResponseSuccess = (): nock =>
     encodedQueryParams: true,
   })
     .get(
-      '/api/address_label?proto=ETH&address=0xed5af388653567af2f388e6224dc7c4b3241c544&apikey=fake-api-key',
+      '/api/address_label?proto=eth&address=0xed5af388653567af2f388e6224dc7c4b3241c544&apikey=fake-api-key',
     )
     .reply(200, {
       status: 200,

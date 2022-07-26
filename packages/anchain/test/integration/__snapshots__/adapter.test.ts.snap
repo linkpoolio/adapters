@@ -48,12 +48,12 @@ Object {
       },
     },
     "err_msg": "",
-    "result": 4,
+    "result": "token",
     "status": 200,
   },
   "jobRunID": "1",
   "providerStatusCode": 200,
-  "result": 4,
+  "result": "token",
   "statusCode": 200,
 }
 `;
