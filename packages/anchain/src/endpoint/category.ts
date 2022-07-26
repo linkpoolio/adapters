@@ -1,6 +1,6 @@
 import { Requester, Validator, AdapterError } from '@chainlink/ea-bootstrap'
 import { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
-import { Chain, categoryToCategoryId } from '../lib/const'
+import { Chain } from '../lib/const'
 import type { ResponseSchemaSanctions as ResponseSchema } from '../lib/types'
 import { join } from 'path'
 
@@ -16,26 +16,7 @@ export const description = `This endpoint returns the category in which the addr
 | :-----: | :--------: |
 |    1    |  Ethereum  |
 |    2    |  Bitcoin   |
-
-| categoryId |    Category    |
-| :--------: | :------------: |
-|     0      |  unaffiliated  |
-|     1      |   app wallet   |
-|     2      |     whale      |
-|     3      |      dapp      |
-|     4      |     token      |
-|     5      |    contract    |
-|     6      |     miner      |
-|     7      |      defi      |
-|     8      |     mixer      |
-|     9      |      bot       |
-|     10     |     hacker     |
-|     11     |      scam      |
-|     12     |   ransomware   |
-|     13     |     abuse      |
-|     14     |    sanction    |
-|     15     | darknet market |
-|     16     |   blackmail    |`
+`
 
 export const inputParameters: InputParameters = {
   address: {
@@ -61,7 +42,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   const url = `/api/address_label`
 
   const params = {
-    proto: Chain[chainId],
+    proto: Chain[chainId].toLowerCase(),
     address,
     apikey: config.apiKey,
   }
@@ -92,16 +73,16 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     })
   }
 
-  const categoryId = categoryToCategoryId.get(categories[0]) as number
+  const category = categories[0] as string
 
-  if (isNaN(categoryId)) {
+  if (typeof category !== 'string') {
     throw new AdapterError({
       jobRunID,
       statusCode: 200,
-      message: `The categoryId returned is not a number.`,
+      message: `The category returned is not a string.`,
       url: join(options.baseURL, options.url),
     })
   }
 
-  return Requester.success(jobRunID, Requester.withResult(response, categoryId), config.verbose)
+  return Requester.success(jobRunID, Requester.withResult(response, category), config.verbose)
 }
