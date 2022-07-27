@@ -22,6 +22,12 @@ export enum Market {
   RESOLVE = 'resolve',
 }
 
+export const leagueIdUrlPath = new Map<any, string>([
+  [2, 'nfl'],
+  [3, 'mlb'],
+  [4, 'nba'],
+])
+
 export const inputParameters: InputParameters = {
   sportId: {
     description: 'The ID of the sport to query',
@@ -95,6 +101,12 @@ export const statusIdToStatus: Map<number, string> = new Map([
   [26, 'STATUS_HALFTIME_ET'],
   [27, 'STATUS_OVERTIME'],
   [28, 'STATUS_SHOOTOUT'],
+])
+
+export const statusSportsData: Map<string, number> = new Map([
+  ['Final', 8],
+  ['Scheduled', 18],
+  ['InProgress', 13],
 ])
 
 export const statusToStatusId = new Map(

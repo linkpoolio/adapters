@@ -9,9 +9,9 @@ export default (fetch): ISchedules => ({
     const data = response?.data ? response.data.events : []
     return Schedule.ListSchedule(data, provider)
   },
-  listScores: async ({ sportId, date }): Promise<IResolve[]> => {
+  listScores: async ({ sportId, date, statuses }): Promise<IResolve[]> => {
     const response = await fetch({ url: `sports/${sportId}/events/${date}` })
     const data = response?.data ? response.data.events : []
-    return Schedule.ListScores(data, provider)
+    return Schedule.ListScores(data, provider, statuses)
   },
 })

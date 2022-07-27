@@ -1,5 +1,7 @@
 import { utils } from 'ethers'
-import { IResolve, ISchedule } from '../models/schedule'
+import { IResolve, ISchedule, IGame } from '../models/schedule'
+import { SportsDataioMLB } from '../models/types'
+import { statusIdToStatus } from '../controllers/schedules/input'
 
 export const validateDate = (dateRaw: number): string => {
   if (isNaN(dateRaw)) {
@@ -17,6 +19,20 @@ export const convertEventId = (eventId: string): string => {
     return `0x${eventIdBytes.toString('hex')}`
   }
   throw new Error(`Unexpected 'event_id': ${eventId}. Expected format is 32 bytes long.`)
+}
+
+export const createEventId = (date: string, teams: string[]): string => {
+  let dateString = String(Math.floor(new Date(date).getTime() / 1000))
+  teams.forEach((x) => (dateString = dateString + x))
+  const eventBytes = Buffer.from(dateString)
+  if (eventBytes.length <= 32) {
+    return utils.formatBytes32String(dateString)
+  }
+  throw new Error(
+    `Unexpected 'event_id': ${dateString}. Expected format is 32 bytes long but got ${
+      eventBytes.length
+    } : 0x${eventBytes.toString('hex')}`,
+  )
 }
 
 export const encodeGameCreate = (gameCreate: ISchedule): string => {
@@ -51,6 +67,29 @@ export const encodeGameResolve = (gameResolve: IResolve): string => {
   return encodedGameResolve
 }
 
-export const filterEventStatus = (event: Event, statuses: string[]): boolean => {
-  return statuses.includes(event.score.event_status)
+export const transformDate = (dateRaw: string): string => {
+  const date = dateRaw.split('T')[0]
+  return date
+}
+
+// findScore checks the sportsdataio return object type since it changes dependent on sport
+export const findScore = (object: any): number[] => {
+  const score: number[] = []
+  switch (true) {
+    case isMLB(object):
+      score[0] = object.HomeTeamRuns as number
+      score[1] = object.AwayTeamRuns as number
+      break
+    default:
+      throw Error('Invalid object')
+  }
+  return score
+}
+
+export function isMLB(object: unknown): object is SportsDataioMLB {
+  return Object.prototype.hasOwnProperty.call(object, 'AwayTeamRuns')
+}
+
+export const filterEventStatus = (event: IGame, statuses: string[]): boolean => {
+  return statuses.includes(statusIdToStatus.get(event.statusId) as string)
 }

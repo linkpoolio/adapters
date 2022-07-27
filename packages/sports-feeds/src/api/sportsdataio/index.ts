@@ -10,14 +10,13 @@ const Fetch =
   async ({ url, params }: RequestConfig): Promise<any> => {
     const options = {
       ...config.api,
-      baseURL: 'https://pro-api.coingecko.com/api/v3',
+      baseURL: 'https://api.sportsdata.io/v3/',
       url,
       params: {
         ...params,
-        x_cg_pro_api_key: config.apiKey,
+        key: config.apiKey,
       },
     }
-
     const response = await Requester.request<any>(options)
     return response
   }

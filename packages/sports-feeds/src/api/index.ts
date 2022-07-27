@@ -2,7 +2,7 @@ import { AdapterError, util } from '@chainlink/ea-bootstrap'
 import { Config } from '@chainlink/types'
 
 import therundown from './therundown'
-// import sportsdataio from './sportsdataio'
+import sportsdataio from './sportsdataio'
 
 export default (config: Config) => {
   const provider = util.getEnv('API_PROVIDER')
@@ -10,6 +10,8 @@ export default (config: Config) => {
   switch (provider) {
     case 'therundown':
       return therundown(config)
+    case 'sportsdataio':
+      return sportsdataio(config)
     default:
       throw new AdapterError({
         statusCode: 200,

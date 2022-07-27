@@ -13,6 +13,7 @@ const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _,
   const sportId = validator.validated.data.sportId
   const dateRaw = validator.validated.data.date
   const market = validator.validated.data.market
+
   // const gameIdsRaw = validator.validated.data.gameIds
   const statusIdsRaw = validator.validated.data.statusIds
 
@@ -37,7 +38,8 @@ const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _,
       } else {
         statuses = marketToStatus.get(Market.RESOLVE) as string[]
       }
-      const result = await client.schedules.listScores({ sportId, date })
+      const result = await client.schedules.listScores({ sportId, date, statuses })
+      return Requester.success(jobRunID, { data: result }, true)
     }
     return Requester.success(jobRunID, { data: [] }, true)
   } catch (error) {
