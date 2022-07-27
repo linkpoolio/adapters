@@ -26,7 +26,7 @@ Every EA supports base input parameters from [this list](../../core/bootstrap#ba
 
 ## Category Endpoint
 
-This endpoint returns the category in which the address queried belongs to.
+This endpoint returns the category in which the address queried belongs.
 
 ### Data Conversions
 

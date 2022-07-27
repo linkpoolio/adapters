@@ -8,7 +8,7 @@ export const supportedEndpoints = ['category']
 
 export const endpointResultPaths = {}
 
-export const description = `This endpoint returns the category in which the address queried belongs to.
+export const description = `This endpoint returns the category in which the address queried belongs.
 
 ### Data Conversions
 
