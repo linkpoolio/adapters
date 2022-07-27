@@ -1,6 +1,6 @@
 # Anchain Adapter
 
-![2.0.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/anchain/package.json)
+![2.0.1](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/anchain/package.json)
 
 The AnChain adapter checks if an address appears in the OFAC Anti-Terrorism/Anti-Money Laundering list and return the category in which the address belongs.
 
