@@ -46,7 +46,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     address,
     apikey: config.apiKey,
   }
-
+  delete config.api.headers.common['Content-Type'] // This is a bug fix. API breaks if Content-Type not deleted.
   const options = { ...config.api, params, url }
 
   const response = await Requester.request<ResponseSchema>(options)
