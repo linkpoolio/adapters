@@ -9,7 +9,7 @@
   "scripts": {
     "bundle": "ncc build",
     "versions": "ts-node-transpile-only ./packages/scripts/src/versions",
-    "clean": "rm -rf **/dist; tsc -b --clean ./packages/tsconfig.json",
+    "clean": "rm -rf .yarn/cache; rm yarn.lock; rm -rf **/node_modules; rm **/tsconfig.tsbuildinfo; rm -rf **/dist",
     "lint": "eslint --ext ts .",
     "lint:fix": "yarn lint --fix",
     "format:check": "prettier --check .",

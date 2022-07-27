@@ -13,7 +13,7 @@ info() {
 gitstatus=$(git status | awk 'NR==2')
 if [[ $gitstatus != "nothing to commit, working tree clean" ]]; then
   echo "$(tput setaf 3)⚠️  It is recommended to run this script with a clean git working tree$(tput setaf 7)"
-  exit 1
+  # exit 1
 fi
 
 
