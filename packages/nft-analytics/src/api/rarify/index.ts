@@ -7,12 +7,12 @@ import floorprices from './floorprices'
 import { Provider as ProviderName, providerToBaseUrl } from '../constants'
 
 const Fetch = (config: Config) => {
+  config.api.baseURL = providerToBaseUrl.get(ProviderName.RARIFY) as string
   config.api.headers['Authorization'] = `Bearer ${config.apiKey}`
 
   return async ({ url }: RequestConfig): Promise<any> => {
     const options = {
       ...config.api,
-      baseURL: providerToBaseUrl.get(ProviderName.RARIFY) as string,
       url,
     }
     const response = await Requester.request<any>(options)
