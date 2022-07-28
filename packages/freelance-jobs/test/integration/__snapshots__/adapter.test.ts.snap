@@ -13,6 +13,7 @@ Object {
     "payment": Object {
       "amount": "10000000000000000000",
       "currency": "LANC",
+      "units": "wei",
     },
   },
   "jobRunID": 1,

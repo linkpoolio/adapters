@@ -3,6 +3,8 @@ import { assertError } from '@chainlink/ea-test-helpers'
 import { AdapterRequest, AdapterContext } from '@chainlink/types'
 import { makeExecute } from '../../src/adapter'
 
+import { Provider } from '../../src/api/constants'
+
 describe('controllers', () => {
   const context: AdapterContext = {}
   const jobID = '1'
@@ -10,7 +12,7 @@ describe('controllers', () => {
 
   process.env.API_KEY = 'fake-api-key'
   process.env.LOG_LEVEL = 'debug'
-  process.env.API_PROVIDER = 'lanceria'
+  process.env.API_PROVIDER = Provider.LANCERIA
 
   describe('jobs input validation error', () => {
     const requests = [
