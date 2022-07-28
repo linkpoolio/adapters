@@ -67,9 +67,7 @@ jobs:
       - name: Update dockerignore
         if: steps.adapter_did_change.outputs.result == 'true'
         run: |
-          echo 'packages' >> .dockerignore
-          echo '!packages/shared' >> .dockerignore
-          echo '!packages/tsconfig*' >> .dockerignore
+          mv .dockerignore.prod .dockerignore
           echo '!packages/${{ matrix.adapter.shortName }}' >> .dockerignore
 
       - name: Build Docker Image

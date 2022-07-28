@@ -1,0 +1,36 @@
+# Config files
+.git
+.github
+.vscode
+grafana
+codecov.yml
+hardhat.config.js
+jest.config.js
+
+# Dist
+**/dist
+!vendor/**/**/dist
+
+# Build artifacts
+packages/**/*.zip
+**/tsconfig.tsbuildinfo
+.DS_Store
+
+# Yarn 2
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+node_modules
+*generated*
+packages
+!packages/shared
+!packages/tsconfig*
+
+# For local development, copy this file to .dockerignore
+# and when testing an adapter uncomment the following line
+# and update the adapter name
+#!packages/<adapter-name>
