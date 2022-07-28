@@ -3,7 +3,7 @@ import { assertError } from '@chainlink/ea-test-helpers'
 import { AdapterRequest, AdapterContext } from '@chainlink/types'
 import { makeExecute } from '../../src/adapter'
 
-import { Provider } from '../../src/api/constants'
+import { Provider as ProviderName } from '../../src/api/constants'
 
 describe('controllers', () => {
   const context: AdapterContext = {}
@@ -12,9 +12,9 @@ describe('controllers', () => {
 
   process.env.API_KEY = 'fake-api-key'
   process.env.LOG_LEVEL = 'debug'
-  process.env.API_PROVIDER = Provider.LANCERIA
+  process.env.API_PROVIDER = ProviderName.RARIFY
 
-  describe('jobs input validation error', () => {
+  describe('floorprices input validation error', () => {
     const requests = [
       {
         name: 'endpoint is not supplied',
@@ -39,33 +39,48 @@ describe('controllers', () => {
         testData: {
           id: jobID,
           data: {
-            endpoint: 'jobs',
+            endpoint: 'floorprices',
             method: 'linkpool',
           },
         },
         errorMessage: `method parameter 'linkpool' is not in the set of available options: get`,
       },
       {
-        name: 'jobId has invalid type',
+        name: 'collectionAddress has invalid type',
         testData: {
           id: jobID,
           data: {
-            endpoint: 'jobs',
+            endpoint: 'floorprices',
             method: 'get',
-            jobId: 'NaN',
+            collectionAddress: 777,
+            network: 'ethereum',
           },
         },
-        errorMessage: `jobId parameter must be of type number`,
+        errorMessage: `collectionAddress parameter must be of type string`,
+      },
+      {
+        name: 'network has invalid type',
+        testData: {
+          id: jobID,
+          data: {
+            endpoint: 'floorprices',
+            method: 'get',
+            collectionAddress: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
+            network: 777,
+          },
+        },
+        errorMessage: `network parameter must be of type string`,
       },
       {
         name: 'parse has invalid type',
         testData: {
           id: jobID,
           data: {
-            endpoint: 'jobs',
+            endpoint: 'floorprices',
             method: 'get',
-            jobId: 1,
-            parse: 3,
+            collectionAddress: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
+            network: 'ethereum',
+            parse: 777,
           },
         },
         errorMessage: `parse parameter must be of type string`,

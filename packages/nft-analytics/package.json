@@ -1,13 +1,13 @@
 {
-  "name": "@linkpool/freelance-jobs-adapter",
-  "version": "1.0.1",
-  "description": "LinkPool freelance-jobs adapter.",
+  "name": "@linkpool/nft-analytics-adapter",
+  "version": "1.0.0",
+  "description": "LinkPool nft-analytics adapter.",
   "keywords": [
     "Chainlink",
     "LINK",
     "blockchain",
     "oracle",
-    "freelance-jobs"
+    "nft-analytics"
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
