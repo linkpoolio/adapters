@@ -26,3 +26,6 @@ packages/**/*.zip
 !.yarn/versions
 node_modules
 *generated*
+packages
+!packages/shared
+!packages/tsconfig*

@@ -27,3 +27,6 @@ packages/k6/src/config/http.json
 
 # Env
 .envrc
+
+# Docker
+.dockerignore
