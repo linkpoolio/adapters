@@ -5,6 +5,11 @@ export interface ISchedules {
   listScores: (props: any) => Promise<IResolve[]>
 }
 
+export interface IValidate {
+  validate: (props: any) => Promise<ISchedule[]>
+}
+
 export interface Base {
   schedules: ISchedules
+  validate: IValidate
 }
