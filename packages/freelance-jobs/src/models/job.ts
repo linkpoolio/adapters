@@ -1,3 +1,5 @@
+import { ethers } from 'ethers'
+
 import { Provider } from '../api/constants'
 import { LanceriaJobsGetPayload } from '../api/lanceria/types'
 
@@ -12,6 +14,7 @@ export interface IFreelancer {
 export interface IPayment {
   amount: string
   currency: string
+  units: string
 }
 
 export interface IJob {
@@ -25,14 +28,17 @@ const transformer = {
   [Provider.LANCERIA]: (payload: LanceriaJobsGetPayload): IJob => ({
     id: payload.jobId,
     employer: {
-      address: payload.employerAddress,
+      address: ethers.utils.getAddress(payload.employerAddress),
     },
     freelancer: {
-      address: payload.freelancerAddress,
+      address: payload.freelancerAddress
+        ? ethers.utils.getAddress(payload.freelancerAddress)
+        : ethers.constants.AddressZero,
     },
     payment: {
       amount: payload.amount,
       currency: 'LANC',
+      units: 'wei',
     },
   }),
 }

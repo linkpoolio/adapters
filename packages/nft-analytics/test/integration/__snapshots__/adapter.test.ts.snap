@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute rarify floorprices endpoint method: get returns a single floorprice 1`] = `
+Object {
+  "data": Object {
+    "collection": Object {
+      "contractAddress": "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D",
+      "imageUrl": "https://rarify-public.s3.amazonaws.com/eth_logo.svg",
+      "name": null,
+      "symbol": null,
+    },
+    "floorPrice": Object {
+      "amount": "77157500000000000000",
+      "currency": "ETH",
+      "units": "wei",
+    },
+    "network": "ethereum",
+    "timestamp": 1659003693,
+  },
+  "jobRunID": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute rarify floorprices endpoint method: get returns an error response when the API errors too 1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"floorprices\\",\\"method\\":\\"get\\",\\"collectionAddress\\":\\"0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d\\",\\"network\\":\\"ethereum\\"}}",
+    "message": "Unexpected error requesting the 'floorprices' endpoint. Reason: AdapterError: Request failed with status code 500",
+    "name": "AdapterError",
+    "url": "https:/api.rarify.tech/data/contracts/ethereum:0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/smart-floor-price",
+  },
+  "jobRunID": 1,
+  "providerStatusCode": 500,
+  "status": "errored",
+  "statusCode": 200,
+}
+`;
