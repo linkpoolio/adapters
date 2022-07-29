@@ -2612,6 +2612,34 @@ __metadata:
 "@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40linkpool%2Fnft-analytics-adapter%40workspace%3Apackages%2Fnft-analytics":
   version: 2.4.0
   resolution: "@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=835051&locator=%40linkpool%2Fnft-analytics-adapter%40workspace%3Apackages%2Fnft-analytics"
+  dependencies:
+    "@reduxjs/toolkit": ^1.6.1
+    ajv: ^8.6.2
+    axios: ^0.24.0
+    decimal.js: ^10.3.1
+    express: ^4.17.1
+    fast-redact: ^3.0.1
+    lodash: ^4.17.21
+    lru-cache: ^6.0.0
+    object-hash: ^2.2.0
+    object-path: ^0.11.5
+    pino: ^6.13.0
+    pino-pretty: ^5.1.3
+    prom-client: ^13.2.0
+    promise-timeout: ^1.3.0
+    redis: ^4.0.0
+    redux: ^4.1.1
+    redux-logger: ^3.0.6
+    redux-observable: ^1.2.0
+    remote-redux-devtools: ^0.5.16
+    rxjs: ^6.6.3
+    tslib: ^2.1.0
+    uuid: ^8.3.0
+    ws: ^7.4.4
+  checksum: 4ea16fe28c9a8e9505603101b00b7b08c806478922c5155c6f6183811080d9eb22d25ec085e59cefc4bf85f84645268142fedba970d64308b4246c53dd48e125
+  languageName: node
+  linkType: hard
+
 "@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40linkpool%2Fsports-feeds-adapter%40workspace%3Apackages%2Fsports-feeds":
   version: 2.4.0
   resolution: "@chainlink/ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=835051&locator=%40linkpool%2Fsports-feeds-adapter%40workspace%3Apackages%2Fsports-feeds"
@@ -2972,6 +3000,12 @@ __metadata:
 "@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers::locator=%40linkpool%2Fnft-analytics-adapter%40workspace%3Apackages%2Fnft-analytics":
   version: 1.2.0
   resolution: "@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers#../../vendor/v1.23.0/test-helpers::hash=185c72&locator=%40linkpool%2Fnft-analytics-adapter%40workspace%3Apackages%2Fnft-analytics"
+  dependencies:
+    tslib: ^2.3.1
+  checksum: cb51672a69b5943991bd4b5d5c6129e45ce270c6b9dc8f89855e1bbd5df494aeec45d6e8e128d069b8498feb27255ab8d1f7efdb79cedc4700e6e9d660834016
+  languageName: node
+  linkType: hard
+
 "@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers::locator=%40linkpool%2Fsports-feeds-adapter%40workspace%3Apackages%2Fsports-feeds":
   version: 1.2.0
   resolution: "@chainlink/ea-test-helpers@file:../../vendor/v1.23.0/test-helpers#../../vendor/v1.23.0/test-helpers::hash=185c72&locator=%40linkpool%2Fsports-feeds-adapter%40workspace%3Apackages%2Fsports-feeds"
@@ -6533,6 +6567,34 @@ __metadata:
 "@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40linkpool%2Fnft-analytics-adapter%40workspace%3Apackages%2Fnft-analytics":
   version: 2.4.0
   resolution: "@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=c8c2ed&locator=%40linkpool%2Fnft-analytics-adapter%40workspace%3Apackages%2Fnft-analytics"
+  dependencies:
+    "@reduxjs/toolkit": ^1.6.1
+    ajv: ^8.6.2
+    axios: ^0.24.0
+    decimal.js: ^10.3.1
+    express: ^4.17.1
+    fast-redact: ^3.0.1
+    lodash: ^4.17.21
+    lru-cache: ^6.0.0
+    object-hash: ^2.2.0
+    object-path: ^0.11.5
+    pino: ^6.13.0
+    pino-pretty: ^5.1.3
+    prom-client: ^13.2.0
+    promise-timeout: ^1.3.0
+    redis: ^4.0.0
+    redux: ^4.1.1
+    redux-logger: ^3.0.6
+    redux-observable: ^1.2.0
+    remote-redux-devtools: ^0.5.16
+    rxjs: ^6.6.3
+    tslib: ^2.1.0
+    uuid: ^8.3.0
+    ws: ^7.4.4
+  checksum: 282629e138722dfa10db80ac4531e859783c671bec3555b422fc4d50ba8807d04e387acae47381e9b82d3787ddd7ccc6a2aacfed5b31d090a1118640375aded6
+  languageName: node
+  linkType: hard
+
 "@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap::locator=%40linkpool%2Fsports-feeds-adapter%40workspace%3Apackages%2Fsports-feeds":
   version: 2.4.0
   resolution: "@types/chainlink__ea-bootstrap@file:../../vendor/v1.23.0/bootstrap#../../vendor/v1.23.0/bootstrap::hash=c8c2ed&locator=%40linkpool%2Fsports-feeds-adapter%40workspace%3Apackages%2Fsports-feeds"
@@ -6756,9 +6818,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 18.6.1
-  resolution: "@types/node@npm:18.6.1"
-  checksum: 06331f68bc73d93b73977ae19ca87818e004bc7b8e70b0d4f73b0ea5e341a4a1ba6f0e79db8fb75a841af2b8d74552d6b9a8f846b267954689f57effedcf5d77
+  version: 18.6.2
+  resolution: "@types/node@npm:18.6.2"
+  checksum: 644c460baedb1fbbd55369ab621167cb39ddaa727fd4fcf4bc7080183cf936d7ff8c2c886ba93ff42768d6f7a579a540e6d1e63d3adba4e5758fb13671ae68ce
   languageName: node
   linkType: hard
 
@@ -7461,12 +7523,12 @@ __metadata:
   linkType: hard
 
 "are-we-there-yet@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "are-we-there-yet@npm:3.0.0"
+  version: 3.0.1
+  resolution: "are-we-there-yet@npm:3.0.1"
   dependencies:
     delegates: ^1.0.0
     readable-stream: ^3.6.0
-  checksum: 348edfdd931b0b50868b55402c01c3f64df1d4c229ab6f063539a5025fd6c5f5bb8a0cab409bbed8d75d34762d22aa91b7c20b4204eb8177063158d9ba792981
+  checksum: 52590c24860fa7173bedeb69a4c05fb573473e860197f618b9a28432ee4379049336727ae3a1f9c4cb083114601c1140cee578376164d0e651217a9843f9fe83
   languageName: node
   linkType: hard
 
@@ -8270,9 +8332,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001370":
-  version: 1.0.30001370
-  resolution: "caniuse-lite@npm:1.0.30001370"
-  checksum: 28e1fd4d623a52945220b189b703556178ec8a185d317e4ae2557a24f68f88bd8168db67700970164690dbf7d29df69efbd318b54457b335a4361314bb530792
+  version: 1.0.30001373
+  resolution: "caniuse-lite@npm:1.0.30001373"
+  checksum: cd2f027e2fcf66ed3b0e3eccec89df871f951f2e7600944fae2c3f6f1c37ac82392e573c279e15bf851b75f9696472e38d33fd52d964819ffb8af7af4078ceba
   languageName: node
   linkType: hard
 
@@ -9243,9 +9305,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.202":
-  version: 1.4.202
-  resolution: "electron-to-chromium@npm:1.4.202"
-  checksum: f6210322a16eb67c3743a5fd18c0e99fc71720132a6da61d93f26a96a4b6fc30b1b1f44e0b1f8eb91358b859f687f745d405515ad5482ded6ee69e5117907aa7
+  version: 1.4.206
+  resolution: "electron-to-chromium@npm:1.4.206"
+  checksum: 1c9b7e867de6a074b389126a655e8edcb1841fb10e44e221164315169d0e53cacb3f90e75ae863f07d74764271720693f5708596f36575c6cd2264651b87bd33
   languageName: node
   linkType: hard
 
