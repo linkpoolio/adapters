@@ -104,9 +104,10 @@ export const statusIdToStatus: Map<number, string> = new Map([
 ])
 
 export const statusSportsData: Map<string, number> = new Map([
-  ['Final', 8],
-  ['Scheduled', 18],
-  ['InProgress', 13],
+  ['final', 8],
+  ['scheduled', 18],
+  ['inprogress', 13],
+  ['closed', 8],
 ])
 
 export const statusToStatusId = new Map(

@@ -1,9 +1,9 @@
 import {
   // encodeGameResolve,
   createEventId,
-  transformDate,
   findScore,
   filterEventStatus,
+  convertTeam,
 } from '../lib/utils'
 import { statusToStatusId, statusSportsData } from '../controllers/schedules/input'
 
@@ -31,13 +31,12 @@ export interface IResolve {
   gameId: string
 }
 
-// schedule is the json blob returned to match to the interface that is made here
 const transformer = {
-  therundown: (schedule): IGame => ({
+  therundown: (schedule: any, date: string): IGame => ({
     homeTeam: schedule.teams_normalized[1].abbreviation,
     awayTeam: schedule.teams_normalized[0].abbreviation,
     startTime: Math.floor(new Date(schedule.event_date).getTime() / 1000),
-    gameId: createEventId(transformDate(schedule.event_date), [
+    gameId: createEventId(date, [
       schedule.teams_normalized[1].abbreviation,
       schedule.teams_normalized[0].abbreviation,
     ]),
@@ -45,23 +44,39 @@ const transformer = {
     awayScore: schedule.score.score_away,
     statusId: statusToStatusId.get(schedule.score?.event_status) as number,
   }),
-  sportsdataio: (schedule): IGame => ({
-    homeTeam: schedule.HomeTeam,
-    awayTeam: schedule.AwayTeam,
-    startTime: Math.floor(new Date(schedule.DateTime).getTime() / 1000),
-    gameId: createEventId(transformDate(schedule.Day), [schedule.HomeTeam, schedule.AwayTeam]),
+  sportsdataio: (schedule: any, date: string): IGame => {
+    const hometeam = convertTeam(schedule.HomeTeam)
+    const awayteam = convertTeam(schedule.AwayTeam)
+    return {
+      homeTeam: hometeam,
+      awayTeam: awayteam,
+      startTime: Math.floor(new Date(schedule.DateTime).getTime() / 1000),
+      gameId: createEventId(date, [hometeam, awayteam]),
+      homeScore: findScore(schedule)[0],
+      awayScore: findScore(schedule)[1],
+      statusId: statusSportsData.get(schedule.Status.toLowerCase()) as number,
+    }
+  },
+  theAP: (schedule: any, date: string): IGame => ({
+    homeTeam: schedule.game.home.abbr,
+    awayTeam: schedule.game.away.abbr,
+    startTime: Math.floor(new Date(schedule.game.scheduled).getTime() / 1000),
+    gameId: createEventId(date, [schedule.game.home.abbr, schedule.game.away.abbr]),
     homeScore: findScore(schedule)[0],
     awayScore: findScore(schedule)[1],
-    statusId: statusSportsData.get(schedule.Status) as number,
+    statusId: statusSportsData.get(schedule.game.status.toLowerCase()) as number,
   }),
 }
 
-const Single = (schedule: any, provider): IGame => transformer[provider](schedule)
+const Single = (schedule: any, provider: string, date: string): IGame =>
+  transformer[provider](schedule, date)
 
-const ListSchedule = (data: any, provider): ISchedule[] => {
-  const events = data.map((schedule: any) => Single(schedule, provider))
+const ListSchedule = (data: any, provider: string, date: string): ISchedule[] => {
+  const events = data.map((schedule: any) => Single(schedule, provider, date))
   const filteredEvents = events.filter(
-    (event) => event.statusId == statusToStatusId.get('STATUS_SCHEDULED') || 'Scheduled',
+    (event) =>
+      event.statusId == statusToStatusId.get('STATUS_SCHEDULED') ||
+      statusSportsData.get('scheduled'),
   )
   const result = filteredEvents.map(
     (game): ISchedule => ({
@@ -76,8 +91,8 @@ const ListSchedule = (data: any, provider): ISchedule[] => {
   return result
 }
 
-const ListScores = (data: any, provider, statuses): IResolve[] => {
-  const events = data.map((schedule: any) => Single(schedule, provider))
+const ListScores = (data: any, provider: string, statuses: string[], date: string): IResolve[] => {
+  const events = data.map((schedule: any) => Single(schedule, provider, date))
   const filteredEvents = events.filter((event: IGame) => {
     return filterEventStatus(event, statuses)
   })

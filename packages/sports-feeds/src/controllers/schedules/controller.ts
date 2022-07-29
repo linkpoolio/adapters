@@ -19,7 +19,6 @@ const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _,
 
   // let gameIds: string[] = []
   let statusIds: string[] = []
-  // let date: string
 
   try {
     const date: string = validateDate(dateRaw)
@@ -28,7 +27,6 @@ const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _,
       const result = await client.schedules.listSchedule({ sportId, date })
       return Requester.success(jobRunID, { data: result }, true)
     }
-
     if (market === Market.RESOLVE) {
       let statuses: string[]
       if (statusIds.length !== 0) {

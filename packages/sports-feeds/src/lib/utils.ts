@@ -1,6 +1,6 @@
 import { utils } from 'ethers'
 import { IResolve, ISchedule, IGame } from '../models/schedule'
-import { SportsDataioMLB } from '../models/types'
+import { ISportsDataioMLB, IapMLB } from '../models/types'
 import { statusIdToStatus } from '../controllers/schedules/input'
 
 export const validateDate = (dateRaw: number): string => {
@@ -11,7 +11,7 @@ export const validateDate = (dateRaw: number): string => {
   return date
 }
 
-export const maxLimit = 500
+export const maxLimit = 300
 
 export const convertEventId = (eventId: string): string => {
   const eventIdBytes = Buffer.from(eventId)
@@ -67,18 +67,17 @@ export const encodeGameResolve = (gameResolve: IResolve): string => {
   return encodedGameResolve
 }
 
-export const transformDate = (dateRaw: string): string => {
-  const date = dateRaw.split('T')[0]
-  return date
-}
-
 // findScore checks the sportsdataio return object type since it changes dependent on sport
 export const findScore = (object: any): number[] => {
   const score: number[] = []
   switch (true) {
-    case isMLB(object):
+    case isSDMLB(object):
       score[0] = object.HomeTeamRuns as number
       score[1] = object.AwayTeamRuns as number
+      break
+    case isAPMLB(object):
+      score[0] = object.game.home.runs as number
+      score[1] = object.game.away.runs as number
       break
     default:
       throw Error('Invalid object')
@@ -86,10 +85,22 @@ export const findScore = (object: any): number[] => {
   return score
 }
 
-export function isMLB(object: unknown): object is SportsDataioMLB {
+function isSDMLB(object: unknown): object is ISportsDataioMLB {
   return Object.prototype.hasOwnProperty.call(object, 'AwayTeamRuns')
+}
+
+function isAPMLB(object: unknown): object is IapMLB {
+  return Object.prototype.hasOwnProperty.call(object, 'game')
 }
 
 export const filterEventStatus = (event: IGame, statuses: string[]): boolean => {
   return statuses.includes(statusIdToStatus.get(event.statusId) as string)
+}
+
+export const convertTeam = (team: string): string => {
+  if (team === 'CHW') {
+    return 'CWS'
+  } else {
+    return team
+  }
 }

@@ -1,7 +1,6 @@
 import { Requester } from '@chainlink/ea-bootstrap'
 import { Config, RequestConfig } from '@chainlink/types'
 import { injector } from '@linkpool/shared'
-import { maxLimit } from '../../lib/utils'
 
 import { Base } from '../base'
 import schedules from './schedules'
@@ -11,17 +10,11 @@ const Fetch =
   async ({ url, params }: RequestConfig): Promise<any> => {
     const options = {
       ...config.api,
-      baseURL: 'https://therundown-therundown-v1.p.rapidapi.com/',
+      baseURL: 'https://api.sportradar.us/',
       url,
       params: {
         ...params,
-        include: 'scores',
-        offset: maxLimit,
-      },
-      headers: {
-        ...config.api.headers,
-        'x-rapidapi-host': 'therundown-therundown-v1.p.rapidapi.com',
-        'x-rapidapi-key': config.apiKey,
+        api_key: config.apiKey,
       },
     }
     const response = await Requester.request<any>(options)

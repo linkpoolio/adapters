@@ -3,6 +3,7 @@ import { Config } from '@chainlink/types'
 
 import therundown from './therundown'
 import sportsdataio from './sportsdataio'
+import theAP from './theAP'
 
 export default (config: Config) => {
   const provider = util.getEnv('API_PROVIDER')
@@ -12,6 +13,8 @@ export default (config: Config) => {
       return therundown(config)
     case 'sportsdataio':
       return sportsdataio(config)
+    case 'theAP':
+      return theAP(config)
     default:
       throw new AdapterError({
         statusCode: 200,
