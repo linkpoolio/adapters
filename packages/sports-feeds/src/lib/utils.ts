@@ -104,3 +104,22 @@ export const convertTeam = (team: string): string => {
     return team
   }
 }
+interface Game {
+  gameId: string
+}
+
+export function validateGames<T extends Game>(...gamesList: T[][]): boolean {
+  const list = new Map<string, number>()
+  for (const games of gamesList) {
+    for (const game of games as T[]) {
+      list.set(game.gameId, (list.get(game.gameId) ?? 0) + 1)
+    }
+  }
+  for (const v of list.values()) {
+    if (v !== gamesList.length) {
+      throw Error('Game aggregation failed!')
+    }
+  }
+
+  return true
+}

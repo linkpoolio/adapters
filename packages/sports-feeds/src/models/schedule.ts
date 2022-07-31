@@ -1,5 +1,6 @@
 import {
   // encodeGameResolve,
+  // encodeGameCreate,
   createEventId,
   findScore,
   filterEventStatus,
@@ -86,7 +87,6 @@ const ListSchedule = (data: any, provider: string, date: string): ISchedule[] =>
       gameId: game.gameId,
     }),
   )
-  // const encoded = result.map((e: ISchedule) => encodeGameCreate(e))
 
   return result
 }
@@ -104,7 +104,6 @@ const ListScores = (data: any, provider: string, statuses: string[], date: strin
       gameId: game.gameId,
     }),
   )
-  // const encoded = result.map((e: IResolve) => encodeGameResolve(e))
 
   return result
 }
