@@ -11,16 +11,16 @@ const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _,
   const jobRunID = validator.validated.id
   const type = validator.validated.data.type
   const rundown = validator.validated.data.rundown
-  const theap = validator.validated.data.theap
+//   const theap = validator.validated.data.theap
   const sdio = validator.validated.data.sdio
 
   try {
     if (type === Market.CREATE) {
-      validateGames<ISchedule>(rundown, sdio, theap)
+      validateGames<ISchedule>(rundown, sdio)
       const encoded: string[] = rundown.map((e: ISchedule) => encodeGameCreate(e))
       return Requester.success(jobRunID, { data: encoded }, true)
     } else {
-      validateGames<IResolve>(rundown, sdio, theap)
+      validateGames<IResolve>(rundown, sdio)
       const encoded: string[] = rundown.map((e: IResolve) => encodeGameResolve(e))
       return Requester.success(jobRunID, { data: encoded }, true)
     }
