@@ -36,6 +36,9 @@
       "path": "./enetscores"
     },
     {
+      "path": "./freelance-jobs"
+    },
+    {
       "path": "./generic"
     },
     {
@@ -46,6 +49,9 @@
     },
     {
       "path": "./nftbank"
+    },
+    {
+      "path": "./nft-analytics"
     },
     {
       "path": "./nft-metrics"
@@ -70,12 +76,6 @@
     },
     {
       "path": "./wavebridge"
-    },
-    {
-      "path": "./freelance-jobs"
-    },
-    {
-      "path": "./nft-analytics"
     }
   ]
 }
