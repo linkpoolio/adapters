@@ -102,7 +102,7 @@ describe('getGameCreate', () => {
 })
 
 describe('getGameResolve', () => {
-  const testCases = [
+  const getGameResolveTestCases1 = [
     {
       name: 'home score is not a number',
       HomeTeamRuns: 'linkpool',
@@ -114,41 +114,70 @@ describe('getGameResolve', () => {
       AwayTeamRuns: 'linkpool',
     },
   ]
-  it.each(testCases)('throws an error if $name', ({ HomeTeamRuns, AwayTeamRuns }) => {
-    const game = {
-      GameID: 64530,
-      Status: 'Final',
-      Day: '2022-04-21T00:00:00',
-      DateTimeUTC: '2022-04-21T13:10:00',
-      AwayTeam: 'CHW',
-      HomeTeam: 'CLE',
-      AwayTeamRuns,
-      HomeTeamRuns,
-    }
+  it.each(getGameResolveTestCases1)(
+    'throws an error if $name',
+    ({ HomeTeamRuns, AwayTeamRuns }) => {
+      const game = {
+        GameID: 64530,
+        Status: 'Final',
+        Day: '2022-04-21T00:00:00',
+        DateTimeUTC: '2022-04-21T13:10:00',
+        AwayTeam: 'CHW',
+        HomeTeam: 'CLE',
+        AwayTeamRuns,
+        HomeTeamRuns,
+      }
 
-    expect(() => getGameResolve(game as GameByDate, LeagueId.MLB)).toThrowError()
-  })
+      expect(() => getGameResolve(game as GameByDate, LeagueId.MLB)).toThrowError()
+    },
+  )
 
-  it('returns the expected GameResolve', () => {
-    const game = {
-      GameID: 64530,
-      Status: 'Final',
-      Day: '2022-04-21T00:00:00',
-      DateTimeUTC: '2022-04-21T13:10:00',
-      AwayTeam: 'CHW',
-      HomeTeam: 'CLE',
-      AwayTeamRuns: 3,
-      HomeTeamRuns: 6,
-    }
+  const getGameResolveTestCases2 = [
+    {
+      name: 'case with runs',
+      gameByDate: {
+        GameID: 64530,
+        Status: 'Final',
+        Day: '2022-04-21T00:00:00',
+        DateTimeUTC: '2022-04-21T13:10:00',
+        AwayTeam: 'CHW',
+        HomeTeam: 'CLE',
+        AwayTeamRuns: 3,
+        HomeTeamRuns: 6,
+      },
+      expectedGameResolve: {
+        gameId: 64530,
+        homeScore: 6,
+        awayScore: 3,
+        status: '0x46696e616c',
+      },
+    },
+    {
+      name: 'case without runs',
+      gameByDate: {
+        GameID: 64530,
+        Status: 'Final',
+        Day: '2022-04-21T00:00:00',
+        DateTimeUTC: '2022-04-21T13:10:00',
+        AwayTeam: 'CHW',
+        HomeTeam: 'CLE',
+        AwayTeamRuns: null,
+        HomeTeamRuns: null,
+      },
+      expectedGameResolve: {
+        gameId: 64530,
+        homeScore: 0,
+        awayScore: 0,
+        status: '0x46696e616c',
+      },
+    },
+  ]
+  it.each(getGameResolveTestCases2)(
+    'returns the expected GameResolve ($name)',
+    ({ gameByDate, expectedGameResolve }) => {
+      const gameResolve = getGameResolve(gameByDate as GameByDate, LeagueId.MLB)
 
-    const gameResolve = getGameResolve(game as GameByDate, LeagueId.MLB)
-
-    const expectedGameResolve = {
-      gameId: 64530,
-      homeScore: 6,
-      awayScore: 3,
-      status: '0x46696e616c',
-    }
-    expect(gameResolve).toEqual(expectedGameResolve)
-  })
+      expect(gameResolve).toEqual(expectedGameResolve)
+    },
+  )
 })
