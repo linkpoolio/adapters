@@ -2,6 +2,7 @@ import { AdapterError, Requester, util, Validator } from '@chainlink/ea-bootstra
 import type { AdapterRequest, Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
 import { response as responseUtils, datetime, enums } from '@linkpool/shared'
 import { utils } from 'ethers'
+import { join } from 'path'
 
 import {
   LeagueId,
@@ -111,7 +112,7 @@ export const execute: ExecuteWithConfig<Config> = async (
               game,
             )}. Reason: ${error}`,
             cause: error,
-            url: responseUtils.getRequestUrl(response),
+            url: join(options.baseURL, options.url),
           })
         }
         return gameCreate
@@ -134,7 +135,7 @@ export const execute: ExecuteWithConfig<Config> = async (
             gameCreate,
           )}. Reason: ${error}`,
           cause: error,
-          url: responseUtils.getRequestUrl(response),
+          url: join(options.baseURL, options.url),
         })
       }
       return encodedGameCreate
@@ -166,7 +167,7 @@ export const execute: ExecuteWithConfig<Config> = async (
               game,
             )}. Reason: ${error}`,
             cause: error,
-            url: responseUtils.getRequestUrl(response),
+            url: join(options.baseURL, options.url),
           })
         }
         return gameResolve
@@ -189,7 +190,7 @@ export const execute: ExecuteWithConfig<Config> = async (
             gameResolve,
           )}. Reason: ${error}`,
           cause: error,
-          url: responseUtils.getRequestUrl(response),
+          url: join(options.baseURL, options.url),
         })
       }
       return encodedGameResolve
