@@ -5,6 +5,7 @@ export enum SportId {
   NBA = 4,
   NCAA_Basketball = 5,
   NHL = 6,
+  MMA = 7,
   WNBA = 8,
   MLS = 10,
   EPL = 11,
@@ -21,6 +22,25 @@ export enum Market {
 }
 
 export const maxLimit = 500
+
+export const supportedSportIdSchedule = [
+  SportId.NFL,
+  SportId.MLB,
+  SportId.NBA,
+  SportId.MMA,
+  SportId.NHL,
+  SportId.MMA,
+  SportId.NCAA_Football,
+  SportId.NCAA_Basketball,
+  SportId.WNBA,
+  SportId.MLS,
+  SportId.EPL,
+  SportId.FRA1,
+  SportId.GER1,
+  SportId.ESP1,
+  SportId.ITA1,
+  SportId.UEFACHAMP,
+]
 
 export const statusIdToStatus: Map<number, string> = new Map([
   [1, 'STATUS_CANCELED'],
