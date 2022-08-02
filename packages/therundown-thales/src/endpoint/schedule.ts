@@ -1,7 +1,7 @@
 import { Requester, Validator, AdapterError, util } from '@chainlink/ea-bootstrap'
 import type { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
 import type { GameResolve, GameCreate, Event } from '../lib/types'
-import { SportId, Market, maxLimit, marketToStatus } from '../lib/const'
+import { supportedSportIdSchedule, Market, maxLimit, marketToStatus } from '../lib/const'
 import {
   filterByEventId,
   filterEventStatus,
@@ -25,22 +25,7 @@ export const inputParameters: InputParameters = {
     description: 'The ID of the sport to query',
     required: true,
     type: 'number',
-    options: [
-      SportId.NFL,
-      SportId.MLB,
-      SportId.NBA,
-      SportId.NHL,
-      SportId.NCAA_Football,
-      SportId.NCAA_Basketball,
-      SportId.WNBA,
-      SportId.MLS,
-      SportId.EPL,
-      SportId.FRA1,
-      SportId.GER1,
-      SportId.ESP1,
-      SportId.ITA1,
-      SportId.UEFACHAMP,
-    ],
+    options: supportedSportIdSchedule,
   },
   date: {
     description: 'The date of the games to query as a Unix timestamp seconds.',
@@ -135,7 +120,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     let gameCreateList: GameCreate[]
     let encodedGameCreateList: string[]
     try {
-      gameCreateList = filteredEvents.map((event: Event) => getGameCreate(event))
+      gameCreateList = filteredEvents.map((event: Event) => getGameCreate(event, sportId))
       encodedGameCreateList = gameCreateList.map((gameCreate: GameCreate) =>
         encodeGameCreate(gameCreate),
       )
@@ -170,7 +155,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     let gameResolveList: GameResolve[]
     let encodedGameResolveList: string[]
     try {
-      gameResolveList = filteredEvents.map((event: Event) => getGameResolve(event))
+      gameResolveList = filteredEvents.map((event: Event) => getGameResolve(event, sportId))
       encodedGameResolveList = gameResolveList.map((gameResolve: GameResolve) =>
         encodeGameResolve(gameResolve),
       )
