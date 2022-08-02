@@ -17,8 +17,8 @@ export function getGameResolve(game: GameByDate, leagueId: LeagueId): GameResolv
   let awayScore: number
   switch (leagueId) {
     case LeagueId.MLB:
-      homeScore = game.HomeTeamRuns
-      awayScore = game.AwayTeamRuns
+      homeScore = game.HomeTeamRuns ?? 0
+      awayScore = game.AwayTeamRuns ?? 0
       break
     default:
       throw new Error(`Unsupported 'leagueId': ${leagueId}`)

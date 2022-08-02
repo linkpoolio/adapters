@@ -1,6 +1,6 @@
 import { AdapterError, Requester, Validator, util } from '@chainlink/ea-bootstrap'
 import { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
-import { response as responseUtils } from '@linkpool/shared'
+import { join } from 'path'
 
 import type { ResponseSchemaPrice as ResponseSchema, FormattedPrices } from '../lib/types'
 import { DEFAULT_START_DATE_MONTH, DEFAULT_END_DATE_MONTH } from '../lib/const'
@@ -59,7 +59,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
       message: `Unexpected error getting the prices. The response is malformed: ${JSON.stringify(
         response.data,
       )}`,
-      url: responseUtils.getRequestUrl(response),
+      url: join(options.baseURL, options.url),
     })
   }
 
@@ -76,7 +76,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
         prices,
       )}. Reason: ${error}`,
       cause: error,
-      url: responseUtils.getRequestUrl(response),
+      url: join(options.baseURL, options.url),
     })
   }
 
@@ -90,7 +90,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
         formattedPrices,
       )}. Reason: ${error}`,
       cause: error,
-      url: responseUtils.getRequestUrl(response),
+      url: join(options.baseURL, options.url),
     })
   }
 
