@@ -28,6 +28,7 @@ Every EA supports base input parameters from [this list](../../core/bootstrap#ba
 `schedule` is the only supported name for this endpoint.
 
 ### Input Params
+
 | Required? |   Name    | Aliases |                                                  Description                                                  |  Type  |                                     Options                                      | Default | Depends On | Not Valid With |
 | :-------: | :-------: | :-----: | :-----------------------------------------------------------------------------------------------------------: | :----: | :------------------------------------------------------------------------------: | :-----: | :--------: | :------------: |
 |    ✅     |  sportId  |         |                                         The ID of the sport to query                                          | number | `1`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `2`, `3`, `4`, `5`, `6`, `7`, `8` |         |            |                |
@@ -37,7 +38,9 @@ Every EA supports base input parameters from [this list](../../core/bootstrap#ba
 |           |  gameIds  |         | The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]` |        |                                                                                  |         |            |                |
 
 ### Example
+
 Request:
+
 ```json
 {
   "id": "1",
@@ -52,7 +55,9 @@ Request:
   }
 }
 ```
+
 Response:
+
 ```json
 {
   "jobRunID": "1",
@@ -396,10 +401,12 @@ Response:
   "providerStatusCode": 200
 }
 ```
+
 <details>
 <summary>Additional Examples</summary>
 
 Request:
+
 ```json
 {
   "id": "1",
@@ -414,7 +421,9 @@ Request:
   }
 }
 ```
+
 Response:
+
 ```json
 {
   "jobRunID": "1",
@@ -918,7 +927,9 @@ Response:
               "point_spread_away_money": 0.0001,
 ...
 ```
+
 Request:
+
 ```json
 {
   "id": "1",
@@ -933,7 +944,9 @@ Request:
   }
 }
 ```
+
 Response:
+
 ```json
 {
   "jobRunID": "1",
@@ -953,18 +966,8 @@ Response:
           "score_home": 91,
           "winner_away": 1,
           "winner_home": 0,
-          "score_away_by_period": [
-            32,
-            29,
-            31,
-            30
-          ],
-          "score_home_by_period": [
-            18,
-            22,
-            32,
-            19
-          ],
+          "score_away_by_period": [32, 29, 31, 30],
+          "score_home_by_period": [18, 22, 32, 19],
           "venue_name": "Toyota Center (Houston)",
           "venue_location": "Houston, TX",
           "game_clock": 0,
@@ -1031,6 +1034,7 @@ Response:
   "providerStatusCode": 200
 }
 ```
+
 </details>
 
 ---
@@ -1040,6 +1044,7 @@ Response:
 `odds` is the only supported name for this endpoint.
 
 ### Input Params
+
 | Required? |  Name   | Aliases |                                                  Description                                                  |  Type  |                                     Options                                      | Default | Depends On | Not Valid With |
 | :-------: | :-----: | :-----: | :-----------------------------------------------------------------------------------------------------------: | :----: | :------------------------------------------------------------------------------: | :-----: | :--------: | :------------: |
 |    ✅     | sportId |         |                                         The ID of the sport to query                                          | number | `1`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `2`, `3`, `4`, `5`, `6`, `7`, `8` |         |            |                |
@@ -1047,7 +1052,9 @@ Response:
 |           | gameIds |         | The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]` |        |                                                                                  |         |            |                |
 
 ### Example
+
 Request:
+
 ```json
 {
   "id": "1",
@@ -1061,7 +1068,9 @@ Request:
   }
 }
 ```
+
 Response:
+
 ```json
 {
   "jobRunID": "1",
@@ -1567,4 +1576,5 @@ Response:
 ```
 
 ---
-MIT License 
+
+MIT License

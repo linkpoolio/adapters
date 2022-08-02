@@ -30,12 +30,15 @@ Returns the sum of both teams' scores for a match (match status must be final)
 `total-score` is the only supported name for this endpoint.
 
 ### Input Params
+
 | Required? |  Name   | Aliases |         Description          | Type | Options | Default | Depends On | Not Valid With |
 | :-------: | :-----: | :-----: | :--------------------------: | :--: | :-----: | :-----: | :--------: | :------------: |
 |    ✅     | matchId |         | The ID of the match to query |      |         |         |            |                |
 
 ### Example
+
 Request:
+
 ```json
 {
   "id": "1",
@@ -48,7 +51,9 @@ Request:
   }
 }
 ```
+
 Response:
+
 ```json
 {
   "jobRunID": "1",
@@ -562,6 +567,7 @@ Returns all events within the specified params
 `events` is the only supported name for this endpoint.
 
 ### Input Params
+
 | Required? |  Name   | Aliases |                Description                |  Type  | Options | Default | Depends On | Not Valid With |
 | :-------: | :-----: | :-----: | :---------------------------------------: | :----: | :-----: | :-----: | :--------: | :------------: |
 |    ✅     | sportId |         |  The ID of the sport to get events from   |        |         |         |            |                |
@@ -569,7 +575,9 @@ Returns all events within the specified params
 |           | status  |         | Optional status param to filter events on | string |         |         |            |                |
 
 ### Example
+
 Request:
+
 ```json
 {
   "id": "1",
@@ -583,7 +591,9 @@ Request:
   }
 }
 ```
+
 Response:
+
 ```json
 {
   "jobRunID": "1",
@@ -1097,12 +1107,15 @@ Returns data for a specific event
 `event` is the only supported name for this endpoint.
 
 ### Input Params
+
 | Required? |  Name   | Aliases |         Description          |  Type  | Options | Default | Depends On | Not Valid With |
 | :-------: | :-----: | :-----: | :--------------------------: | :----: | :-----: | :-----: | :--------: | :------------: |
 |    ✅     | eventId |         | The ID of the event to query | string |         |         |            |                |
 
 ### Example
+
 Request:
+
 ```json
 {
   "id": "1",
@@ -1115,7 +1128,9 @@ Request:
   }
 }
 ```
+
 Response:
+
 ```json
 {
   "jobRunID": "1",
@@ -1627,6 +1642,7 @@ Response:
 `schedule` is the only supported name for this endpoint.
 
 ### Input Params
+
 | Required? |   Name    | Aliases |                                                  Description                                                  |  Type  |                                        Options                                        | Default | Depends On | Not Valid With |
 | :-------: | :-------: | :-----: | :-----------------------------------------------------------------------------------------------------------: | :----: | :-----------------------------------------------------------------------------------: | :-----: | :--------: | :------------: |
 |    ✅     |  sportId  |         |                                         The ID of the sport to query                                          | number | `1`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `2`, `3`, `4`, `5`, `6`, `7`, `7`, `8` |         |            |                |
@@ -1636,7 +1652,9 @@ Response:
 |           |  gameIds  |         | The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]` |        |                                                                                       |         |            |                |
 
 ### Example
+
 Request:
+
 ```json
 {
   "id": "1",
@@ -1651,7 +1669,9 @@ Request:
   }
 }
 ```
+
 Response:
+
 ```json
 {
   "jobRunID": "1",
@@ -1671,18 +1691,8 @@ Response:
           "score_home": 91,
           "winner_away": 1,
           "winner_home": 0,
-          "score_away_by_period": [
-            32,
-            29,
-            31,
-            30
-          ],
-          "score_home_by_period": [
-            18,
-            22,
-            32,
-            19
-          ],
+          "score_away_by_period": [32, 29, 31, 30],
+          "score_home_by_period": [18, 22, 32, 19],
           "venue_name": "Toyota Center (Houston)",
           "venue_location": "Houston, TX",
           "game_clock": 0,
@@ -1749,10 +1759,12 @@ Response:
   "providerStatusCode": 200
 }
 ```
+
 <details>
 <summary>Additional Examples</summary>
 
 Request:
+
 ```json
 {
   "id": "1",
@@ -1767,7 +1779,9 @@ Request:
   }
 }
 ```
+
 Response:
+
 ```json
 {
   "jobRunID": "1",
@@ -1787,18 +1801,8 @@ Response:
           "score_home": 91,
           "winner_away": 1,
           "winner_home": 0,
-          "score_away_by_period": [
-            32,
-            29,
-            31,
-            30
-          ],
-          "score_home_by_period": [
-            18,
-            22,
-            32,
-            19
-          ],
+          "score_away_by_period": [32, 29, 31, 30],
+          "score_home_by_period": [18, 22, 32, 19],
           "venue_name": "Toyota Center (Houston)",
           "venue_location": "Houston, TX",
           "game_clock": 0,
@@ -1865,7 +1869,9 @@ Response:
   "providerStatusCode": 200
 }
 ```
+
 </details>
 
 ---
-MIT License 
+
+MIT License
