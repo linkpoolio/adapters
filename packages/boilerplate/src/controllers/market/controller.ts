@@ -1,10 +1,10 @@
 import { AdapterError, Requester, Validator } from '@chainlink/ea-bootstrap'
-import { Config, ExecuteWithConfig, AdapterRequest } from '@chainlink/types'
+import { AdapterRequest, Config, ExecuteWithConfig } from '@chainlink/types'
 import { reducers } from '@linkpool/shared'
 
 import api from '../../api'
-import input from './input'
 import type { IMarket } from '../../models/market'
+import input from './input'
 
 const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _, config) => {
   const validator = new Validator(request, input)

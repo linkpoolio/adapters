@@ -1,9 +1,9 @@
 import { assertError, assertSuccess } from '@chainlink/ea-test-helpers'
 import type { AdapterRequest } from '@chainlink/types'
 
+import { chainId } from '../../src/lib/const'
 import type { SuiteContext } from './adapter.test'
 import { mockFloorPriceResponseError, mockFloorPriceSuccessResponse } from './fixtures'
-import { chainId } from '../../src/lib/const'
 
 export function testFloorPrice(context: SuiteContext): void {
   const id = '1'

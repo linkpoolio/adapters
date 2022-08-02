@@ -1,12 +1,12 @@
 import http from 'http'
-import process from 'process'
 import type { AddressInfo } from 'net'
+import process from 'process'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
+import { server as startServer } from '../../src'
 import { coinsTests } from './coinmarketcap/coins'
 import { marketTests } from './coinmarketcap/market'
-import { server as startServer } from '../../src'
 
 let oldEnv: NodeJS.ProcessEnv
 

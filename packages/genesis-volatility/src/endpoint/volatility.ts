@@ -1,5 +1,5 @@
-import { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
 import { Requester, Validator } from '@chainlink/ea-bootstrap'
+import { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
 
 export const supportedEndpoints = ['volatility']
 

@@ -1,8 +1,8 @@
 import { AdapterError, util } from '@chainlink/ea-bootstrap'
 import { Config } from '@chainlink/types'
 
-import rarify from './rarify'
 import { Provider } from './constants'
+import rarify from './rarify'
 
 export default (config: Config) => {
   const provider = util.getEnv('API_PROVIDER')

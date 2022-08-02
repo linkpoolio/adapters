@@ -5,8 +5,8 @@ import process from 'process'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
-import { DEFAULT_BASE_URL } from '../../src/config'
 import { server as startServer } from '../../src'
+import { DEFAULT_BASE_URL } from '../../src/config'
 import { categoryTests } from './category'
 
 let oldEnv: NodeJS.ProcessEnv

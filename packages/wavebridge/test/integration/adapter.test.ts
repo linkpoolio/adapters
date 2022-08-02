@@ -4,12 +4,12 @@ import nock from 'nock'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
+import { server as startServer } from '../../src'
+import { DEV_BASE_URL } from '../../src/config'
 import { authTests } from './auth'
 import { cmxDailyTests } from './cmx-daily'
 import { kimpDailyTests } from './kimp-daily'
 import { kimpRealtimeTests } from './kimp-realtime'
-import { DEV_BASE_URL } from '../../src/config'
-import { server as startServer } from '../../src'
 
 let oldEnv: NodeJS.ProcessEnv
 

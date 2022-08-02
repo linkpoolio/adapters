@@ -2,10 +2,10 @@ import { Requester } from '@chainlink/ea-bootstrap'
 import { assertError } from '@chainlink/ea-test-helpers'
 import { AdapterRequest } from '@chainlink/types'
 
-import { eventNBA1 } from '../unit/testCases'
 import { makeExecute } from '../../src/adapter'
 import { NO_EVENT_ODDS } from '../../src/lib/const'
-import { getGameOdds, encodeGameOdds } from '../../src/lib/utils'
+import { encodeGameOdds, getGameOdds } from '../../src/lib/utils'
+import { eventNBA1 } from '../unit/testCases'
 
 describe('validation error', () => {
   const jobID = '1'

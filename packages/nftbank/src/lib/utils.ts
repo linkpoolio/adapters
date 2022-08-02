@@ -1,6 +1,7 @@
-import type { AssetEstimate, AssetFloorPrice } from './types'
-import { PricingAsset, PricingAssetFactor } from './const'
 import { utils } from 'ethers'
+
+import { PricingAsset, PricingAssetFactor } from './const'
+import type { AssetEstimate, AssetFloorPrice } from './types'
 
 export const getEstimateFor = (pricingAsset: PricingAsset, estimate: AssetEstimate[]): number => {
   const assetEstimate = estimate.find(

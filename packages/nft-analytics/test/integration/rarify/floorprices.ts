@@ -1,9 +1,9 @@
 import { assertError, assertSuccess } from '@chainlink/ea-test-helpers'
 
+import { RequestMethod } from '../../../src/controllers/constants'
 import type { SuiteContext } from '../adapter.test'
 import { floorpricesInput } from '../common'
 import { mockFloorpricesGetSingleError, mockFloorpricesGetSingleSuccess } from './fixtures'
-import { RequestMethod } from '../../../src/controllers/constants'
 
 export function testFloorprices(context: SuiteContext): void {
   describe('method: get', () => {

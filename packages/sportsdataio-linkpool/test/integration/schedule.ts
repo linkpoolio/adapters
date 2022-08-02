@@ -1,6 +1,7 @@
 import { assertError, assertSuccess } from '@chainlink/ea-test-helpers'
 import type { AdapterRequest } from '@chainlink/types'
 
+import { LeagueId, Market, leagueIdUrlPath } from '../../src/lib/constants'
 import type { SuiteContext } from './adapter.test'
 import {
   mockScheduleSuccessCreateMLB1,
@@ -8,7 +9,6 @@ import {
   mockScheduleSuccessNoEvents,
   mockScheduleSuccessResolveMLB1,
 } from './fixtures'
-import { LeagueId, Market, leagueIdUrlPath } from '../../src/lib/constants'
 
 export function scheduleTests(context: SuiteContext): void {
   const id = '1'

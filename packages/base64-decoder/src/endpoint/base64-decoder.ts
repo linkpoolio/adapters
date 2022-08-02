@@ -1,10 +1,10 @@
 import { AdapterError, Requester, Validator } from '@chainlink/ea-bootstrap'
 import {
+  AdapterRequest,
+  AxiosResponse,
   Config,
   ExecuteWithConfig,
   InputParameters,
-  AxiosResponse,
-  AdapterRequest,
 } from '@chainlink/types'
 
 export const supportedEndpoints = ['base64-decoder']

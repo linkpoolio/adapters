@@ -1,11 +1,11 @@
 import http from 'http'
-import process from 'process'
 import type { AddressInfo } from 'net'
+import process from 'process'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
-import { base64DecoderTests } from './base64-decoder'
 import { server as startServer } from '../../src'
+import { base64DecoderTests } from './base64-decoder'
 
 let oldEnv: NodeJS.ProcessEnv
 

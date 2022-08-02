@@ -1,9 +1,9 @@
-import { Requester, Validator, util, AdapterError } from '@chainlink/ea-bootstrap'
+import { AdapterError, Requester, Validator, util } from '@chainlink/ea-bootstrap'
 import { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
 import { join } from 'path'
 
-import type { ResponseSchemaTami as ResponseSchema } from '../lib/types'
 import { marketIdToMarket } from '../lib/const'
+import type { ResponseSchemaTami as ResponseSchema } from '../lib/types'
 
 export const supportedEndpoints = ['tami']
 

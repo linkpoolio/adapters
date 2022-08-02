@@ -3,8 +3,8 @@ import { Config, RequestConfig } from '@chainlink/types'
 import { injector } from '@linkpool/shared'
 
 import { Base } from '../base'
-import floorprices from './floorprices'
 import { Provider as ProviderName, providerToBaseUrl } from '../constants'
+import floorprices from './floorprices'
 
 const Fetch = (config: Config) => {
   config.api.baseURL = providerToBaseUrl.get(ProviderName.RARIFY) as string

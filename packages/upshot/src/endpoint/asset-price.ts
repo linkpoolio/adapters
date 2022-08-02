@@ -1,7 +1,8 @@
-import { Requester, Validator, AdapterError } from '@chainlink/ea-bootstrap'
+import { AdapterError, Requester, Validator } from '@chainlink/ea-bootstrap'
 import { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
-import { ResponseSchemaAssetPrice as ResponseSchema } from '../lib/types'
 import { join } from 'path'
+
+import { ResponseSchemaAssetPrice as ResponseSchema } from '../lib/types'
 
 export const supportedEndpoints = ['asset-price']
 

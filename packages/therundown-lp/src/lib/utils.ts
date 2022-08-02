@@ -1,6 +1,7 @@
-import { GameResolve, GameCreate, Event, Team } from '../lib/types'
-import { SportId, Market, statusIdToStatus, statusToStatusId } from '../lib/const'
 import { utils } from 'ethers'
+
+import { Market, SportId, statusIdToStatus, statusToStatusId } from '../lib/const'
+import { Event, GameCreate, GameResolve, Team } from '../lib/types'
 
 export const throwError = (message: string): never => {
   throw new Error(message)

@@ -6,9 +6,9 @@ import {
   mockAuthResponseError,
   mockAuthResponseSuccess,
   mockKimpRealtimeResponseError,
+  mockKimpRealtimeResponseSuccess,
   mockKimpRealtimeResponseSuccessMalformed1,
   mockKimpRealtimeResponseSuccessMalformed2,
-  mockKimpRealtimeResponseSuccess,
 } from './fixtures'
 
 export function kimpRealtimeTests(context: SuiteContext): void {

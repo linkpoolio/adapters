@@ -1,5 +1,8 @@
 import { assertError, assertSuccess } from '@chainlink/ea-test-helpers'
 import { AdapterRequest } from '@chainlink/types'
+
+import { Unit } from '../../src/endpoint/current-conditions'
+import { SuiteContext } from './adapter.test'
 import {
   mockAWCurrentConditionsResponseError,
   mockAWCurrentConditionsResponseSuccess,
@@ -7,8 +10,6 @@ import {
   mockAWLocationResponseSuccessLocationFound,
   mockAWLocationResponseSuccessLocationNotFound,
 } from './fixtures'
-import { Unit } from '../../src/endpoint/current-conditions'
-import { SuiteContext } from './adapter.test'
 
 export function locationCurrentConditionsTests(context: SuiteContext): void {
   const id = '1'

@@ -1,8 +1,8 @@
 import { util } from '@chainlink/ea-bootstrap'
 
-import type { IFloorPrices } from '../base'
 import FloorPrice from '../../models/floorprice'
 import type { IFloorPrice } from '../../models/floorprice'
+import type { IFloorPrices } from '../base'
 import { Provider } from '../constants'
 
 export default (fetch): IFloorPrices => ({

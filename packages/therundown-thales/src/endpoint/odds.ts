@@ -1,18 +1,18 @@
-import { Requester, Validator, AdapterError, util } from '@chainlink/ea-bootstrap'
+import { AdapterError, Requester, Validator, util } from '@chainlink/ea-bootstrap'
 import type { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
-import type { GameOdds, Event } from '../lib/types'
-import { supportedSportIdOdds, Market, maxLimit, marketToStatus } from '../lib/const'
+import { join } from 'path'
+
+import { Market, marketToStatus, maxLimit, supportedSportIdOdds } from '../lib/const'
+import type { Event, GameOdds } from '../lib/types'
 import {
+  encodeGameOdds,
   filterByEventId,
   filterEventStatus,
   getGameOdds,
   validateAndGetGameIds,
-  validateSportId,
   validateDate,
-  encodeGameOdds,
+  validateSportId,
 } from '../lib/utils'
-
-import { join } from 'path'
 
 export const supportedEndpoints = ['odds']
 

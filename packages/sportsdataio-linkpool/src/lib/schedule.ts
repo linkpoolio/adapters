@@ -1,6 +1,6 @@
 import { datetime } from '@linkpool/shared'
-import { LeagueId } from './constants'
 
+import { LeagueId } from './constants'
 import type { GameByDate, GameCreate, GameResolve } from './types'
 
 export function getGameCreate(game: GameByDate): GameCreate {

@@ -1,9 +1,9 @@
 import { assertError, assertSuccess } from '@chainlink/ea-test-helpers'
 
+import { RequestMethod } from '../../../src/controllers/constants'
 import type { SuiteContext } from '../adapter.test'
 import { jobsInput } from '../common'
 import { mockJobsSingleError, mockJobsSingleSuccess } from './fixtures'
-import { RequestMethod } from '../../../src/controllers/constants'
 
 export function testJobs(context: SuiteContext): void {
   describe('method: get', () => {

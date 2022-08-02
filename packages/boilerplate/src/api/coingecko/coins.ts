@@ -1,6 +1,6 @@
-import { ICoins } from '../base'
 import Coin, { ICoin } from '../../models/coin'
 import Market, { IMarket } from '../../models/market'
+import { ICoins } from '../base'
 
 const provider = 'coingecko'
 

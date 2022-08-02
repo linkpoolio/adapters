@@ -1,4 +1,5 @@
 import nock from 'nock'
+
 import { DEFAULT_BASE_URL } from '../../src/config'
 
 export const mockCategoryResponseError = (): nock =>

@@ -1,8 +1,9 @@
-import { Requester, Validator, AdapterError } from '@chainlink/ea-bootstrap'
+import { AdapterError, Requester, Validator } from '@chainlink/ea-bootstrap'
 import { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
+import { join } from 'path'
+
 import { Chain } from '../lib/const'
 import type { ResponseSchemaSanctions as ResponseSchema } from '../lib/types'
-import { join } from 'path'
 
 export const supportedEndpoints = ['category']
 

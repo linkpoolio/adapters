@@ -1,6 +1,7 @@
-import type { Stat, StatisticsResult } from './types'
 import { errors } from '@linkpool/shared'
 import { utils } from 'ethers'
+
+import type { Stat, StatisticsResult } from './types'
 
 export const encodeStatistics = (floorPrice: string, marketCap: string): string => {
   return utils.solidityPack(['uint128', 'uint128'], [floorPrice, marketCap])

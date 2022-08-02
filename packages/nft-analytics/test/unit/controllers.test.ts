@@ -1,8 +1,8 @@
 import { Requester } from '@chainlink/ea-bootstrap'
 import { assertError } from '@chainlink/ea-test-helpers'
-import { AdapterRequest, AdapterContext } from '@chainlink/types'
-import { makeExecute } from '../../src/adapter'
+import { AdapterContext, AdapterRequest } from '@chainlink/types'
 
+import { makeExecute } from '../../src/adapter'
 import { Provider as ProviderName } from '../../src/api/constants'
 
 describe('controllers', () => {

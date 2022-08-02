@@ -4,8 +4,8 @@ import nock from 'nock'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
-import { priceTests } from './price'
 import { server as startServer } from '../../src'
+import { priceTests } from './price'
 
 let oldEnv: NodeJS.ProcessEnv
 

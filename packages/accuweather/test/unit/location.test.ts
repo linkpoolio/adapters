@@ -1,12 +1,13 @@
 import { Requester } from '@chainlink/ea-bootstrap'
 import { assertError } from '@chainlink/ea-test-helpers'
 import { AdapterRequest } from '@chainlink/types'
+
 import { makeExecute } from '../../src/adapter'
 import {
-  encodeLocationResult,
-  getLocationResult,
   Location,
   LocationResult,
+  encodeLocationResult,
+  getLocationResult,
   noLocationResult,
 } from '../../src/endpoint/location'
 
