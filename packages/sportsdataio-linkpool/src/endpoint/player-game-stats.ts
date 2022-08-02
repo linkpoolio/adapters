@@ -1,16 +1,16 @@
-import { AdapterError, Requester, util, Validator } from '@chainlink/ea-bootstrap'
+import { AdapterError, Requester, Validator, util } from '@chainlink/ea-bootstrap'
 import type { AdapterRequest, Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
-import { response as responseUtils, datetime, enums } from '@linkpool/shared'
+import { datetime, enums, response as responseUtils } from '@linkpool/shared'
 import { utils } from 'ethers'
 import { join } from 'path'
 
 import {
   LeagueId,
+  Market,
+  Status,
   leagueIdRequiredEnvVar,
   leagueIdUrlPath,
-  Market,
   marketResultEncode,
-  Status,
 } from '../lib/constants'
 import { getGameCreate, getGameResolve } from '../lib/schedule'
 import type { GameCreate, GameResolve, ResponseSchema } from '../lib/types'

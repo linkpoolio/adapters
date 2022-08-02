@@ -1,8 +1,8 @@
 import { Logger, Requester } from '@chainlink/ea-bootstrap'
 import { Config as ChainlinkConfig } from '@chainlink/types'
 
-import type { Config, GenericConfig } from './lib/types'
 import { getGenericConfig } from './lib/generic-config'
+import type { Config, GenericConfig } from './lib/types'
 
 export const DEFAULT_ENDPOINT = 'generic-request'
 export const NAME = 'GENERIC'

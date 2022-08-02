@@ -6,9 +6,9 @@ import nock from 'nock'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
-import { mockResponseErrorCustom, mockResponseSuccessCustom } from './fixtures'
 import { server as startServer } from '../../../src'
 import { RequestMethod } from '../../../src/lib/constants'
+import { mockResponseErrorCustom, mockResponseSuccessCustom } from './fixtures'
 
 export function authorizationCustomTests(): void {
   let oldEnv: NodeJS.ProcessEnv

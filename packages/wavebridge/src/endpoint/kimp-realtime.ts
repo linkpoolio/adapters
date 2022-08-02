@@ -2,8 +2,8 @@ import { AdapterError, Requester, Validator } from '@chainlink/ea-bootstrap'
 import type { ExecuteWithConfig } from '@chainlink/types'
 import { join } from 'path'
 
-import { execute as executeAuth } from './auth'
 import type { Config } from '../config'
+import { execute as executeAuth } from './auth'
 
 export const supportedEndpoints = ['kimp-realtime']
 

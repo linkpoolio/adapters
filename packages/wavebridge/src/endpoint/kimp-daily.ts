@@ -2,10 +2,10 @@ import { AdapterError, Requester, Validator } from '@chainlink/ea-bootstrap'
 import type { ExecuteWithConfig, InputParameters } from '@chainlink/types'
 import { join } from 'path'
 
-import { execute as executeAuth } from './auth'
 import type { Config } from '../config'
-import { validateDate } from '../lib/validations'
 import { ONE_DAY_IN_MILLISECONDS } from '../lib/constants'
+import { validateDate } from '../lib/validations'
+import { execute as executeAuth } from './auth'
 
 export const supportedEndpoints = ['kimp-daily']
 

@@ -5,10 +5,10 @@ import process from 'process'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
-import { DEFAULT_BASE_URL } from '../../src/config'
 import { server as startServer } from '../../src'
-import { statisticsTests } from './statistics'
+import { DEFAULT_BASE_URL } from '../../src/config'
 import { assetPriceTests } from './asset-price'
+import { statisticsTests } from './statistics'
 
 let oldEnv: NodeJS.ProcessEnv
 

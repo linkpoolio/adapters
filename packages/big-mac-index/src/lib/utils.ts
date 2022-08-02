@@ -1,5 +1,6 @@
-import { FormattedPrices, Prices } from './types'
 import { utils } from 'ethers'
+
+import { FormattedPrices, Prices } from './types'
 
 export const formatPrices = (prices: Prices): FormattedPrices => {
   if (prices.length === 0) return { firstHalfPrice: 0, secondHalfPrice: 0 }

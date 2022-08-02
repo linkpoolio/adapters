@@ -3,8 +3,8 @@ import { Config, RequestConfig } from '@chainlink/types'
 import { injector } from '@linkpool/shared'
 
 import { Base } from '../base'
-import jobs from './jobs'
 import { Provider as ProviderName, providerToBaseUrl } from '../constants'
+import jobs from './jobs'
 
 const Fetch = (config: Config) => {
   config.api.baseURL = providerToBaseUrl.get(ProviderName.LANCERIA) as string

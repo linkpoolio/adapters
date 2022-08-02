@@ -1,8 +1,8 @@
 import { AdapterError, util } from '@chainlink/ea-bootstrap'
 import { Config } from '@chainlink/types'
 
-import lanceria from './lanceria'
 import { Provider } from './constants'
+import lanceria from './lanceria'
 
 export default (config: Config) => {
   const provider = util.getRequiredEnv('API_PROVIDER')

@@ -6,9 +6,9 @@ import nock from 'nock'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
-import { mockResponseErrorApiKey, mockResponseSuccessApiKey } from './fixtures'
 import { server as startServer } from '../../../src'
 import { CredentialsLocation, RequestMethod } from '../../../src/lib/constants'
+import { mockResponseErrorApiKey, mockResponseSuccessApiKey } from './fixtures'
 
 export function authorizationApiKeyTests(): void {
   let oldEnv: NodeJS.ProcessEnv

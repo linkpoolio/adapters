@@ -3,7 +3,7 @@ import { assertError } from '@chainlink/ea-test-helpers'
 import type { AdapterRequest } from '@chainlink/types'
 
 import { makeExecute } from '../../src/adapter'
-import { formatPrices, encodePrices } from '../../src/lib/utils'
+import { encodePrices, formatPrices } from '../../src/lib/utils'
 import { pricesTestCase1, pricesTestCase2, pricesTestCase3 } from './testCases'
 
 describe('execute', () => {

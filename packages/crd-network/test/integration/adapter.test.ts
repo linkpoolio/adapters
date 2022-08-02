@@ -4,9 +4,9 @@ import nock from 'nock'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
-import { addressInfoTests } from './address-info'
 import { server as startServer } from '../../src'
 import { DEV_BASE_URL } from '../../src/config'
+import { addressInfoTests } from './address-info'
 
 let oldEnv: NodeJS.ProcessEnv
 

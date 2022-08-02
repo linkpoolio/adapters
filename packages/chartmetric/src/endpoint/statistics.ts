@@ -1,10 +1,10 @@
 import { AdapterError, Requester, Validator, util } from '@chainlink/ea-bootstrap'
 import { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
-import type { CMStatistics, ResponseSchemaStatistics as ResponseSchema } from '../lib/types'
-import { getStatistics, encodeStatistics } from '../lib/utils'
-
-import { execute as executeAuth } from './auth'
 import { join } from 'path'
+
+import type { CMStatistics, ResponseSchemaStatistics as ResponseSchema } from '../lib/types'
+import { encodeStatistics, getStatistics } from '../lib/utils'
+import { execute as executeAuth } from './auth'
 
 export const supportedEndpoints = ['statistics']
 

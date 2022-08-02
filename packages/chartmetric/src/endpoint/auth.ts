@@ -1,8 +1,8 @@
 import { AdapterError, Requester, Validator } from '@chainlink/ea-bootstrap'
 import type { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
-import type { ResponseSchemaAuth as ResponseSchema } from '../lib/types'
-
 import { join } from 'path'
+
+import type { ResponseSchemaAuth as ResponseSchema } from '../lib/types'
 
 export const supportedEndpoints = ['auth']
 

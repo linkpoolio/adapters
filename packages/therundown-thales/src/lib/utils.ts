@@ -1,15 +1,15 @@
-import { utils } from 'ethers'
 import { Logger } from '@chainlink/ea-bootstrap'
+import { utils } from 'ethers'
 
-import type { GameResolve, GameCreate, Event, GameOdds, Odds, Team } from '../lib/types'
 import {
-  SportId,
+  EVENT_ODDS_EXPONENT,
   Market,
+  NO_EVENT_ODDS,
+  SportId,
   statusIdToStatus,
   statusToStatusId,
-  EVENT_ODDS_EXPONENT,
-  NO_EVENT_ODDS,
 } from '../lib/const'
+import type { Event, GameCreate, GameOdds, GameResolve, Odds, Team } from '../lib/types'
 
 export const throwError = (message: string): never => {
   throw new Error(message)

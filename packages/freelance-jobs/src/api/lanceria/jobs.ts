@@ -1,6 +1,6 @@
-import { IJobs } from '../base'
 import type { IJob } from '../../models/job'
 import Job from '../../models/job'
+import { IJobs } from '../base'
 import { Provider } from '../constants'
 
 export default (fetch): IJobs => ({

@@ -1,13 +1,14 @@
-import process from 'process'
-import nock from 'nock'
 import http from 'http'
-import { DEV_BASE_URL } from '../../src/config'
-import { locationTests } from './location'
-import { currentConditionsTests } from './current-conditions'
-import { locationCurrentConditionsTests } from './location-current-conditions'
-import { server as startServer } from '../../src'
-import request, { SuperTest, Test } from 'supertest'
 import { AddressInfo } from 'net'
+import nock from 'nock'
+import process from 'process'
+import request, { SuperTest, Test } from 'supertest'
+
+import { server as startServer } from '../../src'
+import { DEV_BASE_URL } from '../../src/config'
+import { currentConditionsTests } from './current-conditions'
+import { locationTests } from './location'
+import { locationCurrentConditionsTests } from './location-current-conditions'
 
 let oldEnv: NodeJS.ProcessEnv
 

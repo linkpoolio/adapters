@@ -1,10 +1,11 @@
 import { assertError, assertSuccess } from '@chainlink/ea-test-helpers'
 import { AdapterRequest } from '@chainlink/types'
+
 import { SuiteContext } from './adapter.test'
 import {
   mockAWLocationResponseError,
-  mockAWLocationResponseSuccessLocationNotFound,
   mockAWLocationResponseSuccessLocationFound,
+  mockAWLocationResponseSuccessLocationNotFound,
   mockAWLocationResponseSuccessMalformed1,
   mockAWLocationResponseSuccessMalformed2,
 } from './fixtures'

@@ -1,5 +1,6 @@
-import type { CMStatistics, Statistics } from './types'
 import { utils } from 'ethers'
+
+import type { CMStatistics, Statistics } from './types'
 
 export const getStatistics = (statisticsRaw: CMStatistics): Statistics => {
   const statistics = {

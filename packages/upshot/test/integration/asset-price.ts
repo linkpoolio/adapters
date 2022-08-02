@@ -4,8 +4,8 @@ import type { AdapterRequest } from '@chainlink/types'
 import type { SuiteContext } from './adapter.test'
 import {
   mockAssetPriceResponseError,
-  mockAssetPriceResponseSuccessMalformed,
   mockAssetPriceResponseSuccess,
+  mockAssetPriceResponseSuccessMalformed,
 } from './fixtures'
 
 export function assetPriceTests(context: SuiteContext): void {

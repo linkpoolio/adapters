@@ -1,11 +1,11 @@
 import http from 'http'
-import process from 'process'
 import type { AddressInfo } from 'net'
+import process from 'process'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
-import { requestParamsControllerTests } from './request-params-controller'
 import { server as startServer } from '../../src'
+import { requestParamsControllerTests } from './request-params-controller'
 
 let oldEnv: NodeJS.ProcessEnv
 

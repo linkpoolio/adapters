@@ -1,10 +1,10 @@
-import { AdapterError, Logger, Requester, util, Validator } from '@chainlink/ea-bootstrap'
+import { AdapterError, Logger, Requester, Validator, util } from '@chainlink/ea-bootstrap'
 import type { AdapterRequest, Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
 import { join } from 'path'
 
-import { chainId, PricingAsset, Format } from '../lib/const'
+import { Format, PricingAsset, chainId } from '../lib/const'
 import type { FloorPriceResponseSchema } from '../lib/types'
-import { getFloorPriceFor, encodePriceWithDate } from '../lib/utils'
+import { encodePriceWithDate, getFloorPriceFor } from '../lib/utils'
 
 export const supportedEndpoints = ['floor-price']
 

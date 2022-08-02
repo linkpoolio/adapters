@@ -2,9 +2,9 @@ import { AdapterError, Requester, Validator, util } from '@chainlink/ea-bootstra
 import { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
 import { join } from 'path'
 
-import type { ResponseSchemaPrice as ResponseSchema, FormattedPrices } from '../lib/types'
-import { DEFAULT_START_DATE_MONTH, DEFAULT_END_DATE_MONTH } from '../lib/const'
-import { formatPrices, encodePrices } from '../lib/utils'
+import { DEFAULT_END_DATE_MONTH, DEFAULT_START_DATE_MONTH } from '../lib/const'
+import type { FormattedPrices, ResponseSchemaPrice as ResponseSchema } from '../lib/types'
+import { encodePrices, formatPrices } from '../lib/utils'
 
 export const supportedEndpoints = ['price']
 

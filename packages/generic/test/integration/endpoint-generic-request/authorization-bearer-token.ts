@@ -7,8 +7,8 @@ import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
 import { server as startServer } from '../../../src'
-import { mockResponseErrorBearerToken, mockResponseSuccessBearerToken } from './fixtures'
 import { RequestMethod } from '../../../src/lib/constants'
+import { mockResponseErrorBearerToken, mockResponseSuccessBearerToken } from './fixtures'
 
 export function authorizationBearerTokenTests(): void {
   let oldEnv: NodeJS.ProcessEnv

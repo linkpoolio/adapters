@@ -1,7 +1,7 @@
 import { ethers } from 'ethers'
 
-import Job from '../../src/models/job'
 import { Provider } from '../../src/api/constants'
+import Job from '../../src/models/job'
 
 describe('models', () => {
   describe('lanceria transformer', () => {
