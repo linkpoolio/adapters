@@ -1,6 +1,6 @@
 # Chainlink External Adapter for TheRundown
 
-![1.3.2](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/therundown/package.json)
+![2.0.1](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/therundown-lp/package.json)
 
 Base URL https://therundown-therundown-v1.p.rapidapi.com/
 
@@ -1643,13 +1643,13 @@ Response:
 
 ### Input Params
 
-| Required? |   Name    | Aliases |                                                  Description                                                  |  Type  |                                   Options                                   | Default | Depends On | Not Valid With |
-| :-------: | :-------: | :-----: | :-----------------------------------------------------------------------------------------------------------: | :----: | :-------------------------------------------------------------------------: | :-----: | :--------: | :------------: |
-|    ✅     |  sportId  |         |                                         The ID of the sport to query                                          | number | `1`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `2`, `3`, `4`, `5`, `6`, `8` |         |            |                |
-|    ✅     |   date    |         |                                    The date of the games to query in epoch                                    | number |                                                                             |         |            |                |
-|    ✅     |  market   |         |                                       Chose to create or resolve market                                       | string |                             `create`, `resolve`                             |         |            |                |
-|           | statusIds |         |                         The statuses of the games to query. Examples: `["1","2","3"]`                         |        |                                                                             |         |            |                |
-|           |  gameIds  |         | The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]` |        |                                                                             |         |            |                |
+| Required? |   Name    | Aliases |                                                  Description                                                  |  Type  |                                        Options                                        | Default | Depends On | Not Valid With |
+| :-------: | :-------: | :-----: | :-----------------------------------------------------------------------------------------------------------: | :----: | :-----------------------------------------------------------------------------------: | :-----: | :--------: | :------------: |
+|    ✅     |  sportId  |         |                                         The ID of the sport to query                                          | number | `1`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `2`, `3`, `4`, `5`, `6`, `7`, `7`, `8` |         |            |                |
+|    ✅     |   date    |         |                                    The date of the games to query in epoch                                    | number |                                                                                       |         |            |                |
+|    ✅     |  market   |         |                                       Chose to create or resolve market                                       | string |                                  `create`, `resolve`                                  |         |            |                |
+|           | statusIds |         |                         The statuses of the games to query. Examples: `["1","2","3"]`                         |        |                                                                                       |         |            |                |
+|           |  gameIds  |         | The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]` |        |                                                                                       |         |            |                |
 
 ### Example
 
@@ -1859,11 +1859,11 @@ Response:
       }
     ],
     "result": [
-      "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a0000000000000000000000000000000000000000000000000000000000000008"
+      "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000007a000000000000000000000000000000000000000000000000000000000000007a0000000000000000000000000000000000000000000000000000000000000008"
     ]
   },
   "result": [
-    "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a0000000000000000000000000000000000000000000000000000000000000008"
+    "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000007a000000000000000000000000000000000000000000000000000000000000007a0000000000000000000000000000000000000000000000000000000000000008"
   ],
   "statusCode": 200,
   "providerStatusCode": 200

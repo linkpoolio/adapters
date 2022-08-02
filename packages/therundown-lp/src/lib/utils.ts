@@ -1,4 +1,4 @@
-import { GameResolve, GameCreate, Event } from '../lib/types'
+import { GameResolve, GameCreate, Event, Team } from '../lib/types'
 import { SportId, Market, statusIdToStatus, statusToStatusId } from '../lib/const'
 import { utils } from 'ethers'
 
@@ -30,13 +30,29 @@ export const convertEventId = (eventId: string): string => {
   throw new Error(`Unexpected 'event_id': ${eventId}. Expected format is 32 bytes long.`)
 }
 
-export const getGameCreate = (event: Event): GameCreate => {
+export const getGameCreate = (event: Event, sportId: SportId): GameCreate => {
   const teams =
     event.teams_normalized ??
     throwError(`Missing 'teams_normalized' in event: ${JSON.stringify(event)}`)
+  const homeTeam =
+    (teams.find((team) => team.is_home) as Team) ??
+    throwError(`Missing home team in event: ${JSON.stringify(event)}`)
+  const awayTeam =
+    (teams.find((team) => team.is_away) as Team) ??
+    throwError(`Missing away team in event: ${JSON.stringify(event)}`)
+
+  let homeTeamName: string
+  let awayTeamName: string
+  if ([SportId.NBA].includes(sportId)) {
+    homeTeamName = `${homeTeam.name} ${homeTeam.mascot}`
+    awayTeamName = `${awayTeam.name} ${awayTeam.mascot}`
+  } else {
+    homeTeamName = homeTeam.name
+    awayTeamName = awayTeam.name
+  }
   const gameCreate = {
-    homeTeam: `${teams[1].name} ${teams[1].mascot}`,
-    awayTeam: `${teams[0].name} ${teams[0].mascot}`,
+    homeTeam: homeTeamName,
+    awayTeam: awayTeamName,
     startTime: Math.floor(new Date(event.event_date).getTime() / 1000),
     gameId: convertEventId(event.event_id),
   }
@@ -52,10 +68,19 @@ export const getGameCreate = (event: Event): GameCreate => {
   return gameCreate
 }
 
-export const getGameResolve = (event: Event): GameResolve => {
+export const getGameResolve = (event: Event, sportId: SportId): GameResolve => {
+  let homeScore: number
+  let awayScore: number
+  if ([SportId.MMA].includes(sportId)) {
+    homeScore = event.score?.winner_home
+    awayScore = event.score?.winner_away
+  } else {
+    homeScore = event.score?.score_away
+    awayScore = event.score?.score_away
+  }
   const gameResolve = {
-    homeScore: event.score?.score_home,
-    awayScore: event.score?.score_away,
+    homeScore,
+    awayScore,
     gameId: convertEventId(event.event_id),
     statusId: statusToStatusId.get(event.score?.event_status) as number,
   }

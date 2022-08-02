@@ -1,6 +1,8 @@
 import { Requester } from '@chainlink/ea-bootstrap'
 import { assertError } from '@chainlink/ea-test-helpers'
 import { AdapterRequest } from '@chainlink/types'
+
+import { eventNBA1, eventMMA1 } from '../unit/testCases'
 import { makeExecute } from '../../src/adapter'
 import {
   getGameCreate,
@@ -8,8 +10,7 @@ import {
   encodeGameCreate,
   encodeGameResolve,
 } from '../../src/lib/utils'
-
-import { testCase } from '../unit/testCases'
+import { SportId } from '../../src/lib/const'
 
 describe('validation error', () => {
   const jobID = '1'
@@ -68,45 +69,95 @@ describe('validation error', () => {
 })
 
 describe('getGameCreate()', () => {
-  it('returns a gameCreate from an event', () => {
-    const gameCreate = getGameCreate(testCase)
+  const getGameCreateTestCases = [
+    {
+      name: 'NBA',
+      testData: {
+        event: eventNBA1,
+        sportId: SportId.NBA,
+        expectedGameCreate: {
+          homeTeam: 'St. Louis Blues',
+          awayTeam: 'New York Islanders',
+          gameId: '0x3736313636626436623464653934653131633562643230636466336662313965',
+          startTime: 1649548800,
+        },
+      },
+    },
+    {
+      name: 'MMA',
+      testData: {
+        event: eventMMA1,
+        sportId: SportId.MMA,
+        expectedGameCreate: {
+          homeTeam: 'Mark Coates',
+          awayTeam: 'Jaylon Bates',
+          gameId: '0x3030303935396433396532613763613166656139333832376539646230663834',
+          startTime: 1658530800,
+        },
+      },
+    },
+  ]
+  it.each(getGameCreateTestCases)(
+    'returns the GameCreate from an event (case $name)',
+    ({ testData }) => {
+      const gameCreate = getGameCreate(testData.event, testData.sportId)
 
-    const expectedGameCreate = {
-      homeTeam: 'Los Angeles Lakers',
-      awayTeam: 'Golden State Warriors',
-      gameId: '0x3438663264363964356330383932346236383261323737333131653135383833',
-      startTime: 1634695200,
-    }
-    expect(gameCreate).toEqual(expectedGameCreate)
-  })
+      expect(gameCreate).toEqual(testData.expectedGameCreate)
+    },
+  )
 })
 
 describe('getGameResolve()', () => {
-  it('returns a gameResolve from an event', () => {
-    const getResolve = getGameResolve(testCase)
+  const getGameCreateTestCases = [
+    {
+      name: 'NBA',
+      testData: {
+        event: eventNBA1,
+        sportId: SportId.NBA,
+        expectedGameResolve: {
+          homeScore: 0,
+          awayScore: 0,
+          gameId: '0x3736313636626436623464653934653131633562643230636466336662313965',
+          statusId: 18,
+        },
+      },
+    },
+    {
+      name: 'MMA',
+      testData: {
+        event: eventMMA1,
+        sportId: SportId.MMA,
+        expectedGameResolve: {
+          homeScore: 0,
+          awayScore: 1,
+          gameId: '0x3030303935396433396532613763613166656139333832376539646230663834',
+          statusId: 8,
+        },
+      },
+    },
+  ]
+  it.each(getGameCreateTestCases)(
+    'returns the GameResolve from an event (case $name)',
+    ({ testData }) => {
+      const getResolve = getGameResolve(testData.event, testData.sportId)
 
-    const expectedGameResolve = {
-      homeScore: 114,
-      awayScore: 121,
-      gameId: '0x3438663264363964356330383932346236383261323737333131653135383833',
-      statusId: 8,
-    }
-    expect(getResolve).toEqual(expectedGameResolve)
-  })
+      expect(getResolve).toEqual(testData.expectedGameResolve)
+    },
+  )
 })
 
 describe('encodeGameCreated()', () => {
   it('returns a gameCreate encoded', () => {
     const gameCreate = {
-      homeTeam: 'Los Angeles Lakers',
-      awayTeam: 'Golden State Warriors',
-      gameId: '0x3438663264363964356330383932346236383261323737333131653135383833',
-      startTime: 1634695200,
+      homeTeam: 'St. Louis Blues',
+      awayTeam: 'New York Islanders',
+      gameId: '0x3736313636626436623464653934653131633562643230636466336662313965',
+      startTime: 1649548800,
     }
-    const encodedGameCreate = encodeGameCreate(gameCreate)
-
     const expectedEncodedGameCreate =
-      '0x0000000000000000000000000000000000000000000000000000000000000020343866326436396435633038393234623638326132373733313165313538383300000000000000000000000000000000000000000000000000000000616f7820000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000c000000000000000000000000000000000000000000000000000000000000000124c6f7320416e67656c6573204c616b65727300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000015476f6c64656e2053746174652057617272696f72730000000000000000000000'
+      '0x000000000000000000000000000000000000000000000000000000000000002037363136366264366234646539346531316335626432306364663366623139650000000000000000000000000000000000000000000000000000000062521e00000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000c0000000000000000000000000000000000000000000000000000000000000000f53742e204c6f75697320426c756573000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000124e657720596f726b2049736c616e646572730000000000000000000000000000'
+
+    const encodedGameCreate = encodeGameCreate(gameCreate)
 
     expect(encodedGameCreate).toEqual(expectedEncodedGameCreate)
   })
@@ -120,10 +171,10 @@ describe('encodeGameResolved()', () => {
       gameId: '0x3131656333313439366561303130303038353431323634313062353762366463',
       statusId: 8,
     }
-    const encodedGameResolve = encodeGameResolve(gameResolve)
-
     const expectedEncodedGameResolve =
       '0x3131656333313439366561303130303038353431323634313062353762366463000000000000000000000000000000000000000000000000000000000000007200000000000000000000000000000000000000000000000000000000000000790000000000000000000000000000000000000000000000000000000000000008'
+
+    const encodedGameResolve = encodeGameResolve(gameResolve)
 
     expect(encodedGameResolve).toEqual(expectedEncodedGameResolve)
   })
