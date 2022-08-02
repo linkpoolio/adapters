@@ -1,11 +1,12 @@
 import { AdapterRequest } from '@chainlink/types'
-import request, { SuperTest, Test } from 'supertest'
-import * as process from 'process'
-import { server as startServer } from '../../src'
-import * as nock from 'nock'
 import * as http from 'http'
-import { mockResponseSuccess } from './fixtures'
 import { AddressInfo } from 'net'
+import * as nock from 'nock'
+import * as process from 'process'
+import request, { SuperTest, Test } from 'supertest'
+
+import { server as startServer } from '../../src'
+import { mockResponseSuccess } from './fixtures'
 
 describe('execute', () => {
   const id = '1'

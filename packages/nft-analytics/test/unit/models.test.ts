@@ -1,5 +1,5 @@
-import IFloorPrice from '../../src/models/floorprice'
 import { Provider } from '../../src/api/constants'
+import IFloorPrice from '../../src/models/floorprice'
 
 describe('models', () => {
   describe('rarify transformer', () => {

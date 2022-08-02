@@ -43,6 +43,7 @@
     "source-map-support": "0.5.21"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/babel__core": "7.1.19",
     "@types/babel__preset-env": "7.9.2",
     "@types/eslint": "7.29.0",
@@ -55,12 +56,21 @@
     "typescript": "4.3.5"
   },
   "prettier": {
+    "arrowParens": "always",
+    "endOfLine": "auto",
+    "importOrder": [
+      "<THIRD_PARTY_MODULES>",
+      "^[./]"
+    ],
+    "importOrderParserPlugins": [
+      "typescript"
+    ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true,
     "semi": false,
     "singleQuote": true,
     "printWidth": 100,
-    "endOfLine": "auto",
-    "trailingComma": "all",
-    "arrowParens": "always"
+    "trailingComma": "all"
   },
   "lint-staged": {
     "*.{js,css,md,ts,json,yml,yaml}": "prettier --write"

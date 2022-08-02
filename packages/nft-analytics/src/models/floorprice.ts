@@ -1,6 +1,6 @@
+import { AdapterError } from '@chainlink/ea-bootstrap'
 import { ethers } from 'ethers'
 
-import { AdapterError } from '@chainlink/ea-bootstrap'
 import { Provider } from '../api/constants'
 import { RarifyFloorPricesGetPayload } from '../api/rarify/types'
 

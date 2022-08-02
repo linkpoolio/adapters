@@ -5,9 +5,9 @@ import process from 'process'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
+import { server as startServer } from '../../src'
 import { testEstimate } from './estimate'
 import { testFloorPrice } from './floor-price'
-import { server as startServer } from '../../src'
 
 let oldEnv: NodeJS.ProcessEnv
 

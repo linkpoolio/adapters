@@ -6,12 +6,7 @@ import {
   ExecuteWithConfig,
   InputParameters,
 } from '@chainlink/types'
-import {
-  encodeLocationResult,
-  LocationResult,
-  execute as executeLocation,
-  noLocationResult,
-} from './location'
+
 import {
   CurrentConditionsResult,
   encodeCurrentConditionsResult,
@@ -19,6 +14,12 @@ import {
   noCurrentConditionsResult,
   validateUnitsParameter,
 } from './current-conditions'
+import {
+  LocationResult,
+  encodeLocationResult,
+  execute as executeLocation,
+  noLocationResult,
+} from './location'
 
 export interface LocationCurrentConditionsResult extends LocationResult, CurrentConditionsResult {}
 export type LocationCurrentConditionsResultEncoded = [boolean, string, string]

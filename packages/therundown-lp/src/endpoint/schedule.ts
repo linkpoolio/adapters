@@ -1,22 +1,22 @@
-import { Requester, Validator, AdapterError, util } from '@chainlink/ea-bootstrap'
+import { AdapterError, Requester, Validator, util } from '@chainlink/ea-bootstrap'
 import type { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
-import { GameResolve, GameCreate, Event } from '../lib/types'
-import { supportedSportIdSchedule, Market, maxLimit, marketToStatus } from '../lib/const'
+import { join } from 'path'
+
+import { Market, marketToStatus, maxLimit, supportedSportIdSchedule } from '../lib/const'
+import { Event, GameCreate, GameResolve } from '../lib/types'
 import {
+  encodeGameCreate,
+  encodeGameResolve,
   filterByEventId,
   filterEventStatus,
   getGameCreate,
   getGameResolve,
-  encodeGameCreate,
-  encodeGameResolve,
   validateAndGetGameIds,
   validateAndGetStatusIds,
+  validateDate,
   validateMarket,
   validateSportId,
-  validateDate,
 } from '../lib/utils'
-
-import { join } from 'path'
 
 export const supportedEndpoints = ['schedule']
 

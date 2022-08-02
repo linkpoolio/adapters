@@ -110,13 +110,13 @@ echo "export const ${ENDPOINT}Input = {
 }" > integration/common.ts
 
 echo "import http from 'http'
-import process from 'process'
 import type { AddressInfo } from 'net'
+import process from 'process'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
-import { ${ENDPOINT}Tests } from './$DATA_PROVIDER/$ENDPOINT'
 import { server as startServer } from '../../src'
+import { ${ENDPOINT}Tests } from './$DATA_PROVIDER/$ENDPOINT'
 
 let oldEnv: NodeJS.ProcessEnv
 
@@ -233,8 +233,8 @@ export interface Base {
 sed -i -e "s/coins/$ENDPOINT/g" "$DATA_PROVIDER/index.ts"
 rm "$DATA_PROVIDER/index.ts-e"
 
-echo "import { I$ENDPOINT_UC } from '../base'
-import $MODEL_UC, { I$MODEL_UC } from '../../models/$MODEL'
+echo "import $MODEL_UC, { I$MODEL_UC } from '../../models/$MODEL'
+import { I$ENDPOINT_UC } from '../base'
 
 const provider = '$DATA_PROVIDER'
 

@@ -1,9 +1,9 @@
 import { assertError, assertSuccess } from '@chainlink/ea-test-helpers'
 import type { AdapterRequest } from '@chainlink/types'
 
+import { chainId } from '../../src/lib/const'
 import type { SuiteContext } from './adapter.test'
 import { mockEstimateResponseError, mockEstimateSuccessResponse } from './fixtures'
-import { chainId } from '../../src/lib/const'
 
 export function testEstimate(context: SuiteContext): void {
   const id = '1'

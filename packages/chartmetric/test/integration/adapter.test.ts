@@ -4,9 +4,9 @@ import nock from 'nock'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
+import { server as startServer } from '../../src'
 import { authTests } from './auth'
 import { statisticsTests } from './statistics'
-import { server as startServer } from '../../src'
 
 export interface SuiteContext {
   server: http.Server

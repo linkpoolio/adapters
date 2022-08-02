@@ -1,7 +1,8 @@
-import { Requester, Validator, AdapterError } from '@chainlink/ea-bootstrap'
+import { AdapterError, Requester, Validator } from '@chainlink/ea-bootstrap'
 import { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
-import { Currency } from '../lib/const'
 import { join } from 'path'
+
+import { Currency } from '../lib/const'
 import { ResponseSchema } from '../lib/types'
 import { filterPrice } from '../lib/utils'
 

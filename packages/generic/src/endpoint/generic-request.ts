@@ -1,16 +1,7 @@
-import { Logger, AdapterError, Requester, Validator } from '@chainlink/ea-bootstrap'
+import { AdapterError, Logger, Requester, Validator } from '@chainlink/ea-bootstrap'
 import type { ExecuteWithConfig, InputParameters, RequestConfig } from '@chainlink/types'
 
 import { AuthorizationType, RequestMethod } from '../lib/constants'
-import type {
-  AuthData,
-  AuthorizationApiKey,
-  AuthorizationBasicAuth,
-  AuthorizationBearerToken,
-  AuthorizationCustom,
-  Config,
-  ResponseSchema,
-} from '../lib/types'
 import {
   getAuthDataAuthorizationApiKey,
   getAuthDataAuthorizationBasicAuth,
@@ -23,6 +14,15 @@ import {
   validateInputParameterMethod,
   validateInputParameterUrl,
 } from '../lib/generic-request'
+import type {
+  AuthData,
+  AuthorizationApiKey,
+  AuthorizationBasicAuth,
+  AuthorizationBearerToken,
+  AuthorizationCustom,
+  Config,
+  ResponseSchema,
+} from '../lib/types'
 
 export const supportedEndpoints = ['generic-request']
 

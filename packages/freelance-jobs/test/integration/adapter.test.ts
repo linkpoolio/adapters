@@ -1,11 +1,11 @@
 import http from 'http'
-import process from 'process'
 import type { AddressInfo } from 'net'
+import process from 'process'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
-import { testJobs } from './lanceria/jobs'
 import { server as startServer } from '../../src'
+import { testJobs } from './lanceria/jobs'
 
 let oldEnv: NodeJS.ProcessEnv
 

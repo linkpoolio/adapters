@@ -1,7 +1,6 @@
 import { datetime, errors, uuid } from '@linkpool/shared'
 
 import { statusToStatusId } from './constants'
-
 import type { Game, GameCreate, GameResolve } from './types'
 
 export function getGameCreate(game: Game): GameCreate {

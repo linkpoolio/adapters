@@ -6,8 +6,8 @@ import {
   mockScheduleResponseError,
   mockScheduleResponseMalformedMarketCreate,
   mockScheduleResponseMalformedMarketResolve,
-  mockScheduleResponseSuccessResolve,
   mockScheduleResponseSuccessCreate,
+  mockScheduleResponseSuccessResolve,
 } from './fixtures'
 
 export function scheduleTests(context: SuiteContext): void {

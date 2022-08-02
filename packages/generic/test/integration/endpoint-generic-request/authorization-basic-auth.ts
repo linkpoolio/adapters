@@ -6,9 +6,9 @@ import nock from 'nock'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
-import { mockResponseErrorBasicAuth, mockResponseSuccessBasicAuth } from './fixtures'
 import { server as startServer } from '../../../src'
 import { RequestMethod } from '../../../src/lib/constants'
+import { mockResponseErrorBasicAuth, mockResponseSuccessBasicAuth } from './fixtures'
 
 export function authorizationBasicAuthTests(): void {
   let oldEnv: NodeJS.ProcessEnv

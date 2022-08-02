@@ -1,5 +1,5 @@
 import { AdapterError, Requester, Validator } from '@chainlink/ea-bootstrap'
-import { Config, ExecuteWithConfig, AdapterRequest } from '@chainlink/types'
+import { AdapterRequest, Config, ExecuteWithConfig } from '@chainlink/types'
 import { reducers } from '@linkpool/shared'
 
 import api from '../../api'

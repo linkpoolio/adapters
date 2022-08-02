@@ -6,10 +6,10 @@ import {
   getAuthorizationApiKey,
   getAuthorizationBasicAuth,
   getAuthorizationBearerToken,
-  parseAuthorizationCustomEnvVar,
-  getAuthorizationNoAuth,
   getAuthorizationCustom,
+  getAuthorizationNoAuth,
   getGenericConfig,
+  parseAuthorizationCustomEnvVar,
 } from '../../../src/lib/generic-config'
 import type {
   AuthorizationApiKey,

@@ -6,10 +6,10 @@ import {
   mockAuthResponseError,
   mockAuthResponseSuccess,
   mockKimpDailyResponseError,
-  mockKimpDailyResponseSuccessMalformed1,
-  mockKimpDailyResponseSuccessMalformed2,
   mockKimpDailyResponseSuccess1,
   mockKimpDailyResponseSuccess2,
+  mockKimpDailyResponseSuccessMalformed1,
+  mockKimpDailyResponseSuccessMalformed2,
 } from './fixtures'
 
 export function kimpDailyTests(context: SuiteContext): void {

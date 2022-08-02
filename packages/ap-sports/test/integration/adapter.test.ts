@@ -4,8 +4,8 @@ import nock from 'nock'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
-import { scheduleTests } from './schedule'
 import { server as startServer } from '../../src'
+import { scheduleTests } from './schedule'
 
 export interface SuiteContext {
   server: http.Server

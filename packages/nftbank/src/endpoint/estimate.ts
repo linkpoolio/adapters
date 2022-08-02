@@ -1,8 +1,8 @@
-import { AdapterError, Logger, Requester, util, Validator } from '@chainlink/ea-bootstrap'
+import { AdapterError, Logger, Requester, Validator, util } from '@chainlink/ea-bootstrap'
 import type { AdapterRequest, Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
 import { join } from 'path'
 
-import { chainId, PricingAsset } from '../lib/const'
+import { PricingAsset, chainId } from '../lib/const'
 import type { EstimateResponseSchema } from '../lib/types'
 import { getEstimateFor } from '../lib/utils'
 

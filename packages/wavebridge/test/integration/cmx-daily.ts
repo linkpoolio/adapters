@@ -6,10 +6,10 @@ import {
   mockAuthResponseError,
   mockAuthResponseSuccess,
   mockCmxDailyResponseError,
-  mockCmxDailyResponseSuccessMalformed1,
-  mockCmxDailyResponseSuccessMalformed2,
   mockCmxDailyResponseSuccess1,
   mockCmxDailyResponseSuccess2,
+  mockCmxDailyResponseSuccessMalformed1,
+  mockCmxDailyResponseSuccessMalformed2,
 } from './fixtures'
 
 export function cmxDailyTests(context: SuiteContext): void {

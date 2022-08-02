@@ -4,8 +4,8 @@ import type { AdapterRequest } from '@chainlink/types'
 import type { SuiteContext } from './adapter.test'
 import {
   mockStatisticsResponseError,
-  mockStatisticsResponseSuccessMalformed,
   mockStatisticsResponseSuccess,
+  mockStatisticsResponseSuccessMalformed,
 } from './fixtures'
 
 export function statisticsTests(context: SuiteContext): void {

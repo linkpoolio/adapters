@@ -2,15 +2,15 @@ import { Requester } from '@chainlink/ea-bootstrap'
 import { assertError } from '@chainlink/ea-test-helpers'
 import { AdapterRequest } from '@chainlink/types'
 
-import { eventNBA1, eventMMA1 } from '../unit/testCases'
 import { makeExecute } from '../../src/adapter'
+import { SportId } from '../../src/lib/const'
 import {
-  getGameCreate,
-  getGameResolve,
   encodeGameCreate,
   encodeGameResolve,
+  getGameCreate,
+  getGameResolve,
 } from '../../src/lib/utils'
-import { SportId } from '../../src/lib/const'
+import { eventMMA1, eventNBA1 } from '../unit/testCases'
 
 describe('validation error', () => {
   const jobID = '1'
