@@ -76,7 +76,7 @@ export const getGameResolve = (event: Event, sportId: SportId): GameResolve => {
     homeScore = event.score?.winner_home
     awayScore = event.score?.winner_away
   } else {
-    homeScore = event.score?.score_away
+    homeScore = event.score?.score_home
     awayScore = event.score?.score_away
   }
   const gameResolve = {
