@@ -10,7 +10,7 @@ import {
   getGameCreate,
   getGameResolve,
 } from '../../src/lib/utils'
-import { eventMMA1, eventNBA1 } from '../unit/testCases'
+import { eventMMA1, eventNBA1, eventNBA2 } from '../unit/testCases'
 
 describe('validation error', () => {
   const jobID = '1'
@@ -117,6 +117,19 @@ describe('getGameResolve()', () => {
   const getGameCreateTestCases = [
     {
       name: 'NBA',
+      testData: {
+        event: eventNBA2,
+        sportId: SportId.NBA,
+        expectedGameResolve: {
+          homeScore: 122,
+          awayScore: 131,
+          gameId: '0x6364396535363332356334646438346235396635636332313365373763396638',
+          statusId: 8,
+        },
+      },
+    },
+    {
+      name: 'NBA (without winner, scheduled)',
       testData: {
         event: eventNBA1,
         sportId: SportId.NBA,
