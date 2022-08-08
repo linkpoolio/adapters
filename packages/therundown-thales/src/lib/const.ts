@@ -59,6 +59,17 @@ export const supportedSportIdOdds = [
   SportId.UEFACHAMP,
 ]
 
+export const sportIdsRequireMascot = [
+  SportId.NCAA_Football,
+  SportId.NFL,
+  SportId.MLB,
+  SportId.NBA,
+  SportId.NCAA_Basketball,
+  SportId.NHL,
+  SportId.WNBA,
+  SportId.MLS,
+]
+
 export const statusIdToStatus: Map<number, string> = new Map([
   [1, 'STATUS_CANCELED'],
   [2, 'STATUS_DELAYED'],

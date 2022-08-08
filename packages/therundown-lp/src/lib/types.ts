@@ -20,6 +20,11 @@ export interface Event {
   event_date: string
 }
 
+export interface HomeAwayName {
+  homeName: string
+  awayName: string
+}
+
 export interface GameCreate {
   homeTeam: string
   awayTeam: string

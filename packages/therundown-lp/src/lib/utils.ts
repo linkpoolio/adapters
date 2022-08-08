@@ -1,7 +1,13 @@
 import { utils } from 'ethers'
 
-import { Market, SportId, statusIdToStatus, statusToStatusId } from '../lib/const'
-import { Event, GameCreate, GameResolve, Team } from '../lib/types'
+import {
+  Market,
+  SportId,
+  sportIdsRequireMascot,
+  statusIdToStatus,
+  statusToStatusId,
+} from '../lib/const'
+import { Event, GameCreate, GameResolve, HomeAwayName, Team } from '../lib/types'
 
 export const throwError = (message: string): never => {
   throw new Error(message)
@@ -31,7 +37,7 @@ export const convertEventId = (eventId: string): string => {
   throw new Error(`Unexpected 'event_id': ${eventId}. Expected format is 32 bytes long.`)
 }
 
-export const getGameCreate = (event: Event, sportId: SportId): GameCreate => {
+export const getHomeAwayName = (event: Event, sportId: SportId): HomeAwayName => {
   const teams =
     event.teams_normalized ??
     throwError(`Missing 'teams_normalized' in event: ${JSON.stringify(event)}`)
@@ -42,18 +48,24 @@ export const getGameCreate = (event: Event, sportId: SportId): GameCreate => {
     (teams.find((team) => team.is_away) as Team) ??
     throwError(`Missing away team in event: ${JSON.stringify(event)}`)
 
-  let homeTeamName: string
-  let awayTeamName: string
-  if ([SportId.NBA].includes(sportId)) {
-    homeTeamName = `${homeTeam.name} ${homeTeam.mascot}`
-    awayTeamName = `${awayTeam.name} ${awayTeam.mascot}`
+  let homeName: string
+  let awayName: string
+  if (sportIdsRequireMascot.includes(sportId)) {
+    homeName = `${homeTeam.name} ${homeTeam.mascot}`
+    awayName = `${awayTeam.name} ${awayTeam.mascot}`
   } else {
-    homeTeamName = homeTeam.name
-    awayTeamName = awayTeam.name
+    homeName = homeTeam.name
+    awayName = awayTeam.name
   }
+  return { homeName, awayName }
+}
+
+export const getGameCreate = (event: Event, sportId: SportId): GameCreate => {
+  const homeAwayName = getHomeAwayName(event, sportId)
+
   const gameCreate = {
-    homeTeam: homeTeamName,
-    awayTeam: awayTeamName,
+    homeTeam: homeAwayName.homeName,
+    awayTeam: homeAwayName.awayName,
     startTime: Math.floor(new Date(event.event_date).getTime() / 1000),
     gameId: convertEventId(event.event_id),
   }
