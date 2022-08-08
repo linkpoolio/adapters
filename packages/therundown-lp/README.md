@@ -1,6 +1,6 @@
 # Chainlink External Adapter for TheRundown
 
-![2.0.2](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/therundown-lp/package.json)
+![2.0.3](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/therundown-lp/package.json)
 
 Base URL https://therundown-therundown-v1.p.rapidapi.com/
 
