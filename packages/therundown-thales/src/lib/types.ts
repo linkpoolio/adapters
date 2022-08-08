@@ -31,6 +31,11 @@ export interface Event {
   lines: Line[]
 }
 
+export interface HomeAwayName {
+  homeName: string
+  awayName: string
+}
+
 export interface GameCreate {
   homeTeam: string
   awayTeam: string

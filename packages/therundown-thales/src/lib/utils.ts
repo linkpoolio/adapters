@@ -6,10 +6,19 @@ import {
   Market,
   NO_EVENT_ODDS,
   SportId,
+  sportIdsRequireMascot,
   statusIdToStatus,
   statusToStatusId,
 } from '../lib/const'
-import type { Event, GameCreate, GameOdds, GameResolve, Odds, Team } from '../lib/types'
+import type {
+  Event,
+  GameCreate,
+  GameOdds,
+  GameResolve,
+  HomeAwayName,
+  Odds,
+  Team,
+} from '../lib/types'
 
 export const throwError = (message: string): never => {
   throw new Error(message)
@@ -58,12 +67,10 @@ export const getOdds = (event: Event): Odds => {
   return { homeOdds, awayOdds, drawOdds }
 }
 
-export const getGameCreate = (event: Event, sportId: SportId): GameCreate => {
+export const getHomeAwayName = (event: Event, sportId: SportId): HomeAwayName => {
   const teams =
     event.teams_normalized ??
     throwError(`Missing 'teams_normalized' in event: ${JSON.stringify(event)}`)
-
-  const odds = getOdds(event)
   const homeTeam =
     (teams.find((team) => team.is_home) as Team) ??
     throwError(`Missing home team in event: ${JSON.stringify(event)}`)
@@ -71,18 +78,25 @@ export const getGameCreate = (event: Event, sportId: SportId): GameCreate => {
     (teams.find((team) => team.is_away) as Team) ??
     throwError(`Missing away team in event: ${JSON.stringify(event)}`)
 
-  let homeTeamName: string
-  let awayTeamName: string
-  if ([SportId.NBA].includes(sportId)) {
-    homeTeamName = `${homeTeam.name} ${homeTeam.mascot}`
-    awayTeamName = `${awayTeam.name} ${awayTeam.mascot}`
+  let homeName: string
+  let awayName: string
+  if (sportIdsRequireMascot.includes(sportId)) {
+    homeName = `${homeTeam.name} ${homeTeam.mascot}`
+    awayName = `${awayTeam.name} ${awayTeam.mascot}`
   } else {
-    homeTeamName = homeTeam.name
-    awayTeamName = awayTeam.name
+    homeName = homeTeam.name
+    awayName = awayTeam.name
   }
+  return { homeName, awayName }
+}
+
+export const getGameCreate = (event: Event, sportId: SportId): GameCreate => {
+  const homeAwayName = getHomeAwayName(event, sportId)
+  const odds = getOdds(event)
+
   const gameCreate = {
-    homeTeam: homeTeamName,
-    awayTeam: awayTeamName,
+    homeTeam: homeAwayName.homeName,
+    awayTeam: homeAwayName.awayName,
     startTime: Math.floor(new Date(event.event_date).getTime() / 1000),
     homeOdds: odds.homeOdds,
     awayOdds: odds.awayOdds,
