@@ -1,7 +1,7 @@
 export enum Endpoint {
-    address = 'address',
-  }
-  
-  export enum RequestMethod {
-    GET = 'get',
-  }
+  address = 'address',
+}
+
+export enum RequestMethod {
+  GET = 'get',
+}

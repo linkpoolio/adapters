@@ -1,6 +1,6 @@
 import { InputParameters } from '@chainlink/types'
-import { RequestMethod } from '../constants'
 
+import { RequestMethod } from '../constants'
 
 export const sharedInputParameters: InputParameters = {
   method: {

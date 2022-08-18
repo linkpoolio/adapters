@@ -6,9 +6,9 @@ import api from '../../api'
 import { RequestMethod } from '../constants'
 import { getSingleInputParameters, inputParameters } from './input'
 
-const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _, config) => {
+const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest) => {
   const validator = new Validator(request, inputParameters)
-  const client = api(config)
+  const client = api()
 
   const jobRunID = validator.validated.id
   const method = validator.validated.data.method
