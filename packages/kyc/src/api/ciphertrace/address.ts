@@ -3,9 +3,8 @@ import { IAddresses } from '../base'
 import { Provider } from '../constants'
 
 export default (fetch): IAddresses => ({
-  get: async (): Promise<IAddress> => {
+  get: async (): Promise<IAddress[]> => {
     const response = await fetch()
-
-    return Address.Single(response.data, Provider.CIPHERTRACE)
+    return Address.List(response, Provider.CIPHERTRACE)
   },
 })

@@ -1,9 +1,9 @@
 import { IAddress } from '../models/address'
 
 export interface IAddresses {
-  get: () => Promise<IAddress>
+  get: () => Promise<IAddress[]>
 }
 
 export interface Base {
-  addresses: IAddresses
+  address: IAddresses
 }

@@ -18,20 +18,20 @@ const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest) =>
   try {
     switch (method) {
       case RequestMethod.GET: {
-        result = (await client.addresses.get()) as Record<string, any>
+        result = (await client.address.get()) as Record<string, any>
         break
       }
       default:
         throw new AdapterError({
           jobRunID,
-          message: `Unsupported 'method' requesting the 'addresses' endpoint: ${method}`,
+          message: `Unsupported 'method' requesting the 'address' endpoint: ${method}`,
           statusCode: 200,
         })
     }
   } catch (error) {
     ;(
       error as Error
-    ).message = `Unexpected error requesting the 'addresses' endpoint. Reason: ${error}`
+    ).message = `Unexpected error requesting the 'address' endpoint. Reason: ${error}`
     throw error
   }
 
@@ -44,14 +44,16 @@ const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest) =>
             getSingleValidator.validated.data.lookupAddress.toLowerCase() as string
           ).toLowerCase()
           const network = (getSingleValidator.validated.data.network as string).toUpperCase()
-          const filterByAddress = selectors.filterKeyValueInArray(result, 'Address', lookupAddress)
-          result = selectors.filterKeyValueInArray(filterByAddress, 'Blockchain', network)
+          const filterByAddress = selectors.filterKeyValueInArray(result, 'address', lookupAddress)
+          console.log(filterByAddress)
+          result = selectors.filterKeyValueInArray(filterByAddress, 'network', network)[0]
+
           break
         }
         default:
           throw new AdapterError({
             jobRunID,
-            message: `Unsupported 'method' reducing the 'addresses' endpoint result: ${method}`,
+            message: `Unsupported 'method' reducing the 'address' endpoint result: ${method}`,
             statusCode: 200,
           })
       }
@@ -59,7 +61,7 @@ const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest) =>
       throw new AdapterError({
         cause: error,
         jobRunID,
-        message: `Unexpected error reducing the 'addresses' endpoint result. Reason: ${error}. Result: ${JSON.stringify(
+        message: `Unexpected error reducing the 'address' endpoint result. Reason: ${error}. Result: ${JSON.stringify(
           result,
         )}`,
         statusCode: 200,

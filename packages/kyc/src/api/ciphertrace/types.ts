@@ -1,9 +1,7 @@
 export interface CiphertraceAddressGetPayload {
-  jobId: number
-  Network: string
+  Blockchain: string
   Address: string
 }
-// exort interface Payload
 
 export interface InputParameters {
   network: number
