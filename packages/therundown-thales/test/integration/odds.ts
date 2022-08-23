@@ -20,6 +20,9 @@ export function oddsTests(context: SuiteContext): void {
             endpoint: 'odds',
             sportId: 4,
             date: 1635529231,
+            sportIdToBookmakers: {
+              '4': [11, 3],
+            },
           },
         }
         mockScheduleResponseError()
@@ -44,6 +47,9 @@ export function oddsTests(context: SuiteContext): void {
             endpoint: 'odds',
             sportId: 4,
             date: 1635529231,
+            sportIdToBookmakers: {
+              '4': [11, 3],
+            },
           },
         }
         mockScheduleResponseMalformedMarketCreate()
@@ -71,6 +77,9 @@ export function oddsTests(context: SuiteContext): void {
             endpoint: 'odds',
             sportId: 4,
             date: 1635529231,
+            sportIdToBookmakers: {
+              '4': [11, 3],
+            },
           },
         }
         mockScheduleResponseSuccessMarketCreate()

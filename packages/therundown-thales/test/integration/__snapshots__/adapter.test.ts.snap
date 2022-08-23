@@ -3,7 +3,7 @@
 exports[`execute odds endpoint error calls when successfully requesting Therundown API should throw and exception if the response is malformed 1`] = `
 Object {
   "error": Object {
-    "feedID": "{\\"data\\":{\\"endpoint\\":\\"odds\\",\\"sportId\\":4,\\"date\\":1635529231}}",
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"odds\\",\\"sportId\\":4,\\"date\\":1635529231,\\"sportIdToBookmakers\\":{\\"4\\":[11,3]}}}",
     "message": "The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received type number (777)",
     "name": "AdapterError",
     "url": "https:/therundown-therundown-v1.p.rapidapi.com/sports/4/events/2021-10-29?include=scores&limit=500",
@@ -17,11 +17,15 @@ Object {
 exports[`execute odds endpoint success calls when successfully requesting Therundown API should return the odds 1`] = `
 Object {
   "data": Object {
-    "result": Array [],
+    "result": Array [
+      "0x36386530393232306339666237646239373035353530666165386138383332320000000000000000000000000000000000000000000000000000000000015ae00000000000000000000000000000000000000000000000000000000000012f840000000000000000000000000000000000000000000000000000000000000000",
+    ],
   },
   "jobRunID": "1",
   "providerStatusCode": 200,
-  "result": Array [],
+  "result": Array [
+    "0x36386530393232306339666237646239373035353530666165386138383332320000000000000000000000000000000000000000000000000000000000015ae00000000000000000000000000000000000000000000000000000000000012f840000000000000000000000000000000000000000000000000000000000000000",
+  ],
   "statusCode": 200,
 }
 `;
@@ -29,7 +33,7 @@ Object {
 exports[`execute shcedule endpoint error calls when successfully requesting Therundown API should throw an exception if a game attribute is malformed while creating market 1`] = `
 Object {
   "error": Object {
-    "feedID": "{\\"data\\":{\\"endpoint\\":\\"schedule\\",\\"sportId\\":4,\\"date\\":1635529231,\\"market\\":\\"create\\"}}",
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"schedule\\",\\"sportId\\":4,\\"date\\":1635529231,\\"market\\":\\"create\\",\\"sportIdToBookmakers\\":{\\"4\\":[3,11]}}}",
     "message": "Missing 'teams_normalized' in event: {\\"event_id\\":777,\\"event_uuid\\":\\"11ec-384b-28cf0000-823d-cd821c1e16bb\\",\\"score\\":{\\"event_status\\":\\"STATUS_SCHEDULED\\",\\"score_away\\":23,\\"score_home\\":91,\\"winner_away\\":1,\\"winner_home\\":0},\\"teams\\":[{\\"team_id\\":152,\\"team_normalized_id\\":20,\\"is_away\\":true,\\"is_home\\":false},{\\"team_id\\":188,\\"team_normalized_id\\":27,\\"name\\":\\"Houston Rockets\\",\\"is_away\\":false,\\"is_home\\":true}]}",
     "name": "AdapterError",
     "url": "https:/therundown-therundown-v1.p.rapidapi.com/sports/4/events/2021-10-29?include=scores&limit=500",
@@ -43,8 +47,8 @@ Object {
 exports[`execute shcedule endpoint error calls when successfully requesting Therundown API should throw an exception if a game attribute is malformed while resolving market 1`] = `
 Object {
   "error": Object {
-    "feedID": "{\\"data\\":{\\"endpoint\\":\\"schedule\\",\\"sportId\\":4,\\"date\\":1635529231,\\"market\\":\\"resolve\\"}}",
-    "message": "'awayScore' is null or undefined: {\\"homeScore\\":91,\\"awayScore\\":null,\\"gameId\\":\\"0x3432656630396566643762313465663961393664363831363738356236316265\\",\\"statusId\\":8}. Event: {\\"event_id\\":\\"42ef09efd7b14ef9a96d6816785b61be\\",\\"event_uuid\\":\\"11ec-384b-28cf0000-823d-cd821c1e16bb\\",\\"score\\":{\\"event_status\\":\\"STATUS_FINAL\\",\\"score_away\\":null,\\"score_home\\":91,\\"winner_away\\":1,\\"winner_home\\":0},\\"teams\\":[{\\"team_id\\":152,\\"team_normalized_id\\":20,\\"is_away\\":true,\\"is_home\\":false},{\\"team_id\\":188,\\"team_normalized_id\\":27,\\"name\\":\\"Houston Rockets\\",\\"is_away\\":false,\\"is_home\\":true}]}",
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"schedule\\",\\"sportId\\":4,\\"date\\":1635529231,\\"market\\":\\"resolve\\",\\"sportIdToBookmakers\\":{\\"4\\":[3,11]}}}",
+    "message": "'awayScore' is null or undefined: {\\"homeScore\\":91,\\"awayScore\\":null,\\"gameId\\":\\"0x3432656630396566643762313465663961393664363831363738356236316265\\",\\"statusId\\":8,\\"lastUpdated\\":null}. Event: {\\"event_id\\":\\"42ef09efd7b14ef9a96d6816785b61be\\",\\"event_uuid\\":\\"11ec-384b-28cf0000-823d-cd821c1e16bb\\",\\"score\\":{\\"event_status\\":\\"STATUS_FINAL\\",\\"score_away\\":null,\\"score_home\\":91,\\"winner_away\\":1,\\"winner_home\\":0},\\"teams\\":[{\\"team_id\\":152,\\"team_normalized_id\\":20,\\"is_away\\":true,\\"is_home\\":false},{\\"team_id\\":188,\\"team_normalized_id\\":27,\\"name\\":\\"Houston Rockets\\",\\"is_away\\":false,\\"is_home\\":true}]}",
     "name": "AdapterError",
     "url": "https:/therundown-therundown-v1.p.rapidapi.com/sports/4/events/2021-10-29?include=scores&limit=500",
   },
@@ -83,11 +87,15 @@ Object {
 exports[`execute shcedule endpoint success calls when successfully requesting Therundown API should return correct endpoint result (case create market) 1`] = `
 Object {
   "data": Object {
-    "result": Array [],
+    "result": Array [
+      "0x0000000000000000000000000000000000000000000000000000000000000020363865303932323063396662376462393730353535306661653861383833323200000000000000000000000000000000000000000000000000000000624e2980ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff2734000000000000000000000000000000000000000000000000000000000000b220000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000120000000000000000000000000000000000000000000000000000000000000000d41746c616e7461204861776b7300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001257617368696e67746f6e2057697a617264730000000000000000000000000000",
+    ],
   },
   "jobRunID": "1",
   "providerStatusCode": 200,
-  "result": Array [],
+  "result": Array [
+    "0x0000000000000000000000000000000000000000000000000000000000000020363865303932323063396662376462393730353535306661653861383833323200000000000000000000000000000000000000000000000000000000624e2980ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff2734000000000000000000000000000000000000000000000000000000000000b220000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000120000000000000000000000000000000000000000000000000000000000000000d41746c616e7461204861776b7300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001257617368696e67746f6e2057697a617264730000000000000000000000000000",
+  ],
   "statusCode": 200,
 }
 `;
@@ -96,13 +104,13 @@ exports[`execute shcedule endpoint success calls when successfully requesting Th
 Object {
   "data": Object {
     "result": Array [
-      "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a0000000000000000000000000000000000000000000000000000000000000008",
+      "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a00000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000062db3e25",
     ],
   },
   "jobRunID": "1",
   "providerStatusCode": 200,
   "result": Array [
-    "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a0000000000000000000000000000000000000000000000000000000000000008",
+    "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a00000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000062db3e25",
   ],
   "statusCode": 200,
 }

@@ -16,6 +16,7 @@ import {
   validateDate,
   validateMarket,
   validateSportId,
+  validateSportIdToBookmakers,
 } from '../lib/utils'
 
 export const supportedEndpoints = ['schedule']
@@ -47,6 +48,10 @@ export const inputParameters: InputParameters = {
       'The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]`',
     required: false,
   },
+  sportIdToBookmakers: {
+    description: 'The priority of bookmakers for each sport.`',
+    required: true,
+  },
 }
 
 export const execute: ExecuteWithConfig<Config> = async (request, _, config) => {
@@ -58,16 +63,20 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   const market = validator.validated.data.market
   const gameIdsRaw = validator.validated.data.gameIds
   const statusIdsRaw = validator.validated.data.statusIds
+  const sportIdToBookmakers = validator.validated.data.sportIdToBookmakers
 
   let gameIds: string[] = []
   let statusIds: string[] = []
   let date: string
+  let bookmakers: number[]
+
   try {
     validateMarket(market as Market)
     validateSportId(sportId)
     date = validateDate(dateRaw)
     gameIds = validateAndGetGameIds(gameIdsRaw)
     statusIds = validateAndGetStatusIds(statusIdsRaw)
+    bookmakers = validateSportIdToBookmakers(sportIdToBookmakers, sportId)
   } catch (error) {
     const message = (error as Error).message
     throw new AdapterError({
@@ -120,7 +129,9 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     let gameCreateList: GameCreate[]
     let encodedGameCreateList: string[]
     try {
-      gameCreateList = filteredEvents.map((event: Event) => getGameCreate(event, sportId))
+      gameCreateList = filteredEvents.map((event: Event) =>
+        getGameCreate(event, sportId, bookmakers),
+      )
       encodedGameCreateList = gameCreateList.map((gameCreate: GameCreate) =>
         encodeGameCreate(gameCreate),
       )

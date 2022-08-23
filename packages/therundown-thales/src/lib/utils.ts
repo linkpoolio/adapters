@@ -1,4 +1,5 @@
 import { Logger } from '@chainlink/ea-bootstrap'
+import { datetime } from '@linkpool/shared'
 import { utils } from 'ethers'
 
 import {
@@ -6,6 +7,7 @@ import {
   Market,
   NO_EVENT_ODDS,
   SportId,
+  noDrawOddsSportIds,
   sportIdsRequireMascot,
   statusIdToStatus,
   statusToStatusId,
@@ -17,6 +19,7 @@ import type {
   GameResolve,
   HomeAwayName,
   Odds,
+  SportIdToBookmakers,
   Team,
 } from '../lib/types'
 
@@ -48,22 +51,44 @@ export const convertEventId = (eventId: string): string => {
   throw new Error(`Unexpected 'event_id': ${eventId}. Expected format is 32 bytes long.`)
 }
 
-export const getOdds = (event: Event): Odds => {
+export const getOdds = (event: Event, sportId: number, bookmakers: number[]): Odds => {
   let homeOdds = 0
   let awayOdds = 0
   let drawOdds = 0
   const lines = event.lines
-  if (!lines || !lines[3]?.moneyline) {
-    Logger.warn({ event }, 'No lines found in event. Defaulting odds to 0.')
-    return { homeOdds, awayOdds, drawOdds }
+  for (const [index, bookmakerId] of bookmakers.entries()) {
+    const fallbackMsg =
+      index === bookmakers.length - 1
+        ? 'No bookmakers to fall back, returning default odds'
+        : `Falling back to bookmaker with ID: ${bookmakers[index + 1]}`
+    if (!lines || !lines[bookmakerId]?.moneyline) {
+      Logger.warn(
+        { event, sportId, bookmakers },
+        `No lines found in event for bookmaker: ${bookmakerId}. ${fallbackMsg}`,
+      )
+      continue
+    }
+    const rawOdds = event.lines[bookmakerId].moneyline
+    const isNoDrawOddsSport = noDrawOddsSportIds.has(sportId)
+    homeOdds =
+      rawOdds.moneyline_home !== NO_EVENT_ODDS ? rawOdds.moneyline_home * EVENT_ODDS_EXPONENT : 0
+    awayOdds =
+      rawOdds.moneyline_away !== NO_EVENT_ODDS ? rawOdds.moneyline_away * EVENT_ODDS_EXPONENT : 0
+    drawOdds =
+      rawOdds.moneyline_draw !== NO_EVENT_ODDS && !isNoDrawOddsSport
+        ? rawOdds.moneyline_draw * EVENT_ODDS_EXPONENT
+        : 0
+
+    if (isNoDrawOddsSport) {
+      if (homeOdds && awayOdds) break
+    } else {
+      if (homeOdds && drawOdds && awayOdds) break
+    }
+    Logger.warn(
+      { event, sportId, bookmakers, isNoDrawOddsSport },
+      `No odds found in bookmaker with ID: ${bookmakerId}. ${fallbackMsg}`,
+    )
   }
-  const rawOdds = event.lines[3]?.moneyline
-  homeOdds =
-    rawOdds.moneyline_home !== NO_EVENT_ODDS ? rawOdds.moneyline_home * EVENT_ODDS_EXPONENT : 0
-  awayOdds =
-    rawOdds.moneyline_away !== NO_EVENT_ODDS ? rawOdds.moneyline_away * EVENT_ODDS_EXPONENT : 0
-  drawOdds =
-    rawOdds.moneyline_draw !== NO_EVENT_ODDS ? rawOdds.moneyline_draw * EVENT_ODDS_EXPONENT : 0
   return { homeOdds, awayOdds, drawOdds }
 }
 
@@ -90,9 +115,9 @@ export const getHomeAwayName = (event: Event, sportId: SportId): HomeAwayName =>
   return { homeName, awayName }
 }
 
-export const getGameCreate = (event: Event, sportId: SportId): GameCreate => {
+export const getGameCreate = (event: Event, sportId: SportId, bookmakers: number[]): GameCreate => {
   const homeAwayName = getHomeAwayName(event, sportId)
-  const odds = getOdds(event)
+  const odds = getOdds(event, sportId, bookmakers)
 
   const gameCreate = {
     homeTeam: homeAwayName.homeName,
@@ -130,6 +155,7 @@ export const getGameResolve = (event: Event, sportId: SportId): GameResolve => {
     awayScore,
     gameId: convertEventId(event.event_id),
     statusId: statusToStatusId.get(event.score?.event_status) as number,
+    lastUpdated: datetime.iso8061ToTimestamp(event.score?.updated_at),
   }
   Object.entries(gameResolve).forEach(([key, value]) => {
     value ??
@@ -143,8 +169,8 @@ export const getGameResolve = (event: Event, sportId: SportId): GameResolve => {
   return gameResolve
 }
 
-export const getGameOdds = (event: Event): GameOdds => {
-  const odds = getOdds(event)
+export const getGameOdds = (event: Event, sportId: SportId, bookmakers: number[]): GameOdds => {
+  const odds = getOdds(event, sportId, bookmakers)
 
   const gameOdds = {
     homeOdds: odds.homeOdds,
@@ -185,7 +211,9 @@ export const encodeGameResolve = (gameResolve: GameResolve): string => {
   let encodedGameResolve: string
   try {
     encodedGameResolve = utils.defaultAbiCoder.encode(
-      ['tuple(bytes32 gameId, uint8 homeScore, uint8 awayScore, uint8 statusId)'],
+      [
+        'tuple(bytes32 gameId, uint8 homeScore, uint8 awayScore, uint8 statusId, uint40 lastUpdated)',
+      ],
       [gameResolve],
     )
   } catch (error) {
@@ -269,4 +297,46 @@ export const validateDate = (dateRaw: number): string => {
   }
   const date = new Date(dateRaw * 1000).toISOString().split('T')[0]
   return date
+}
+
+export const validateSportIdToBookmakers = (
+  sportIdToBookmakers: SportIdToBookmakers,
+  sportId: SportId,
+): number[] => {
+  if (typeof sportIdToBookmakers !== 'object' || Object.keys(sportIdToBookmakers).length === 0) {
+    throw new Error(
+      `Invalid 'sportIdToBookmakers': ${JSON.stringify(
+        sportIdToBookmakers,
+      )}. Expected formats is an object with string sport ID keys and bookmaker ID array values.`,
+    )
+  }
+  if (!Object.keys(sportIdToBookmakers).includes(sportId.toString() as string)) {
+    throw new Error(
+      `The 'sportId': ${sportId} does not match with any key in 'sportIdToBookmakers': ${JSON.stringify(
+        sportIdToBookmakers,
+      )}`,
+    )
+  }
+  for (const [sportId, bookmakerIds] of Object.entries(sportIdToBookmakers)) {
+    if (!Object.values(SportId).includes(Number(sportId) as SportId)) {
+      throw new Error(
+        `Unsupported 'sportId': ${sportId}. 'sportIdToBookmakers': ${JSON.stringify(
+          sportIdToBookmakers,
+        )}`,
+      )
+    }
+    if (
+      !Array.isArray(bookmakerIds) ||
+      bookmakerIds.some((bookmakerId) => isNaN(bookmakerId) || bookmakerId === null)
+    ) {
+      throw new Error(
+        `Invalid 'bookmakerIds' by 'sportId' ${sportId}: ${JSON.stringify(
+          bookmakerIds,
+        )}. 'sportIdToBookmakers': ${JSON.stringify(
+          sportIdToBookmakers,
+        )}. Expected formats is an Array of bookmaker IDs (integers)`,
+      )
+    }
+  }
+  return sportIdToBookmakers[sportId]
 }

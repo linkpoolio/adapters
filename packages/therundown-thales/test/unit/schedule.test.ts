@@ -12,38 +12,117 @@ describe('validation error', () => {
   const requests = [
     {
       name: 'date not supplied',
-      testData: { id: jobID, data: { sportId: 4, market: 'create', endpoint: 'schedule' } },
+      testData: {
+        id: jobID,
+        data: {
+          sportId: 4,
+          market: 'create',
+          endpoint: 'schedule',
+          sportIdToBookmakers: {
+            '4': [11, 3],
+          },
+        },
+      },
     },
     {
       name: 'date invalid',
       testData: {
         id: jobID,
-        data: { sportId: 4, date: 'linkpool', market: 'create', endpoint: 'schedule' },
+        data: {
+          sportId: 4,
+          date: 'linkpool',
+          market: 'create',
+          endpoint: 'schedule',
+          sportIdToBookmakers: {
+            '4': [11, 3],
+          },
+        },
       },
     },
     {
       name: 'sportId not supplied',
       testData: {
         id: jobID,
-        data: { market: 'create', date: 1638297631, endpoint: 'schedule' },
+        data: {
+          market: 'create',
+          date: 1638297631,
+          endpoint: 'schedule',
+          sportIdToBookmakers: {
+            '4': [11, 3],
+          },
+        },
       },
     },
     {
       name: 'sportId invalid',
       testData: {
         id: jobID,
-        data: { sportId: 'linkpool', date: 1638297631, market: 'create', endpoint: 'schedule' },
+        data: {
+          sportId: 'linkpool',
+          date: 1638297631,
+          market: 'create',
+          endpoint: 'schedule',
+          sportIdToBookmakers: {
+            '4': [11, 3],
+          },
+        },
       },
     },
     {
       name: 'market not supplied',
-      testData: { id: jobID, data: { sportId: 4, date: 1638297631, endpoint: 'schedule' } },
+      testData: {
+        id: jobID,
+        data: {
+          sportId: 4,
+          date: 1638297631,
+          endpoint: 'schedule',
+          sportIdToBookmakers: {
+            '4': [11, 3],
+          },
+        },
+      },
     },
     {
       name: 'market invalid',
       testData: {
         id: jobID,
-        data: { sportId: 4, date: 1638297631, market: 'linkpool', endpoint: 'schedule' },
+        data: {
+          sportId: 4,
+          date: 1638297631,
+          market: 'linkpool',
+          endpoint: 'schedule',
+          sportIdToBookmakers: {
+            '4': [11, 3],
+          },
+        },
+      },
+    },
+
+    {
+      name: 'sportIdToBookmakers not supplied',
+      testData: {
+        id: jobID,
+        data: {
+          sportId: 4,
+          date: 1638297631,
+          market: 'create',
+          endpoint: 'schedule',
+        },
+      },
+    },
+    {
+      name: 'sportIdToBookmakers invalid',
+      testData: {
+        id: jobID,
+        data: {
+          sportId: 4,
+          date: 1638297631,
+          market: 'create',
+          endpoint: 'schedule',
+          sportIdToBookmakers: {
+            '4': 'linkpool',
+          },
+        },
       },
     },
   ]

@@ -29,13 +29,14 @@ Every EA supports base input parameters from [this list](../../core/bootstrap#ba
 
 ### Input Params
 
-| Required? |   Name    | Aliases |                                                  Description                                                  |  Type  |                                     Options                                      | Default | Depends On | Not Valid With |
-| :-------: | :-------: | :-----: | :-----------------------------------------------------------------------------------------------------------: | :----: | :------------------------------------------------------------------------------: | :-----: | :--------: | :------------: |
-|    ✅     |  sportId  |         |                                         The ID of the sport to query                                          | number | `1`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `2`, `3`, `4`, `5`, `6`, `7`, `8` |         |            |                |
-|    ✅     |   date    |         |                          The date of the games to query as a Unix timestamp seconds.                          | number |                                                                                  |         |            |                |
-|    ✅     |  market   |         |                                       Chose to create or resolve market                                       | string |                               `create`, `resolve`                                |         |            |                |
-|           | statusIds |         |                         The statuses of the games to query. Examples: `["1","2","3"]`                         |        |                                                                                  |         |            |                |
-|           |  gameIds  |         | The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]` |        |                                                                                  |         |            |                |
+| Required? |        Name         | Aliases |                                                  Description                                                  |  Type  |                                     Options                                      | Default | Depends On | Not Valid With |
+| :-------: | :-----------------: | :-----: | :-----------------------------------------------------------------------------------------------------------: | :----: | :------------------------------------------------------------------------------: | :-----: | :--------: | :------------: |
+|    ✅     |       sportId       |         |                                         The ID of the sport to query                                          | number | `1`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `2`, `3`, `4`, `5`, `6`, `7`, `8` |         |            |                |
+|    ✅     |        date         |         |                          The date of the games to query as a Unix timestamp seconds.                          | number |                                                                                  |         |            |                |
+|    ✅     |       market        |         |                                       Chose to create or resolve market                                       | string |                               `create`, `resolve`                                |         |            |                |
+|           |      statusIds      |         |                         The statuses of the games to query. Examples: `["1","2","3"]`                         |        |                                                                                  |         |            |                |
+|           |       gameIds       |         | The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]` |        |                                                                                  |         |            |                |
+|    ✅     | sportIdToBookmakers |         |                                  The priority of bookmakers for each sport.`                                  |        |                                                                                  |         |            |                |
 
 ### Example
 
@@ -48,10 +49,13 @@ Request:
     "endpoint": "schedule",
     "sportId": 4,
     "date": 1635529231,
-    "market": "create"
+    "market": "create",
+    "sportIdToBookmakers": {
+      "4": [3, 11]
+    }
   },
   "debug": {
-    "cacheKey": "ZWao7hRMZbaaivPL/6Qme1w6JxU="
+    "cacheKey": "9GkhsH3Xm2rGQxt9hixrapAhIAw="
   }
 }
 ```
@@ -69,7 +73,7 @@ Response:
       {
         "event_id": "647d6bbdc2a7e33529fe0106fbb47748",
         "event_uuid": "11ed-0144-ad954c00-8b44-c10719b58e07",
-        "sport_id": 3,
+        "sport_id": 4,
         "event_date": "2022-07-11T18:10:00Z",
         "score": {
           "event_id": "647d6bbdc2a7e33529fe0106fbb47748",
@@ -122,7 +126,7 @@ Response:
       {
         "event_id": "114c32bfe19a4d13b4507a3bee2f875a",
         "event_uuid": "11ed-016a-65892000-8f86-ce0fb6e15b09",
-        "sport_id": 3,
+        "sport_id": 4,
         "event_date": "2022-07-11T22:40:00Z",
         "score": {
           "event_id": "114c32bfe19a4d13b4507a3bee2f875a",
@@ -174,7 +178,7 @@ Response:
       {
         "event_id": "88da82bc135157faea219ced8e4a4c38",
         "event_uuid": "11ed-016e-966b5400-8407-c4e594da7c7f",
-        "sport_id": 3,
+        "sport_id": 4,
         "event_date": "2022-07-11T23:10:00Z",
         "score": {
           "event_id": "88da82bc135157faea219ced8e4a4c38",
@@ -226,7 +230,7 @@ Response:
       {
         "event_id": "b44fdfd8127787a260a885e69ff5fa44",
         "event_uuid": "11ed-016e-966b5400-8d82-ea2ffaff8a1c",
-        "sport_id": 3,
+        "sport_id": 4,
         "event_date": "2022-07-11T23:10:00Z",
         "score": {
           "event_id": "b44fdfd8127787a260a885e69ff5fa44",
@@ -278,7 +282,7 @@ Response:
       {
         "event_id": "a726e8c32aed43e48f5693b1b8710c2d",
         "event_uuid": "11ed-016f-493bb200-85a2-41eca0d0f57e",
-        "sport_id": 3,
+        "sport_id": 4,
         "event_date": "2022-07-11T23:15:00Z",
         "score": {
           "event_id": "a726e8c32aed43e48f5693b1b8710c2d",
@@ -330,7 +334,7 @@ Response:
       {
         "event_id": "8fdb6e79f0473bcf99bfe2d31481b2a8",
         "event_uuid": "11ed-016f-fc0c1000-8ac4-167bccf6c2a5",
-        "sport_id": 3,
+        "sport_id": 4,
         "event_date": "2022-07-11T23:20:00Z",
         "score": {
           "event_id": "8fdb6e79f0473bcf99bfe2d31481b2a8",
@@ -414,10 +418,13 @@ Request:
     "endpoint": "schedule",
     "sportId": 4,
     "date": 1635529231,
-    "market": "create"
+    "market": "create",
+    "sportIdToBookmakers": {
+      "4": [3, 11]
+    }
   },
   "debug": {
-    "cacheKey": "ZWao7hRMZbaaivPL/6Qme1w6JxU="
+    "cacheKey": "9GkhsH3Xm2rGQxt9hixrapAhIAw="
   }
 }
 ```
@@ -441,7 +448,7 @@ Response:
         "rotation_number_home": 584,
         "score": {
           "event_id": "68e09220c9fb7db9705550fae8a88322",
-          "event_status": "STATUS_FINAL",
+          "event_status": "STATUS_SCHEDULED",
           "score_away": 103,
           "score_home": 118,
           "winner_away": 0,
@@ -613,11 +620,11 @@ Response:
             "line_id": 14875455,
             "moneyline": {
               "line_id": 14875455,
-              "moneyline_away": 0.0001,
+              "moneyline_away": 456,
               "moneyline_away_delta": -413.9999,
-              "moneyline_home": 0.0001,
+              "moneyline_home": -555,
               "moneyline_home_delta": 514.0001,
-              "moneyline_draw": 0.0001,
+              "moneyline_draw": 300,
               "moneyline_draw_delta": 0,
               "date_updated": "2022-04-07T00:10:09.403399Z",
               "format": "American"
@@ -760,11 +767,11 @@ Response:
             "line_id": 14874654,
             "moneyline": {
               "line_id": 14874654,
-              "moneyline_away": 0.0001,
+              "moneyline_away": 777,
               "moneyline_away_delta": -394.9999,
-              "moneyline_home": 0.0001,
+              "moneyline_home": 888,
               "moneyline_home_delta": 500.0001,
-              "moneyline_draw": 0.0001,
+              "moneyline_draw": 222,
               "moneyline_draw_delta": 500.0001,
               "date_updated": "2022-04-07T00:10:44.550588Z",
               "format": "American"
@@ -937,10 +944,13 @@ Request:
     "endpoint": "schedule",
     "sportId": 4,
     "date": 1635529231,
-    "market": "resolve"
+    "market": "resolve",
+    "sportIdToBookmakers": {
+      "4": [3, 11]
+    }
   },
   "debug": {
-    "cacheKey": "aXx1YDkpJ0s7ejKzNcsZ1J1zGW4="
+    "cacheKey": "KD/SEEt/btf+3+q0ffARg6usdMc="
   }
 }
 ```
@@ -974,7 +984,8 @@ Response:
           "display_clock": "0.00",
           "game_period": 4,
           "broadcast": "",
-          "event_status_detail": "Final"
+          "event_status_detail": "Final",
+          "updated_at": "2022-07-23T00:17:41Z"
         },
         "teams": [
           {
@@ -1024,11 +1035,11 @@ Response:
       }
     ],
     "result": [
-      "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a0000000000000000000000000000000000000000000000000000000000000008"
+      "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a00000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000062db3e25"
     ]
   },
   "result": [
-    "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a0000000000000000000000000000000000000000000000000000000000000008"
+    "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a00000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000062db3e25"
   ],
   "statusCode": 200,
   "providerStatusCode": 200
@@ -1045,11 +1056,12 @@ Response:
 
 ### Input Params
 
-| Required? |  Name   | Aliases |                                                  Description                                                  |  Type  |                                     Options                                      | Default | Depends On | Not Valid With |
-| :-------: | :-----: | :-----: | :-----------------------------------------------------------------------------------------------------------: | :----: | :------------------------------------------------------------------------------: | :-----: | :--------: | :------------: |
-|    ✅     | sportId |         |                                         The ID of the sport to query                                          | number | `1`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `2`, `3`, `4`, `5`, `6`, `7`, `8` |         |            |                |
-|    ✅     |  date   |         |                          The date of the games to query as a Unix timestamp seconds.                          | number |                                                                                  |         |            |                |
-|           | gameIds |         | The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]` |        |                                                                                  |         |            |                |
+| Required? |        Name         | Aliases |                                                  Description                                                  |  Type  |                                     Options                                      | Default | Depends On | Not Valid With |
+| :-------: | :-----------------: | :-----: | :-----------------------------------------------------------------------------------------------------------: | :----: | :------------------------------------------------------------------------------: | :-----: | :--------: | :------------: |
+|    ✅     |       sportId       |         |                                         The ID of the sport to query                                          | number | `1`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `2`, `3`, `4`, `5`, `6`, `7`, `8` |         |            |                |
+|    ✅     |        date         |         |                          The date of the games to query as a Unix timestamp seconds.                          | number |                                                                                  |         |            |                |
+|           |       gameIds       |         | The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]` |        |                                                                                  |         |            |                |
+|    ✅     | sportIdToBookmakers |         |                                  The priority of bookmakers for each sport.`                                  |        |                                                                                  |         |            |                |
 
 ### Example
 
@@ -1061,10 +1073,13 @@ Request:
   "data": {
     "endpoint": "odds",
     "sportId": 4,
-    "date": 1635529231
+    "date": 1635529231,
+    "sportIdToBookmakers": {
+      "4": [11, 3]
+    }
   },
   "debug": {
-    "cacheKey": "gJba2MNcPMOHcvICv2x9w0fxRcU="
+    "cacheKey": "A3hb9s0YkcvI45IdICemX05tPA0="
   }
 }
 ```
@@ -1088,7 +1103,7 @@ Response:
         "rotation_number_home": 584,
         "score": {
           "event_id": "68e09220c9fb7db9705550fae8a88322",
-          "event_status": "STATUS_FINAL",
+          "event_status": "STATUS_SCHEDULED",
           "score_away": 103,
           "score_home": 118,
           "winner_away": 0,
@@ -1260,11 +1275,11 @@ Response:
             "line_id": 14875455,
             "moneyline": {
               "line_id": 14875455,
-              "moneyline_away": 0.0001,
+              "moneyline_away": 456,
               "moneyline_away_delta": -413.9999,
-              "moneyline_home": 0.0001,
+              "moneyline_home": -555,
               "moneyline_home_delta": 514.0001,
-              "moneyline_draw": 0.0001,
+              "moneyline_draw": 300,
               "moneyline_draw_delta": 0,
               "date_updated": "2022-04-07T00:10:09.403399Z",
               "format": "American"
@@ -1407,11 +1422,11 @@ Response:
             "line_id": 14874654,
             "moneyline": {
               "line_id": 14874654,
-              "moneyline_away": 0.0001,
+              "moneyline_away": 777,
               "moneyline_away_delta": -394.9999,
-              "moneyline_home": 0.0001,
+              "moneyline_home": 888,
               "moneyline_home_delta": 500.0001,
-              "moneyline_draw": 0.0001,
+              "moneyline_draw": 222,
               "moneyline_draw_delta": 500.0001,
               "date_updated": "2022-04-07T00:10:44.550588Z",
               "format": "American"

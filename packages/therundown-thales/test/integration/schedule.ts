@@ -24,6 +24,9 @@ export function scheduleTests(context: SuiteContext): void {
             sportId: 4,
             date: 1635529231,
             market: 'create',
+            sportIdToBookmakers: {
+              '4': [3, 11],
+            },
           },
         }
         mockScheduleResponseError()
@@ -49,6 +52,9 @@ export function scheduleTests(context: SuiteContext): void {
             sportId: 4,
             date: 1635529231,
             market: 'create',
+            sportIdToBookmakers: {
+              '4': [3, 11],
+            },
           },
         }
         mockScheduleResponseMalformedMarketCreate()
@@ -70,6 +76,9 @@ export function scheduleTests(context: SuiteContext): void {
             sportId: 4,
             date: 1635529231,
             market: 'resolve',
+            sportIdToBookmakers: {
+              '4': [3, 11],
+            },
           },
         }
         mockScheduleResponseMalformedMarketResolve()
@@ -96,6 +105,9 @@ export function scheduleTests(context: SuiteContext): void {
             sportId: 4,
             date: 1635529231,
             market: 'create',
+            sportIdToBookmakers: {
+              '4': [3, 11],
+            },
           },
         }
         mockScheduleResponseSuccessMarketCreateNoLines()
@@ -120,6 +132,9 @@ export function scheduleTests(context: SuiteContext): void {
             sportId: 4,
             date: 1635529231,
             market: 'create',
+            sportIdToBookmakers: {
+              '4': [3, 11],
+            },
           },
         }
         mockScheduleResponseSuccessMarketCreate()
@@ -143,6 +158,9 @@ export function scheduleTests(context: SuiteContext): void {
             sportId: 4,
             date: 1635529231,
             market: 'resolve',
+            sportIdToBookmakers: {
+              '4': [3, 11],
+            },
           },
         }
         mockScheduleResponseSuccessResolve()

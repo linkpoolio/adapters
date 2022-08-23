@@ -9,7 +9,7 @@ import {
   getGameResolve,
   getHomeAwayName,
 } from '../../src/lib/utils'
-import { eventMMA1, eventNBA1, eventNBA2 } from '../unit/testCases'
+import { eventMLS1, eventMMA1, eventNBA1, eventNBA2 } from '../unit/testCases'
 
 describe('getHomeAwayName()', () => {
   const sportIdValues = Object.values(SportId)
@@ -56,6 +56,9 @@ describe('getGameCreate()', () => {
       testData: {
         event: eventNBA1,
         sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          '4': [3, 11],
+        },
         expectedGameCreate: {
           homeTeam: 'St. Louis Blues',
           awayTeam: 'New York Islanders',
@@ -72,6 +75,9 @@ describe('getGameCreate()', () => {
       testData: {
         event: eventMMA1,
         sportId: SportId.MMA,
+        sportIdToBookmakers: {
+          '7': [3, 11],
+        },
         expectedGameCreate: {
           homeTeam: 'Mark Coates',
           awayTeam: 'Jaylon Bates',
@@ -87,7 +93,11 @@ describe('getGameCreate()', () => {
   it.each(getGameCreateTestCases)(
     'returns the GameCreate from an event (case $name)',
     ({ testData }) => {
-      const gameCreate = getGameCreate(testData.event, testData.sportId)
+      const gameCreate = getGameCreate(
+        testData.event,
+        testData.sportId,
+        testData.sportIdToBookmakers[testData.sportId],
+      )
 
       expect(gameCreate).toEqual(testData.expectedGameCreate)
     },
@@ -101,11 +111,15 @@ describe('getGameResolve()', () => {
       testData: {
         event: eventNBA2,
         sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          '4': [3, 11],
+        },
         expectedGameResolve: {
           homeScore: 122,
           awayScore: 131,
           gameId: '0x6364396535363332356334646438346235396635636332313365373763396638',
           statusId: 8,
+          lastUpdated: 1649126125,
         },
       },
     },
@@ -114,11 +128,15 @@ describe('getGameResolve()', () => {
       testData: {
         event: eventNBA1,
         sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          '4': [3, 11],
+        },
         expectedGameResolve: {
           homeScore: 0,
           awayScore: 0,
           gameId: '0x3736313636626436623464653934653131633562643230636466336662313965',
           statusId: 18,
+          lastUpdated: 1649126125,
         },
       },
     },
@@ -127,11 +145,15 @@ describe('getGameResolve()', () => {
       testData: {
         event: eventMMA1,
         sportId: SportId.MMA,
+        sportIdToBookmakers: {
+          '7': [3, 11],
+        },
         expectedGameResolve: {
           homeScore: 0,
           awayScore: 1,
           gameId: '0x3030303935396433396532613763613166656139333832376539646230663834',
           statusId: 8,
+          lastUpdated: 1649126125,
         },
       },
     },
@@ -152,10 +174,25 @@ describe('getGameOdds()', () => {
       name: 'case all NO_EVENT_ODDS',
       testData: {
         event: eventNBA1,
-        rawOdds: {
-          moneyline_home: NO_EVENT_ODDS,
-          moneyline_away: NO_EVENT_ODDS,
-          moneyline_draw: NO_EVENT_ODDS,
+        sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          '4': [3],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: NO_EVENT_ODDS,
+              moneyline_away: NO_EVENT_ODDS,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: NO_EVENT_ODDS,
+              moneyline_away: NO_EVENT_ODDS,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+          },
         },
         expectedGameOdds: {
           gameId: '0x3736313636626436623464653934653131633562643230636466336662313965',
@@ -166,46 +203,78 @@ describe('getGameOdds()', () => {
       },
     },
     {
-      name: 'case some NO_EVENT_ODDS',
+      name: 'case sportId has no drawOdds',
       testData: {
         event: eventNBA1,
-        rawOdds: {
-          moneyline_home: -16000,
-          moneyline_away: 14000,
-          moneyline_draw: NO_EVENT_ODDS,
+        sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          '4': [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: -600,
+              moneyline_away: 540,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 800,
+              moneyline_away: -500,
+              moneyline_draw: -450,
+            },
+          },
         },
         expectedGameOdds: {
           gameId: '0x3736313636626436623464653934653131633562643230636466336662313965',
-          homeOdds: -1600000,
-          awayOdds: 1400000,
+          homeOdds: -60000,
+          awayOdds: 54000,
           drawOdds: 0,
         },
       },
     },
     {
-      name: 'case no NO_EVENT_ODDS',
+      name: 'case sport has drawOdds',
       testData: {
-        event: eventNBA1,
-        rawOdds: {
-          moneyline_home: -16000,
-          moneyline_away: 14000,
-          moneyline_draw: 0,
+        event: eventMLS1,
+        sportId: SportId.MLS,
+        sportIdToBookmakers: {
+          '10': [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 600,
+              moneyline_away: -300,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 800,
+              moneyline_away: -500,
+              moneyline_draw: -450,
+            },
+          },
         },
         expectedGameOdds: {
-          gameId: '0x3736313636626436623464653934653131633562643230636466336662313965',
-          homeOdds: -1600000,
-          awayOdds: 1400000,
-          drawOdds: 0,
+          gameId: '0x3362326665633932653464616664613934313233376438323536323337363433',
+          homeOdds: 80000,
+          awayOdds: -50000,
+          drawOdds: -45000,
         },
       },
     },
   ]
   it.each(gameOddsTestCases)('returns the game odds ($name)', ({ testData }) => {
-    testData.event.lines['3'].moneyline.moneyline_home = testData.rawOdds.moneyline_home
-    testData.event.lines['3'].moneyline.moneyline_away = testData.rawOdds.moneyline_away
-    testData.event.lines['3'].moneyline.moneyline_draw = testData.rawOdds.moneyline_draw
+    testData.event['lines'] = testData.lines
 
-    const gameOdds = getGameOdds(testData.event)
+    const gameOdds = getGameOdds(
+      testData.event,
+      testData.sportId,
+      testData.sportIdToBookmakers[testData.sportId],
+    )
 
     expect(gameOdds).toEqual(testData.expectedGameOdds)
   })
@@ -238,9 +307,10 @@ describe('encodeGameResolve()', () => {
       awayScore: 121,
       gameId: '0x3131656333313439366561303130303038353431323634313062353762366463',
       statusId: 8,
+      lastUpdated: 1658535461,
     }
     const expectedEncodedGameResolve =
-      '0x3131656333313439366561303130303038353431323634313062353762366463000000000000000000000000000000000000000000000000000000000000007200000000000000000000000000000000000000000000000000000000000000790000000000000000000000000000000000000000000000000000000000000008'
+      '0x31316563333134393665613031303030383534313236343130623537623664630000000000000000000000000000000000000000000000000000000000000072000000000000000000000000000000000000000000000000000000000000007900000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000062db3e25'
 
     const encodedGameResolve = encodeGameResolve(gameResolve)
 

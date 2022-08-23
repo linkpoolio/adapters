@@ -12,6 +12,7 @@ import {
   validateAndGetGameIds,
   validateDate,
   validateSportId,
+  validateSportIdToBookmakers,
 } from '../lib/utils'
 
 export const supportedEndpoints = ['odds']
@@ -33,6 +34,10 @@ export const inputParameters: InputParameters = {
       'The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]`',
     required: false,
   },
+  sportIdToBookmakers: {
+    description: 'The priority of bookmakers for each sport.`',
+    required: true,
+  },
 }
 
 export const execute: ExecuteWithConfig<Config> = async (request, _, config) => {
@@ -42,13 +47,16 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   const sportId = validator.validated.data.sportId
   const dateRaw = validator.validated.data.date
   const gameIdsRaw = validator.validated.data.gameIds
+  const sportIdToBookmakers = validator.validated.data.sportIdToBookmakers
 
   let gameIds: string[] = []
   let date: string
+  let bookmakers: number[]
   try {
     validateSportId(sportId)
     date = validateDate(dateRaw)
     gameIds = validateAndGetGameIds(gameIdsRaw)
+    bookmakers = validateSportIdToBookmakers(sportIdToBookmakers, sportId)
   } catch (error) {
     const message = (error as Error).message
     throw new AdapterError({
@@ -88,6 +96,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
       url: join(reqConfig.baseURL, reqConfig.url),
     })
   }
+
   if (events.length === 0) {
     response.data.result = []
 
@@ -102,7 +111,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   let oddsList: GameOdds[]
   let encodedOddsList: string[]
   try {
-    oddsList = filteredEvents.map((event: Event) => getGameOdds(event))
+    oddsList = filteredEvents.map((event: Event) => getGameOdds(event, sportId, bookmakers))
     encodedOddsList = oddsList.map((gameOdds: GameOdds) => encodeGameOdds(gameOdds))
   } catch (error) {
     const message = (error as Error).message

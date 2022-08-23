@@ -130,6 +130,7 @@ export const mockScheduleResponseSuccessResolve = (): nock =>
             game_period: 4,
             broadcast: '',
             event_status_detail: 'Final',
+            updated_at: '2022-07-23T00:17:41Z',
           },
           teams: [
             {
@@ -199,7 +200,7 @@ export const mockScheduleResponseSuccessMarketCreateNoLines = (): nock =>
         {
           event_id: '647d6bbdc2a7e33529fe0106fbb47748',
           event_uuid: '11ed-0144-ad954c00-8b44-c10719b58e07',
-          sport_id: 3,
+          sport_id: 4,
           event_date: '2022-07-11T18:10:00Z',
           score: {
             event_id: '647d6bbdc2a7e33529fe0106fbb47748',
@@ -253,7 +254,7 @@ export const mockScheduleResponseSuccessMarketCreateNoLines = (): nock =>
         {
           event_id: '114c32bfe19a4d13b4507a3bee2f875a',
           event_uuid: '11ed-016a-65892000-8f86-ce0fb6e15b09',
-          sport_id: 3,
+          sport_id: 4,
           event_date: '2022-07-11T22:40:00Z',
           score: {
             event_id: '114c32bfe19a4d13b4507a3bee2f875a',
@@ -305,7 +306,7 @@ export const mockScheduleResponseSuccessMarketCreateNoLines = (): nock =>
         {
           event_id: '88da82bc135157faea219ced8e4a4c38',
           event_uuid: '11ed-016e-966b5400-8407-c4e594da7c7f',
-          sport_id: 3,
+          sport_id: 4,
           event_date: '2022-07-11T23:10:00Z',
           score: {
             event_id: '88da82bc135157faea219ced8e4a4c38',
@@ -357,7 +358,7 @@ export const mockScheduleResponseSuccessMarketCreateNoLines = (): nock =>
         {
           event_id: 'b44fdfd8127787a260a885e69ff5fa44',
           event_uuid: '11ed-016e-966b5400-8d82-ea2ffaff8a1c',
-          sport_id: 3,
+          sport_id: 4,
           event_date: '2022-07-11T23:10:00Z',
           score: {
             event_id: 'b44fdfd8127787a260a885e69ff5fa44',
@@ -409,7 +410,7 @@ export const mockScheduleResponseSuccessMarketCreateNoLines = (): nock =>
         {
           event_id: 'a726e8c32aed43e48f5693b1b8710c2d',
           event_uuid: '11ed-016f-493bb200-85a2-41eca0d0f57e',
-          sport_id: 3,
+          sport_id: 4,
           event_date: '2022-07-11T23:15:00Z',
           score: {
             event_id: 'a726e8c32aed43e48f5693b1b8710c2d',
@@ -461,7 +462,7 @@ export const mockScheduleResponseSuccessMarketCreateNoLines = (): nock =>
         {
           event_id: '8fdb6e79f0473bcf99bfe2d31481b2a8',
           event_uuid: '11ed-016f-fc0c1000-8ac4-167bccf6c2a5',
-          sport_id: 3,
+          sport_id: 4,
           event_date: '2022-07-11T23:20:00Z',
           score: {
             event_id: '8fdb6e79f0473bcf99bfe2d31481b2a8',
@@ -537,7 +538,7 @@ export const mockScheduleResponseSuccessMarketCreate = (): nock =>
           rotation_number_home: 584,
           score: {
             event_id: '68e09220c9fb7db9705550fae8a88322',
-            event_status: 'STATUS_FINAL',
+            event_status: 'STATUS_SCHEDULED',
             score_away: 103,
             score_home: 118,
             winner_away: 0,
@@ -699,11 +700,11 @@ export const mockScheduleResponseSuccessMarketCreate = (): nock =>
               line_id: 14875455,
               moneyline: {
                 line_id: 14875455,
-                moneyline_away: 0.0001,
+                moneyline_away: 456,
                 moneyline_away_delta: -413.9999,
-                moneyline_home: 0.0001,
+                moneyline_home: -555,
                 moneyline_home_delta: 514.0001,
-                moneyline_draw: 0.0001,
+                moneyline_draw: 300,
                 moneyline_draw_delta: 0,
                 date_updated: '2022-04-07T00:10:09.403399Z',
                 format: 'American',
@@ -895,11 +896,11 @@ export const mockScheduleResponseSuccessMarketCreate = (): nock =>
               line_id: 14874654,
               moneyline: {
                 line_id: 14874654,
-                moneyline_away: 0.0001,
+                moneyline_away: 777,
                 moneyline_away_delta: -394.9999,
-                moneyline_home: 0.0001,
+                moneyline_home: 888,
                 moneyline_home_delta: 500.0001,
-                moneyline_draw: 0.0001,
+                moneyline_draw: 222,
                 moneyline_draw_delta: 500.0001,
                 date_updated: '2022-04-07T00:10:44.550588Z',
                 format: 'American',
