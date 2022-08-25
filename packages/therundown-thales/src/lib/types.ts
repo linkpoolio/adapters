@@ -1,4 +1,4 @@
-export interface SportIdToBookmakers {
+export interface SportIdToBookmakerIds {
   [key: string]: number[]
 }
 

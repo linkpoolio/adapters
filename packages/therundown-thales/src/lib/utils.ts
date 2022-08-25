@@ -19,7 +19,7 @@ import type {
   GameResolve,
   HomeAwayName,
   Odds,
-  SportIdToBookmakers,
+  SportIdToBookmakerIds,
   Team,
 } from '../lib/types'
 
@@ -51,20 +51,23 @@ export const convertEventId = (eventId: string): string => {
   throw new Error(`Unexpected 'event_id': ${eventId}. Expected format is 32 bytes long.`)
 }
 
-export const getOdds = (event: Event, sportId: number, bookmakers: number[]): Odds => {
+export const getOdds = (event: Event, sportId: number, bookmakerIds: number[]): Odds => {
   let homeOdds = 0
   let awayOdds = 0
   let drawOdds = 0
+  if (!bookmakerIds.length) {
+    throw new Error(`Unexpected Array of bookmaker IDs. It can't be empty`)
+  }
   const lines = event.lines
-  for (const [index, bookmakerId] of bookmakers.entries()) {
+  for (const [index, bookmakerId] of bookmakerIds.entries()) {
     const fallbackMsg =
-      index === bookmakers.length - 1
-        ? 'No bookmakers to fall back, returning default odds'
-        : `Falling back to bookmaker with ID: ${bookmakers[index + 1]}`
+      index === bookmakerIds.length - 1
+        ? 'No bookmaker to fall back, returning default odds'
+        : `Falling back to bookmaker with ID: ${bookmakerIds[index + 1]}`
     if (!lines || !lines[bookmakerId]?.moneyline) {
       Logger.warn(
-        { event, sportId, bookmakers },
-        `No lines found in event for bookmaker: ${bookmakerId}. ${fallbackMsg}`,
+        { event, sportId, bookmakerIds },
+        `No lines found in event for bookmaker with ID: ${bookmakerId}. ${fallbackMsg}`,
       )
       continue
     }
@@ -85,7 +88,7 @@ export const getOdds = (event: Event, sportId: number, bookmakers: number[]): Od
       if (homeOdds && drawOdds && awayOdds) break
     }
     Logger.warn(
-      { event, sportId, bookmakers, isNoDrawOddsSport },
+      { event, sportId, bookmakerIds, isNoDrawOddsSport },
       `No odds found in bookmaker with ID: ${bookmakerId}. ${fallbackMsg}`,
     )
   }
@@ -169,8 +172,8 @@ export const getGameResolve = (event: Event, sportId: SportId): GameResolve => {
   return gameResolve
 }
 
-export const getGameOdds = (event: Event, sportId: SportId, bookmakers: number[]): GameOdds => {
-  const odds = getOdds(event, sportId, bookmakers)
+export const getGameOdds = (event: Event, sportId: SportId, bookmakerIds: number[]): GameOdds => {
+  const odds = getOdds(event, sportId, bookmakerIds)
 
   const gameOdds = {
     homeOdds: odds.homeOdds,
@@ -291,52 +294,48 @@ export const validateSportId = (sportId: number): void => {
   }
 }
 
-export const validateDate = (dateRaw: number): string => {
+export const validateAndGetDate = (dateRaw: number): string => {
   if (isNaN(dateRaw)) {
-    throw new Error(`Invalid 'date': ${dateRaw}. Expected formats is epoch.`)
+    throw new Error(`Invalid 'date': ${dateRaw}. Expected formats is epoch`)
   }
   const date = new Date(dateRaw * 1000).toISOString().split('T')[0]
   return date
 }
 
-export const validateSportIdToBookmakers = (
-  sportIdToBookmakers: SportIdToBookmakers,
+export const validateAndGetBookmakerIdsBySportId = (
   sportId: SportId,
+  sportIdToBookmakerIds: SportIdToBookmakerIds,
 ): number[] => {
-  if (typeof sportIdToBookmakers !== 'object' || Object.keys(sportIdToBookmakers).length === 0) {
+  const keys = Object.keys(sportIdToBookmakerIds)
+  // NB: sportId must have an Array of bookmaker IDs. Validator should prevent an empty object
+  if (!keys.length || !keys.includes(sportId.toString())) {
     throw new Error(
-      `Invalid 'sportIdToBookmakers': ${JSON.stringify(
-        sportIdToBookmakers,
-      )}. Expected formats is an object with string sport ID keys and bookmaker ID array values.`,
+      `Missing 'sportIdToBookmakerIds' entry for 'sportId': ${sportId}. Expected formats is an ` +
+        `object with sportId as key and an Array of bookmaker IDs (Integer) as value. ` +
+        `'sportIdToBookmakerIds' ${JSON.stringify(sportIdToBookmakerIds)}`,
     )
   }
-  if (!Object.keys(sportIdToBookmakers).includes(sportId.toString() as string)) {
-    throw new Error(
-      `The 'sportId': ${sportId} does not match with any key in 'sportIdToBookmakers': ${JSON.stringify(
-        sportIdToBookmakers,
-      )}`,
-    )
-  }
-  for (const [sportId, bookmakerIds] of Object.entries(sportIdToBookmakers)) {
-    if (!Object.values(SportId).includes(Number(sportId) as SportId)) {
+  for (const [keySportId, bookmakerIds] of Object.entries(sportIdToBookmakerIds)) {
+    if (!Object.values(SportId).includes(Number(keySportId) as SportId)) {
       throw new Error(
-        `Unsupported 'sportId': ${sportId}. 'sportIdToBookmakers': ${JSON.stringify(
-          sportIdToBookmakers,
+        `Unsupported 'sportId': ${keySportId}. 'sportIdToBookmakerIds': ${JSON.stringify(
+          sportIdToBookmakerIds,
         )}`,
       )
     }
     if (
       !Array.isArray(bookmakerIds) ||
-      bookmakerIds.some((bookmakerId) => isNaN(bookmakerId) || bookmakerId === null)
+      !bookmakerIds.length ||
+      bookmakerIds.some((bookmakerId) => !Number.isInteger(bookmakerId))
     ) {
       throw new Error(
-        `Invalid 'bookmakerIds' by 'sportId' ${sportId}: ${JSON.stringify(
+        `Invalid bookmaker IDs by 'sportId' ${keySportId}: ${JSON.stringify(
           bookmakerIds,
-        )}. 'sportIdToBookmakers': ${JSON.stringify(
-          sportIdToBookmakers,
-        )}. Expected formats is an Array of bookmaker IDs (integers)`,
+        )}. Expected formats is an Array of Integer with at least one item. 'sportIdToBookmakerIds': ${JSON.stringify(
+          sportIdToBookmakerIds,
+        )}`,
       )
     }
   }
-  return sportIdToBookmakers[sportId]
+  return sportIdToBookmakerIds[sportId]
 }
