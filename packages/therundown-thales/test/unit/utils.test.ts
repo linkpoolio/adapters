@@ -203,6 +203,10 @@ describe('getGameOdds()', () => {
 })
 
 describe('getOdds()', () => {
+  it(`throws an error if bookmakerIds is an empty Array`, async () => {
+    expect(() => getOdds(eventMLS1, SportId.MLS, [])).toThrow()
+  })
+
   const getOddsTestCases = [
     {
       name: 'case: sport with draw odds, 1 bookmaker, 1st bookmaker ID is missing. Returns default odds',
@@ -277,16 +281,16 @@ describe('getOdds()', () => {
         lines: {
           '3': {
             moneyline: {
-              moneyline_home: NO_EVENT_ODDS,
-              moneyline_away: NO_EVENT_ODDS,
-              moneyline_draw: NO_EVENT_ODDS,
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: 3,
             },
           },
           '11': {
             moneyline: {
-              moneyline_home: NO_EVENT_ODDS,
-              moneyline_away: NO_EVENT_ODDS,
-              moneyline_draw: NO_EVENT_ODDS,
+              moneyline_home: 4,
+              moneyline_away: 5,
+              moneyline_draw: 6,
             },
           },
         },
@@ -308,16 +312,16 @@ describe('getOdds()', () => {
         lines: {
           '3': {
             moneyline: {
-              moneyline_home: NO_EVENT_ODDS,
-              moneyline_away: NO_EVENT_ODDS,
-              moneyline_draw: NO_EVENT_ODDS,
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: 3,
             },
           },
           '11': {
             moneyline: {
-              moneyline_home: NO_EVENT_ODDS,
-              moneyline_away: NO_EVENT_ODDS,
-              moneyline_draw: NO_EVENT_ODDS,
+              moneyline_home: 4,
+              moneyline_away: 5,
+              moneyline_draw: 6,
             },
           },
         },
@@ -391,7 +395,7 @@ describe('getOdds()', () => {
       },
     },
     {
-      name: 'case: sport with draw odds, 2 bookmakers, 1st and 2nd bookmaker have no odds. Returns default odds',
+      name: 'case: sport with draw odds, 2 bookmakers, 1st and 2nd bookmaker have no draw odds. Falls back to 2nd bookmaker',
       testData: {
         event: eventMLS1,
         sportId: SportId.MLS,
@@ -422,7 +426,38 @@ describe('getOdds()', () => {
       },
     },
     {
-      name: 'case: sport with no draw odds, 2 bookmakers, 1st bookmaker has odds. Returns 1st bookmaker odds',
+      name: 'case: sport with draw odds, 2 bookmakers, 1st and 2nd bookmaker have no odds. Returns default odds',
+      testData: {
+        event: eventMLS1,
+        sportId: SportId.MLS,
+        sportIdToBookmakers: {
+          [`${SportId.MLS}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: NO_EVENT_ODDS,
+              moneyline_draw: 3,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: NO_EVENT_ODDS,
+              moneyline_away: 5,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 0,
+          awayOdds: 0,
+          drawOdds: 0,
+        },
+      },
+    },
+    {
+      name: 'case: sport with no draw odds, 2 bookmakers, 1st bookmaker has odds. Returns 1st bookmaker odds with drawOdds default value',
       testData: {
         event: eventNBA1,
         sportId: SportId.NBA,
@@ -439,9 +474,9 @@ describe('getOdds()', () => {
           },
           '11': {
             moneyline: {
-              moneyline_home: NO_EVENT_ODDS,
-              moneyline_away: NO_EVENT_ODDS,
-              moneyline_draw: NO_EVENT_ODDS,
+              moneyline_home: 4,
+              moneyline_away: 5,
+              moneyline_draw: 6,
             },
           },
         },
@@ -464,8 +499,8 @@ describe('getOdds()', () => {
           '3': {
             moneyline: {
               moneyline_home: NO_EVENT_ODDS,
-              moneyline_away: NO_EVENT_ODDS,
-              moneyline_draw: NO_EVENT_ODDS,
+              moneyline_away: 2,
+              moneyline_draw: 3,
             },
           },
           '11': {
@@ -495,15 +530,15 @@ describe('getOdds()', () => {
           '3': {
             moneyline: {
               moneyline_home: NO_EVENT_ODDS,
-              moneyline_away: NO_EVENT_ODDS,
-              moneyline_draw: NO_EVENT_ODDS,
+              moneyline_away: 2,
+              moneyline_draw: 3,
             },
           },
           '11': {
             moneyline: {
               moneyline_home: NO_EVENT_ODDS,
-              moneyline_away: NO_EVENT_ODDS,
-              moneyline_draw: NO_EVENT_ODDS,
+              moneyline_away: 5,
+              moneyline_draw: 6,
             },
           },
         },

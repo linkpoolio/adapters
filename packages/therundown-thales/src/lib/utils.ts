@@ -52,16 +52,14 @@ export const convertEventId = (eventId: string): string => {
 }
 
 export const getOdds = (event: Event, sportId: number, bookmakerIds: number[]): Odds => {
-  let homeOdds = 0
-  let awayOdds = 0
-  let drawOdds = 0
   if (!bookmakerIds.length) {
     throw new Error(`Unexpected Array of bookmaker IDs. It can't be empty`)
   }
   const lines = event.lines
+  const bookmakerIdsLastIndex = bookmakerIds.length - 1
   for (const [index, bookmakerId] of bookmakerIds.entries()) {
     const fallbackMsg =
-      index === bookmakerIds.length - 1
+      index === bookmakerIdsLastIndex
         ? 'No bookmaker to fall back, returning default odds'
         : `Falling back to bookmaker with ID: ${bookmakerIds[index + 1]}`
     if (!lines || !lines[bookmakerId]?.moneyline) {
@@ -73,26 +71,32 @@ export const getOdds = (event: Event, sportId: number, bookmakerIds: number[]): 
     }
     const rawOdds = event.lines[bookmakerId].moneyline
     const isNoDrawOddsSport = noDrawOddsSportIds.has(sportId)
-    homeOdds =
+    const homeOdds =
       rawOdds.moneyline_home !== NO_EVENT_ODDS ? rawOdds.moneyline_home * EVENT_ODDS_EXPONENT : 0
-    awayOdds =
+    const awayOdds =
       rawOdds.moneyline_away !== NO_EVENT_ODDS ? rawOdds.moneyline_away * EVENT_ODDS_EXPONENT : 0
-    drawOdds =
+    const drawOdds =
       rawOdds.moneyline_draw !== NO_EVENT_ODDS && !isNoDrawOddsSport
         ? rawOdds.moneyline_draw * EVENT_ODDS_EXPONENT
         : 0
 
     if (isNoDrawOddsSport) {
-      if (homeOdds && awayOdds) break
+      if (homeOdds && awayOdds) {
+        return { homeOdds, awayOdds, drawOdds }
+      }
     } else {
-      if (homeOdds && drawOdds && awayOdds) break
+      if (
+        (homeOdds && drawOdds && awayOdds) ||
+        (homeOdds && awayOdds && index === bookmakerIdsLastIndex)
+      )
+        return { homeOdds, awayOdds, drawOdds }
     }
     Logger.warn(
       { event, sportId, bookmakerIds, isNoDrawOddsSport },
       `No odds found in bookmaker with ID: ${bookmakerId}. ${fallbackMsg}`,
     )
   }
-  return { homeOdds, awayOdds, drawOdds }
+  return { homeOdds: 0, awayOdds: 0, drawOdds: 0 }
 }
 
 export const getHomeAwayName = (event: Event, sportId: SportId): HomeAwayName => {
