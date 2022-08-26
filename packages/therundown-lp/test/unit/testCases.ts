@@ -22,6 +22,7 @@ export const eventNBA1 = {
     game_period: 0,
     broadcast: 'ESPN+',
     event_status_detail: '4/9 - 8:00 PM EDT',
+    updated_at: '2022-04-06T17:18:44Z',
   },
   teams: [
     {
@@ -732,6 +733,7 @@ export const eventNBA2 = {
     game_period: 4,
     broadcast: '',
     event_status_detail: 'Final',
+    updated_at: '2022-04-06T17:18:44Z',
   },
   teams: [
     {
@@ -1507,6 +1509,7 @@ export const eventMMA1 = {
     game_period: 3,
     broadcast: '',
     event_status_detail: 'R3, 5:00',
+    updated_at: '2022-04-06T17:18:44Z',
   },
   teams: [
     {

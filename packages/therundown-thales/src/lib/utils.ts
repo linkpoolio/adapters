@@ -308,7 +308,7 @@ export const validateAndGetBookmakerIdsBySportId = (
 ): number[] => {
   const keys = Object.keys(sportIdToBookmakerIds)
   // NB: sportId must have an Array of bookmaker IDs. Validator should prevent an empty object
-  if (!keys.length) {
+  if (!keys.length || !keys.includes(sportId.toString())) {
     throw new Error(
       `Missing 'sportIdToBookmakerIds' entry for 'sportId': ${sportId}. Expected formats is an ` +
         `object with sportId as key and an Array of bookmaker IDs (Integer) as value. ` +
