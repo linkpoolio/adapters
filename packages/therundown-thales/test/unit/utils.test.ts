@@ -8,6 +8,7 @@ import {
   getGameOdds,
   getGameResolve,
   getHomeAwayName,
+  getOdds,
 } from '../../src/lib/utils'
 import { eventMLS1, eventMMA1, eventNBA1, eventNBA2 } from '../unit/testCases'
 
@@ -168,21 +169,43 @@ describe('getGameResolve()', () => {
   )
 })
 
-// Test a part that bookmakers [] throws an exception
-// name: 'case: sport with draw odds, 1 bookmaker, 1st bookmaker ID is missing. Returns default odds'
-// name: 'case: sport with draw odds, 2 bookmakers, 1st and 2nd bookmaker IDs are missing. Returns default odds'
-// name: 'case: sport with no draw odds, 1 bookmaker, 1st bookmaker ID is missing. Returns default odds'
-// name: 'case: sport with no draw odds, 2 bookmakers, 1st and 2nd bookmaker IDs are missing. Returns default odds'
-// name: 'case: sport with draw odds, 2 bookmakers, 1st bookmaker has odds. Returns 1st bookmaker odds'
-// name: 'case: sport with draw odds, 2 bookmakers, 1st bookmaker has no odds. 2nd bookmaker has odds. Returns 2nd bookmaker odds'
-// name: 'case: sport with draw odds, 2 bookmakers, 1st and 2nd bookmaker have no odds. Returns default odds'
-// name: 'case: sport with no draw odds, 2 bookmakers, 1st bookmaker has odds. Returns 1st bookmaker odds'
-// name: 'case: sport with no draw odds, 2 bookmakers, 1st bookmaker has no odds. 2nd bookmaker has odds. Returns 2nd bookmaker odds'
-// name: 'case: sport with no draw odds, 2 bookmakers, 1st and 2nd bookmaker have no odds. Returns default odds'
-describe.only('getGameOdds()', () => {
-  const gameOddsTestCases = [
+describe('getGameOdds()', () => {
+  const getGameResolveTestCases = [
     {
-      name: 'case: sport with draw odds, no bookmaker IDs. Returns default odds',
+      name: 'NBA',
+      testData: {
+        event: eventNBA2,
+        sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          '4': [3, 11],
+        },
+        expectedGameResolve: {
+          homeOdds: 0,
+          awayOdds: 0,
+          drawOdds: 0,
+          gameId: '0x6364396535363332356334646438346235396635636332313365373763396638',
+        },
+      },
+    },
+  ]
+  it.each(getGameResolveTestCases)(
+    'returns the GameResolve from an event (case $name)',
+    ({ testData }) => {
+      const getResolve = getGameOdds(
+        testData.event,
+        testData.sportId,
+        testData.sportIdToBookmakers[testData.sportId],
+      )
+
+      expect(getResolve).toEqual(testData.expectedGameResolve)
+    },
+  )
+})
+
+describe('getOdds()', () => {
+  const getOddsTestCases = [
+    {
+      name: 'case: sport with draw odds, 1 bookmaker, 1st bookmaker ID is missing. Returns default odds',
       testData: {
         event: eventMLS1,
         sportId: SportId.MLS,
@@ -206,7 +229,6 @@ describe.only('getGameOdds()', () => {
           },
         },
         expectedGameOdds: {
-          gameId: '0x3362326665633932653464616664613934313233376438323536323337363433',
           homeOdds: 0,
           awayOdds: 0,
           drawOdds: 0,
@@ -214,12 +236,12 @@ describe.only('getGameOdds()', () => {
       },
     },
     {
-      name: 'case: sport with draw odds, bookmaker ID is missing. Returns default odds',
+      name: 'case: sport with draw odds, 2 bookmakers, 1st and 2nd bookmaker IDs are missing. Returns default odds',
       testData: {
         event: eventMLS1,
         sportId: SportId.MLS,
         sportIdToBookmakers: {
-          [`${SportId.MLS}`]: [1],
+          [`${SportId.MLS}`]: [1, 2],
         },
         lines: {
           '3': {
@@ -238,21 +260,19 @@ describe.only('getGameOdds()', () => {
           },
         },
         expectedGameOdds: {
-          gameId: '0x3362326665633932653464616664613934313233376438323536323337363433',
           homeOdds: 0,
           awayOdds: 0,
           drawOdds: 0,
         },
       },
     },
-    // Cases for a sport without draw odds
     {
-      name: 'case: sport without draw odds, no bookmaker IDs. Returns default odds',
+      name: 'case: sport with no draw odds, 1 bookmaker, 1st bookmaker ID is missing. Returns default odds',
       testData: {
         event: eventNBA1,
         sportId: SportId.NBA,
         sportIdToBookmakers: {
-          [`${SportId.NBA}`]: [],
+          [`${SportId.NBA}`]: [1],
         },
         lines: {
           '3': {
@@ -271,114 +291,234 @@ describe.only('getGameOdds()', () => {
           },
         },
         expectedGameOdds: {
-          gameId: '0x3736313636626436623464653934653131633562643230636466336662313965',
           homeOdds: 0,
           awayOdds: 0,
           drawOdds: 0,
         },
       },
     },
-    // {
-    //   name: 'case all NO_EVENT_ODDS',
-    //   testData: {
-    //     event: eventNBA1,
-    //     sportId: SportId.NBA,
-    //     sportIdToBookmakers: {
-    //       '4': [3],
-    //     },
-    //     lines: {
-    //       '3': {
-    //         moneyline: {
-    //           moneyline_home: NO_EVENT_ODDS,
-    //           moneyline_away: NO_EVENT_ODDS,
-    //           moneyline_draw: NO_EVENT_ODDS,
-    //         },
-    //       },
-    //       '11': {
-    //         moneyline: {
-    //           moneyline_home: NO_EVENT_ODDS,
-    //           moneyline_away: NO_EVENT_ODDS,
-    //           moneyline_draw: NO_EVENT_ODDS,
-    //         },
-    //       },
-    //     },
-    //     expectedGameOdds: {
-    //       gameId: '0x3736313636626436623464653934653131633562643230636466336662313965',
-    //       homeOdds: 0,
-    //       awayOdds: 0,
-    //       drawOdds: 0,
-    //     },
-    //   },
-    // },
-    // {
-    //   name: 'case sportId has no drawOdds',
-    //   testData: {
-    //     event: eventNBA1,
-    //     sportId: SportId.NBA,
-    //     sportIdToBookmakers: {
-    //       '4': [3, 11],
-    //     },
-    //     lines: {
-    //       '3': {
-    //         moneyline: {
-    //           moneyline_home: -600,
-    //           moneyline_away: 540,
-    //           moneyline_draw: NO_EVENT_ODDS,
-    //         },
-    //       },
-    //       '11': {
-    //         moneyline: {
-    //           moneyline_home: 800,
-    //           moneyline_away: -500,
-    //           moneyline_draw: -450,
-    //         },
-    //       },
-    //     },
-    //     expectedGameOdds: {
-    //       gameId: '0x3736313636626436623464653934653131633562643230636466336662313965',
-    //       homeOdds: -60000,
-    //       awayOdds: 54000,
-    //       drawOdds: 0,
-    //     },
-    //   },
-    // },
-    // {
-    //   name: 'case sport has drawOdds',
-    //   testData: {
-    //     event: eventMLS1,
-    //     sportId: SportId.MLS,
-    //     sportIdToBookmakers: {
-    //       '10': [3, 11],
-    //     },
-    //     lines: {
-    //       '3': {
-    //         moneyline: {
-    //           moneyline_home: 600,
-    //           moneyline_away: -300,
-    //           moneyline_draw: NO_EVENT_ODDS,
-    //         },
-    //       },
-    //       '11': {
-    //         moneyline: {
-    //           moneyline_home: 800,
-    //           moneyline_away: -500,
-    //           moneyline_draw: -450,
-    //         },
-    //       },
-    //     },
-    //     expectedGameOdds: {
-    //       gameId: '0x3362326665633932653464616664613934313233376438323536323337363433',
-    //       homeOdds: 80000,
-    //       awayOdds: -50000,
-    //       drawOdds: -45000,
-    //     },
-    //   },
-    // },
+    {
+      name: 'case: sport with no draw odds, 2 bookmakers, 1st and 2nd bookmaker IDs are missing. Returns default odds',
+      testData: {
+        event: eventNBA1,
+        sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          [`${SportId.NBA}`]: [1, 2],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: NO_EVENT_ODDS,
+              moneyline_away: NO_EVENT_ODDS,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: NO_EVENT_ODDS,
+              moneyline_away: NO_EVENT_ODDS,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 0,
+          awayOdds: 0,
+          drawOdds: 0,
+        },
+      },
+    },
+    {
+      name: 'case: sport with draw odds, 2 bookmakers, 1st bookmaker has odds. Returns 1st bookmaker odds',
+      testData: {
+        event: eventMLS1,
+        sportId: SportId.MLS,
+        sportIdToBookmakers: {
+          [SportId.MLS]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: 3,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 4,
+              moneyline_away: 5,
+              moneyline_draw: 6,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 100,
+          awayOdds: 200,
+          drawOdds: 300,
+        },
+      },
+    },
+    {
+      name: 'case: sport with draw odds, 2 bookmakers, 1st bookmaker has no odds. 2nd bookmaker has odds. Returns 2nd bookmaker odds',
+      testData: {
+        event: eventMLS1,
+        sportId: SportId.MLS,
+        sportIdToBookmakers: {
+          [`${SportId.MLS}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 4,
+              moneyline_away: 5,
+              moneyline_draw: 6,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 400,
+          awayOdds: 500,
+          drawOdds: 600,
+        },
+      },
+    },
+    {
+      name: 'case: sport with draw odds, 2 bookmakers, 1st and 2nd bookmaker have no odds. Returns default odds',
+      testData: {
+        event: eventMLS1,
+        sportId: SportId.MLS,
+        sportIdToBookmakers: {
+          [`${SportId.MLS}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 4,
+              moneyline_away: 5,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 400,
+          awayOdds: 500,
+          drawOdds: 0,
+        },
+      },
+    },
+    {
+      name: 'case: sport with no draw odds, 2 bookmakers, 1st bookmaker has odds. Returns 1st bookmaker odds',
+      testData: {
+        event: eventNBA1,
+        sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          [`${SportId.NBA}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: 3,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: NO_EVENT_ODDS,
+              moneyline_away: NO_EVENT_ODDS,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 100,
+          awayOdds: 200,
+          drawOdds: 0,
+        },
+      },
+    },
+    {
+      name: 'case: sport with no draw odds, 2 bookmakers, 1st bookmaker has no odds. 2nd bookmaker has odds. Returns 2nd bookmaker odds with drawOdds default value',
+      testData: {
+        event: eventNBA1,
+        sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          [`${SportId.NBA}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: NO_EVENT_ODDS,
+              moneyline_away: NO_EVENT_ODDS,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 4,
+              moneyline_away: 5,
+              moneyline_draw: 6,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 400,
+          awayOdds: 500,
+          drawOdds: 0,
+        },
+      },
+    },
+    {
+      name: 'case: sport with no draw odds, 2 bookmakers, 1st and 2nd bookmaker have no odds. Returns default odds',
+      testData: {
+        event: eventNBA1,
+        sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          [`${SportId.NBA}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: NO_EVENT_ODDS,
+              moneyline_away: NO_EVENT_ODDS,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: NO_EVENT_ODDS,
+              moneyline_away: NO_EVENT_ODDS,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 0,
+          awayOdds: 0,
+          drawOdds: 0,
+        },
+      },
+    },
   ]
-  it.only.each(gameOddsTestCases)('returns the game odds ($name)', ({ testData }) => {
+  it.each(getOddsTestCases)('returns the game odds ($name)', ({ testData }) => {
     testData.event['lines'] = testData.lines
 
-    const gameOdds = getGameOdds(
+    const gameOdds = getOdds(
       testData.event,
       testData.sportId,
       testData.sportIdToBookmakers[testData.sportId],

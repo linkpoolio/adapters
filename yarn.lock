@@ -3594,6 +3594,7 @@ __metadata:
     "@chainlink/ea-bootstrap": "file:../../vendor/v1.23.0/bootstrap"
     "@chainlink/ea-test-helpers": "file:../../vendor/v1.23.0/test-helpers"
     "@chainlink/types": "file:../../vendor/v1.23.0/types/@chainlink"
+    "@linkpool/shared": 2.0.0
     "@node-redis/client": 1.0.6
     "@reduxjs/toolkit": ^1.6.1
     "@types/chainlink__ea-bootstrap": "file:../../vendor/v1.23.0/bootstrap"

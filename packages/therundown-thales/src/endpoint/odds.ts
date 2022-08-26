@@ -38,7 +38,6 @@ export const inputParameters: InputParameters = {
     description:
       `A JSON object with sportId as key and an Array of bookmaker IDs (Integer) as value. ` +
       `The order of the bookmakers' IDs set the priority where to fetch the game odds)`,
-    type: 'object',
     required: true,
   },
 }

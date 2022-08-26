@@ -20,7 +20,7 @@ export function oddsTests(context: SuiteContext): void {
             endpoint: 'odds',
             sportId: 4,
             date: 1635529231,
-            sportIdToBookmakers: {
+            sportIdToBookmakerIds: {
               '4': [11, 3],
             },
           },
@@ -47,7 +47,7 @@ export function oddsTests(context: SuiteContext): void {
             endpoint: 'odds',
             sportId: 4,
             date: 1635529231,
-            sportIdToBookmakers: {
+            sportIdToBookmakerIds: {
               '4': [11, 3],
             },
           },
@@ -60,9 +60,9 @@ export function oddsTests(context: SuiteContext): void {
           .set('Accept', '*/*')
           .set('Content-Type', 'application/json')
           .expect('Content-Type', /json/)
-          .expect(200)
+          .expect(500)
 
-        assertError({ expected: 200, actual: response.statusCode }, response.body, id)
+        assertError({ expected: 500, actual: response.statusCode }, response.body, id)
         expect(response.body).toMatchSnapshot()
       })
     })
@@ -77,7 +77,7 @@ export function oddsTests(context: SuiteContext): void {
             endpoint: 'odds',
             sportId: 4,
             date: 1635529231,
-            sportIdToBookmakers: {
+            sportIdToBookmakerIds: {
               '4': [11, 3],
             },
           },

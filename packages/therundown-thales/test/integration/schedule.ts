@@ -24,7 +24,7 @@ export function scheduleTests(context: SuiteContext): void {
             sportId: 4,
             date: 1635529231,
             market: 'create',
-            sportIdToBookmakers: {
+            sportIdToBookmakerIds: {
               '4': [3, 11],
             },
           },
@@ -52,7 +52,7 @@ export function scheduleTests(context: SuiteContext): void {
             sportId: 4,
             date: 1635529231,
             market: 'create',
-            sportIdToBookmakers: {
+            sportIdToBookmakerIds: {
               '4': [3, 11],
             },
           },
@@ -64,8 +64,8 @@ export function scheduleTests(context: SuiteContext): void {
           .set('Accept', '*/*')
           .set('Content-Type', 'application/json')
           .expect('Content-Type', /json/)
-          .expect(200)
-        assertError({ expected: 200, actual: response.statusCode }, response.body, id)
+          .expect(500)
+        assertError({ expected: 500, actual: response.statusCode }, response.body, id)
         expect(response.body).toMatchSnapshot()
       })
       it('should throw an exception if a game attribute is malformed while resolving market', async () => {
@@ -76,7 +76,7 @@ export function scheduleTests(context: SuiteContext): void {
             sportId: 4,
             date: 1635529231,
             market: 'resolve',
-            sportIdToBookmakers: {
+            sportIdToBookmakerIds: {
               '4': [3, 11],
             },
           },
@@ -88,8 +88,8 @@ export function scheduleTests(context: SuiteContext): void {
           .set('Accept', '*/*')
           .set('Content-Type', 'application/json')
           .expect('Content-Type', /json/)
-          .expect(200)
-        assertError({ expected: 200, actual: response.statusCode }, response.body, id)
+          .expect(500)
+        assertError({ expected: 500, actual: response.statusCode }, response.body, id)
         expect(response.body).toMatchSnapshot()
       })
     })
@@ -105,7 +105,7 @@ export function scheduleTests(context: SuiteContext): void {
             sportId: 4,
             date: 1635529231,
             market: 'create',
-            sportIdToBookmakers: {
+            sportIdToBookmakerIds: {
               '4': [3, 11],
             },
           },
@@ -132,7 +132,7 @@ export function scheduleTests(context: SuiteContext): void {
             sportId: 4,
             date: 1635529231,
             market: 'create',
-            sportIdToBookmakers: {
+            sportIdToBookmakerIds: {
               '4': [3, 11],
             },
           },
@@ -158,7 +158,7 @@ export function scheduleTests(context: SuiteContext): void {
             sportId: 4,
             date: 1635529231,
             market: 'resolve',
-            sportIdToBookmakers: {
+            sportIdToBookmakerIds: {
               '4': [3, 11],
             },
           },

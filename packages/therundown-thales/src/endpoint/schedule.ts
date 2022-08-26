@@ -52,7 +52,6 @@ export const inputParameters: InputParameters = {
     description:
       `A JSON object with sportId as key and an Array of bookmaker IDs (Integer) as value. ` +
       `The order of the bookmakers' IDs set the priority where to fetch the game odds)`,
-    type: 'object',
     required: true,
   },
 }
@@ -79,7 +78,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     date = validateAndGetDate(dateRaw)
     gameIds = validateAndGetGameIds(gameIdsRaw)
     statusIds = validateAndGetStatusIds(statusIdsRaw)
-    bookmakerIds = validateAndGetBookmakerIdsBySportId(sportIdToBookmakerIds, sportId)
+    bookmakerIds = validateAndGetBookmakerIdsBySportId(sportId, sportIdToBookmakerIds)
   } catch (error) {
     const message = (error as Error).message
     throw new AdapterError({
