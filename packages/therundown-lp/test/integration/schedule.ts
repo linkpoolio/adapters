@@ -58,9 +58,9 @@ export function scheduleTests(context: SuiteContext): void {
           .set('Accept', '*/*')
           .set('Content-Type', 'application/json')
           .expect('Content-Type', /json/)
-          .expect(200)
+          .expect(500)
 
-        assertError({ expected: 200, actual: response.statusCode }, response.body, id)
+        assertError({ expected: 500, actual: response.statusCode }, response.body, id)
       })
 
       it('should throw an exception if a game attribute is malformed while resolving market', async () => {
@@ -81,9 +81,9 @@ export function scheduleTests(context: SuiteContext): void {
           .set('Accept', '*/*')
           .set('Content-Type', 'application/json')
           .expect('Content-Type', /json/)
-          .expect(200)
+          .expect(500)
 
-        assertError({ expected: 200, actual: response.statusCode }, response.body, id)
+        assertError({ expected: 500, actual: response.statusCode }, response.body, id)
       })
     })
   })
