@@ -122,3 +122,11 @@ export const marketToStatus: Map<Market, string[]> = new Map([
 export const NO_EVENT_ODDS = 0.0001
 
 export const EVENT_ODDS_EXPONENT = 100
+
+export const noDrawOddsSportIds: Set<number> = new Set([
+  SportId.MLB,
+  SportId.NFL,
+  SportId.MMA,
+  SportId.NHL,
+  SportId.NBA,
+])

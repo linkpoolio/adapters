@@ -11,9 +11,10 @@ import {
   filterEventStatus,
   getGameCreate,
   getGameResolve,
+  validateAndGetBookmakerIdsBySportId,
+  validateAndGetDate,
   validateAndGetGameIds,
   validateAndGetStatusIds,
-  validateDate,
   validateMarket,
   validateSportId,
 } from '../lib/utils'
@@ -47,6 +48,12 @@ export const inputParameters: InputParameters = {
       'The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]`',
     required: false,
   },
+  sportIdToBookmakerIds: {
+    description:
+      `A JSON object with sportId as key and an Array of bookmaker IDs (Integer) as value. ` +
+      `The order of the bookmakers' IDs set the priority where to fetch the game odds)`,
+    required: true,
+  },
 }
 
 export const execute: ExecuteWithConfig<Config> = async (request, _, config) => {
@@ -58,16 +65,20 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   const market = validator.validated.data.market
   const gameIdsRaw = validator.validated.data.gameIds
   const statusIdsRaw = validator.validated.data.statusIds
+  const sportIdToBookmakerIds = validator.validated.data.sportIdToBookmakerIds
 
   let gameIds: string[] = []
   let statusIds: string[] = []
   let date: string
+  let bookmakerIds: number[]
+
   try {
     validateMarket(market as Market)
     validateSportId(sportId)
-    date = validateDate(dateRaw)
+    date = validateAndGetDate(dateRaw)
     gameIds = validateAndGetGameIds(gameIdsRaw)
     statusIds = validateAndGetStatusIds(statusIdsRaw)
+    bookmakerIds = validateAndGetBookmakerIdsBySportId(sportId, sportIdToBookmakerIds)
   } catch (error) {
     const message = (error as Error).message
     throw new AdapterError({
@@ -102,7 +113,6 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   if (!Array.isArray(events)) {
     throw new AdapterError({
       jobRunID,
-      statusCode: 200,
       message: `Unexpected 'events' format in data: ${events}. Expected array.`,
       url: join(reqConfig.baseURL, reqConfig.url),
     })
@@ -120,7 +130,9 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     let gameCreateList: GameCreate[]
     let encodedGameCreateList: string[]
     try {
-      gameCreateList = filteredEvents.map((event: Event) => getGameCreate(event, sportId))
+      gameCreateList = filteredEvents.map((event: Event) =>
+        getGameCreate(event, sportId, bookmakerIds),
+      )
       encodedGameCreateList = gameCreateList.map((gameCreate: GameCreate) =>
         encodeGameCreate(gameCreate),
       )
@@ -128,7 +140,6 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
       const message = (error as Error).message
       throw new AdapterError({
         jobRunID,
-        statusCode: 200,
         message,
         cause: error,
         url: join(reqConfig.baseURL, reqConfig.url),
@@ -163,7 +174,6 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
       const message = (error as Error).message
       throw new AdapterError({
         jobRunID,
-        statusCode: 200,
         message,
         cause: error,
         url: join(reqConfig.baseURL, reqConfig.url),

@@ -1,3 +1,4 @@
+import { datetime } from '@linkpool/shared'
 import { utils } from 'ethers'
 
 import {
@@ -96,6 +97,7 @@ export const getGameResolve = (event: Event, sportId: SportId): GameResolve => {
     awayScore,
     gameId: convertEventId(event.event_id),
     statusId: statusToStatusId.get(event.score?.event_status) as number,
+    lastUpdated: datetime.iso8061ToTimestamp(event.score?.updated_at),
   }
   Object.entries(gameResolve).forEach(([key, value]) => {
     value ??
@@ -129,7 +131,9 @@ export const encodeGameResolve = (gameResolve: GameResolve): string => {
   let encodedGameResolve: string
   try {
     encodedGameResolve = utils.defaultAbiCoder.encode(
-      ['tuple(bytes32 gameId, uint8 homeScore, uint8 awayScore, uint8 statusId)'],
+      [
+        'tuple(bytes32 gameId, uint8 homeScore, uint8 awayScore, uint8 statusId, uint40 lastUpdated)',
+      ],
       [gameResolve],
     )
   } catch (error) {

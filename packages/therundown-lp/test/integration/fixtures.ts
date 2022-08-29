@@ -10844,6 +10844,7 @@ export const mockScheduleResponseSuccessResolve = (): nock =>
             game_period: 4,
             broadcast: '',
             event_status_detail: 'Final',
+            updated_at: '2022-07-23T00:17:41Z',
           },
           teams: [
             {

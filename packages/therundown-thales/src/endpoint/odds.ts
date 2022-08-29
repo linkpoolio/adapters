@@ -9,8 +9,9 @@ import {
   filterByEventId,
   filterEventStatus,
   getGameOdds,
+  validateAndGetBookmakerIdsBySportId,
+  validateAndGetDate,
   validateAndGetGameIds,
-  validateDate,
   validateSportId,
 } from '../lib/utils'
 
@@ -33,6 +34,12 @@ export const inputParameters: InputParameters = {
       'The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]`',
     required: false,
   },
+  sportIdToBookmakerIds: {
+    description:
+      `A JSON object with sportId as key and an Array of bookmaker IDs (Integer) as value. ` +
+      `The order of the bookmakers' IDs set the priority where to fetch the game odds)`,
+    required: true,
+  },
 }
 
 export const execute: ExecuteWithConfig<Config> = async (request, _, config) => {
@@ -42,13 +49,16 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   const sportId = validator.validated.data.sportId
   const dateRaw = validator.validated.data.date
   const gameIdsRaw = validator.validated.data.gameIds
+  const sportIdToBookmakerIds = validator.validated.data.sportIdToBookmakerIds
 
   let gameIds: string[] = []
   let date: string
+  let bookmakerIds: number[]
   try {
     validateSportId(sportId)
-    date = validateDate(dateRaw)
+    date = validateAndGetDate(dateRaw)
     gameIds = validateAndGetGameIds(gameIdsRaw)
+    bookmakerIds = validateAndGetBookmakerIdsBySportId(sportId, sportIdToBookmakerIds)
   } catch (error) {
     const message = (error as Error).message
     throw new AdapterError({
@@ -83,11 +93,11 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   if (!Array.isArray(events)) {
     throw new AdapterError({
       jobRunID,
-      statusCode: 200,
       message: `Unexpected 'events' format in data: ${events}. Expected array.`,
       url: join(reqConfig.baseURL, reqConfig.url),
     })
   }
+
   if (events.length === 0) {
     response.data.result = []
 
@@ -102,13 +112,12 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   let oddsList: GameOdds[]
   let encodedOddsList: string[]
   try {
-    oddsList = filteredEvents.map((event: Event) => getGameOdds(event))
+    oddsList = filteredEvents.map((event: Event) => getGameOdds(event, sportId, bookmakerIds))
     encodedOddsList = oddsList.map((gameOdds: GameOdds) => encodeGameOdds(gameOdds))
   } catch (error) {
     const message = (error as Error).message
     throw new AdapterError({
       jobRunID,
-      statusCode: 200,
       message,
       cause: error,
       url: join(reqConfig.baseURL, reqConfig.url),

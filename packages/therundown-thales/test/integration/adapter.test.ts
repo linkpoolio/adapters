@@ -46,6 +46,6 @@ describe('execute', () => {
     context.server.close(done)
   })
 
-  describe('shcedule endpoint', () => scheduleTests(context))
+  describe('schedule endpoint', () => scheduleTests(context))
   describe('odds endpoint', () => oddsTests(context))
 })

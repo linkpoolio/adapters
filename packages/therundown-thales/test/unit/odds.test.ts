@@ -3,6 +3,7 @@ import { assertError } from '@chainlink/ea-test-helpers'
 import { AdapterRequest } from '@chainlink/types'
 
 import { makeExecute } from '../../src/adapter'
+import { SportId } from '../../src/lib/const'
 
 describe('validation error', () => {
   const jobID = '1'
@@ -12,31 +13,141 @@ describe('validation error', () => {
   const requests = [
     {
       name: 'date not supplied',
-      testData: { id: jobID, data: { sportId: 4, endpoint: 'odds' } },
+      testData: {
+        id: jobID,
+        data: {
+          sportId: SportId.NBA,
+          endpoint: 'odds',
+          sportIdToBookmakerIds: {
+            [SportId.NBA]: [11, 3],
+          },
+        },
+      },
     },
     {
       name: 'date invalid',
       testData: {
         id: jobID,
-        data: { sportId: 4, date: 'linkpool', endpoint: 'odds' },
+        data: {
+          sportId: SportId.NBA,
+          date: 'linkpool',
+          endpoint: 'odds',
+          sportIdToBookmakerIds: {
+            [SportId.NBA]: [11, 3],
+          },
+        },
       },
     },
     {
       name: 'sportId not supplied',
       testData: {
         id: jobID,
-        data: { date: 1638297631, endpoint: 'odds' },
+        data: {
+          date: 1638297631,
+          endpoint: 'odds',
+          sportIdToBookmakerIds: {
+            [SportId.NBA]: [11, 3],
+          },
+        },
       },
     },
     {
       name: 'sportId invalid',
       testData: {
         id: jobID,
-        data: { sportId: 'linkpool', date: 1638297631, endpoint: 'odds' },
+        data: {
+          sportId: 'linkpool',
+          date: 1638297631,
+          endpoint: 'odds',
+          sportIdToBookmakerIds: {
+            [SportId.NBA]: [11, 3],
+          },
+        },
+      },
+    },
+    {
+      name: 'sportIdToBookmakerIds not supplied',
+      testData: {
+        id: jobID,
+        data: {
+          sportId: SportId.NBA,
+          date: 1638297631,
+          endpoint: 'odds',
+        },
+      },
+    },
+    {
+      name: 'sportIdToBookmakerIds invalid (missing sportId entry)',
+      testData: {
+        id: jobID,
+        data: {
+          sportId: SportId.NBA,
+          date: 1638297631,
+          endpoint: 'odds',
+          sportIdToBookmakerIds: {
+            [SportId.MLB]: [1, 2, 3],
+          },
+        },
+      },
+    },
+    {
+      name: 'sportIdToBookmakerIds invalid (unsupported sportId entry)',
+      testData: {
+        id: jobID,
+        data: {
+          sportId: SportId.NBA,
+          date: 1638297631,
+          endpoint: 'odds',
+          sportIdToBookmakerIds: {
+            [SportId.NBA]: [1, 2, 3],
+            '30': [4, 5, 6],
+          },
+        },
+      },
+    },
+    {
+      name: 'sportIdToBookmakerIds invalid (entry value is not an Array of Integer)',
+      testData: {
+        id: jobID,
+        data: {
+          sportId: SportId.NBA,
+          date: 1638297631,
+          endpoint: 'odds',
+          sportIdToBookmakerIds: {
+            [SportId.NBA]: 'linkpool',
+          },
+        },
+      },
+    },
+    {
+      name: 'sportIdToBookmakerIds invalid (entry value is an empty Array)',
+      testData: {
+        id: jobID,
+        data: {
+          sportId: SportId.NBA,
+          date: 1638297631,
+          endpoint: 'odds',
+          sportIdToBookmakerIds: {
+            [SportId.NBA]: [],
+          },
+        },
+      },
+    },
+    {
+      name: 'sportIdToBookmakerIds invalid (entry value has an invalid bookmaker ID)',
+      testData: {
+        id: jobID,
+        data: {
+          sportId: SportId.NBA,
+          date: 1638297631,
+          endpoint: 'odds',
+          sportIdToBookmakerIds: {
+            [SportId.NBA]: [1, 'linkpool'],
+          },
+        },
       },
     },
   ]
-
   requests.forEach((req) => {
     it(`${req.name}`, async () => {
       try {
