@@ -102,7 +102,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   if (!Array.isArray(events)) {
     throw new AdapterError({
       jobRunID,
-      statusCode: 200,
+      statusCode: 500,
       message: `Unexpected 'events' format in data: ${events}. Expected array.`,
       url: join(reqConfig.baseURL, reqConfig.url),
     })
@@ -114,8 +114,9 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   }
 
   if (market === Market.CREATE) {
+    const statuses = marketToStatus.get(Market.CREATE) as string[]
     const filteredEvents = events.filter((event: Event) => {
-      return (marketToStatus.get(Market.CREATE) as string[]).includes(event.score?.event_status)
+      return filterByEventId(event, gameIds) && filterEventStatus(event, statuses)
     })
     let gameCreateList: GameCreate[]
     let encodedGameCreateList: string[]
@@ -128,7 +129,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
       const message = (error as Error).message
       throw new AdapterError({
         jobRunID,
-        statusCode: 200,
+        statusCode: 500,
         message,
         cause: error,
         url: join(reqConfig.baseURL, reqConfig.url),
@@ -163,7 +164,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
       const message = (error as Error).message
       throw new AdapterError({
         jobRunID,
-        statusCode: 200,
+        statusCode: 500,
         message,
         cause: error,
         url: join(reqConfig.baseURL, reqConfig.url),

@@ -83,7 +83,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   if (!Array.isArray(events)) {
     throw new AdapterError({
       jobRunID,
-      statusCode: 200,
+      statusCode: 500,
       message: `Unexpected 'events' format in data: ${events}. Expected array.`,
       url: join(reqConfig.baseURL, reqConfig.url),
     })
@@ -108,7 +108,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     const message = (error as Error).message
     throw new AdapterError({
       jobRunID,
-      statusCode: 200,
+      statusCode: 500,
       message,
       cause: error,
       url: join(reqConfig.baseURL, reqConfig.url),
