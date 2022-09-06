@@ -1,6 +1,6 @@
 # Chainlink External Adapter for TheRundown Thales
 
-![3.0.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/therundown-thales/package.json)
+![2.1.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/therundown-thales/package.json)
 
 Base URL https://therundown-therundown-v1.p.rapidapi.com/
 
@@ -28,7 +28,6 @@ Every EA supports base input parameters from [this list](../../core/bootstrap#ba
 `schedule` is the only supported name for this endpoint.
 
 ### Input Params
-
 | Required? |         Name          | Aliases |                                                                             Description                                                                             |  Type  |                                     Options                                      | Default | Depends On | Not Valid With |
 | :-------: | :-------------------: | :-----: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----: | :------------------------------------------------------------------------------: | :-----: | :--------: | :------------: |
 |    ✅     |        sportId        |         |                                                                    The ID of the sport to query                                                                     | number | `1`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `2`, `3`, `4`, `5`, `6`, `7`, `8` |         |            |                |
@@ -39,9 +38,7 @@ Every EA supports base input parameters from [this list](../../core/bootstrap#ba
 |    ✅     | sportIdToBookmakerIds |         | A JSON object with sportId as key and an Array of bookmaker IDs (Integer) as value. The order of the bookmakers' IDs set the priority where to fetch the game odds) |        |                                                                                  |         |            |                |
 
 ### Example
-
 Request:
-
 ```json
 {
   "id": "1",
@@ -51,7 +48,10 @@ Request:
     "date": 1635529231,
     "market": "create",
     "sportIdToBookmakerIds": {
-      "4": [3, 11]
+      "4": [
+        3,
+        11
+      ]
     }
   },
   "debug": {
@@ -59,9 +59,7 @@ Request:
   }
 }
 ```
-
 Response:
-
 ```json
 {
   "jobRunID": "1",
@@ -405,12 +403,10 @@ Response:
   "providerStatusCode": 200
 }
 ```
-
 <details>
 <summary>Additional Examples</summary>
 
 Request:
-
 ```json
 {
   "id": "1",
@@ -420,7 +416,10 @@ Request:
     "date": 1635529231,
     "market": "create",
     "sportIdToBookmakerIds": {
-      "4": [3, 11]
+      "4": [
+        3,
+        11
+      ]
     }
   },
   "debug": {
@@ -428,9 +427,7 @@ Request:
   }
 }
 ```
-
 Response:
-
 ```json
 {
   "jobRunID": "1",
@@ -934,9 +931,7 @@ Response:
               "point_spread_away_money": 0.0001,
 ...
 ```
-
 Request:
-
 ```json
 {
   "id": "1",
@@ -946,7 +941,10 @@ Request:
     "date": 1635529231,
     "market": "resolve",
     "sportIdToBookmakerIds": {
-      "4": [3, 11]
+      "4": [
+        3,
+        11
+      ]
     }
   },
   "debug": {
@@ -954,9 +952,7 @@ Request:
   }
 }
 ```
-
 Response:
-
 ```json
 {
   "jobRunID": "1",
@@ -976,8 +972,18 @@ Response:
           "score_home": 91,
           "winner_away": 1,
           "winner_home": 0,
-          "score_away_by_period": [32, 29, 31, 30],
-          "score_home_by_period": [18, 22, 32, 19],
+          "score_away_by_period": [
+            32,
+            29,
+            31,
+            30
+          ],
+          "score_home_by_period": [
+            18,
+            22,
+            32,
+            19
+          ],
           "venue_name": "Toyota Center (Houston)",
           "venue_location": "Houston, TX",
           "game_clock": 0,
@@ -1035,17 +1041,16 @@ Response:
       }
     ],
     "result": [
-      "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a00000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000062db3e25"
+      "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a0000000000000000000000000000000000000000000000000000000000000008"
     ]
   },
   "result": [
-    "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a00000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000062db3e25"
+    "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a0000000000000000000000000000000000000000000000000000000000000008"
   ],
   "statusCode": 200,
   "providerStatusCode": 200
 }
 ```
-
 </details>
 
 ---
@@ -1055,7 +1060,6 @@ Response:
 `odds` is the only supported name for this endpoint.
 
 ### Input Params
-
 | Required? |         Name          | Aliases |                                                                             Description                                                                             |  Type  |                                     Options                                      | Default | Depends On | Not Valid With |
 | :-------: | :-------------------: | :-----: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----: | :------------------------------------------------------------------------------: | :-----: | :--------: | :------------: |
 |    ✅     |        sportId        |         |                                                                    The ID of the sport to query                                                                     | number | `1`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `2`, `3`, `4`, `5`, `6`, `7`, `8` |         |            |                |
@@ -1064,9 +1068,7 @@ Response:
 |    ✅     | sportIdToBookmakerIds |         | A JSON object with sportId as key and an Array of bookmaker IDs (Integer) as value. The order of the bookmakers' IDs set the priority where to fetch the game odds) |        |                                                                                  |         |            |                |
 
 ### Example
-
 Request:
-
 ```json
 {
   "id": "1",
@@ -1075,7 +1077,10 @@ Request:
     "sportId": 4,
     "date": 1635529231,
     "sportIdToBookmakerIds": {
-      "4": [11, 3]
+      "4": [
+        11,
+        3
+      ]
     }
   },
   "debug": {
@@ -1083,9 +1088,7 @@ Request:
   }
 }
 ```
-
 Response:
-
 ```json
 {
   "jobRunID": "1",
@@ -1591,5 +1594,4 @@ Response:
 ```
 
 ---
-
-MIT License
+MIT License 

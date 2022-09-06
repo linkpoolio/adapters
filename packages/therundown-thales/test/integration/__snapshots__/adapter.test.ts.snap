@@ -48,7 +48,7 @@ exports[`execute schedule endpoint error calls when successfully requesting Ther
 Object {
   "error": Object {
     "feedID": "{\\"data\\":{\\"endpoint\\":\\"schedule\\",\\"sportId\\":4,\\"date\\":1635529231,\\"market\\":\\"resolve\\",\\"sportIdToBookmakerIds\\":{\\"4\\":[3,11]}}}",
-    "message": "'awayScore' is null or undefined: {\\"homeScore\\":91,\\"awayScore\\":null,\\"gameId\\":\\"0x3432656630396566643762313465663961393664363831363738356236316265\\",\\"statusId\\":8,\\"lastUpdated\\":null}. Event: {\\"event_id\\":\\"42ef09efd7b14ef9a96d6816785b61be\\",\\"event_uuid\\":\\"11ec-384b-28cf0000-823d-cd821c1e16bb\\",\\"score\\":{\\"event_status\\":\\"STATUS_FINAL\\",\\"score_away\\":null,\\"score_home\\":91,\\"winner_away\\":1,\\"winner_home\\":0},\\"teams\\":[{\\"team_id\\":152,\\"team_normalized_id\\":20,\\"is_away\\":true,\\"is_home\\":false},{\\"team_id\\":188,\\"team_normalized_id\\":27,\\"name\\":\\"Houston Rockets\\",\\"is_away\\":false,\\"is_home\\":true}]}",
+    "message": "'awayScore' is null or undefined: {\\"homeScore\\":91,\\"awayScore\\":null,\\"gameId\\":\\"0x3432656630396566643762313465663961393664363831363738356236316265\\",\\"statusId\\":8}. Event: {\\"event_id\\":\\"42ef09efd7b14ef9a96d6816785b61be\\",\\"event_uuid\\":\\"11ec-384b-28cf0000-823d-cd821c1e16bb\\",\\"score\\":{\\"event_status\\":\\"STATUS_FINAL\\",\\"score_away\\":null,\\"score_home\\":91,\\"winner_away\\":1,\\"winner_home\\":0},\\"teams\\":[{\\"team_id\\":152,\\"team_normalized_id\\":20,\\"is_away\\":true,\\"is_home\\":false},{\\"team_id\\":188,\\"team_normalized_id\\":27,\\"name\\":\\"Houston Rockets\\",\\"is_away\\":false,\\"is_home\\":true}]}",
     "name": "AdapterError",
     "url": "https:/therundown-therundown-v1.p.rapidapi.com/sports/4/events/2021-10-29?include=scores&limit=500",
   },
@@ -104,13 +104,13 @@ exports[`execute schedule endpoint success calls when successfully requesting Th
 Object {
   "data": Object {
     "result": Array [
-      "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a00000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000062db3e25",
+      "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a0000000000000000000000000000000000000000000000000000000000000008",
     ],
   },
   "jobRunID": "1",
   "providerStatusCode": 200,
   "result": Array [
-    "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a00000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000062db3e25",
+    "0x3464373363633831373762393464346439653230353266613537656263663163000000000000000000000000000000000000000000000000000000000000005b000000000000000000000000000000000000000000000000000000000000007a0000000000000000000000000000000000000000000000000000000000000008",
   ],
   "statusCode": 200,
 }
