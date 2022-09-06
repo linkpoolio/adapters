@@ -30,12 +30,15 @@ Returns the sum of both teams' scores for a match (match status must be final)
 `total-score` is the only supported name for this endpoint.
 
 ### Input Params
+
 | Required? |  Name   | Aliases |         Description          | Type | Options | Default | Depends On | Not Valid With |
 | :-------: | :-----: | :-----: | :--------------------------: | :--: | :-----: | :-----: | :--------: | :------------: |
 |    ✅     | matchId |         | The ID of the match to query |      |         |         |            |                |
 
 ### Example
+
 Request:
+
 ```json
 {
   "id": "1",
@@ -48,7 +51,9 @@ Request:
   }
 }
 ```
+
 Response:
+
 ```json
 {
   "jobRunID": "1",
@@ -562,6 +567,7 @@ Returns all events within the specified params
 `events` is the only supported name for this endpoint.
 
 ### Input Params
+
 | Required? |  Name   | Aliases |                Description                |  Type  | Options | Default | Depends On | Not Valid With |
 | :-------: | :-----: | :-----: | :---------------------------------------: | :----: | :-----: | :-----: | :--------: | :------------: |
 |    ✅     | sportId |         |  The ID of the sport to get events from   |        |         |         |            |                |
@@ -569,7 +575,9 @@ Returns all events within the specified params
 |           | status  |         | Optional status param to filter events on | string |         |         |            |                |
 
 ### Example
+
 Request:
+
 ```json
 {
   "id": "1",
@@ -583,7 +591,9 @@ Request:
   }
 }
 ```
+
 Response:
+
 ```json
 {
   "jobRunID": "1",
@@ -1097,12 +1107,15 @@ Returns data for a specific event
 `event` is the only supported name for this endpoint.
 
 ### Input Params
+
 | Required? |  Name   | Aliases |         Description          |  Type  | Options | Default | Depends On | Not Valid With |
 | :-------: | :-----: | :-----: | :--------------------------: | :----: | :-----: | :-----: | :--------: | :------------: |
 |    ✅     | eventId |         | The ID of the event to query | string |         |         |            |                |
 
 ### Example
+
 Request:
+
 ```json
 {
   "id": "1",
@@ -1115,7 +1128,9 @@ Request:
   }
 }
 ```
+
 Response:
+
 ```json
 {
   "jobRunID": "1",
@@ -1627,6 +1642,7 @@ Response:
 `schedule` is the only supported name for this endpoint.
 
 ### Input Params
+
 | Required? |   Name    | Aliases |                                                  Description                                                  |  Type  |                                        Options                                        | Default | Depends On | Not Valid With |
 | :-------: | :-------: | :-----: | :-----------------------------------------------------------------------------------------------------------: | :----: | :-----------------------------------------------------------------------------------: | :-----: | :--------: | :------------: |
 |    ✅     |  sportId  |         |                                         The ID of the sport to query                                          | number | `1`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `2`, `3`, `4`, `5`, `6`, `7`, `7`, `8` |         |            |                |
@@ -1636,7 +1652,9 @@ Response:
 |           |  gameIds  |         | The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]` |        |                                                                                       |         |            |                |
 
 ### Example
+
 Request:
+
 ```json
 {
   "id": "1",
@@ -1651,7 +1669,9 @@ Request:
   }
 }
 ```
+
 Response:
+
 ```json
 {
   "jobRunID": "1",
@@ -1671,18 +1691,8 @@ Response:
           "score_home": 91,
           "winner_away": 1,
           "winner_home": 0,
-          "score_away_by_period": [
-            32,
-            29,
-            31,
-            30
-          ],
-          "score_home_by_period": [
-            18,
-            22,
-            32,
-            19
-          ],
+          "score_away_by_period": [32, 29, 31, 30],
+          "score_home_by_period": [18, 22, 32, 19],
           "venue_name": "Toyota Center (Houston)",
           "venue_location": "Houston, TX",
           "game_clock": 0,
@@ -1749,10 +1759,1060 @@ Response:
   "providerStatusCode": 200
 }
 ```
+
 <details>
 <summary>Additional Examples</summary>
 
 Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "schedule",
+    "sportId": 1,
+    "date": 1662817303,
+    "market": "create",
+    "gameIds": ["0017049a376cd9c73345507767295c74", "03a242a346a63835d9ba1797f3a10ff8"]
+  },
+  "debug": {
+    "cacheKey": "/hTi7dgcA/AANVMzTFV0XPu40pQ="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "meta": {
+      "delta_last_id": "11ed-3121-9f9e8000-8d67-e900fae2cc44"
+    },
+    "events": [
+      {
+        "event_id": "5576affd4c18740983cd389c85bbdd07",
+        "event_uuid": "11ed-30a3-e51c6800-8eea-db7656cb634e",
+        "sport_id": 1,
+        "event_date": "2022-09-10T01:00:00Z",
+        "rotation_number_away": 317,
+        "rotation_number_home": 318,
+        "score": {
+          "event_id": "5576affd4c18740983cd389c85bbdd07",
+          "event_status": "STATUS_SCHEDULED",
+          "score_away": 0,
+          "score_home": 0,
+          "winner_away": 0,
+          "winner_home": 0,
+          "score_away_by_period": [],
+          "score_home_by_period": [],
+          "venue_name": "University Stadium (NM)",
+          "venue_location": "Albuquerque, NM",
+          "game_clock": 0,
+          "display_clock": "0.00",
+          "game_period": 0,
+          "broadcast": "CBSSN",
+          "event_status_detail": "9/9 - 9:00 PM EDT",
+          "updated_at": "2022-07-29T07:11:54Z"
+        },
+        "teams": [
+          {
+            "team_id": 3548,
+            "team_normalized_id": 133,
+            "name": "Boise State",
+            "is_away": true,
+            "is_home": false
+          },
+          {
+            "team_id": 5041,
+            "team_normalized_id": 185,
+            "name": "New Mexico",
+            "is_away": false,
+            "is_home": true
+          }
+        ],
+        "teams_normalized": [
+          {
+            "team_id": 133,
+            "name": "Boise State",
+            "mascot": "Broncos",
+            "abbreviation": "BOISE",
+            "ranking": 99,
+            "record": "0-1",
+            "is_away": true,
+            "is_home": false
+          },
+          {
+            "team_id": 185,
+            "name": "New Mexico",
+            "mascot": "Lobos",
+            "abbreviation": "UNM",
+            "ranking": 99,
+            "record": "1-0",
+            "is_away": false,
+            "is_home": true
+          }
+        ],
+        "schedule": {
+          "season_type": "Regular Season",
+          "season_year": 2022,
+          "event_name": "Boise State at New Mexico - 2022-09-10",
+          "attendance": "0"
+        },
+        "lines": {
+          "1": {
+            "line_id": 17109765,
+            "moneyline": {
+              "moneyline_away": -750,
+              "moneyline_away_delta": 90,
+              "moneyline_home": 600,
+              "moneyline_home_delta": -60,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 17109765,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 1,
+              "date_updated": "2022-09-05T16:30:22.573061Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": -16.5,
+              "point_spread_home": 16.5,
+              "point_spread_away_delta": 0,
+              "point_spread_home_delta": 0,
+              "point_spread_away_money": -108,
+              "point_spread_away_money_delta": -3,
+              "point_spread_home_money": -102,
+              "point_spread_home_money_delta": 3,
+              "line_id": 17109765,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 1,
+              "date_updated": "2022-09-05T12:53:56.251792Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 44,
+              "total_over_delta": -0.5,
+              "total_under": 44,
+              "total_under_delta": -0.5,
+              "total_over_money": -105,
+              "total_over_money_delta": 0,
+              "total_under_money": -105,
+              "total_under_money_delta": 0,
+              "line_id": 17109765,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 1,
+              "date_updated": "2022-09-06T13:16:04.657026Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 1,
+              "affiliate_name": "5Dimes",
+              "affiliate_url": "https://bit.ly/3rKIuBh"
+            }
+          },
+          "2": {
+            "line_id": 17109793,
+            "moneyline": {
+              "moneyline_away": -800,
+              "moneyline_away_delta": -800.0001,
+              "moneyline_home": 525,
+              "moneyline_home_delta": 524.9999,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 17109793,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 2,
+              "date_updated": "2022-09-05T18:55:03.046148Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": -16.5,
+              "point_spread_home": 16.5,
+              "point_spread_away_delta": 0.5,
+              "point_spread_home_delta": -0.5,
+              "point_spread_away_money": -110,
+              "point_spread_away_money_delta": 0,
+              "point_spread_home_money": -110,
+              "point_spread_home_money_delta": 0,
+              "line_id": 17109793,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 2,
+              "date_updated": "2022-09-05T19:16:41.649657Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 44,
+              "total_over_delta": -0.5,
+              "total_under": 44,
+              "total_under_delta": -0.5,
+              "total_over_money": -110,
+              "total_over_money_delta": 0,
+              "total_under_money": -110,
+              "total_under_money_delta": 0,
+              "line_id": 17109793,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 2,
+              "date_updated": "2022-09-06T13:17:47.132389Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 2,
+              "affiliate_name": "Bovada",
+              "affiliate_url": "https://www.bovada.lv/"
+            }
+          },
+          "3": {
+            "line_id": 16929108,
+            "moneyline": {
+              "moneyline_away": -900,
+              "moneyline_away_delta": -10,
+              "moneyline_home": 534,
+              "moneyline_home_delta": 4,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 16929108,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 3,
+              "date_updated": "2022-09-06T13:34:34.453316Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": -16.5,
+              "point_spread_home": 16.5,
+              "point_spread_away_delta": 0,
+              "point_spread_home_delta": 0,
+              "point_spread_away_money": -111,
+              "point_spread_away_money_delta": -1,
+              "point_spread_home_money": -107,
+              "point_spread_home_money_delta": 1,
+              "extended_spreads": [
+                {
+                  "point_spread_away": -14.5,
+                  "point_spread_home": 14.5,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": -126,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": 103,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -15,
+                  "point_spread_home": 15,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": -123,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": 100,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -15.5,
+                  "point_spread_home": 15.5,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": -119,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": -102,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -16,
+                  "point_spread_home": 16,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": -115,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": -104,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -16.5,
+                  "point_spread_home": 16.5,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": -111,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": -107,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -17,
+                  "point_spread_home": 17,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": -100,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": -120,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -17.5,
+                  "point_spread_home": 17.5,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": 109,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": -133,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -18,
+                  "point_spread_home": 18,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": 115,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": -141,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -18.5,
+                  "point_spread_home": 18.5,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": 120,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": -148,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                }
+              ],
+              "line_id": 16929108,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 3,
+              "date_updated": "2022-09-06T13:34:34.483508Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 44,
+              "total_over_delta": 0,
+              "total_under": 44,
+              "total_under_delta": 0,
+              "total_over_money": -109,
+              "total_over_money_delta": 1,
+              "total_under_money": -111,
+              "total_under_money_delta": -1,
+              "extended_totals": [
+                {
+                  "total_over": 46,
+                  "total_over_delta": 0,
+                  "total_under": 46,
+                  "total_under_delta": 0,
+                  "total_over_money": 120,
+                  "total_over_money_delta": 0,
+                  "total_under_money": -146,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 45.5,
+                  "total_over_delta": 0,
+                  "total_under": 45.5,
+                  "total_under_delta": 0,
+                  "total_over_money": 112,
+                  "total_over_money_delta": 0,
+                  "total_under_money": -137,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 45,
+                  "total_over_delta": 0,
+                  "total_under": 45,
+                  "total_under_delta": 0,
+                  "total_over_money": 105,
+                  "total_over_money_delta": 0,
+                  "total_under_money": -128,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 44.5,
+                  "total_over_delta": 0,
+                  "total_under": 44.5,
+                  "total_under_delta": 0,
+                  "total_over_money": -103,
+                  "total_over_money_delta": 0,
+                  "total_under_money": -118,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 44,
+                  "total_over_delta": 0,
+                  "total_under": 44,
+                  "total_under_delta": 0,
+                  "total_over_money": -109,
+                  "total_over_money_delta": 0,
+                  "total_under_money": -111,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 43.5,
+                  "total_over_delta": 0,
+                  "total_under": 43.5,
+                  "total_under_delta": 0,
+                  "total_over_money": -117,
+                  "total_over_money_delta": 0,
+                  "total_under_money": -104,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 43,
+                  "total_over_delta": 0,
+                  "total_under": 43,
+                  "total_under_delta": 0,
+                  "total_over_money": -124,
+                  "total_over_money_delta": 0,
+                  "total_under_money": 103,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 42.5,
+                  "total_over_delta": 0,
+                  "total_under": 42.5,
+                  "total_under_delta": 0,
+                  "total_over_money": -132,
+                  "total_over_money_delta": 0,
+                  "total_under_money": 108,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 42,
+                  "total_over_delta": 0,
+                  "total_under": 42,
+                  "total_under_delta": 0,
+                  "total_over_money": -139,
+                  "total_over_money_delta": 0,
+                  "total_under_money": 115,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                }
+              ],
+...
+```
+
+Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "schedule",
+    "sportId": 1,
+    "date": 1662817303,
+    "market": "create",
+    "gameIds": ["00000000000000000000000000000000"]
+  },
+  "debug": {
+    "cacheKey": "AFz7Yn+VlDGvFxPKsngR4qmfmPA="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "meta": {
+      "delta_last_id": "11ed-3121-9f9e8000-8d67-e900fae2cc44"
+    },
+    "events": [
+      {
+        "event_id": "5576affd4c18740983cd389c85bbdd07",
+        "event_uuid": "11ed-30a3-e51c6800-8eea-db7656cb634e",
+        "sport_id": 1,
+        "event_date": "2022-09-10T01:00:00Z",
+        "rotation_number_away": 317,
+        "rotation_number_home": 318,
+        "score": {
+          "event_id": "5576affd4c18740983cd389c85bbdd07",
+          "event_status": "STATUS_SCHEDULED",
+          "score_away": 0,
+          "score_home": 0,
+          "winner_away": 0,
+          "winner_home": 0,
+          "score_away_by_period": [],
+          "score_home_by_period": [],
+          "venue_name": "University Stadium (NM)",
+          "venue_location": "Albuquerque, NM",
+          "game_clock": 0,
+          "display_clock": "0.00",
+          "game_period": 0,
+          "broadcast": "CBSSN",
+          "event_status_detail": "9/9 - 9:00 PM EDT",
+          "updated_at": "2022-07-29T07:11:54Z"
+        },
+        "teams": [
+          {
+            "team_id": 3548,
+            "team_normalized_id": 133,
+            "name": "Boise State",
+            "is_away": true,
+            "is_home": false
+          },
+          {
+            "team_id": 5041,
+            "team_normalized_id": 185,
+            "name": "New Mexico",
+            "is_away": false,
+            "is_home": true
+          }
+        ],
+        "teams_normalized": [
+          {
+            "team_id": 133,
+            "name": "Boise State",
+            "mascot": "Broncos",
+            "abbreviation": "BOISE",
+            "ranking": 99,
+            "record": "0-1",
+            "is_away": true,
+            "is_home": false
+          },
+          {
+            "team_id": 185,
+            "name": "New Mexico",
+            "mascot": "Lobos",
+            "abbreviation": "UNM",
+            "ranking": 99,
+            "record": "1-0",
+            "is_away": false,
+            "is_home": true
+          }
+        ],
+        "schedule": {
+          "season_type": "Regular Season",
+          "season_year": 2022,
+          "event_name": "Boise State at New Mexico - 2022-09-10",
+          "attendance": "0"
+        },
+        "lines": {
+          "1": {
+            "line_id": 17109765,
+            "moneyline": {
+              "moneyline_away": -750,
+              "moneyline_away_delta": 90,
+              "moneyline_home": 600,
+              "moneyline_home_delta": -60,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 17109765,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 1,
+              "date_updated": "2022-09-05T16:30:22.573061Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": -16.5,
+              "point_spread_home": 16.5,
+              "point_spread_away_delta": 0,
+              "point_spread_home_delta": 0,
+              "point_spread_away_money": -108,
+              "point_spread_away_money_delta": -3,
+              "point_spread_home_money": -102,
+              "point_spread_home_money_delta": 3,
+              "line_id": 17109765,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 1,
+              "date_updated": "2022-09-05T12:53:56.251792Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 44,
+              "total_over_delta": -0.5,
+              "total_under": 44,
+              "total_under_delta": -0.5,
+              "total_over_money": -105,
+              "total_over_money_delta": 0,
+              "total_under_money": -105,
+              "total_under_money_delta": 0,
+              "line_id": 17109765,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 1,
+              "date_updated": "2022-09-06T13:16:04.657026Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 1,
+              "affiliate_name": "5Dimes",
+              "affiliate_url": "https://bit.ly/3rKIuBh"
+            }
+          },
+          "2": {
+            "line_id": 17109793,
+            "moneyline": {
+              "moneyline_away": -800,
+              "moneyline_away_delta": -800.0001,
+              "moneyline_home": 525,
+              "moneyline_home_delta": 524.9999,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 17109793,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 2,
+              "date_updated": "2022-09-05T18:55:03.046148Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": -16.5,
+              "point_spread_home": 16.5,
+              "point_spread_away_delta": 0.5,
+              "point_spread_home_delta": -0.5,
+              "point_spread_away_money": -110,
+              "point_spread_away_money_delta": 0,
+              "point_spread_home_money": -110,
+              "point_spread_home_money_delta": 0,
+              "line_id": 17109793,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 2,
+              "date_updated": "2022-09-05T19:16:41.649657Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 44,
+              "total_over_delta": -0.5,
+              "total_under": 44,
+              "total_under_delta": -0.5,
+              "total_over_money": -110,
+              "total_over_money_delta": 0,
+              "total_under_money": -110,
+              "total_under_money_delta": 0,
+              "line_id": 17109793,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 2,
+              "date_updated": "2022-09-06T13:17:47.132389Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 2,
+              "affiliate_name": "Bovada",
+              "affiliate_url": "https://www.bovada.lv/"
+            }
+          },
+          "3": {
+            "line_id": 16929108,
+            "moneyline": {
+              "moneyline_away": -900,
+              "moneyline_away_delta": -10,
+              "moneyline_home": 534,
+              "moneyline_home_delta": 4,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 16929108,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 3,
+              "date_updated": "2022-09-06T13:34:34.453316Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": -16.5,
+              "point_spread_home": 16.5,
+              "point_spread_away_delta": 0,
+              "point_spread_home_delta": 0,
+              "point_spread_away_money": -111,
+              "point_spread_away_money_delta": -1,
+              "point_spread_home_money": -107,
+              "point_spread_home_money_delta": 1,
+              "extended_spreads": [
+                {
+                  "point_spread_away": -14.5,
+                  "point_spread_home": 14.5,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": -126,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": 103,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -15,
+                  "point_spread_home": 15,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": -123,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": 100,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -15.5,
+                  "point_spread_home": 15.5,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": -119,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": -102,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -16,
+                  "point_spread_home": 16,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": -115,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": -104,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -16.5,
+                  "point_spread_home": 16.5,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": -111,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": -107,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -17,
+                  "point_spread_home": 17,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": -100,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": -120,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -17.5,
+                  "point_spread_home": 17.5,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": 109,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": -133,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -18,
+                  "point_spread_home": 18,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": 115,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": -141,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "point_spread_away": -18.5,
+                  "point_spread_home": 18.5,
+                  "point_spread_away_delta": 0,
+                  "point_spread_home_delta": 0,
+                  "point_spread_away_money": 120,
+                  "point_spread_away_money_delta": 0,
+                  "point_spread_home_money": -148,
+                  "point_spread_home_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                }
+              ],
+              "line_id": 16929108,
+              "event_id": "5576affd4c18740983cd389c85bbdd07",
+              "sport_id": 1,
+              "affiliate_id": 3,
+              "date_updated": "2022-09-06T13:34:34.483508Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 44,
+              "total_over_delta": 0,
+              "total_under": 44,
+              "total_under_delta": 0,
+              "total_over_money": -109,
+              "total_over_money_delta": 1,
+              "total_under_money": -111,
+              "total_under_money_delta": -1,
+              "extended_totals": [
+                {
+                  "total_over": 46,
+                  "total_over_delta": 0,
+                  "total_under": 46,
+                  "total_under_delta": 0,
+                  "total_over_money": 120,
+                  "total_over_money_delta": 0,
+                  "total_under_money": -146,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 45.5,
+                  "total_over_delta": 0,
+                  "total_under": 45.5,
+                  "total_under_delta": 0,
+                  "total_over_money": 112,
+                  "total_over_money_delta": 0,
+                  "total_under_money": -137,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 45,
+                  "total_over_delta": 0,
+                  "total_under": 45,
+                  "total_under_delta": 0,
+                  "total_over_money": 105,
+                  "total_over_money_delta": 0,
+                  "total_under_money": -128,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 44.5,
+                  "total_over_delta": 0,
+                  "total_under": 44.5,
+                  "total_under_delta": 0,
+                  "total_over_money": -103,
+                  "total_over_money_delta": 0,
+                  "total_under_money": -118,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 44,
+                  "total_over_delta": 0,
+                  "total_under": 44,
+                  "total_under_delta": 0,
+                  "total_over_money": -109,
+                  "total_over_money_delta": 0,
+                  "total_under_money": -111,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 43.5,
+                  "total_over_delta": 0,
+                  "total_under": 43.5,
+                  "total_under_delta": 0,
+                  "total_over_money": -117,
+                  "total_over_money_delta": 0,
+                  "total_under_money": -104,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 43,
+                  "total_over_delta": 0,
+                  "total_under": 43,
+                  "total_under_delta": 0,
+                  "total_over_money": -124,
+                  "total_over_money_delta": 0,
+                  "total_under_money": 103,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 42.5,
+                  "total_over_delta": 0,
+                  "total_under": 42.5,
+                  "total_under_delta": 0,
+                  "total_over_money": -132,
+                  "total_over_money_delta": 0,
+                  "total_under_money": 108,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                },
+                {
+                  "total_over": 42,
+                  "total_over_delta": 0,
+                  "total_under": 42,
+                  "total_under_delta": 0,
+                  "total_over_money": -139,
+                  "total_over_money_delta": 0,
+                  "total_under_money": 115,
+                  "total_under_money_delta": 0,
+                  "line_id": 16929108,
+                  "event_id": "",
+                  "sport_id": 1,
+                  "affiliate_id": 3,
+                  "format": ""
+                }
+              ],
+...
+```
+
+Request:
+
 ```json
 {
   "id": "1",
@@ -1767,7 +2827,9 @@ Request:
   }
 }
 ```
+
 Response:
+
 ```json
 {
   "jobRunID": "1",
@@ -1787,18 +2849,8 @@ Response:
           "score_home": 91,
           "winner_away": 1,
           "winner_home": 0,
-          "score_away_by_period": [
-            32,
-            29,
-            31,
-            30
-          ],
-          "score_home_by_period": [
-            18,
-            22,
-            32,
-            19
-          ],
+          "score_away_by_period": [32, 29, 31, 30],
+          "score_home_by_period": [18, 22, 32, 19],
           "venue_name": "Toyota Center (Houston)",
           "venue_location": "Houston, TX",
           "game_clock": 0,
@@ -1866,7 +2918,1057 @@ Response:
   "providerStatusCode": 200
 }
 ```
+
+Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "schedule",
+    "sportId": 1,
+    "date": 1662222667,
+    "market": "resolve",
+    "gameIds": ["392546e145079d0d3d3282b4075d7127", "040265cdc1022e13ef1764b9a72cca43"]
+  },
+  "debug": {
+    "cacheKey": "1f3H48yNa3Zn1moERZvJ3KryCc8="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "meta": {
+      "delta_last_id": "11ed-2ba1-76ba4000-8abb-6ce0bc65650d"
+    },
+    "events": [
+      {
+        "event_id": "16e079e20382533f0d3548d5146c057f",
+        "event_uuid": "11ed-2b1b-5a73c000-8efb-1ccdebf9ca4a",
+        "sport_id": 1,
+        "event_date": "2022-09-03T00:00:00Z",
+        "rotation_number_away": 153,
+        "rotation_number_home": 154,
+        "score": {
+          "event_id": "16e079e20382533f0d3548d5146c057f",
+          "event_status": "STATUS_FINAL",
+          "score_away": 20,
+          "score_home": 23,
+          "winner_away": 0,
+          "winner_home": 1,
+          "score_away_by_period": [
+            7,
+            3,
+            7,
+            3
+          ],
+          "score_home_by_period": [
+            3,
+            13,
+            0,
+            7
+          ],
+          "venue_name": "Memorial Stadium (Bloomington, IN)",
+          "venue_location": "Bloomington, IN",
+          "game_clock": 0,
+          "display_clock": "0.00",
+          "game_period": 4,
+          "broadcast": "FS1",
+          "event_status_detail": "Final",
+          "updated_at": "2022-09-03T05:04:24Z"
+        },
+        "teams": [
+          {
+            "team_id": 3439,
+            "team_normalized_id": 158,
+            "name": "Illinois",
+            "is_away": true,
+            "is_home": false
+          },
+          {
+            "team_id": 3414,
+            "team_normalized_id": 159,
+            "name": "Indiana",
+            "is_away": false,
+            "is_home": true
+          }
+        ],
+        "teams_normalized": [
+          {
+            "team_id": 158,
+            "name": "Illinois",
+            "mascot": "Fighting Illini",
+            "abbreviation": "ILL",
+            "ranking": 99,
+            "record": "1-1",
+            "is_away": true,
+            "is_home": false
+          },
+          {
+            "team_id": 159,
+            "name": "Indiana",
+            "mascot": "Hoosiers",
+            "abbreviation": "IND",
+            "ranking": 99,
+            "record": "1-0",
+            "is_away": false,
+            "is_home": true
+          }
+        ],
+        "schedule": {
+          "season_type": "Regular Season",
+          "season_year": 2022,
+          "event_name": "Illinois at Indiana - 2022-09-03",
+          "attendance": "0"
+        },
+        "lines": {
+          "1": {
+            "line_id": 15008513,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 105.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 105.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 15008513,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 1,
+              "date_updated": "2022-09-03T00:06:54.334258Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": 0.0001,
+              "point_spread_home_delta": 0.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 105.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": 105.0001,
+              "line_id": 15008513,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 1,
+              "date_updated": "2022-09-03T00:06:54.364765Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -47.4999,
+              "total_under": 0.0001,
+              "total_under_delta": -47.4999,
+              "total_over_money": 0.0001,
+              "total_over_money_delta": 107.0001,
+              "total_under_money": 0.0001,
+              "total_under_money_delta": 103.0001,
+              "line_id": 15008513,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 1,
+              "date_updated": "2022-09-03T00:06:54.390576Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 1,
+              "affiliate_name": "5Dimes",
+              "affiliate_url": "https://bit.ly/3rKIuBh"
+            }
+          },
+          "2": {
+            "line_id": 15012246,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 105.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 115.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 15012246,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 2,
+              "date_updated": "2022-09-03T00:05:26.939201Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": -0.9999,
+              "point_spread_home_delta": 1.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 115.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": 105.0001,
+              "line_id": 15012246,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 2,
+              "date_updated": "2022-09-03T00:05:26.958051Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -47.9999,
+              "total_under": 0.0001,
+              "total_under_delta": -47.9999,
+              "total_over_money": 0.0001,
+              "total_over_money_delta": 105.0001,
+              "total_under_money": 0.0001,
+              "total_under_money_delta": 115.0001,
+              "line_id": 15012246,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 2,
+              "date_updated": "2022-09-03T00:05:26.982924Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 2,
+              "affiliate_name": "Bovada",
+              "affiliate_url": "https://www.bovada.lv/"
+            }
+          },
+          "3": {
+            "line_id": 16928973,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 108.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 104.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 16928973,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 3,
+              "date_updated": "2022-09-03T00:01:09.882917Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": -0.9999,
+              "point_spread_home_delta": 1.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 114.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": -100.9999,
+              "line_id": 16928973,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 3,
+              "date_updated": "2022-09-03T00:01:09.977683Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -46.9999,
+              "total_under": 0.0001,
+              "total_under_delta": -46.9999,
+              "total_over_money": 0.0001,
+              "total_over_money_delta": 115.0001,
+              "total_under_money": 0.0001,
+              "total_under_money_delta": 102.0001,
+              "line_id": 16928973,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 3,
+              "date_updated": "2022-09-03T00:01:10.091249Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 3,
+              "affiliate_name": "Pinnacle",
+              "affiliate_url": "https://www.pinnacle.com/en/rtn"
+            }
+          },
+          "4": {
+            "line_id": 15007969,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 102.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 118.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 118.0001,
+              "line_id": 15007969,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 4,
+              "date_updated": "2022-09-03T00:10:29.110007Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": -0.9999,
+              "point_spread_home_delta": 1.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 107.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": 113.0001,
+              "line_id": 15007969,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 4,
+              "date_updated": "2022-09-03T00:10:29.136193Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -47.4999,
+              "total_under": 0.0001,
+              "total_under_delta": -47.4999,
+              "total_over_money": 0.0001,
+              "total_over_money_delta": 110.0001,
+              "total_under_money": 0.0001,
+              "total_under_money_delta": 110.0001,
+              "line_id": 15007969,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 4,
+              "date_updated": "2022-09-03T00:10:29.169133Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 4,
+              "affiliate_name": "SportsBetting",
+              "affiliate_url": "http://bit.ly/2JT73M1"
+            }
+          },
+          "6": {
+            "line_id": 15008351,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 102.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 118.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 118.0001,
+              "line_id": 15008351,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 6,
+              "date_updated": "2022-09-03T00:08:58.619342Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": -0.9999,
+              "point_spread_home_delta": 1.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 107.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": 113.0001,
+              "line_id": 15008351,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 6,
+              "date_updated": "2022-09-03T00:08:58.636024Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -47.4999,
+              "total_under": 0.0001,
+              "total_under_delta": -47.4999,
+              "total_over_money": 0.0001,
+              "total_over_money_delta": 110.0001,
+              "total_under_money": 0.0001,
+              "total_under_money_delta": 110.0001,
+              "line_id": 15008351,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 6,
+              "date_updated": "2022-09-03T00:08:58.669144Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 6,
+              "affiliate_name": "BetOnline",
+              "affiliate_url": "http://bit.ly/3oogty4"
+            }
+          },
+          "11": {
+            "line_id": 15008221,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 102.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 118.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 118.0001,
+              "line_id": 15008221,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 11,
+              "date_updated": "2022-09-03T00:07:18.616959Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": -0.9999,
+              "point_spread_home_delta": 1.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 105.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": 105.0001,
+              "line_id": 15008221,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 11,
+              "date_updated": "2022-09-03T00:07:18.861281Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -47.4999,
+              "total_under": 0.0001,
+              "total_under_delta": -47.4999,
+              "total_over_money": 0.0001,
+              "total_over_money_delta": 108.0001,
+              "total_under_money": 0.0001,
+              "total_under_money_delta": 108.0001,
+              "line_id": 15008221,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 11,
+              "date_updated": "2022-09-03T00:07:19.161881Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 11,
+              "affiliate_name": "LowVig",
+              "affiliate_url": "https://sportsbook.lowvig.ag/"
+            }
+          },
+          "12": {
+            "line_id": 15012329,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 105.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 115.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 15012329,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 12,
+              "date_updated": "2022-09-03T00:05:40.316622Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": -0.9999,
+              "point_spread_home_delta": 1.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 115.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": 105.0001,
+              "line_id": 15012329,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 12,
+              "date_updated": "2022-09-03T00:05:40.341062Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -47.9999,
+              "total_under": 0.0001,
+              "total_under_delta": -47.9999,
+              "total_over_money": 0.0001,
+              "total_over_money_delta": 105.0001,
+              "total_under_money": 0.0001,
+              "total_under_money_delta": 115.0001,
+              "line_id": 15012329,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 12,
+              "date_updated": "2022-09-03T00:05:40.369711Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 12,
+              "affiliate_name": "Bodog",
+              "affiliate_url": "https://bit.ly/2Z5uFkw"
+            }
+          },
+          "14": {
+            "line_id": 15008013,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 105.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 115.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 15008013,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 14,
+              "date_updated": "2022-09-02T23:24:36.913681Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": 0.0001,
+              "point_spread_home_delta": 0.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 110.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": 110.0001,
+              "line_id": 15008013,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 14,
+              "date_updated": "2022-09-03T00:00:14.082703Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -47.4999,
+...
+```
+
+Request:
+
+```json
+{
+  "id": "1",
+  "data": {
+    "endpoint": "schedule",
+    "sportId": 1,
+    "date": 1662222667,
+    "market": "resolve",
+    "gameIds": ["00000000000000000000000000000000"]
+  },
+  "debug": {
+    "cacheKey": "TK1bQjQ8sYPusVFr/IrM7C/j8hs="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": "1",
+  "data": {
+    "meta": {
+      "delta_last_id": "11ed-2ba1-76ba4000-8abb-6ce0bc65650d"
+    },
+    "events": [
+      {
+        "event_id": "16e079e20382533f0d3548d5146c057f",
+        "event_uuid": "11ed-2b1b-5a73c000-8efb-1ccdebf9ca4a",
+        "sport_id": 1,
+        "event_date": "2022-09-03T00:00:00Z",
+        "rotation_number_away": 153,
+        "rotation_number_home": 154,
+        "score": {
+          "event_id": "16e079e20382533f0d3548d5146c057f",
+          "event_status": "STATUS_FINAL",
+          "score_away": 20,
+          "score_home": 23,
+          "winner_away": 0,
+          "winner_home": 1,
+          "score_away_by_period": [
+            7,
+            3,
+            7,
+            3
+          ],
+          "score_home_by_period": [
+            3,
+            13,
+            0,
+            7
+          ],
+          "venue_name": "Memorial Stadium (Bloomington, IN)",
+          "venue_location": "Bloomington, IN",
+          "game_clock": 0,
+          "display_clock": "0.00",
+          "game_period": 4,
+          "broadcast": "FS1",
+          "event_status_detail": "Final",
+          "updated_at": "2022-09-03T05:04:24Z"
+        },
+        "teams": [
+          {
+            "team_id": 3439,
+            "team_normalized_id": 158,
+            "name": "Illinois",
+            "is_away": true,
+            "is_home": false
+          },
+          {
+            "team_id": 3414,
+            "team_normalized_id": 159,
+            "name": "Indiana",
+            "is_away": false,
+            "is_home": true
+          }
+        ],
+        "teams_normalized": [
+          {
+            "team_id": 158,
+            "name": "Illinois",
+            "mascot": "Fighting Illini",
+            "abbreviation": "ILL",
+            "ranking": 99,
+            "record": "1-1",
+            "is_away": true,
+            "is_home": false
+          },
+          {
+            "team_id": 159,
+            "name": "Indiana",
+            "mascot": "Hoosiers",
+            "abbreviation": "IND",
+            "ranking": 99,
+            "record": "1-0",
+            "is_away": false,
+            "is_home": true
+          }
+        ],
+        "schedule": {
+          "season_type": "Regular Season",
+          "season_year": 2022,
+          "event_name": "Illinois at Indiana - 2022-09-03",
+          "attendance": "0"
+        },
+        "lines": {
+          "1": {
+            "line_id": 15008513,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 105.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 105.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 15008513,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 1,
+              "date_updated": "2022-09-03T00:06:54.334258Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": 0.0001,
+              "point_spread_home_delta": 0.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 105.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": 105.0001,
+              "line_id": 15008513,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 1,
+              "date_updated": "2022-09-03T00:06:54.364765Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -47.4999,
+              "total_under": 0.0001,
+              "total_under_delta": -47.4999,
+              "total_over_money": 0.0001,
+              "total_over_money_delta": 107.0001,
+              "total_under_money": 0.0001,
+              "total_under_money_delta": 103.0001,
+              "line_id": 15008513,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 1,
+              "date_updated": "2022-09-03T00:06:54.390576Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 1,
+              "affiliate_name": "5Dimes",
+              "affiliate_url": "https://bit.ly/3rKIuBh"
+            }
+          },
+          "2": {
+            "line_id": 15012246,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 105.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 115.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 15012246,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 2,
+              "date_updated": "2022-09-03T00:05:26.939201Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": -0.9999,
+              "point_spread_home_delta": 1.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 115.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": 105.0001,
+              "line_id": 15012246,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 2,
+              "date_updated": "2022-09-03T00:05:26.958051Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -47.9999,
+              "total_under": 0.0001,
+              "total_under_delta": -47.9999,
+              "total_over_money": 0.0001,
+              "total_over_money_delta": 105.0001,
+              "total_under_money": 0.0001,
+              "total_under_money_delta": 115.0001,
+              "line_id": 15012246,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 2,
+              "date_updated": "2022-09-03T00:05:26.982924Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 2,
+              "affiliate_name": "Bovada",
+              "affiliate_url": "https://www.bovada.lv/"
+            }
+          },
+          "3": {
+            "line_id": 16928973,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 108.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 104.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 16928973,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 3,
+              "date_updated": "2022-09-03T00:01:09.882917Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": -0.9999,
+              "point_spread_home_delta": 1.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 114.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": -100.9999,
+              "line_id": 16928973,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 3,
+              "date_updated": "2022-09-03T00:01:09.977683Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -46.9999,
+              "total_under": 0.0001,
+              "total_under_delta": -46.9999,
+              "total_over_money": 0.0001,
+              "total_over_money_delta": 115.0001,
+              "total_under_money": 0.0001,
+              "total_under_money_delta": 102.0001,
+              "line_id": 16928973,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 3,
+              "date_updated": "2022-09-03T00:01:10.091249Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 3,
+              "affiliate_name": "Pinnacle",
+              "affiliate_url": "https://www.pinnacle.com/en/rtn"
+            }
+          },
+          "4": {
+            "line_id": 15007969,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 102.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 118.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 118.0001,
+              "line_id": 15007969,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 4,
+              "date_updated": "2022-09-03T00:10:29.110007Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": -0.9999,
+              "point_spread_home_delta": 1.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 107.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": 113.0001,
+              "line_id": 15007969,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 4,
+              "date_updated": "2022-09-03T00:10:29.136193Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -47.4999,
+              "total_under": 0.0001,
+              "total_under_delta": -47.4999,
+              "total_over_money": 0.0001,
+              "total_over_money_delta": 110.0001,
+              "total_under_money": 0.0001,
+              "total_under_money_delta": 110.0001,
+              "line_id": 15007969,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 4,
+              "date_updated": "2022-09-03T00:10:29.169133Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 4,
+              "affiliate_name": "SportsBetting",
+              "affiliate_url": "http://bit.ly/2JT73M1"
+            }
+          },
+          "6": {
+            "line_id": 15008351,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 102.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 118.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 118.0001,
+              "line_id": 15008351,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 6,
+              "date_updated": "2022-09-03T00:08:58.619342Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": -0.9999,
+              "point_spread_home_delta": 1.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 107.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": 113.0001,
+              "line_id": 15008351,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 6,
+              "date_updated": "2022-09-03T00:08:58.636024Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -47.4999,
+              "total_under": 0.0001,
+              "total_under_delta": -47.4999,
+              "total_over_money": 0.0001,
+              "total_over_money_delta": 110.0001,
+              "total_under_money": 0.0001,
+              "total_under_money_delta": 110.0001,
+              "line_id": 15008351,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 6,
+              "date_updated": "2022-09-03T00:08:58.669144Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 6,
+              "affiliate_name": "BetOnline",
+              "affiliate_url": "http://bit.ly/3oogty4"
+            }
+          },
+          "11": {
+            "line_id": 15008221,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 102.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 118.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 118.0001,
+              "line_id": 15008221,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 11,
+              "date_updated": "2022-09-03T00:07:18.616959Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": -0.9999,
+              "point_spread_home_delta": 1.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 105.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": 105.0001,
+              "line_id": 15008221,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 11,
+              "date_updated": "2022-09-03T00:07:18.861281Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -47.4999,
+              "total_under": 0.0001,
+              "total_under_delta": -47.4999,
+              "total_over_money": 0.0001,
+              "total_over_money_delta": 108.0001,
+              "total_under_money": 0.0001,
+              "total_under_money_delta": 108.0001,
+              "line_id": 15008221,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 11,
+              "date_updated": "2022-09-03T00:07:19.161881Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 11,
+              "affiliate_name": "LowVig",
+              "affiliate_url": "https://sportsbook.lowvig.ag/"
+            }
+          },
+          "12": {
+            "line_id": 15012329,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 105.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 115.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 15012329,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 12,
+              "date_updated": "2022-09-03T00:05:40.316622Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": -0.9999,
+              "point_spread_home_delta": 1.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 115.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": 105.0001,
+              "line_id": 15012329,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 12,
+              "date_updated": "2022-09-03T00:05:40.341062Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -47.9999,
+              "total_under": 0.0001,
+              "total_under_delta": -47.9999,
+              "total_over_money": 0.0001,
+              "total_over_money_delta": 105.0001,
+              "total_under_money": 0.0001,
+              "total_under_money_delta": 115.0001,
+              "line_id": 15012329,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 12,
+              "date_updated": "2022-09-03T00:05:40.369711Z",
+              "format": "American"
+            },
+            "affiliate": {
+              "affiliate_id": 12,
+              "affiliate_name": "Bodog",
+              "affiliate_url": "https://bit.ly/2Z5uFkw"
+            }
+          },
+          "14": {
+            "line_id": 15008013,
+            "moneyline": {
+              "moneyline_away": 0.0001,
+              "moneyline_away_delta": 105.0001,
+              "moneyline_home": 0.0001,
+              "moneyline_home_delta": 115.0001,
+              "moneyline_draw": 0.0001,
+              "moneyline_draw_delta": 0,
+              "line_id": 15008013,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 14,
+              "date_updated": "2022-09-02T23:24:36.913681Z",
+              "format": "American"
+            },
+            "spread": {
+              "point_spread_away": 0.0001,
+              "point_spread_home": 0.0001,
+              "point_spread_away_delta": 0.0001,
+              "point_spread_home_delta": 0.0001,
+              "point_spread_away_money": 0.0001,
+              "point_spread_away_money_delta": 110.0001,
+              "point_spread_home_money": 0.0001,
+              "point_spread_home_money_delta": 110.0001,
+              "line_id": 15008013,
+              "event_id": "16e079e20382533f0d3548d5146c057f",
+              "sport_id": 1,
+              "affiliate_id": 14,
+              "date_updated": "2022-09-03T00:00:14.082703Z",
+              "format": "American"
+            },
+            "total": {
+              "total_over": 0.0001,
+              "total_over_delta": -47.4999,
+...
+```
+
 </details>
 
 ---
-MIT License 
+
+MIT License

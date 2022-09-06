@@ -111,8 +111,9 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   }
 
   if (market === Market.CREATE) {
+    const statuses = marketToStatus.get(Market.CREATE) as string[]
     const filteredEvents = events.filter((event: Event) => {
-      return (marketToStatus.get(Market.CREATE) as string[]).includes(event.score?.event_status)
+      return filterByEventId(event, gameIds) && filterEventStatus(event, statuses)
     })
     let gameCreateList: GameCreate[]
     let encodedGameCreateList: string[]
