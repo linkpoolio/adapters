@@ -82,7 +82,6 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
       ...config.api.headers,
       'x-rapidapi-key': config.apiKey,
     },
-
     url,
   }
 
