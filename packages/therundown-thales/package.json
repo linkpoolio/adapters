@@ -1,6 +1,6 @@
 {
   "name": "@chainlink/therundown-thales-adapter",
-  "version": "3.0.0",
+  "version": "2.1.0",
   "description": "Chainlink therundown-thales adapter.",
   "keywords": [
     "Chainlink",

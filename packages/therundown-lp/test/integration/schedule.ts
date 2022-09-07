@@ -6,8 +6,10 @@ import {
   mockScheduleResponseError,
   mockScheduleResponseMalformedMarketCreate,
   mockScheduleResponseMalformedMarketResolve,
-  mockScheduleResponseSuccessCreate,
-  mockScheduleResponseSuccessResolve,
+  mockScheduleResponseSuccessMarketCreate,
+  mockScheduleResponseSuccessMarketCreate2,
+  mockScheduleResponseSuccessMarketResolve,
+  mockScheduleResponseSuccessMarketResolve2,
 } from './fixtures'
 
 export function scheduleTests(context: SuiteContext): void {
@@ -90,7 +92,7 @@ export function scheduleTests(context: SuiteContext): void {
 
   describe('success calls', () => {
     describe('when successfully requesting Therundown API', () => {
-      it('should return correct endpoint result (case create market)', async () => {
+      it('should return 1 result (case create market)', async () => {
         const data: AdapterRequest = {
           id,
           data: {
@@ -100,7 +102,7 @@ export function scheduleTests(context: SuiteContext): void {
             market: 'create',
           },
         }
-        mockScheduleResponseSuccessCreate()
+        mockScheduleResponseSuccessMarketCreate()
 
         const response = await context.req
           .post('/')
@@ -114,7 +116,57 @@ export function scheduleTests(context: SuiteContext): void {
         expect(response.body).toMatchSnapshot()
       })
 
-      it('should return correct endpoint result (case resolve market)', async () => {
+      it('should return 2 results (case create market filtering by gameIds)', async () => {
+        const data: AdapterRequest = {
+          id,
+          data: {
+            endpoint: 'schedule',
+            sportId: 1,
+            date: 1662817303,
+            market: 'create',
+            gameIds: ['0017049a376cd9c73345507767295c74', '03a242a346a63835d9ba1797f3a10ff8'],
+          },
+        }
+        mockScheduleResponseSuccessMarketCreate2()
+
+        const response = await context.req
+          .post('/')
+          .send(data)
+          .set('Accept', '*/*')
+          .set('Content-Type', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+
+        assertSuccess({ expected: 200, actual: response.statusCode }, response.body, id)
+        expect(response.body).toMatchSnapshot()
+      })
+
+      it('should return 0 results (case create market filtering by gameIds)', async () => {
+        const data: AdapterRequest = {
+          id,
+          data: {
+            endpoint: 'schedule',
+            sportId: 1,
+            date: 1662817303,
+            market: 'create',
+            gameIds: ['00000000000000000000000000000000'],
+          },
+        }
+        mockScheduleResponseSuccessMarketCreate2()
+
+        const response = await context.req
+          .post('/')
+          .send(data)
+          .set('Accept', '*/*')
+          .set('Content-Type', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+
+        assertSuccess({ expected: 200, actual: response.statusCode }, response.body, id)
+        expect(response.body).toMatchSnapshot()
+      })
+
+      it('should return 1 result (case resolve market)', async () => {
         const data: AdapterRequest = {
           id,
           data: {
@@ -124,7 +176,57 @@ export function scheduleTests(context: SuiteContext): void {
             market: 'resolve',
           },
         }
-        mockScheduleResponseSuccessResolve()
+        mockScheduleResponseSuccessMarketResolve()
+
+        const response = await context.req
+          .post('/')
+          .send(data)
+          .set('Accept', '*/*')
+          .set('Content-Type', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+
+        assertSuccess({ expected: 200, actual: response.statusCode }, response.body, id)
+        expect(response.body).toMatchSnapshot()
+      })
+
+      it('should return 2 results (case resolve market filtering by gameIds)', async () => {
+        const data: AdapterRequest = {
+          id,
+          data: {
+            endpoint: 'schedule',
+            sportId: 1,
+            date: 1662222667,
+            market: 'resolve',
+            gameIds: ['392546e145079d0d3d3282b4075d7127', '040265cdc1022e13ef1764b9a72cca43'],
+          },
+        }
+        mockScheduleResponseSuccessMarketResolve2()
+
+        const response = await context.req
+          .post('/')
+          .send(data)
+          .set('Accept', '*/*')
+          .set('Content-Type', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+
+        assertSuccess({ expected: 200, actual: response.statusCode }, response.body, id)
+        expect(response.body).toMatchSnapshot()
+      })
+
+      it('should return 0 results (case resolve market filtering by gameIds)', async () => {
+        const data: AdapterRequest = {
+          id,
+          data: {
+            endpoint: 'schedule',
+            sportId: 1,
+            date: 1662222667,
+            market: 'resolve',
+            gameIds: ['00000000000000000000000000000000'],
+          },
+        }
+        mockScheduleResponseSuccessMarketResolve2()
 
         const response = await context.req
           .post('/')

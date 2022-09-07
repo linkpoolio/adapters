@@ -6,6 +6,7 @@ import {
   mockScheduleResponseError,
   mockScheduleResponseMalformedMarketCreate,
   mockScheduleResponseSuccessMarketCreate,
+  mockScheduleResponseSuccessMarketCreate2,
 } from './fixtures'
 
 export function oddsTests(context: SuiteContext): void {
@@ -70,7 +71,7 @@ export function oddsTests(context: SuiteContext): void {
 
   describe('success calls', () => {
     describe('when successfully requesting Therundown API', () => {
-      it('should return the odds', async () => {
+      it('should return 1 result', async () => {
         const data: AdapterRequest = {
           id,
           data: {
@@ -83,6 +84,60 @@ export function oddsTests(context: SuiteContext): void {
           },
         }
         mockScheduleResponseSuccessMarketCreate()
+
+        const response = await context.req
+          .post('/')
+          .send(data)
+          .set('Accept', '*/*')
+          .set('Content-Type', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+
+        assertSuccess({ expected: 200, actual: response.statusCode }, response.body, id)
+        expect(response.body).toMatchSnapshot()
+      })
+
+      it('should return 2 results (case filtering by gameIds)', async () => {
+        const data: AdapterRequest = {
+          id,
+          data: {
+            endpoint: 'odds',
+            sportId: 1,
+            date: 1662817303,
+            sportIdToBookmakerIds: {
+              '1': [3, 11],
+            },
+            gameIds: ['0017049a376cd9c73345507767295c74', '03a242a346a63835d9ba1797f3a10ff8'],
+          },
+        }
+        mockScheduleResponseSuccessMarketCreate2()
+
+        const response = await context.req
+          .post('/')
+          .send(data)
+          .set('Accept', '*/*')
+          .set('Content-Type', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+
+        assertSuccess({ expected: 200, actual: response.statusCode }, response.body, id)
+        expect(response.body).toMatchSnapshot()
+      })
+
+      it('should return 2 results (case filtering by gameIds)', async () => {
+        const data: AdapterRequest = {
+          id,
+          data: {
+            endpoint: 'odds',
+            sportId: 1,
+            date: 1662817303,
+            sportIdToBookmakerIds: {
+              '1': [3, 11],
+            },
+            gameIds: ['00000000000000000000000000000000'],
+          },
+        }
+        mockScheduleResponseSuccessMarketCreate2()
 
         const response = await context.req
           .post('/')

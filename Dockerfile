@@ -14,8 +14,10 @@ RUN \
   apt-get update && \
   apt-get install -yqq nodejs yarn && \
   npm i -g npm@^6 && \
-  curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python && ln -s /root/.poetry/bin/poetry /usr/local/bin && \
+  curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python - && \
   rm -rf /var/lib/apt/lists/*
+
+ENV PATH="${PATH}:/root/.local/bin"
 
 WORKDIR /home/node/app
 
