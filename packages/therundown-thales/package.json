@@ -1,6 +1,6 @@
 {
   "name": "@chainlink/therundown-thales-adapter",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "Chainlink therundown-thales adapter.",
   "keywords": [
     "Chainlink",
@@ -29,6 +29,7 @@
   "dependencies": {
     "@chainlink/ea-bootstrap": "file:../../vendor/v1.23.0/bootstrap",
     "@chainlink/ea-test-helpers": "file:../../vendor/v1.23.0/test-helpers",
+    "@linkpool/shared": "2.0.0",
     "@reduxjs/toolkit": "^1.6.1",
     "ajv": "^8.6.2",
     "axios": "^0.24.0",

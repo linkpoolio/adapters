@@ -11,6 +11,7 @@ export interface Score {
   winner_away: number
   winner_home: number
   event_status: string
+  updated_at: string
 }
 
 export interface Event {

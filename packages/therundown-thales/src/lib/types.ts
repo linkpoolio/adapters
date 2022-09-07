@@ -1,3 +1,7 @@
+export interface SportIdToBookmakerIds {
+  [key: string]: number[]
+}
+
 export interface Team {
   name: string
   mascot: string
@@ -11,6 +15,7 @@ export interface Score {
   winner_away: number
   winner_home: number
   event_status: string
+  updated_at: string
 }
 
 export interface Moneyline {
