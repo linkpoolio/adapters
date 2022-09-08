@@ -19,27 +19,21 @@ const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _,
     switch (method) {
       case RequestMethod.GET: {
         const getSingleValidator = new Validator(request, getSingleInputParameters)
-        const collectionAddress = (
-          getSingleValidator.validated.data.collectionAddress as string
+        const collectionName = (
+          getSingleValidator.validated.data.collectionName as string
         ).toLowerCase()
-        const network = (getSingleValidator.validated.data.network as string).toLowerCase()
-        result = (await client.floorprices.get({ collectionAddress, network })) as Record<
-          string,
-          any
-        >
+        result = (await client.twaps.get({ collectionName })) as Record<string, any>
         break
       }
       default:
         throw new AdapterError({
           jobRunID,
-          message: `Unsupported 'method' requesting the 'floorprices' endpoint: ${method}`,
+          message: `Unsupported 'method' requesting the 'twaps' endpoint: ${method}`,
           statusCode: 500,
         })
     }
   } catch (error) {
-    ;(
-      error as Error
-    ).message = `Unexpected error requesting the 'floorprices' endpoint. Reason: ${error}`
+    ;(error as Error).message = `Unexpected error requesting the 'twaps' endpoint. Reason: ${error}`
     throw error
   }
 
@@ -53,7 +47,7 @@ const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _,
         default:
           throw new AdapterError({
             jobRunID,
-            message: `Unsupported 'method' reducing the 'floorprices' endpoint result: ${method}`,
+            message: `Unsupported 'method' reducing the 'twaps' endpoint result: ${method}`,
             statusCode: 500,
           })
       }
@@ -61,7 +55,7 @@ const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _,
       throw new AdapterError({
         cause: error,
         jobRunID,
-        message: `Unexpected error reducing the 'floorprices' endpoint result. Reason: ${error}. Result: ${JSON.stringify(
+        message: `Unexpected error reducing the 'twaps' endpoint result. Reason: ${error}. Result: ${JSON.stringify(
           result,
         )}`,
         statusCode: 500,
