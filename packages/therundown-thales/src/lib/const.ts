@@ -129,4 +129,5 @@ export const noDrawOddsSportIds: Set<number> = new Set([
   SportId.MMA,
   SportId.NHL,
   SportId.NBA,
+  SportId.NCAA_Football,
 ])
