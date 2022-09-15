@@ -3,7 +3,6 @@ import { assertError } from '@chainlink/ea-test-helpers'
 import { AdapterContext, AdapterRequest } from '@chainlink/types'
 
 import { makeExecute } from '../../src/adapter'
-import { Provider as ProviderName } from '../../src/api/constants'
 
 describe('controllers', () => {
   const context: AdapterContext = {}
@@ -12,7 +11,6 @@ describe('controllers', () => {
 
   process.env.API_KEY = 'fake-api-key'
   process.env.LOG_LEVEL = 'debug'
-  process.env.API_PROVIDER = ProviderName.RARIFY // API_PROVIDER is not relevant for these tests
 
   describe('floorprices input validation error', () => {
     const requests = [
