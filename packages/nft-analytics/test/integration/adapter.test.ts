@@ -5,8 +5,8 @@ import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
 import { server as startServer } from '../../src'
-import { Provider } from '../../src/api/constants'
-import { testFloorprices } from './rarify/floorprices'
+import { testFloorprices } from './floorprices/get'
+import { testTwaps } from './twaps/get'
 
 let oldEnv: NodeJS.ProcessEnv
 
@@ -19,7 +19,6 @@ beforeAll(() => {
   oldEnv = JSON.parse(JSON.stringify(process.env))
   process.env.CACHE_ENABLED = 'false'
   process.env.WARMUP_ENABLED = 'false'
-  process.env.API_PROVIDER = Provider.RARIFY
   process.env.API_KEY = 'fake-api-key'
 })
 
@@ -42,7 +41,8 @@ describe('execute', () => {
     context.server.close(done)
   })
 
-  describe('rarify', () => {
+  describe('nft-analytics', () => {
     describe('floorprices endpoint', () => testFloorprices(context))
+    describe('twaps endpoint', () => testTwaps(context))
   })
 })

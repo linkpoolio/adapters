@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`execute rarify floorprices endpoint method: get returns a single floorprice 1`] = `
+exports[`execute nft-analytics floorprices endpoint rarify returns a single floorprice 1`] = `
 Object {
   "data": Object {
     "collection": Object {
@@ -22,13 +22,50 @@ Object {
 }
 `;
 
-exports[`execute rarify floorprices endpoint method: get returns an error response when the API errors too 1`] = `
+exports[`execute nft-analytics floorprices endpoint rarify returns an error response when the API errors too 1`] = `
 Object {
   "error": Object {
     "feedID": "{\\"data\\":{\\"endpoint\\":\\"floorprices\\",\\"method\\":\\"get\\",\\"collectionAddress\\":\\"0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d\\",\\"network\\":\\"ethereum\\"}}",
     "message": "Unexpected error requesting the 'floorprices' endpoint. Reason: AdapterError: Request failed with status code 500",
     "name": "AdapterError",
     "url": "https:/api.rarify.tech/data/contracts/ethereum:0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/smart-floor-price",
+  },
+  "jobRunID": 1,
+  "providerStatusCode": 500,
+  "status": "errored",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute nft-analytics twaps endpoint nftperp returns a single twap 1`] = `
+Object {
+  "data": Object {
+    "collection": Object {
+      "contractAddress": null,
+      "imageUrl": null,
+      "name": null,
+      "symbol": null,
+    },
+    "network": null,
+    "timestamp": 1662988500,
+    "twap": Object {
+      "amount": "67607924791666666666",
+      "currency": null,
+      "units": "wei",
+    },
+  },
+  "jobRunID": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute nft-analytics twaps endpoint nftperp returns an error response when the API errors too 1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"twaps\\",\\"method\\":\\"get\\",\\"collectionName\\":\\"boredapeyachtclub\\"}}",
+    "message": "Unexpected error requesting the 'twaps' endpoint. Reason: AdapterError: Request failed with status code 500",
+    "name": "AdapterError",
+    "url": "https:/vdj0xvxta8.execute-api.eu-central-1.amazonaws.com/twap?slug=boredapeyachtclub",
   },
   "jobRunID": 1,
   "providerStatusCode": 500,

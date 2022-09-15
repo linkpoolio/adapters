@@ -97,9 +97,9 @@ export class ReadmeGenerator {
     this.defaultEndpoint = configFile.DEFAULT_ENDPOINT
     this.defaultBaseUrl = configFile.DEFAULT_BASE_URL || configFile.DEFAULT_WS_API_ENDPOINT
 
-    if (this.verbose) console.log(`${this.adapterPath}: Importing src/endpoint/index.ts`)
+    if (this.verbose) console.log(`${this.adapterPath}: Importing src/controllers/index.ts`)
 
-    const endpointPath = checkFilePaths([this.adapterPath + 'src/endpoint/index.ts'])
+    const endpointPath = checkFilePaths([this.adapterPath + 'src/controllers/index.ts'])
     this.endpointDetails = await require(localPathToRoot + endpointPath)
   }
 

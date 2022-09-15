@@ -2,18 +2,21 @@ import { AdapterError, util } from '@chainlink/ea-bootstrap'
 import { Config } from '@chainlink/types'
 
 import { Provider } from './constants'
+import nftperp from './nftperp'
 import rarify from './rarify'
 
 export default (config: Config) => {
-  const provider = util.getEnv('API_PROVIDER')
+  const provider = util.getRequiredEnv('API_PROVIDER')
 
   switch (provider) {
+    case Provider.NFTPERP:
+      return nftperp(config)
     case Provider.RARIFY:
       return rarify(config)
     default: {
       const message = `Unsupported provider: ${provider}. Check API_PROVIDER env var`
       throw new AdapterError({
-        statusCode: 200,
+        statusCode: 500,
         message,
         cause: message,
       })
