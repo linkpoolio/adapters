@@ -2,9 +2,9 @@ import nock from 'nock'
 
 import { Provider as ProviderName, providerToBaseUrl } from '../../../src/api/constants'
 
-const baseUrl = providerToBaseUrl.get(ProviderName.RARIFY) as string
+const baseUrlRarify = providerToBaseUrl.get(ProviderName.RARIFY) as string
 
-const getFloorpricesPayload = {
+const getFloorpricesPayloadRarify = {
   data: {
     id: 'ethereum:bc4ca0eda7647a8ab7c2061c2e118a18a936f13d:1659003693',
     type: 'floor-price',
@@ -19,18 +19,18 @@ const getFloorpricesPayload = {
   included: [],
 }
 
-export const mockFloorpricesGetSingleError = (): nock =>
-  nock(baseUrl, {
+export const mockFloorpricesGetSingleErrorRarify = (): nock =>
+  nock(baseUrlRarify, {
     encodedQueryParams: true,
     reqheaders: { Authorization: `Bearer ${process.env.API_KEY as string}` },
   })
     .get(`/data/contracts/ethereum:0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/smart-floor-price`)
     .reply(500, {})
 
-export const mockFloorpricesGetSingleSuccess = (): nock =>
-  nock(baseUrl, {
+export const mockFloorpricesGetSingleSuccessRarify = (): nock =>
+  nock(baseUrlRarify, {
     encodedQueryParams: true,
     reqheaders: { Authorization: `Bearer ${process.env.API_KEY as string}` },
   })
     .get(`/data/contracts/ethereum:0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/smart-floor-price`)
-    .reply(200, getFloorpricesPayload)
+    .reply(200, getFloorpricesPayloadRarify)

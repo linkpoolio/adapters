@@ -4,14 +4,8 @@ import { sharedInputParameters } from '../input'
 
 export const getSingleInputParameters: InputParameters = {
   ...sharedInputParameters,
-  collectionAddress: {
-    description: 'The contract address',
-    required: true,
-    type: 'string',
-  },
-  // NB: rarify currently only supports: ethereum, polygon
-  network: {
-    description: 'The network name, e.g. ethereum, polygon',
+  collectionName: {
+    description: 'The NFT collection name.',
     required: true,
     type: 'string',
   },

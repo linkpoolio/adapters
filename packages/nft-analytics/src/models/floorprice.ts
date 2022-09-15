@@ -52,7 +52,7 @@ const Single = (payload: RarifyFloorPricesGetPayload, provider: Provider): IFloo
       message: `Unexpected error transforming the ${provider} payload: ${JSON.stringify(
         payload,
       )}. Reason: ${error}`,
-      statusCode: 200,
+      statusCode: 500,
     })
   }
   return floorPrice
