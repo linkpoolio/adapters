@@ -92,7 +92,6 @@ export async function main(): Promise<void | string> {
       return map
     }, {})
     adapters = adapters.filter((a) => !adapterInBlacklist[a.name])
-
     // Collect new README versions
     const readmeQueue = await Promise.all(
       adapters.map(async (adapter: Adapter) => {
