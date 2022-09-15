@@ -1,5 +1,5 @@
 export enum Endpoint {
-  address = 'address',
+  addresses = 'addresses',
 }
 
 export enum RequestMethod {

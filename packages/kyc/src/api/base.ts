@@ -5,5 +5,5 @@ export interface IAddresses {
 }
 
 export interface Base {
-  address: IAddresses
+  addresses: IAddresses
 }
