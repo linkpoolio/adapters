@@ -1,5 +1,5 @@
 import { AdapterError } from '@chainlink/ea-bootstrap'
-import { formatEnumValuesPretty } from '@linkpool/shared'
+import { enums } from '@linkpool/shared'
 
 import type { SupportedApiProviderConfig } from '../config/types'
 import ciphertrace from './ciphertrace'
@@ -12,7 +12,9 @@ export default (config: SupportedApiProviderConfig) => {
     default: {
       const message = `Unsupported provider: ${
         config.apiProvider
-      }. Supported providers are: ${formatEnumValuesPretty(Provider)}. Check API_PROVIDER env var`
+      }. Supported providers are: ${enums.formatEnumValuesPretty(
+        Provider as unknown as Record<string, number>,
+      )}. Check API_PROVIDER env var`
       throw new AdapterError({
         statusCode: 500,
         message,

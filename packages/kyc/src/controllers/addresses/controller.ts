@@ -22,7 +22,6 @@ const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _,
         const getSingleValidator = new Validator(request, getSingleInputParameters)
         const address = (getSingleValidator.validated.data.lookupAddress as string).toLowerCase()
         const network = (getSingleValidator.validated.data.network as string).toUpperCase()
-        console.log('*** here')
         result = (await client.addresses.get({ network, address })) as Record<string, any>
         break
       }

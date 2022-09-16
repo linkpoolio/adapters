@@ -2,7 +2,7 @@ import { S3Client, SelectObjectContentCommand } from '@aws-sdk/client-s3'
 import { injector } from '@linkpool/shared'
 
 import type { ApiProviderConfigCiphertrace } from '../../config/types'
-import { Base } from '../base'
+import type { Base } from '../types'
 import addresses from './addresses'
 
 const Fetch = (config: ApiProviderConfigCiphertrace) => {

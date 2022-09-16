@@ -1,8 +1,8 @@
 import { AdapterError } from '@chainlink/ea-bootstrap'
 
-import type { AddressesGetPayload, AddressesGetPayloadItem } from '../api/base'
 import type { Record } from '../api/ciphertrace/types'
 import { Provider } from '../api/constants'
+import type { AddressesGetPayload, AddressesGetPayloadItem } from '../api/types'
 
 export interface IAddress {
   network: string

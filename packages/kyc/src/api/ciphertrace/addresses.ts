@@ -1,16 +1,12 @@
 import Address from '../../models/address'
 import type { IAddress } from '../../models/address'
-import type { AddressesGetInput, IAddresses } from '../base'
 import { Provider } from '../constants'
+import type { AddressesGetInput, IAddresses } from '../types'
 import type { CiphertraceAddressesGetPayload } from './types'
 
 export default (fetch): IAddresses => ({
   get: async (input: AddressesGetInput): Promise<IAddress> => {
     const response = await fetch()
-    console.log('*****************')
-    console.log(response)
-    console.log('*****************')
-    // TODO: here
     if (!('Payload' in response)) {
       throw new Error(
         `Unexpected S3Client response: missing 'Payload'. Response: ${JSON.stringify(response)}`,
@@ -20,6 +16,7 @@ export default (fetch): IAddresses => ({
     const records = []
     try {
       for await (const val of response.Payload) {
+        // TODO: missing types
         // @ts-expect-error: missing types
         if (val.Records) records.push(val.Records?.Payload)
       }
@@ -31,12 +28,10 @@ export default (fetch): IAddresses => ({
     payloadString = `[${payloadString.substring(0, payloadString.length - 1)}]`
     const payload = JSON.parse(payloadString) as CiphertraceAddressesGetPayload
 
-    console.log('*** payload', payload)
     const addresses = Address.List(payload, Provider.CIPHERTRACE)
     const filteredAddresses = addresses.filter(
       (address: IAddress) => address.address === input.address && address.network === input.network,
     )
-    // TODO: what if more than 1 result? Etc? Add them in a set?
     return filteredAddresses[0]
   },
 })

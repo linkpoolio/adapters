@@ -4,11 +4,11 @@ export interface ApiProviderConfig extends Config {
   apiProvider: string
 }
 
-export interface ApiProviderConfigCiphertrace extends ApiProviderConfig {
+export interface CiphertraceApiProviderConfig extends ApiProviderConfig {
   s3Client: {
     accessKey: string
     secretKey: string
   }
 }
 
-export type SupportedApiProviderConfig = ApiProviderConfigCiphertrace
+export type SupportedApiProviderConfig = CiphertraceApiProviderConfig

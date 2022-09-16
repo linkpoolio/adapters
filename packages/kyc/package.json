@@ -27,7 +27,7 @@
     "hoistingLimits": "workspaces"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.145.0",
+    "@aws-sdk/client-s3": "^3.171.0",
     "@chainlink/ea-bootstrap": "file:../../vendor/v1.23.0/bootstrap",
     "@chainlink/ea-test-helpers": "file:../../vendor/v1.23.0/test-helpers",
     "@linkpool/shared": "2.0.0",

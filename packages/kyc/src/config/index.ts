@@ -1,5 +1,5 @@
 import { AdapterError, Requester, util } from '@chainlink/ea-bootstrap'
-import { formatEnumValuesPretty } from '@linkpool/shared'
+import { enums } from '@linkpool/shared'
 
 import { Provider } from '../api/constants'
 import type { ApiProviderConfig, SupportedApiProviderConfig } from './types'
@@ -25,7 +25,9 @@ export const makeConfig = (prefix?: string): SupportedApiProviderConfig => {
     default: {
       const message = `Unsupported provider: ${
         config.apiProvider
-      }. Supported providers are: ${formatEnumValuesPretty(Provider)}. Check API_PROVIDER env var`
+      }. Supported providers are: ${enums.formatEnumValuesPretty(
+        Provider as unknown as Record<string, number>,
+      )}. Check API_PROVIDER env var`
       throw new AdapterError({
         statusCode: 500,
         message,
