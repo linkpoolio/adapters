@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute exchange-analytics funding-rates endpoint binance returns a single floorprice 1`] = `
+Object {
+  "data": Object {
+    "nextFunding": Object {
+      "rate": -0.000019615725081026844,
+      "timestamp": 1663344000,
+    },
+  },
+  "jobRunID": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute exchange-analytics funding-rates endpoint binance returns an error response when the API errors too 1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"funding-rates\\",\\"method\\":\\"get\\",\\"asset\\":\\"ETH\\"}}",
+    "message": "Unexpected error requesting the 'funding-rates' endpoint. Reason: AdapterError: Request failed with status code 500",
+    "name": "AdapterError",
+    "url": "https:/fapi.binance.com/fapi/v1/premiumIndex?symbol=ETHUSDT",
+  },
+  "jobRunID": 1,
+  "providerStatusCode": 500,
+  "status": "errored",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute exchange-analytics funding-rates endpoint bybit returns a single floorprice 1`] = `
+Object {
+  "data": Object {
+    "nextFunding": Object {
+      "rate": -0.00001119125,
+      "timestamp": 1663315200,
+    },
+  },
+  "jobRunID": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute exchange-analytics funding-rates endpoint bybit returns an error response when the API errors too 1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"funding-rates\\",\\"method\\":\\"get\\",\\"asset\\":\\"ETH\\"}}",
+    "message": "Unexpected error requesting the 'funding-rates' endpoint. Reason: AdapterError: Request failed with status code 500",
+    "name": "AdapterError",
+    "url": "https:/api.bybit.com/v2/public/funding/prev-funding-rate?symbol=ETHUSD",
+  },
+  "jobRunID": 1,
+  "providerStatusCode": 500,
+  "status": "errored",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute exchange-analytics funding-rates endpoint ftx returns a single floorprice 1`] = `
+Object {
+  "data": Object {
+    "nextFunding": Object {
+      "rate": -0.000005,
+      "timestamp": 1663336800,
+    },
+  },
+  "jobRunID": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute exchange-analytics funding-rates endpoint ftx returns an error response when the API errors too 1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"funding-rates\\",\\"method\\":\\"get\\",\\"asset\\":\\"ETH\\"}}",
+    "message": "Unexpected error requesting the 'funding-rates' endpoint. Reason: AdapterError: Request failed with status code 500",
+    "name": "AdapterError",
+    "url": "https:/ftx.com/api/futures/ETH-PERP/stats",
+  },
+  "jobRunID": 1,
+  "providerStatusCode": 500,
+  "status": "errored",
+  "statusCode": 200,
+}
+`;

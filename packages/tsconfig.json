@@ -33,6 +33,9 @@
       "path": "./enetscores"
     },
     {
+      "path": "./exchange-analytics"
+    },
+    {
       "path": "./freelance-jobs"
     },
     {
