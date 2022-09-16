@@ -20,8 +20,8 @@ beforeAll(() => {
   process.env.CACHE_ENABLED = 'false'
   process.env.WARMUP_ENABLED = 'false'
   process.env.API_PROVIDER = 'ciphertrace'
-  process.env.ACCESS_KEY = 'fake-access-key'
-  process.env.SECRET_KEY = 'fake-secret-key'
+  process.env.CIPHERTRACE_ACCESS_KEY = 'fake-access-key'
+  process.env.CIPHERTRACE_SECRET_KEY = 'fake-secret-key'
 })
 
 afterAll(() => {

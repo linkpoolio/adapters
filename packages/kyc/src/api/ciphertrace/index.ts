@@ -1,20 +1,16 @@
 import { S3Client, SelectObjectContentCommand } from '@aws-sdk/client-s3'
-import { util } from '@chainlink/ea-bootstrap'
 import { injector } from '@linkpool/shared'
 
+import type { ApiProviderConfigCiphertrace } from '../../config/types'
 import { Base } from '../base'
 import addresses from './addresses'
-import type { ConfigCiphertrace } from './types'
 
-const Fetch = async (): Promise<any> => {
-  const accessKeyId = util.getEnv('ACCESS_KEY') as string
-  const secretAccessKey = util.getEnv('SECRET_KEY') as string
-
+const Fetch = (config: ApiProviderConfigCiphertrace) => {
   const client = new S3Client({
     region: 'us-east-2',
     credentials: {
-      accessKeyId: config.s3Client.accessKeyId,
-      secretAccessKey: config.s3Client.secretAccessKey,
+      accessKeyId: config.s3Client.accessKey,
+      secretAccessKey: config.s3Client.secretKey,
     },
   })
   const command = new SelectObjectContentCommand({
@@ -30,28 +26,14 @@ const Fetch = async (): Promise<any> => {
     ExpressionType: 'SQL',
     Expression: 'SELECT * FROM s3object s',
   })
+
   return async (): Promise<any> => {
-    let response = client.send(command)
-    const records: any[] = []
-
-    console.log(response.Payload)
-    
-    if (response.Payload)
-      for await (const val of response.Payload) {
-        if (val.Records) records.push(val.Records?.Payload)
-      }
-
-    let recordString = Buffer.concat(records as Uint8Array[]).toString('utf8')
-    recordString = `[${recordString.substring(0, recordString.length - 1)}]`
-
-    response = JSON.parse(recordString)
-
-    return response
+    return client.send(command)
   }
 }
 
-const Provider = (): Base => {
-  const fetch = Fetch
+const Provider = (config: ApiProviderConfigCiphertrace): Base => {
+  const fetch = Fetch(config)
   const endpoints = {
     addresses,
   }

@@ -1,13 +1,11 @@
-import { Config } from '@chainlink/types'
+export interface CiphertraceAddressesGetInput {
+  address: string
+  network: string
+}
 
 export type CiphertraceAddressesGetPayload = Array<Record>
 
 export interface Record {
   Blockchain: string
   Address: string
-}
-
-export interface InputParameters {
-  network: number
-  lookupAddress: string
 }

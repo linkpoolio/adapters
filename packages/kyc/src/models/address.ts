@@ -1,6 +1,7 @@
 import { AdapterError } from '@chainlink/ea-bootstrap'
 
-import { CiphertraceAddressGetPayload } from '../api/ciphertrace/types'
+import type { AddressesGetPayload, AddressesGetPayloadItem } from '../api/base'
+import type { Record } from '../api/ciphertrace/types'
 import { Provider } from '../api/constants'
 
 export interface IAddress {
@@ -10,33 +11,33 @@ export interface IAddress {
 }
 
 const transformer = {
-  [Provider.CIPHERTRACE]: (payload: CiphertraceAddressGetPayload[]): IAddress[] => {
-    return payload.map((payloadAddress) => {
-      return {
-        network: payloadAddress.Blockchain.toUpperCase() ?? null,
-        address: payloadAddress.Address.toLowerCase() ?? null,
-        isMalicious: payloadAddress.Address === undefined ? false : true,
-      }
-    })
-  },
+  [Provider.CIPHERTRACE]: (record: Record): IAddress => ({
+    network: record.Blockchain.toUpperCase() ?? null,
+    address: record.Address.toLowerCase() ?? null,
+    isMalicious: record.Address === undefined ? false : true,
+  }),
 }
 
-const List = (payload: CiphertraceAddressGetPayload[], provider: Provider): IAddress[] => {
-  let addresses: IAddress[]
+const Single = (payloadItem: AddressesGetPayloadItem, provider: Provider): IAddress => {
+  let address: IAddress
   try {
-    addresses = transformer[provider](payload)
+    address = transformer[provider](payloadItem)
   } catch (error) {
     throw new AdapterError({
       cause: error,
-      message: `Unexpected error transforming the ${provider} payload: ${JSON.stringify(
-        payload,
+      message: `Unexpected error transforming the ${provider} payload item: ${JSON.stringify(
+        payloadItem,
       )}. Reason: ${error}`,
-      statusCode: 200,
+      statusCode: 500,
     })
   }
-  return addresses
+  return address
 }
+
+const List = (payload: AddressesGetPayload, provider: Provider): IAddress[] =>
+  payload.map((payloadItem: AddressesGetPayloadItem) => Single(payloadItem, provider))
 
 export default {
   List,
+  Single,
 }
