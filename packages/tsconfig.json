@@ -48,6 +48,9 @@
       "path": "./heni"
     },
     {
+      "path": "./kyc"
+    },
+    {
       "path": "./nftbank"
     },
     {
@@ -76,9 +79,6 @@
     },
     {
       "path": "./wavebridge"
-    },
-    {
-      "path": "./kyc"
     }
   ]
 }

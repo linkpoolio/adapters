@@ -1,6 +1,6 @@
 import Address from '../../models/address'
 import type { IAddress } from '../../models/address'
-import { Provider } from '../constants'
+import { Provider, addressesGetNotFoundResult } from '../constants'
 import type { AddressesGetInput, IAddresses } from '../types'
 import type { CiphertraceAddressesGetPayload } from './types'
 
@@ -17,7 +17,7 @@ export default (fetch): IAddresses => ({
     try {
       for await (const val of response.Payload) {
         // TODO: missing types
-        // @ts-expect-error: missing types
+        // @ts-expect-error: error TS2345: Argument of type 'any' is not assignable to parameter of type 'never'
         if (val.Records) records.push(val.Records?.Payload)
       }
     } catch (error) {
@@ -32,6 +32,6 @@ export default (fetch): IAddresses => ({
     const filteredAddresses = addresses.filter(
       (address: IAddress) => address.address === input.address && address.network === input.network,
     )
-    return filteredAddresses[0]
+    return filteredAddresses.length ? filteredAddresses[0] : addressesGetNotFoundResult
   },
 })

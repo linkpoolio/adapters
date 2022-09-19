@@ -5,16 +5,16 @@ import { Provider } from '../api/constants'
 import type { AddressesGetPayload, AddressesGetPayloadItem } from '../api/types'
 
 export interface IAddress {
-  network: string
-  address: string
+  network: string | null
+  address: string | null
   isMalicious: boolean
 }
 
 const transformer = {
   [Provider.CIPHERTRACE]: (record: Record): IAddress => ({
-    network: record.Blockchain.toUpperCase() ?? null,
-    address: record.Address.toLowerCase() ?? null,
-    isMalicious: record.Address === undefined ? false : true,
+    network: record?.Blockchain ? record.Blockchain.toUpperCase() : null,
+    address: record?.Address ? record.Address.toLowerCase() : null,
+    isMalicious: !!record?.Address,
   }),
 }
 

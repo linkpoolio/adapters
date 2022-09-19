@@ -1,11 +1,12 @@
 import http from 'http'
 import type { AddressInfo } from 'net'
+import nock from 'nock'
 import process from 'process'
 import request from 'supertest'
 import type { SuperTest, Test } from 'supertest'
 
 import { server as startServer } from '../../src'
-import { addressTests } from './ciphertrace/address'
+import { testAddressesGet } from './addresses/get'
 
 let oldEnv: NodeJS.ProcessEnv
 
@@ -16,16 +17,21 @@ export interface SuiteContext {
 
 beforeAll(() => {
   oldEnv = JSON.parse(JSON.stringify(process.env))
-  process.env.API_VERBOSE = 'true'
   process.env.CACHE_ENABLED = 'false'
   process.env.WARMUP_ENABLED = 'false'
-  process.env.API_PROVIDER = 'ciphertrace'
-  process.env.CIPHERTRACE_ACCESS_KEY = 'fake-access-key'
-  process.env.CIPHERTRACE_SECRET_KEY = 'fake-secret-key'
+  if (process.env.RECORD) {
+    nock.recorder.rec()
+  }
 })
 
 afterAll(() => {
   process.env = oldEnv
+  if (process.env.RECORD) {
+    nock.recorder.play()
+  }
+  nock.restore()
+  nock.cleanAll()
+  nock.enableNetConnect()
 })
 
 describe('execute', () => {
@@ -43,5 +49,7 @@ describe('execute', () => {
     context.server.close(done)
   })
 
-  describe('ciphertrace - address endpoint', () => addressTests(context))
+  describe('endpoint', () => {
+    describe('addresses get', () => testAddressesGet(context))
+  })
 })

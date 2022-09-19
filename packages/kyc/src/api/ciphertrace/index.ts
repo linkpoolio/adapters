@@ -1,11 +1,11 @@
 import { S3Client, SelectObjectContentCommand } from '@aws-sdk/client-s3'
 import { injector } from '@linkpool/shared'
 
-import type { ApiProviderConfigCiphertrace } from '../../config/types'
+import type { CiphertraceApiProviderConfig } from '../../config/types'
 import type { Base } from '../types'
 import addresses from './addresses'
 
-const Fetch = (config: ApiProviderConfigCiphertrace) => {
+const Fetch = (config: CiphertraceApiProviderConfig) => {
   const client = new S3Client({
     region: 'us-east-2',
     credentials: {
@@ -32,7 +32,7 @@ const Fetch = (config: ApiProviderConfigCiphertrace) => {
   }
 }
 
-const Provider = (config: ApiProviderConfigCiphertrace): Base => {
+const Provider = (config: CiphertraceApiProviderConfig): Base => {
   const fetch = Fetch(config)
   const endpoints = {
     addresses,

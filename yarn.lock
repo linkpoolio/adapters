@@ -207,7 +207,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-s3@npm:^3.145.0":
+"@aws-sdk/client-s3@npm:^3.171.0":
   version: 3.171.0
   resolution: "@aws-sdk/client-s3@npm:3.171.0"
   dependencies:
@@ -6358,7 +6358,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@linkpool/kyc-adapter@workspace:packages/kyc"
   dependencies:
-    "@aws-sdk/client-s3": ^3.145.0
+    "@aws-sdk/client-s3": ^3.171.0
     "@chainlink/ea-bootstrap": "file:../../vendor/v1.23.0/bootstrap"
     "@chainlink/ea-test-helpers": "file:../../vendor/v1.23.0/test-helpers"
     "@chainlink/types": "file:../../vendor/v1.23.0/types/@chainlink"
@@ -9294,7 +9294,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.21.3":
+"browserslist@npm:^4.21.3, browserslist@npm:^4.21.4":
   version: 4.21.4
   resolution: "browserslist@npm:4.21.4"
   dependencies:
@@ -9503,9 +9503,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001400":
-  version: 1.0.30001402
-  resolution: "caniuse-lite@npm:1.0.30001402"
-  checksum: 6068ccccd64b357f75388cb2303cf351b686b20800571d0a845bff5c0e0d24f83df0133afbbdd8177a33eb087c93d39ecf359035a52b2feac5f182c946f706ee
+  version: 1.0.30001406
+  resolution: "caniuse-lite@npm:1.0.30001406"
+  checksum: 1ae9701f0c58462f93add1236ed88f51ce3d7939f57afcde720763d1b18f78aa9afb0bfda620d47a32f5e14661e506037835e441ca4437cb821f4bba7bd7bcf8
   languageName: node
   linkType: hard
 
@@ -9968,18 +9968,18 @@ __metadata:
   linkType: hard
 
 "core-js-compat@npm:^3.20.2, core-js-compat@npm:^3.21.0":
-  version: 3.25.1
-  resolution: "core-js-compat@npm:3.25.1"
+  version: 3.25.2
+  resolution: "core-js-compat@npm:3.25.2"
   dependencies:
-    browserslist: ^4.21.3
-  checksum: 34dbec657adc2f660f4cd701709c9c5e27cbd608211c65df09458f80f3e357b9492ba1c5173e17cca72d889dcc6da01268cadf88fb407cf1726e76d301c6143e
+    browserslist: ^4.21.4
+  checksum: 2e3de43cfed9f0f7ca4fe2c529be514aba6b80209fa314bd882aa5d5f8e3f43b59b2f9b174158ec3b321358ba2ed726a937abe7344279c67da1c51422b5f0b93
   languageName: node
   linkType: hard
 
 "core-js-pure@npm:^3.0.1":
-  version: 3.25.1
-  resolution: "core-js-pure@npm:3.25.1"
-  checksum: 0123131ec7ab3a1e56f0b4df4ae659de03d9c245ce281637d4d0f18f9839d8e0cfbfa989bd577ce1b67826f889a7dcc734421f697cf1bbe59f605f29c537a678
+  version: 3.25.2
+  resolution: "core-js-pure@npm:3.25.2"
+  checksum: 8940d844f3a2474b9f51478341b682cb86d998723337f249424a7cdedd321dd2568cb0fbc459bb0f98a9427d23d1a3050aa44644ac2301fe380308ebecd6f28e
   languageName: node
   linkType: hard
 
@@ -10222,9 +10222,9 @@ __metadata:
   linkType: hard
 
 "decimal.js@npm:^10.2.1, decimal.js@npm:^10.3.1":
-  version: 10.4.0
-  resolution: "decimal.js@npm:10.4.0"
-  checksum: 98702d9d817a9e5b3767ea6580e7f3b35544b9454e463a5dd5d3232131470f39067d02864c45cab009eb1200bc162cd26a33d34c622cd79e4657a3e25e95fb4e
+  version: 10.4.1
+  resolution: "decimal.js@npm:10.4.1"
+  checksum: 5da6dc74af5b73d954741b24d404ef6da07841794d9e51412a2708ec384dd7b4bced3365fb178f4cd119b7ef45f0b34344014a4dc0494c8374c5e746df3cb410
   languageName: node
   linkType: hard
 
@@ -10475,9 +10475,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.251":
-  version: 1.4.253
-  resolution: "electron-to-chromium@npm:1.4.253"
-  checksum: 74a4a0f983ffa7c42b1d6847f96c7c333ab86bd2eb374a98ec58ff5ffd2ec9bc6295442bb83b7ba54aeff31a453915b7b0ccf9040863dafb72d8bc182ee1f69f
+  version: 1.4.254
+  resolution: "electron-to-chromium@npm:1.4.254"
+  checksum: 32f0ecb621db44d37fc93017f742a2b1da7302c778b4d6c0fa122cc662f9c50e6576d214048dcac5c9baf835340c954c624f09f2e02c6dea9049c4a839e862e2
   languageName: node
   linkType: hard
 

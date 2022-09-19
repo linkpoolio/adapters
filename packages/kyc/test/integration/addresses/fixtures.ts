@@ -1,6 +1,6 @@
 import nock from 'nock'
 
-export const mockAddressSuccess = (): nock =>
+export const mockAddressesGetSuccess = (): nock =>
   nock('https://adapter-ciphertrace.s3.us-east-2.amazonaws.com:443', { encodedQueryParams: true })
     .post(
       '/ciphertrace.csv',
