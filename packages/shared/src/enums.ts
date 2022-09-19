@@ -8,3 +8,7 @@ export function formatNumericEnumValuesPretty(
 ): string {
   return getNumericEnumValues(data).join(separator)
 }
+
+export function formatEnumValuesPretty(data: Record<string, number>, separator = ','): string {
+  return Object.values(data).join(separator)
+}
