@@ -48,6 +48,9 @@
       "path": "./heni"
     },
     {
+      "path": "./kyc"
+    },
+    {
       "path": "./nftbank"
     },
     {
