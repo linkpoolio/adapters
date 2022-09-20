@@ -1,6 +1,6 @@
 import { Provider } from '../../src/api/constants'
-import IFloorPrice from '../../src/models/floorprice'
-import ITwap from '../../src/models/twap'
+import FloorPrice from '../../src/models/floorprice'
+import Twap from '../../src/models/twap'
 
 describe('models', () => {
   describe('rarify transformer', () => {
@@ -35,7 +35,7 @@ describe('models', () => {
         timestamp: 1659003693,
       }
 
-      expect(IFloorPrice.Single(getFloorPricePayload, Provider.RARIFY)).toEqual(expectedFloorPrice)
+      expect(FloorPrice.Single(getFloorPricePayload, Provider.RARIFY)).toEqual(expectedFloorPrice)
     })
   })
 
@@ -61,7 +61,7 @@ describe('models', () => {
         },
       }
 
-      expect(ITwap.Single(getTwapPayload, Provider.NFTPERP)).toEqual(expectedTwap)
+      expect(Twap.Single(getTwapPayload, Provider.NFTPERP)).toEqual(expectedTwap)
     })
   })
 })
