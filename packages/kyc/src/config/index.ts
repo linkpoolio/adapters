@@ -22,6 +22,12 @@ export const makeConfig = (prefix?: string): SupportedApiProviderConfig => {
         },
       }
     }
+    case Provider.EVEREST: {
+      return {
+        ...config,
+        apiKey: util.getRequiredEnv('EVEREST_API_KEY'),
+      }
+    }
     default: {
       const message = `Unsupported provider: ${
         config.apiProvider
