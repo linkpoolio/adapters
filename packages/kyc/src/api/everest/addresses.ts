@@ -11,6 +11,7 @@ export default (fetch): IAddresses => ({
       address: input.address.toLowerCase(),
     })
     const response = await fetch({ url })
+
     return Address.Single(response.data, Provider.EVEREST)
   },
 })
