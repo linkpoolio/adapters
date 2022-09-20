@@ -30,7 +30,9 @@ export default (fetch): IAddresses => ({
 
     const addresses = Address.List(payload, Provider.CIPHERTRACE)
     const filteredAddresses = addresses.filter(
-      (address: IAddress) => address.address === input.address && address.network === input.network,
+      (address: IAddress) =>
+        address.address === input.address.toLowerCase() &&
+        address.network === input.network.toUpperCase(),
     )
     return filteredAddresses.length ? filteredAddresses[0] : addressesGetNotFoundResult
   },

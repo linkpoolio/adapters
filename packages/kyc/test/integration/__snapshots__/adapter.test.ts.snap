@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`execute endpoint addresses get everest fails to request the API (case: status code 400)  1`] = `
+Object {
+  "error": Object {
+    "errorResponse": "address url param does not match the ethereum address pattern",
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"addresses\\",\\"method\\":\\"get\\",\\"address\\":\\"1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2\\"}}",
+    "message": "Unexpected error requesting the 'addresses' endpoint. Reason: AdapterError: Request failed with status code 400",
+    "name": "AdapterError",
+    "url": "https:/distributedlab-everest-chainlink.3xm.dev.identitynetwork.io/everest-chainlink/status/1bvbmseystwetqtfn5au4m4gfg7xjanvn2",
+  },
+  "jobRunID": 1,
+  "providerStatusCode": 400,
+  "status": "errored",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute endpoint addresses get everest fails to request the API (case: status code 500)  1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"addresses\\",\\"method\\":\\"get\\",\\"address\\":\\"0x5B38Da6a701c568545dCfcB03FcB875f56beddC4\\"}}",
+    "message": "Unexpected error requesting the 'addresses' endpoint. Reason: AdapterError: Request failed with status code 500",
+    "name": "AdapterError",
+    "url": "https:/distributedlab-everest-chainlink.3xm.dev.identitynetwork.io/everest-chainlink/status/0x5b38da6a701c568545dcfcb03fcb875f56beddc4",
+  },
+  "jobRunID": 1,
+  "providerStatusCode": 500,
+  "status": "errored",
+  "statusCode": 200,
+}
+`;
+
+exports[`execute endpoint addresses get everest returns a single address (case: is human and unique) 1`] = `
+Object {
+  "data": Object {
+    "address": null,
+    "aml": Object {
+      "isSanctioned": null,
+    },
+    "isFound": true,
+    "kyc": Object {
+      "status": 1,
+      "timestamp": 0,
+    },
+    "network": null,
+  },
+  "jobRunID": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute endpoint addresses get everest returns a single address (case: is kyc user) 1`] = `
+Object {
+  "data": Object {
+    "address": null,
+    "aml": Object {
+      "isSanctioned": null,
+    },
+    "isFound": true,
+    "kyc": Object {
+      "status": 2,
+      "timestamp": 1661786511,
+    },
+    "network": null,
+  },
+  "jobRunID": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute endpoint addresses get everest returns a single address (case: is not found) 1`] = `
+Object {
+  "data": Object {
+    "address": null,
+    "aml": Object {
+      "isSanctioned": null,
+    },
+    "isFound": false,
+    "kyc": Object {
+      "status": 0,
+      "timestamp": 0,
+    },
+    "network": null,
+  },
+  "jobRunID": 1,
+  "statusCode": 200,
+}
+`;

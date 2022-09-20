@@ -4,15 +4,16 @@ import { sharedInputParameters } from '../input'
 
 export const getSingleInputParameters: InputParameters = {
   ...sharedInputParameters,
-  lookupAddress: {
-    aliases: ['address'],
-    description: 'The address to check whether is sanctioned',
+  address: {
+    description: 'The address to check',
     required: true,
     type: 'string',
   },
+  // TODO: standardise supported network, although only CipherTrace requires it for now
   network: {
-    description: 'The network name, e.g. ETH, BTC',
-    required: true,
+    description:
+      'The network name, e.g. ETH, BTC. Only for the following API_PROVIDER: ciphertrace',
+    required: false,
     type: 'string',
   },
 }

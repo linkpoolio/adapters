@@ -57,7 +57,7 @@ describe('config', () => {
   })
 
   describe('CiphertraceApiProviderConfig', () => {
-    const ciphertraceTestCases = [
+    const testCases = [
       {
         name: 'CIPHERTRACE_ACCESS_KEY is not set',
         testData: {
@@ -79,23 +79,49 @@ describe('config', () => {
         },
       },
     ]
-    it.each(ciphertraceTestCases)(
-      'throws an error if ($name) env var is not set',
-      ({ testData }) => {
-        expect.hasAssertions()
-        process.env.API_PROVIDER = 'ciphertrace'
-        process.env = { ...process.env, ...testData.envVars }
+    it.each(testCases)('throws an error if ($name) env var is not set', ({ testData }) => {
+      expect.hasAssertions()
+      process.env.API_PROVIDER = Provider.CIPHERTRACE
+      process.env = { ...process.env, ...testData.envVars }
 
-        try {
-          makeConfig()
-        } catch (error) {
-          expect(error.message.includes(testData.expectedMessage)).toBe(true)
-          expect(error.constructor.name).toBe('RequiredEnvError')
+      try {
+        makeConfig()
+      } catch (error) {
+        expect(error.message.includes(testData.expectedMessage)).toBe(true)
+        expect(error.constructor.name).toBe('RequiredEnvError')
 
-          const errorResp = Requester.errored(jobID, error)
-          assertError({ expected: 500, actual: errorResp.statusCode }, errorResp, jobID)
-        }
+        const errorResp = Requester.errored(jobID, error)
+        assertError({ expected: 500, actual: errorResp.statusCode }, errorResp, jobID)
+      }
+    })
+  })
+
+  describe('EverestApiProviderConfig', () => {
+    const testCases = [
+      {
+        name: 'EVEREST_API_KEY is not set',
+        testData: {
+          envVars: {
+            EVEREST_API_KEY: undefined,
+          },
+          expectedMessage: 'Please set the required env EVEREST_API_KEY',
+        },
       },
-    )
+    ]
+    it.each(testCases)('throws an error if ($name) env var is not set', ({ testData }) => {
+      expect.hasAssertions()
+      process.env.API_PROVIDER = Provider.EVEREST
+      process.env = { ...process.env, ...testData.envVars }
+
+      try {
+        makeConfig()
+      } catch (error) {
+        expect(error.message.includes(testData.expectedMessage)).toBe(true)
+        expect(error.constructor.name).toBe('RequiredEnvError')
+
+        const errorResp = Requester.errored(jobID, error)
+        assertError({ expected: 500, actual: errorResp.statusCode }, errorResp, jobID)
+      }
+    })
   })
 })
