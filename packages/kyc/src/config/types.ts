@@ -12,5 +12,4 @@ export interface CiphertraceApiProviderConfig extends ApiProviderConfig {
 }
 
 export type EverestApiProviderConfig = ApiProviderConfig
-
 export type SupportedApiProviderConfig = CiphertraceApiProviderConfig | EverestApiProviderConfig
