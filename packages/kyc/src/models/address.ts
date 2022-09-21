@@ -22,8 +22,8 @@ export interface IAddress {
 
 export enum EverestKYCStatus {
   NOT_FOUND = 0,
-  HUMAN_UNIQUE = 1,
-  KYC_USER = 2,
+  KYC_USER = 1,
+  HUMAN_UNIQUE = 2,
 }
 
 export function getKycStatusEverest(kycData: KYCData): number {

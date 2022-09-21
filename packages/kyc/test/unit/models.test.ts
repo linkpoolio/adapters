@@ -163,7 +163,7 @@ describe('models', () => {
   describe('everest transformer', () => {
     const addressesGetPayloadItemTestCases = [
       {
-        name: 'case 1 - status is NOT_FOUND',
+        name: 'case 1 - status is NOT_FOUND (0)',
         testData: {
           payload: {
             success: true,
@@ -189,7 +189,7 @@ describe('models', () => {
         },
       },
       {
-        name: 'case 2 - status is HUMAN_UNIQUE',
+        name: 'case 2 - status is HUMAN_UNIQUE (2)',
         testData: {
           payload: {
             success: true,
@@ -215,7 +215,7 @@ describe('models', () => {
         },
       },
       {
-        name: 'case 3 - status is KYC_USER',
+        name: 'case 3 - status is KYC_USER (1)',
         testData: {
           payload: {
             success: true,
