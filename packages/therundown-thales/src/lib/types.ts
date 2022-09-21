@@ -56,6 +56,7 @@ export interface GameResolve {
   awayScore: number
   gameId: string
   statusId: number
+  updatedAt: number
 }
 
 export interface GameCreateOdds {
