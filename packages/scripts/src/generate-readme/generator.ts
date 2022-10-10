@@ -1,4 +1,4 @@
-import { cat, exec, test } from 'shelljs'
+import { cat, exec, find, test } from 'shelljs'
 import { buildTable, TableText } from '../shared/tableUtils'
 import {
   capitalize,
@@ -97,9 +97,13 @@ export class ReadmeGenerator {
     this.defaultEndpoint = configFile.DEFAULT_ENDPOINT
     this.defaultBaseUrl = configFile.DEFAULT_BASE_URL || configFile.DEFAULT_WS_API_ENDPOINT
 
-    if (this.verbose) console.log(`${this.adapterPath}: Importing src/controllers/index.ts`)
+    // NB: support boilerplate folders structure
+    const isBoilerplateAdapter = !(find(this.adapterPath + 'src/endpoint/index.ts').stdout)
+    const endpointsFolder = isBoilerplateAdapter ? 'controllers' : 'endpoint'
 
-    const endpointPath = checkFilePaths([this.adapterPath + 'src/controllers/index.ts'])
+    if (this.verbose) console.log(`${this.adapterPath}: Importing src/${endpointsFolder}/index.ts`)
+
+    const endpointPath = checkFilePaths([this.adapterPath + `src/${endpointsFolder}/index.ts`])
     this.endpointDetails = await require(localPathToRoot + endpointPath)
   }
 
