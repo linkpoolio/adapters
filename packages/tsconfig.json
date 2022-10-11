@@ -60,9 +60,6 @@
       "path": "./nft-metrics"
     },
     {
-      "path": "./request-params-controller"
-    },
-    {
       "path": "./sportsdataio-linkpool"
     },
     {
