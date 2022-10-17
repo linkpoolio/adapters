@@ -1,5 +1,5 @@
 import { Provider } from '../../src/api/constants'
-import IFundingRate from '../../src/models/funding-rate'
+import FundingRate from '../../src/models/funding-rate'
 
 describe('models', () => {
   describe('binance transformer', () => {
@@ -11,7 +11,7 @@ describe('models', () => {
         estimatedSettlePrice: '1461.84099962',
         lastFundingRate: '0.00007817',
         interestRate: '0.00010000',
-        nextFundingTime: 1663344000000,
+        nextFundingTime: 1663344000001,
         time: 1663334434003,
       }
       const expectedFundingRate = {
@@ -21,7 +21,7 @@ describe('models', () => {
         },
       }
 
-      expect(IFundingRate.Single(getFundingRatePayload, Provider.BINANCE)).toEqual(
+      expect(FundingRate.Single(getFundingRatePayload, Provider.BINANCE)).toEqual(
         expectedFundingRate,
       )
     })
@@ -48,7 +48,7 @@ describe('models', () => {
         },
       }
 
-      expect(IFundingRate.Single(getFundingRatePayload, Provider.BYBIT)).toEqual(
+      expect(FundingRate.Single(getFundingRatePayload, Provider.BYBIT)).toEqual(
         expectedFundingRate,
       )
     })
@@ -72,7 +72,7 @@ describe('models', () => {
         },
       }
 
-      expect(IFundingRate.Single(getFundingRatePayload, Provider.FTX)).toEqual(expectedFundingRate)
+      expect(FundingRate.Single(getFundingRatePayload, Provider.FTX)).toEqual(expectedFundingRate)
     })
   })
 })

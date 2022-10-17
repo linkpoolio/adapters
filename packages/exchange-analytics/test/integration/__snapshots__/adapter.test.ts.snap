@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`execute exchange-analytics funding-rates endpoint binance returns a single floorprice 1`] = `
+exports[`execute endpoint funding-rates endpoint binance returns a single funding rate 1`] = `
 Object {
   "data": Object {
     "nextFunding": Object {
@@ -13,7 +13,7 @@ Object {
 }
 `;
 
-exports[`execute exchange-analytics funding-rates endpoint binance returns an error response when the API errors too 1`] = `
+exports[`execute endpoint funding-rates endpoint binance returns an error response when the API errors too 1`] = `
 Object {
   "error": Object {
     "feedID": "{\\"data\\":{\\"endpoint\\":\\"funding-rates\\",\\"method\\":\\"get\\",\\"asset\\":\\"ETH\\"}}",
@@ -28,7 +28,7 @@ Object {
 }
 `;
 
-exports[`execute exchange-analytics funding-rates endpoint bybit returns a single floorprice 1`] = `
+exports[`execute endpoint funding-rates endpoint bybit returns a single funding rate 1`] = `
 Object {
   "data": Object {
     "nextFunding": Object {
@@ -41,7 +41,7 @@ Object {
 }
 `;
 
-exports[`execute exchange-analytics funding-rates endpoint bybit returns an error response when the API errors too 1`] = `
+exports[`execute endpoint funding-rates endpoint bybit returns an error response when the API errors too 1`] = `
 Object {
   "error": Object {
     "feedID": "{\\"data\\":{\\"endpoint\\":\\"funding-rates\\",\\"method\\":\\"get\\",\\"asset\\":\\"ETH\\"}}",
@@ -56,7 +56,7 @@ Object {
 }
 `;
 
-exports[`execute exchange-analytics funding-rates endpoint ftx returns a single floorprice 1`] = `
+exports[`execute endpoint funding-rates endpoint ftx returns a single funding rate 1`] = `
 Object {
   "data": Object {
     "nextFunding": Object {
@@ -69,7 +69,7 @@ Object {
 }
 `;
 
-exports[`execute exchange-analytics funding-rates endpoint ftx returns an error response when the API errors too 1`] = `
+exports[`execute endpoint funding-rates endpoint ftx returns an error response when the API errors too 1`] = `
 Object {
   "error": Object {
     "feedID": "{\\"data\\":{\\"endpoint\\":\\"funding-rates\\",\\"method\\":\\"get\\",\\"asset\\":\\"ETH\\"}}",

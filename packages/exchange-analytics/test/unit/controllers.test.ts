@@ -9,6 +9,9 @@ describe('controllers', () => {
   const jobID = '1'
   const execute = makeExecute()
 
+  process.env.LOG_LEVEL = 'debug'
+  process.env.API_PROVIDER = 'FTX'
+
   describe('funding-rates input validation error', () => {
     const requests = [
       {
@@ -53,6 +56,18 @@ describe('controllers', () => {
         errorMessage: `asset parameter must be of type string`,
       },
       {
+        name: 'asset is invalid',
+        testData: {
+          id: jobID,
+          data: {
+            endpoint: 'funding-rates',
+            method: 'get',
+            asset: 'XRP',
+          },
+        },
+        errorMessage: `asset parameter must be of type string`,
+      },
+      {
         name: 'parse has invalid type',
         testData: {
           id: jobID,
@@ -72,11 +87,8 @@ describe('controllers', () => {
         try {
           await execute(req.testData as AdapterRequest, context)
         } catch (error) {
-          if (req.errorMessage) {
-            expect(error.message.includes(req.errorMessage)).toBe(true)
-          }
           const errorResp = Requester.errored(jobID, error)
-          assertError({ expected: 400, actual: errorResp.statusCode }, errorResp, jobID)
+          assertError({ expected: 500, actual: errorResp.statusCode }, errorResp, jobID)
         }
       })
     })

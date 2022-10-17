@@ -45,7 +45,7 @@ export function testFundingRates(context: SuiteContext): void {
       expect(response.body).toMatchSnapshot()
     })
 
-    it('returns a single floorprice', async () => {
+    it('returns a single funding rate', async () => {
       const fundingRatesSingleInput = { ...fundingRatesInput }
       fundingRatesSingleInput.data.method = RequestMethod.GET
       fundingRatesSingleInput.data.asset = 'ETH'
@@ -99,7 +99,7 @@ export function testFundingRates(context: SuiteContext): void {
       expect(response.body).toMatchSnapshot()
     })
 
-    it('returns a single floorprice', async () => {
+    it('returns a single funding rate', async () => {
       const fundingRatesSingleInput = { ...fundingRatesInput }
       fundingRatesSingleInput.data.method = RequestMethod.GET
       fundingRatesSingleInput.data.asset = 'ETH'
@@ -153,7 +153,7 @@ export function testFundingRates(context: SuiteContext): void {
       expect(response.body).toMatchSnapshot()
     })
 
-    it('returns a single floorprice', async () => {
+    it('returns a single funding rate', async () => {
       const fundingRatesSingleInput = { ...fundingRatesInput }
       fundingRatesSingleInput.data.method = RequestMethod.GET
       fundingRatesSingleInput.data.asset = 'ETH'

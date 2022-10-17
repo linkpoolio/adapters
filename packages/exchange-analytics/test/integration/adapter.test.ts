@@ -40,7 +40,7 @@ describe('execute', () => {
     context.server.close(done)
   })
 
-  describe('exchange-analytics', () => {
+  describe('endpoint', () => {
     describe('funding-rates endpoint', () => testFundingRates(context))
   })
 })
