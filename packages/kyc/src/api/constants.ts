@@ -1,13 +1,21 @@
 export enum Provider {
   CIPHERTRACE = 'ciphertrace',
+  EVEREST = 'everest',
 }
 
 export const providerToBaseUrl: ReadonlyMap<Provider, string> = new Map([
-  [Provider.CIPHERTRACE, 'https://api.rarify.tech'],
+  [Provider.EVEREST, 'https://distributedlab-everest-chainlink.3xm.dev.identitynetwork.io'],
 ])
 
 export const addressesGetNotFoundResult = {
+  isFound: false,
   network: null,
   address: null,
-  isMalicious: false,
+  aml: {
+    isSanctioned: null,
+  },
+  kyc: {
+    status: null,
+    timestamp: null,
+  },
 }
