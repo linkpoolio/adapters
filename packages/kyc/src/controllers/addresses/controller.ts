@@ -3,8 +3,10 @@ import { AdapterRequest, Config, ExecuteWithConfig } from '@chainlink/types'
 import { reducers } from '@linkpool/shared'
 
 import api from '../../api'
+import { Provider } from '../../api/constants'
 import { SupportedApiProviderConfig } from '../../config/types'
 import { RequestMethod } from '../constants'
+import { validateInputNetwork } from './helpers'
 import { getSingleInputParameters, inputParameters } from './input'
 
 const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _, config) => {
@@ -20,10 +22,21 @@ const controller: ExecuteWithConfig<Config> = async (request: AdapterRequest, _,
     switch (method) {
       case RequestMethod.GET: {
         const getSingleValidator = new Validator(request, getSingleInputParameters)
-        const address = (getSingleValidator.validated.data.lookupAddress as string).toLowerCase()
-        const network = (getSingleValidator.validated.data.network as string).toUpperCase()
+        const address = getSingleValidator.validated.data.address as string
+        const network = getSingleValidator.validated.data.network as string
+        try {
+          validateInputNetwork(
+            (config as SupportedApiProviderConfig).apiProvider as Provider,
+            network,
+          )
+        } catch (error) {
+          throw new AdapterError({
+            jobRunID,
+            message: `${error}`,
+            statusCode: 400,
+          })
+        }
         result = (await client.addresses.get({ network, address })) as Record<string, any>
-        console.log('*** result', result)
         break
       }
       default:

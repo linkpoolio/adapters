@@ -15,9 +15,6 @@
       "path": "./ap-sports"
     },
     {
-      "path": "./base64-decoder"
-    },
-    {
       "path": "./big-mac-index"
     },
     {
@@ -58,9 +55,6 @@
     },
     {
       "path": "./nft-metrics"
-    },
-    {
-      "path": "./request-params-controller"
     },
     {
       "path": "./sportsdataio-linkpool"

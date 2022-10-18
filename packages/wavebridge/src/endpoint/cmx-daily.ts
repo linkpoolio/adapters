@@ -22,7 +22,7 @@ export const inputParameters: InputParameters = {
   date: {
     description:
       'The date of the Index (as `YYYY-MM-DD`). Set to yesterday by the API if it is not present',
-    // type: 'string', // NB: disabled to allow sending null (via request-params-controller)
+    // type: 'string', // NB: disabled to allow sending null (via merge task)
     required: false,
   },
 }
