@@ -1,6 +1,6 @@
 # nft-analytics Adapter
 
-![1.1.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/nft-analytics/package.json)
+![1.2.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/nft-analytics/package.json)
 
 An adapter to query NFT analytics
 
@@ -8,10 +8,12 @@ This document was generated automatically. Please see [README Generator](../../s
 
 ## Environment Variables
 
-| Required? |     Name     |         Description         |  Type  | Options | Default |
-| :-------: | :----------: | :-------------------------: | :----: | :-----: | :-----: |
-|           |   API_KEY    | The data provider's API key | string |         |         |
-|           | API_PROVIDER |      The data provider      | string |         |         |
+| Required? |        Name        |      Description       |  Type  | Options | Default |
+| :-------: | :----------------: | :--------------------: | :----: | :-----: | :-----: |
+|           | BITSCRUNCH_API_KEY | The Bitscrunch API Key | string |         |         |
+|           |  NFTPERP_API_KEY   |  The Nftperp API Key   | string |         |         |
+|           |   RARIFY_API_KEY   |   The Rarify API Key   | string |         |         |
+|           |    API_PROVIDER    |   The data provider    | string |         |         |
 
 ---
 
@@ -19,9 +21,9 @@ This document was generated automatically. Please see [README Generator](../../s
 
 Every EA supports base input parameters from [this list](../../core/bootstrap#base-input-parameters)
 
-| Required? |   Name   |     Description     |  Type  |                            Options                             | Default |
-| :-------: | :------: | :-----------------: | :----: | :------------------------------------------------------------: | :-----: |
-|           | endpoint | The endpoint to use | string | [floorprices](#floorprices-endpoint), [twaps](#twaps-endpoint) |         |
+| Required? |   Name   |     Description     |  Type  |                                              Options                                               | Default |
+| :-------: | :------: | :-----------------: | :----: | :------------------------------------------------------------------------------------------------: | :-----: |
+|           | endpoint | The endpoint to use | string | [floorprices](#floorprices-endpoint), [twaps](#twaps-endpoint), [valuations](#valuations-endpoint) |         |
 
 ## Floorprices Endpoint
 
@@ -134,6 +136,72 @@ Response:
     },
     "network": null,
     "timestamp": 1662988500
+  },
+  "statusCode": 200
+}
+```
+
+---
+
+## Valuations Endpoint
+
+This endpoint returns the valuation (price estimate) for a given NFT
+
+`valuations` is the only supported name for this endpoint.
+
+### Input Params
+
+| Required? |       Name        | Aliases |                        Description                         |  Type  | Options | Default | Depends On | Not Valid With |
+| :-------: | :---------------: | :-----: | :--------------------------------------------------------: | :----: | :-----: | :-----: | :--------: | :------------: |
+|    ✅     |      method       |         |                The endpoint request method                 | string |  `get`  |         |            |                |
+|           |       parse       |         |           Properties to return (comma separated)           | string |         |         |            |                |
+|    ✅     |      chainId      |         | The ID of the blockchain where the NFT collection belongs. | number |         |         |            |                |
+|    ✅     | collectionAddress |         |        The contract address of the NFT collection.         | string |         |         |            |                |
+|    ✅     |      tokenId      |         |                    The ID of the token.                    | number |         |         |            |                |
+
+### Example
+
+Request:
+
+```json
+{
+  "id": 1,
+  "data": {
+    "endpoint": "valuations",
+    "method": "get",
+    "chainId": 137,
+    "collectionAddress": "0x67f4732266c7300cca593c814d46bee72e40659f",
+    "tokenId": 13056
+  },
+  "debug": {
+    "cacheKey": "dVX9BPPz1w+kXZ/t0G46UcAAiTc="
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "jobRunID": 1,
+  "data": {
+    "valuation": {
+      "priceEstimate": {
+        "currency": "ETH",
+        "amount": "26798414565161245000",
+        "units": "wei"
+      },
+      "priceEstimateUpperBound": {
+        "currency": "ETH",
+        "amount": "110165986056929110000",
+        "units": "wei"
+      },
+      "priceEstimateLowerBound": {
+        "currency": "ETH",
+        "amount": "10930285452745508000",
+        "units": "wei"
+      }
+    }
   },
   "statusCode": 200
 }

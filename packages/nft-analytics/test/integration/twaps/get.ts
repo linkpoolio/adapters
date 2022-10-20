@@ -12,6 +12,7 @@ export function testTwaps(context: SuiteContext): void {
     beforeAll(() => {
       oldEnv = JSON.parse(JSON.stringify(process.env))
       process.env.API_PROVIDER = Provider.NFTPERP
+      process.env.NFTPERP_API_KEY = 'fake-api-key'
     })
     afterAll(() => {
       process.env = oldEnv
