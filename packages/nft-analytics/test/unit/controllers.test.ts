@@ -9,9 +9,6 @@ describe('controllers', () => {
   const jobID = '1'
   const execute = makeExecute()
 
-  process.env.API_KEY = 'fake-api-key'
-  process.env.LOG_LEVEL = 'debug'
-
   describe('floorprices input validation error', () => {
     const requests = [
       {
