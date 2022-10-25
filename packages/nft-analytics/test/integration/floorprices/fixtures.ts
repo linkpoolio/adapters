@@ -22,7 +22,7 @@ const getFloorpricesPayloadRarify = {
 export const mockFloorpricesGetSingleErrorRarify = (): nock =>
   nock(baseUrlRarify, {
     encodedQueryParams: true,
-    reqheaders: { Authorization: `Bearer ${process.env.API_KEY as string}` },
+    reqheaders: { Authorization: `Bearer ${process.env.RARIFY_API_KEY as string as string}` },
   })
     .get(`/data/contracts/ethereum:0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/smart-floor-price`)
     .reply(500, {})
@@ -30,7 +30,7 @@ export const mockFloorpricesGetSingleErrorRarify = (): nock =>
 export const mockFloorpricesGetSingleSuccessRarify = (): nock =>
   nock(baseUrlRarify, {
     encodedQueryParams: true,
-    reqheaders: { Authorization: `Bearer ${process.env.API_KEY as string}` },
+    reqheaders: { Authorization: `Bearer ${process.env.RARIFY_API_KEY as string as string}` },
   })
     .get(`/data/contracts/ethereum:0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/smart-floor-price`)
     .reply(200, getFloorpricesPayloadRarify)

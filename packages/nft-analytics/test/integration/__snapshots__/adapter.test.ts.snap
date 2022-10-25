@@ -73,3 +73,44 @@ Object {
   "statusCode": 200,
 }
 `;
+
+exports[`execute nft-analytics valuations endpoint bitscrunch returns a single valuation 1`] = `
+Object {
+  "data": Object {
+    "valuation": Object {
+      "priceEstimate": Object {
+        "amount": "26798414565161245000",
+        "currency": "ETH",
+        "units": "wei",
+      },
+      "priceEstimateLowerBound": Object {
+        "amount": "10930285452745508000",
+        "currency": "ETH",
+        "units": "wei",
+      },
+      "priceEstimateUpperBound": Object {
+        "amount": "110165986056929110000",
+        "currency": "ETH",
+        "units": "wei",
+      },
+    },
+  },
+  "jobRunID": 1,
+  "statusCode": 200,
+}
+`;
+
+exports[`execute nft-analytics valuations endpoint bitscrunch returns an error response when the API errors too 1`] = `
+Object {
+  "error": Object {
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"valuations\\",\\"method\\":\\"get\\",\\"chainId\\":137,\\"collectionAddress\\":\\"0x67f4732266c7300cca593c814d46bee72e40659f\\",\\"tokenId\\":13056}}",
+    "message": "Unexpected error requesting the 'valuations' endpoint. Reason: AdapterError: Request failed with status code 500",
+    "name": "AdapterError",
+    "url": "https:/api.unleashnfts.com/api/v1/nft/137/0x67f4732266c7300cca593c814d46bee72e40659f/13056/price-estimate",
+  },
+  "jobRunID": 1,
+  "providerStatusCode": 500,
+  "status": "errored",
+  "statusCode": 200,
+}
+`;

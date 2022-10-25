@@ -11,14 +11,14 @@ const getTwapsPayloadNftperp = {
 
 export const mockTwapsGetSingleErrorNftperp = (): nock =>
   nock(baseUrlNftperp, {
-    reqheaders: { 'x-api-key': process.env.API_KEY as string },
+    reqheaders: { 'x-api-key': process.env.NFTPERP_API_KEY as string },
   })
     .get(`/twap?slug=boredapeyachtclub`)
     .reply(500, {})
 
 export const mockTwapsGetSingleSuccessNftperp = (): nock =>
   nock(baseUrlNftperp, {
-    reqheaders: { 'x-api-key': process.env.API_KEY as string },
+    reqheaders: { 'x-api-key': process.env.NFTPERP_API_KEY as string },
   })
     .get(`/twap?slug=boredapeyachtclub`)
     .reply(200, getTwapsPayloadNftperp)
