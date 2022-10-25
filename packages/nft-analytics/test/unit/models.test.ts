@@ -1,8 +1,49 @@
 import { Provider } from '../../src/api/constants'
 import FloorPrice from '../../src/models/floorprice'
 import Twap from '../../src/models/twap'
+import Valuation from '../../src/models/valuation'
 
 describe('models', () => {
+  describe('bitscrunch transformer', () => {
+    it('hydrates an IValuation object', async () => {
+      const getValuationPayload = {
+        price_estimate: {
+          value: 26.798414565161245,
+          unit: 'ETH',
+        },
+        price_estimate_upper_bound: {
+          value: 110.16598605692911,
+          unit: 'ETH',
+        },
+        price_estimate_lower_bound: {
+          value: 10.930285452745508,
+          unit: 'ETH',
+        },
+      }
+      const expectedValuation = {
+        valuation: {
+          priceEstimate: {
+            amount: 26.798414565161245,
+            currency: 'ETH',
+            units: 'ether',
+          },
+          priceEstimateLowerBound: {
+            amount: 10.930285452745508,
+            currency: 'ETH',
+            units: 'ether',
+          },
+          priceEstimateUpperBound: {
+            amount: 110.16598605692911,
+            currency: 'ETH',
+            units: 'ether',
+          },
+        },
+      }
+
+      expect(Valuation.Single(getValuationPayload, Provider.BITSCRUNCH)).toEqual(expectedValuation)
+    })
+  })
+
   describe('rarify transformer', () => {
     it('hydrates an IFloorPrice object', async () => {
       const getFloorPricePayload = {

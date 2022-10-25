@@ -11,3 +11,10 @@ export const twapsInput = {
     endpoint: 'twaps',
   },
 }
+
+export const valuationsInput = {
+  id: 1,
+  data: {
+    endpoint: 'valuations',
+  },
+}

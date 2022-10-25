@@ -15,6 +15,7 @@ export function testFloorprices(context: SuiteContext): void {
     beforeAll(() => {
       oldEnv = JSON.parse(JSON.stringify(process.env))
       process.env.API_PROVIDER = Provider.RARIFY
+      process.env.RARIFY_API_KEY = 'fake-api-key'
     })
     afterAll(() => {
       process.env = oldEnv

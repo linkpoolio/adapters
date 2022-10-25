@@ -15,7 +15,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, context, confi
 }
 
 export const endpointSelector = (request: AdapterRequest): APIEndpoint =>
-  Builder.selectEndpoint(request, makeConfig(), endpoints)
+  Builder.selectEndpoint(request, makeConfig() as Config, endpoints)
 
 export const makeExecute: ExecuteFactory<Config> = (config) => {
   return async (request, context) => execute(request, context, config || makeConfig())
