@@ -1,6 +1,6 @@
 # Chainlink External Adapter for Enetscores
 
-![1.1.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/enetscores/package.json)
+![2.0.2](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/enetscores/package.json)
 
 Base URL https://eapi.enetpulse.com/
 
