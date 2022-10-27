@@ -23,19 +23,19 @@ describe('models', () => {
       const expectedValuation = {
         valuation: {
           priceEstimate: {
-            amount: 26.798414565161245,
+            amount: '26798414565161245000',
             currency: 'ETH',
-            units: 'ether',
+            units: 'wei',
           },
           priceEstimateLowerBound: {
-            amount: 10.930285452745508,
+            amount: '10930285452745508000',
             currency: 'ETH',
-            units: 'ether',
+            units: 'wei',
           },
           priceEstimateUpperBound: {
-            amount: 110.16598605692911,
+            amount: '110165986056929110000',
             currency: 'ETH',
-            units: 'ether',
+            units: 'wei',
           },
         },
       }
