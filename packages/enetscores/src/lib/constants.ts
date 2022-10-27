@@ -1,3 +1,5 @@
+export const SUPPORTED_NUMBER_OF_EVENT_PARTICIPANTS = 2
+
 export enum Market {
   CREATE = 0,
   RESOLVE = 1,
