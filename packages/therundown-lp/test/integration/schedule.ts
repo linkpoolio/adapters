@@ -166,7 +166,7 @@ export function scheduleTests(context: SuiteContext): void {
         expect(response.body).toMatchSnapshot()
       })
 
-      it('should return 1 result (case resolve market)', async () => {
+      it('should return 1 result (case resolve market with hasScoresByPeriod set to true)', async () => {
         const data: AdapterRequest = {
           id,
           data: {
@@ -174,6 +174,7 @@ export function scheduleTests(context: SuiteContext): void {
             sportId: 4,
             date: 1635529231,
             market: 'resolve',
+            hasScoresByPeriod: true,
           },
         }
         mockScheduleResponseSuccessMarketResolve()

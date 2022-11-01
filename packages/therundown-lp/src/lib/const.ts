@@ -14,6 +14,7 @@ export enum SportId {
   ESP1 = 14,
   ITA1 = 15,
   UEFACHAMP = 16,
+  FIFA = 18,
 }
 
 export enum Market {
@@ -40,6 +41,7 @@ export const supportedSportIdSchedule = [
   SportId.ESP1,
   SportId.ITA1,
   SportId.UEFACHAMP,
+  SportId.FIFA,
 ]
 
 export const sportIdsRequireMascot = [

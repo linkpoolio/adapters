@@ -94,10 +94,13 @@ describe('getGameResolve()', () => {
         event: eventNBA2,
         sportId: SportId.NBA,
         expectedGameResolve: {
+          homeScoreByPeriod: [31, 28, 40, 23],
+          awayScoreByPeriod: [33, 49, 25, 24],
           homeScore: 122,
           awayScore: 131,
           gameId: '0x6364396535363332356334646438346235396635636332313365373763396638',
           statusId: 8,
+          updatedAt: 1649265524,
         },
       },
     },
@@ -107,10 +110,13 @@ describe('getGameResolve()', () => {
         event: eventNBA1,
         sportId: SportId.NBA,
         expectedGameResolve: {
+          homeScoreByPeriod: [],
+          awayScoreByPeriod: [],
           homeScore: 0,
           awayScore: 0,
           gameId: '0x3736313636626436623464653934653131633562643230636466336662313965',
           statusId: 18,
+          updatedAt: 1649265524,
         },
       },
     },
@@ -120,10 +126,13 @@ describe('getGameResolve()', () => {
         event: eventMMA1,
         sportId: SportId.MMA,
         expectedGameResolve: {
+          homeScoreByPeriod: [],
+          awayScoreByPeriod: [],
           homeScore: 0,
           awayScore: 1,
           gameId: '0x3030303935396433396532613763613166656139333832376539646230663834',
           statusId: 8,
+          updatedAt: 1649265524,
         },
       },
     },
@@ -155,19 +164,50 @@ describe('encodeGameCreated()', () => {
   })
 })
 
-describe('encodeGameResolved()', () => {
-  it('returns a GameResolve encoded', () => {
-    const gameResolve = {
-      homeScore: 114,
-      awayScore: 121,
-      gameId: '0x3131656333313439366561303130303038353431323634313062353762366463',
-      statusId: 8,
-    }
-    const expectedEncodedGameResolve =
-      '0x3131656333313439366561303130303038353431323634313062353762366463000000000000000000000000000000000000000000000000000000000000007200000000000000000000000000000000000000000000000000000000000000790000000000000000000000000000000000000000000000000000000000000008'
+describe('encodeGameResolve()', () => {
+  const encodeGameResolveTestCases = [
+    {
+      name: 'GameResolve with final score (hasScoresByPeriod is false)',
+      testData: {
+        hasScoresByPeriod: false,
+        GameResolve: {
+          homeScoreByPeriod: [31, 28, 40, 23],
+          awayScoreByPeriod: [33, 49, 25, 24],
+          homeScore: 122,
+          awayScore: 131,
+          gameId: '0x6364396535363332356334646438346235396635636332313365373763396638',
+          statusId: 8,
+          updatedAt: 1649265524,
+        },
+        expectedEncodedGameResolve:
+          '0x6364396535363332356334646438346235396635636332313365373763396638000000000000000000000000000000000000000000000000000000000000007a0000000000000000000000000000000000000000000000000000000000000083000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000624dcb74',
+      },
+    },
+    {
+      name: 'GameResolve with scores per period (hasScoresByPeriod is true)',
+      testData: {
+        hasScoresByPeriod: true,
+        GameResolve: {
+          homeScoreByPeriod: [31, 28, 40, 23],
+          awayScoreByPeriod: [33, 49, 25, 24],
+          homeScore: 122,
+          awayScore: 131,
+          gameId: '0x6364396535363332356334646438346235396635636332313365373763396638',
+          statusId: 8,
+          updatedAt: 1649265524,
+        },
+        expectedEncodedGameResolve:
+          '0x0000000000000000000000000000000000000000000000000000000000000020636439653536333235633464643834623539663563633231336537376339663800000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000140000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000624dcb740000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001f000000000000000000000000000000000000000000000000000000000000001c0000000000000000000000000000000000000000000000000000000000000028000000000000000000000000000000000000000000000000000000000000001700000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000021000000000000000000000000000000000000000000000000000000000000003100000000000000000000000000000000000000000000000000000000000000190000000000000000000000000000000000000000000000000000000000000018',
+      },
+    },
+  ]
 
-    const encodedGameResolve = encodeGameResolve(gameResolve)
+  it.each(encodeGameResolveTestCases)(
+    'returns a GameResolve encoded from an event (case $name)',
+    ({ testData }) => {
+      const encodedGameResolve = encodeGameResolve(testData.GameResolve, testData.hasScoresByPeriod)
 
-    expect(encodedGameResolve).toEqual(expectedEncodedGameResolve)
-  })
+      expect(encodedGameResolve).toEqual(testData.expectedEncodedGameResolve)
+    },
+  )
 })
