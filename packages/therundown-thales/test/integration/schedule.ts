@@ -11,6 +11,7 @@ import {
   mockScheduleResponseSuccessMarketCreateNoLines,
   mockScheduleResponseSuccessMarketResolve,
   mockScheduleResponseSuccessMarketResolve2,
+  mockScheduleResponseSuccessMarketResolveWorldCup,
 } from './fixtures'
 
 export function scheduleTests(context: SuiteContext): void {
@@ -29,6 +30,7 @@ export function scheduleTests(context: SuiteContext): void {
             sportIdToBookmakerIds: {
               '4': [3, 11],
             },
+            hasScoresByPeriod: true,
           },
         }
         mockScheduleResponseError()
@@ -57,6 +59,7 @@ export function scheduleTests(context: SuiteContext): void {
             sportIdToBookmakerIds: {
               '4': [3, 11],
             },
+            hasScoresByPeriod: true,
           },
         }
         mockScheduleResponseMalformedMarketCreate()
@@ -82,6 +85,7 @@ export function scheduleTests(context: SuiteContext): void {
             sportIdToBookmakerIds: {
               '4': [3, 11],
             },
+            hasScoresByPeriod: true,
           },
         }
         mockScheduleResponseMalformedMarketResolve()
@@ -112,6 +116,7 @@ export function scheduleTests(context: SuiteContext): void {
             sportIdToBookmakerIds: {
               '4': [3, 11],
             },
+            hasScoresByPeriod: true,
           },
         }
         mockScheduleResponseSuccessMarketCreateNoLines()
@@ -139,6 +144,7 @@ export function scheduleTests(context: SuiteContext): void {
             sportIdToBookmakerIds: {
               '4': [3, 11],
             },
+            hasScoresByPeriod: true,
           },
         }
         mockScheduleResponseSuccessMarketCreate()
@@ -167,6 +173,7 @@ export function scheduleTests(context: SuiteContext): void {
               '1': [3, 11],
             },
             gameIds: ['0017049a376cd9c73345507767295c74', '03a242a346a63835d9ba1797f3a10ff8'],
+            hasScoresByPeriod: true,
           },
         }
         mockScheduleResponseSuccessMarketCreate2()
@@ -195,6 +202,7 @@ export function scheduleTests(context: SuiteContext): void {
               '1': [3, 11],
             },
             gameIds: ['00000000000000000000000000000000'],
+            hasScoresByPeriod: true,
           },
         }
         mockScheduleResponseSuccessMarketCreate2()
@@ -222,6 +230,7 @@ export function scheduleTests(context: SuiteContext): void {
             sportIdToBookmakerIds: {
               '4': [3, 11],
             },
+            hasScoresByPeriod: true,
           },
         }
         mockScheduleResponseSuccessMarketResolve()
@@ -250,9 +259,37 @@ export function scheduleTests(context: SuiteContext): void {
               '1': [3, 11],
             },
             gameIds: ['392546e145079d0d3d3282b4075d7127', '040265cdc1022e13ef1764b9a72cca43'],
+            hasScoresByPeriod: false,
           },
         }
         mockScheduleResponseSuccessMarketResolve2()
+
+        const response = await context.req
+          .post('/')
+          .send(data)
+          .set('Accept', '*/*')
+          .set('Content-Type', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+
+        assertSuccess({ expected: 200, actual: response.statusCode }, response.body, id)
+        expect(response.body).toMatchSnapshot()
+      })
+      it('should return 1 result (case resolve market for FIFA World Cup)', async () => {
+        const data: AdapterRequest = {
+          id,
+          data: {
+            endpoint: 'schedule',
+            sportId: 18,
+            date: 1662222667,
+            market: 'resolve',
+            sportIdToBookmakerIds: {
+              '18': [3, 11],
+            },
+            hasScoresByPeriod: false,
+          },
+        }
+        mockScheduleResponseSuccessMarketResolveWorldCup()
 
         const response = await context.req
           .post('/')
@@ -278,6 +315,7 @@ export function scheduleTests(context: SuiteContext): void {
               '1': [3, 11],
             },
             gameIds: ['00000000000000000000000000000000'],
+            hasScoresByPeriod: false,
           },
         }
         mockScheduleResponseSuccessMarketResolve2()

@@ -7,6 +7,7 @@ import {
   Market,
   NO_EVENT_ODDS,
   SportId,
+  WORLD_CUP_SCORE_PERIOD,
   noDrawOddsSportIds,
   sportIdsRequireMascot,
   statusIdToStatus,
@@ -147,23 +148,45 @@ export const getGameCreate = (event: Event, sportId: SportId, bookmakers: number
   return gameCreate
 }
 
+export const getSumOfScores = (scores: number[], period: number): number => {
+  let sumOfScores = 0
+  const scoresLength = scores.length
+  if (!scoresLength) return sumOfScores
+  for (let i = 0; i < period; i++) {
+    sumOfScores += scores[i]
+    if (i === scoresLength - 1) break
+  }
+  return sumOfScores
+}
+
 export const getGameResolve = (event: Event, sportId: SportId): GameResolve => {
   let homeScore: number
   let awayScore: number
-  if ([SportId.MMA].includes(sportId)) {
-    homeScore = event.score?.winner_home
-    awayScore = event.score?.winner_away
-  } else {
-    homeScore = event.score?.score_home
-    awayScore = event.score?.score_away
+  switch (sportId) {
+    case SportId.MMA:
+      homeScore = event.score?.winner_home
+      awayScore = event.score?.winner_away
+      break
+    case SportId.FIFA:
+      homeScore = getSumOfScores(event.score?.score_home_by_period, WORLD_CUP_SCORE_PERIOD)
+      awayScore = getSumOfScores(event.score?.score_away_by_period, WORLD_CUP_SCORE_PERIOD)
+      break
+    default:
+      homeScore = event.score?.score_home
+      awayScore = event.score?.score_away
+      break
   }
-  const gameResolve = {
+
+  const gameResolve: GameResolve = {
     homeScore,
     awayScore,
+    homeScoreByPeriod: event.score?.score_home_by_period,
+    awayScoreByPeriod: event.score?.score_away_by_period,
     gameId: convertEventId(event.event_id),
     statusId: statusToStatusId.get(event.score?.event_status) as number,
     updatedAt: datetime.iso8061ToTimestamp(event.score?.updated_at),
   }
+
   Object.entries(gameResolve).forEach(([key, value]) => {
     value ??
       throwError(
@@ -214,17 +237,28 @@ export const encodeGameCreate = (gameCreate: GameCreate): string => {
   return encodedGameCreate
 }
 
-export const encodeGameResolve = (gameResolve: GameResolve): string => {
+export const encodeGameResolve = (gameResolve: GameResolve, hasScoresByPeriod: boolean): string => {
   let encodedGameResolve: string
+  let type: string
+
+  switch (hasScoresByPeriod) {
+    case true:
+      type =
+        'tuple(bytes32 gameId, uint8[] homeScoreByPeriod, uint8[] awayScoreByPeriod, uint8 statusId, uint40 updatedAt)'
+      break
+    case false:
+      type =
+        'tuple(bytes32 gameId, uint8 homeScore, uint8 awayScore, uint8 statusId, uint40 updatedAt)'
+      break
+    default: {
+      throw new Error(`Unexpected error encoding result: '${JSON.stringify(gameResolve)}' .`)
+    }
+  }
+
   try {
-    encodedGameResolve = utils.defaultAbiCoder.encode(
-      ['tuple(bytes32 gameId, uint8 homeScore, uint8 awayScore, uint8 statusId, uint40 updatedAt)'],
-      [gameResolve],
-    )
+    encodedGameResolve = utils.defaultAbiCoder.encode([type], [gameResolve])
   } catch (error) {
-    throw new Error(
-      `Unexpected error encoding result: '${JSON.stringify(gameResolve)}' . Reason: ${error}.`,
-    )
+    throw new Error(`Unsupported 'hasScoresByPeriod': ${hasScoresByPeriod}`)
   }
 
   return encodedGameResolve

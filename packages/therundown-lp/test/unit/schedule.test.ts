@@ -46,6 +46,19 @@ describe('validation error', () => {
         data: { sportId: 4, date: 1638297631, market: 'linkpool', endpoint: 'schedule' },
       },
     },
+    {
+      name: 'hasScoresByPeriod invalid',
+      testData: {
+        id: jobID,
+        data: {
+          sportId: 4,
+          date: 1638297631,
+          market: 'linkpool',
+          endpoint: 'schedule',
+          hasScoresByPeriod: 'tree',
+        },
+      },
+    },
   ]
 
   requests.forEach((req) => {

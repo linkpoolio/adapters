@@ -23,7 +23,7 @@ export const supportedEndpoints = ['schedule']
 
 export const inputParameters: InputParameters = {
   sportId: {
-    description: 'The ID of the sport to query',
+    description: 'The ID of the sport to query.',
     required: true,
     type: 'number',
     options: supportedSportIdSchedule,
@@ -34,25 +34,31 @@ export const inputParameters: InputParameters = {
     type: 'number',
   },
   market: {
-    description: 'Chose to create or resolve market',
+    description: 'Choose to create or resolve market.',
     required: true,
     type: 'string',
     options: [Market.CREATE, Market.RESOLVE],
   },
   statusIds: {
-    description: 'The statuses of the games to query. Examples: `["1","2","3"]`',
+    description: 'The statuses of the games to query. Examples: `["1","2","3"].`',
     required: false,
   },
   gameIds: {
     description:
-      'The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]`',
+      'The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]`.',
     required: false,
   },
   sportIdToBookmakerIds: {
     description:
       `A JSON object with sportId as key and an Array of bookmaker IDs (Integer) as value. ` +
-      `The order of the bookmakers' IDs set the priority where to fetch the game odds)`,
+      `The order of the bookmaker IDs sets the priority for where to fetch the game odds.`,
     required: true,
+  },
+  hasScoresByPeriod: {
+    description: `The scores are returned for each team as 2 uint8 arrays. Each element of the array represents the score from each period.`,
+    required: false,
+    default: false,
+    type: 'boolean',
   },
 }
 
@@ -66,6 +72,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   const gameIdsRaw = validator.validated.data.gameIds
   const statusIdsRaw = validator.validated.data.statusIds
   const sportIdToBookmakerIds = validator.validated.data.sportIdToBookmakerIds
+  const hasScoresByPeriod = validator.validated.data.hasScoresByPeriod
 
   let gameIds: string[] = []
   let statusIds: string[] = []
@@ -169,7 +176,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     try {
       gameResolveList = filteredEvents.map((event: Event) => getGameResolve(event, sportId))
       encodedGameResolveList = gameResolveList.map((gameResolve: GameResolve) =>
-        encodeGameResolve(gameResolve),
+        encodeGameResolve(gameResolve, hasScoresByPeriod),
       )
     } catch (error) {
       const message = (error as Error).message

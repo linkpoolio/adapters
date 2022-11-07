@@ -10,7 +10,7 @@ import {
   getHomeAwayName,
   getOdds,
 } from '../../src/lib/utils'
-import { eventMLS1, eventMMA1, eventNBA1, eventNBA2 } from '../unit/testCases'
+import { eventFIFA1, eventMLS1, eventMMA1, eventNBA1, eventNBA2 } from '../unit/testCases'
 
 describe('getHomeAwayName()', () => {
   const sportIdValues = Object.values(SportId)
@@ -116,6 +116,8 @@ describe('getGameResolve()', () => {
           '4': [3, 11],
         },
         expectedGameResolve: {
+          homeScoreByPeriod: [31, 28, 40, 23],
+          awayScoreByPeriod: [33, 49, 25, 24],
           homeScore: 122,
           awayScore: 131,
           gameId: '0x6364396535363332356334646438346235396635636332313365373763396638',
@@ -133,6 +135,8 @@ describe('getGameResolve()', () => {
           '4': [3, 11],
         },
         expectedGameResolve: {
+          homeScoreByPeriod: [],
+          awayScoreByPeriod: [],
           homeScore: 0,
           awayScore: 0,
           gameId: '0x3736313636626436623464653934653131633562643230636466336662313965',
@@ -150,9 +154,30 @@ describe('getGameResolve()', () => {
           '7': [3, 11],
         },
         expectedGameResolve: {
+          homeScoreByPeriod: [],
+          awayScoreByPeriod: [],
           homeScore: 0,
           awayScore: 1,
           gameId: '0x3030303935396433396532613763613166656139333832376539646230663834',
+          statusId: 8,
+          updatedAt: 1649126125,
+        },
+      },
+    },
+    {
+      name: 'FIFA World Cup',
+      testData: {
+        event: eventFIFA1,
+        sportId: SportId.FIFA,
+        sportIdToBookmakers: {
+          '18': [3, 11],
+        },
+        expectedGameResolve: {
+          homeScore: 5,
+          awayScore: 3,
+          homeScoreByPeriod: [2, 3, 1, 1],
+          awayScoreByPeriod: [1, 2, 1, 1],
+          gameId: '0x6364396535363332356334646438346235396635636332313365373763396638',
           statusId: 8,
           updatedAt: 1649126125,
         },
@@ -584,21 +609,51 @@ describe('encodeGameCreate()', () => {
 })
 
 describe('encodeGameResolve()', () => {
-  it('returns a GameResolve encoded', () => {
-    const gameResolve = {
-      homeScore: 114,
-      awayScore: 121,
-      gameId: '0x3131656333313439366561303130303038353431323634313062353762366463',
-      statusId: 8,
-      updatedAt: 1649548800,
-    }
-    const expectedEncodedGameResolve =
-      '0x31316563333134393665613031303030383534313236343130623537623664630000000000000000000000000000000000000000000000000000000000000072000000000000000000000000000000000000000000000000000000000000007900000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000062521e00'
+  const encodeGameResolveTestCases = [
+    {
+      name: 'GameResolve with final score (hasScoresByPeriod is false)',
+      testData: {
+        hasScoresByPeriod: false,
+        GameResolve: {
+          homeScoreByPeriod: [31, 28, 40, 23],
+          awayScoreByPeriod: [33, 49, 25, 24],
+          homeScore: 122,
+          awayScore: 131,
+          gameId: '0x6364396535363332356334646438346235396635636332313365373763396638',
+          statusId: 8,
+          updatedAt: 1649265524,
+        },
+        expectedEncodedGameResolve:
+          '0x6364396535363332356334646438346235396635636332313365373763396638000000000000000000000000000000000000000000000000000000000000007a0000000000000000000000000000000000000000000000000000000000000083000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000624dcb74',
+      },
+    },
+    {
+      name: 'GameResolve with scores per period (hasScoresByPeriod is true)',
+      testData: {
+        hasScoresByPeriod: true,
+        GameResolve: {
+          homeScoreByPeriod: [31, 28, 40, 23],
+          awayScoreByPeriod: [33, 49, 25, 24],
+          homeScore: 122,
+          awayScore: 131,
+          gameId: '0x6364396535363332356334646438346235396635636332313365373763396638',
+          statusId: 8,
+          updatedAt: 1649265524,
+        },
+        expectedEncodedGameResolve:
+          '0x0000000000000000000000000000000000000000000000000000000000000020636439653536333235633464643834623539663563633231336537376339663800000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000140000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000624dcb740000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001f000000000000000000000000000000000000000000000000000000000000001c0000000000000000000000000000000000000000000000000000000000000028000000000000000000000000000000000000000000000000000000000000001700000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000021000000000000000000000000000000000000000000000000000000000000003100000000000000000000000000000000000000000000000000000000000000190000000000000000000000000000000000000000000000000000000000000018',
+      },
+    },
+  ]
 
-    const encodedGameResolve = encodeGameResolve(gameResolve)
+  it.each(encodeGameResolveTestCases)(
+    'returns a GameResolve encoded from an event (case $name)',
+    ({ testData }) => {
+      const encodedGameResolve = encodeGameResolve(testData.GameResolve, testData.hasScoresByPeriod)
 
-    expect(encodedGameResolve).toEqual(expectedEncodedGameResolve)
-  })
+      expect(encodedGameResolve).toEqual(testData.expectedEncodedGameResolve)
+    },
+  )
 })
 
 describe('encodeGameOdds()', () => {

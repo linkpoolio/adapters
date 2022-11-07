@@ -47,6 +47,12 @@ export const inputParameters: InputParameters = {
       'The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]`',
     required: false,
   },
+  hasScoresByPeriod: {
+    description: `The scores are returned for each team as 2 uint8 arrays. Each element of the array represents the score from each period.`,
+    required: false,
+    default: false,
+    type: 'boolean',
+  },
 }
 
 export const execute: ExecuteWithConfig<Config> = async (request, _, config) => {
@@ -58,6 +64,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   const market = validator.validated.data.market
   const gameIdsRaw = validator.validated.data.gameIds
   const statusIdsRaw = validator.validated.data.statusIds
+  const hasScoresByPeriod = validator.validated.data.hasScoresByPeriod
 
   let gameIds: string[] = []
   let statusIds: string[] = []
@@ -154,7 +161,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     try {
       gameResolveList = filteredEvents.map((event: Event) => getGameResolve(event, sportId))
       encodedGameResolveList = gameResolveList.map((gameResolve: GameResolve) =>
-        encodeGameResolve(gameResolve),
+        encodeGameResolve(gameResolve, hasScoresByPeriod),
       )
     } catch (error) {
       const message = (error as Error).message

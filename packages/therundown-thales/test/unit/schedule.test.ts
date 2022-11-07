@@ -22,6 +22,7 @@ describe('validation error', () => {
           sportIdToBookmakerIds: {
             [SportId.NBA]: [11, 3],
           },
+          hasScoresByPeriod: true,
         },
       },
     },
@@ -37,6 +38,7 @@ describe('validation error', () => {
           sportIdToBookmakerIds: {
             [SportId.NBA]: [11, 3],
           },
+          hasScoresByPeriod: true,
         },
       },
     },
@@ -51,6 +53,7 @@ describe('validation error', () => {
           sportIdToBookmakerIds: {
             [SportId.NBA]: [11, 3],
           },
+          hasScoresByPeriod: true,
         },
       },
     },
@@ -66,6 +69,7 @@ describe('validation error', () => {
           sportIdToBookmakerIds: {
             [SportId.NBA]: [11, 3],
           },
+          hasScoresByPeriod: true,
         },
       },
     },
@@ -80,6 +84,7 @@ describe('validation error', () => {
           sportIdToBookmakerIds: {
             '4': [11, 3],
           },
+          hasScoresByPeriod: true,
         },
       },
     },
@@ -95,6 +100,7 @@ describe('validation error', () => {
           sportIdToBookmakerIds: {
             '4': [11, 3],
           },
+          hasScoresByPeriod: true,
         },
       },
     },
@@ -107,6 +113,7 @@ describe('validation error', () => {
           sportId: SportId.NBA,
           date: 1638297631,
           endpoint: 'odds',
+          hasScoresByPeriod: true,
         },
       },
     },
@@ -121,6 +128,7 @@ describe('validation error', () => {
           sportIdToBookmakerIds: {
             [SportId.MLB]: [1, 2, 3],
           },
+          hasScoresByPeriod: true,
         },
       },
     },
@@ -136,6 +144,7 @@ describe('validation error', () => {
             [SportId.NBA]: [1, 2, 3],
             '30': [4, 5, 6],
           },
+          hasScoresByPeriod: true,
         },
       },
     },
@@ -150,6 +159,7 @@ describe('validation error', () => {
           sportIdToBookmakerIds: {
             [SportId.NBA]: 'linkpool',
           },
+          hasScoresByPeriod: true,
         },
       },
     },
@@ -164,6 +174,7 @@ describe('validation error', () => {
           sportIdToBookmakerIds: {
             [SportId.NBA]: [],
           },
+          hasScoresByPeriod: true,
         },
       },
     },
@@ -178,6 +189,23 @@ describe('validation error', () => {
           sportIdToBookmakerIds: {
             [SportId.NBA]: [1, 'linkpool'],
           },
+          hasScoresByPeriod: true,
+        },
+      },
+    },
+    {
+      name: 'scoreFormatId invalid',
+      testData: {
+        id: jobID,
+        data: {
+          sportId: SportId.NBA,
+          date: 1638297631,
+          market: 'create',
+          endpoint: 'schedule',
+          sportIdToBookmakerIds: {
+            [SportId.NBA]: [11, 3],
+          },
+          hasScoresByPeriod: 'tree',
         },
       },
     },

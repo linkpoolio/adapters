@@ -10745,6 +10745,8 @@ export const mockScheduleResponseMalformedMarketCreate = (): nock =>
             event_status: 'STATUS_SCHEDULED',
             score_away: 23,
             score_home: 91,
+            score_away_by_period: [36, 25, 25, 29],
+            score_home_by_period: [35, 24, 32, 29],
             winner_away: 1,
             winner_home: 0,
           },
@@ -10787,6 +10789,8 @@ export const mockScheduleResponseMalformedMarketResolve = (): nock =>
             event_status: 'STATUS_FINAL',
             score_away: null, // score should be number instead of null
             score_home: 91,
+            score_away_by_period: [36, 25, 25, 29],
+            score_home_by_period: [35, 24, 32, 29],
             winner_away: 1,
             winner_home: 0,
           },

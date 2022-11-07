@@ -12,6 +12,8 @@ export interface Team {
 export interface Score {
   score_away: number
   score_home: number
+  score_home_by_period: number[]
+  score_away_by_period: number[]
   winner_away: number
   winner_home: number
   event_status: string
@@ -54,6 +56,8 @@ export interface GameCreate {
 export interface GameResolve {
   homeScore: number
   awayScore: number
+  homeScoreByPeriod: number[]
+  awayScoreByPeriod: number[]
   gameId: string
   statusId: number
   updatedAt: number
