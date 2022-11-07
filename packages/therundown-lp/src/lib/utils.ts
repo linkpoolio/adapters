@@ -153,9 +153,7 @@ export const encodeGameResolve = (gameResolve: GameResolve, hasScoresByPeriod: b
   try {
     encodedGameResolve = utils.defaultAbiCoder.encode([type], [gameResolve])
   } catch (error) {
-    throw new Error(
-      `Unexpected error encoding result: '${JSON.stringify(gameResolve)}' . Reason: ${error}.`,
-    )
+    throw new Error(`Unsupported 'hasScoresByPeriod': ${hasScoresByPeriod}`)
   }
 
   return encodedGameResolve

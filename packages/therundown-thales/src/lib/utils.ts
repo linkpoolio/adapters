@@ -150,10 +150,12 @@ export const getGameCreate = (event: Event, sportId: SportId, bookmakers: number
 
 export const getSumOfScores = (scores: number[], period: number): number => {
   let sumOfScores = 0
-  for (let i = 0; i < period; i++)
-    if (scores[i]) {
-      sumOfScores += scores[i]
-    }
+  const scoresLength = scores.length
+  if (!scoresLength) return sumOfScores
+  for (let i = 0; i < period; i++) {
+    sumOfScores += scores[i]
+    if (i === scoresLength - 1) break
+  }
   return sumOfScores
 }
 
@@ -256,9 +258,7 @@ export const encodeGameResolve = (gameResolve: GameResolve, hasScoresByPeriod: b
   try {
     encodedGameResolve = utils.defaultAbiCoder.encode([type], [gameResolve])
   } catch (error) {
-    throw new Error(
-      `Unexpected error encoding result: '${JSON.stringify(gameResolve)}' . Reason: ${error}.`,
-    )
+    throw new Error(`Unsupported 'hasScoresByPeriod': ${hasScoresByPeriod}`)
   }
 
   return encodedGameResolve

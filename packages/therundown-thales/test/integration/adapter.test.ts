@@ -47,5 +47,5 @@ describe('execute', () => {
   })
 
   describe('schedule endpoint', () => scheduleTests(context))
-  // describe('odds endpoint', () => oddsTests(context))
+  describe('odds endpoint', () => oddsTests(context))
 })
