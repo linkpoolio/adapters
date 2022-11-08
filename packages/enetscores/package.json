@@ -1,6 +1,6 @@
 {
   "name": "@chainlink/enetscores-adapter",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Chainlink enetscores adapter.",
   "keywords": [
     "Chainlink",
