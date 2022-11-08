@@ -9,6 +9,7 @@ export interface ParticipantResult {
 
 export interface EventParticipant {
   id: string
+  number: string
   result: { [key: string]: ParticipantResult }
   participant: Participant
 }

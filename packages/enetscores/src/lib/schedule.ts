@@ -1,6 +1,10 @@
 import { datetime } from '@linkpool/shared'
 
-import { SUPPORTED_NUMBER_OF_EVENT_PARTICIPANTS } from './constants'
+import {
+  EVENT_PARTICIPANTS_AWAY_TEAM_NUMBER,
+  EVENT_PARTICIPANTS_HOME_TEAM_NUMBER,
+  SUPPORTED_NUMBER_OF_EVENT_PARTICIPANTS,
+} from './constants'
 import type { DailyEvent, EventParticipant, GameCreate, GameResolve } from './types'
 
 export function validateEventAndGetEventParticipants(event: DailyEvent): EventParticipant[] {
@@ -15,18 +19,21 @@ export function validateEventAndGetEventParticipants(event: DailyEvent): EventPa
 }
 
 export function getTeamNames(eventParticipants: EventParticipant[], eventName: string): string[] {
-  const homeTeamParticipant = eventParticipants[0].participant
-  if (!homeTeamParticipant) throw new Error(`Could not find 'participant' for home team`)
-  const awayTeamParticipant = eventParticipants[1].participant
-  if (!awayTeamParticipant) throw new Error(`Could not find 'participant' for away team`)
-
-  const homeTeam = homeTeamParticipant.name
+  const homeTeamParticipant = eventParticipants.find(
+    (eventParticipant) => eventParticipant.number === EVENT_PARTICIPANTS_HOME_TEAM_NUMBER,
+  )
+  const awayTeamParticipant = eventParticipants.find(
+    (eventParticipant) => eventParticipant.number === EVENT_PARTICIPANTS_AWAY_TEAM_NUMBER,
+  )
+  const homeTeam = homeTeamParticipant?.participant?.name
+  if (!homeTeam) throw new Error(`Could not find home team name`)
   if (!eventName.startsWith(homeTeam)) {
     throw new Error(
       `Unexpected error fetching the home team data. Event 'name' ('${eventName}') does not start with '${homeTeam}'`,
     )
   }
-  const awayTeam = awayTeamParticipant.name
+  const awayTeam = awayTeamParticipant?.participant?.name
+  if (!awayTeam) throw new Error(`Could not find away team name`)
   if (!eventName.endsWith(awayTeam)) {
     throw new Error(
       `Unexpected error fetching the away team data. Event 'name' ('${eventName}') does not end with '${awayTeam}'`,
