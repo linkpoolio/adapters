@@ -122,11 +122,11 @@ describe('validateEventAndGetEventParticipants', () => {
 describe('getTeamNames', () => {
   const errorTestCases = [
     {
-      name: "could not find 'participant' for home team",
+      name: 'could not find home team name',
       eventName: 'LinkPool-Brighton & Hove Albion',
     },
     {
-      name: "could not find 'participant' for away team",
+      name: 'could not find away team name',
       eventName: 'Tottenham Hotspur-LinkPool',
     },
     {
@@ -145,25 +145,6 @@ describe('getTeamNames', () => {
       startdate: '2022-04-16T11:30:00+00:00',
       status_type: 'finished',
       event_participants: {
-        '13066708': {
-          id: '13066708',
-          number: '1',
-          participantFK: '8586',
-          eventFK: '3610253',
-          n: '0',
-          ut: '2022-04-16T10:33:19+00:00',
-          result: {}, // NB: not necessary
-          participant: {
-            id: '8586',
-            name: 'Tottenham Hotspur',
-            gender: 'male',
-            type: 'team',
-            countryFK: '2',
-            n: '3',
-            ut: '2022-04-12T12:43:50+00:00',
-            country_name: 'England',
-          },
-        },
         '13066709': {
           id: '13066709',
           number: '2',
@@ -180,6 +161,25 @@ describe('getTeamNames', () => {
             countryFK: '2',
             n: '3',
             ut: '2022-04-12T12:43:53+00:00',
+            country_name: 'England',
+          },
+        },
+        '13066708': {
+          id: '13066708',
+          number: '1',
+          participantFK: '8586',
+          eventFK: '3610253',
+          n: '0',
+          ut: '2022-04-16T10:33:19+00:00',
+          result: {}, // NB: not necessary
+          participant: {
+            id: '8586',
+            name: 'Tottenham Hotspur',
+            gender: 'male',
+            type: 'team',
+            countryFK: '2',
+            n: '3',
+            ut: '2022-04-12T12:43:50+00:00',
             country_name: 'England',
           },
         },
@@ -226,25 +226,6 @@ describe('getTeamNames', () => {
         startdate: '2022-04-16T11:30:00+00:00',
         status_type: 'finished',
         event_participants: {
-          '13066708': {
-            id: '13066708',
-            number: '1',
-            participantFK: '8586',
-            eventFK: '3610253',
-            n: '0',
-            ut: '2022-04-16T10:33:19+00:00',
-            result: {}, // NB: not necessary
-            participant: {
-              id: '8586',
-              name: homeTeamName,
-              gender: 'male',
-              type: 'team',
-              countryFK: '2',
-              n: '3',
-              ut: '2022-04-12T12:43:50+00:00',
-              country_name: 'England',
-            },
-          },
           '13066709': {
             id: '13066709',
             number: '2',
@@ -261,6 +242,25 @@ describe('getTeamNames', () => {
               countryFK: '2',
               n: '3',
               ut: '2022-04-12T12:43:53+00:00',
+              country_name: 'England',
+            },
+          },
+          '13066708': {
+            id: '13066708',
+            number: '1',
+            participantFK: '8586',
+            eventFK: '3610253',
+            n: '0',
+            ut: '2022-04-16T10:33:19+00:00',
+            result: {}, // NB: not necessary
+            participant: {
+              id: '8586',
+              name: homeTeamName,
+              gender: 'male',
+              type: 'team',
+              countryFK: '2',
+              n: '3',
+              ut: '2022-04-12T12:43:50+00:00',
               country_name: 'England',
             },
           },
