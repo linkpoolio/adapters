@@ -1,3 +1,6 @@
+export const MIN_LIMIT = 1
+export const GAME_ID_NUMBER_OF_CHARACTERS = 32 // UUID without dashes
+
 export enum SportId {
   NCAA_Football = 1,
   NFL = 2,

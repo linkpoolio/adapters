@@ -15,13 +15,22 @@ import {
   validateAndGetDate,
   validateAndGetGameIds,
   validateAndGetStatusIds,
+  validateLimit,
   validateMarket,
   validateSportId,
+  validateStartAfterGameId,
 } from '../lib/utils'
 
 export const supportedEndpoints = ['schedule']
 
 export const inputParameters: InputParameters = {
+  // Filtering params
+  market: {
+    description: 'Choose to create or resolve market.',
+    required: true,
+    type: 'string',
+    options: [Market.CREATE, Market.RESOLVE],
+  },
   sportId: {
     description: 'The ID of the sport to query.',
     required: true,
@@ -33,32 +42,45 @@ export const inputParameters: InputParameters = {
     required: true,
     type: 'number',
   },
-  market: {
-    description: 'Choose to create or resolve market.',
-    required: true,
-    type: 'string',
-    options: [Market.CREATE, Market.RESOLVE],
-  },
-  statusIds: {
-    description: 'The statuses of the games to query. Examples: `["1","2","3"].`',
-    required: false,
-  },
   gameIds: {
     description:
       'The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]`.',
     required: false,
   },
+  statusIds: {
+    description:
+      'The statuses of the games to query in this moment. Examples: `["1","2","3"]. ' +
+      'Bear in mind that the status of an unfinished game can change on the Data Provider side',
+    required: false,
+  },
+  // Odds logic params
   sportIdToBookmakerIds: {
     description:
       `A JSON object with sportId as key and an Array of bookmaker IDs (Integer) as value. ` +
       `The order of the bookmaker IDs sets the priority for where to fetch the game odds.`,
     required: true,
   },
+  // Result format params
   hasScoresByPeriod: {
-    description: `The scores are returned for each team as 2 uint8 arrays. Each element of the array represents the score from each period.`,
+    description:
+      'The scores are returned for each team as 2 uint8 arrays. ' +
+      'Each element of the array represents the score from each period.',
     required: false,
-    default: false,
     type: 'boolean',
+  },
+  // Pagination params
+  // NB: do not default `limit` as it will vary depending on the combination of sportId, market and network
+  limit: {
+    description: `The maximum number of results to be returned. The minumum value is \`1\``,
+    required: true,
+    type: 'number',
+  },
+  startAfterGameId: {
+    description:
+      'A cursor for use in pagination. It is the game ID that defines your place in the ' +
+      'list and after which game start fetching new results.',
+    required: false,
+    type: 'string',
   },
 }
 
@@ -66,13 +88,15 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   const validator = new Validator(request, inputParameters)
 
   const jobRunID = validator.validated.id
+  const market = validator.validated.data.market
   const sportId = validator.validated.data.sportId
   const dateRaw = validator.validated.data.date
-  const market = validator.validated.data.market
   const gameIdsRaw = validator.validated.data.gameIds
   const statusIdsRaw = validator.validated.data.statusIds
   const sportIdToBookmakerIds = validator.validated.data.sportIdToBookmakerIds
   const hasScoresByPeriod = validator.validated.data.hasScoresByPeriod
+  const limit = validator.validated.data.limit
+  const startAfterGameId = validator.validated.data.startAfterGameId
 
   let gameIds: string[] = []
   let statusIds: string[] = []
@@ -86,6 +110,8 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     gameIds = validateAndGetGameIds(gameIdsRaw)
     statusIds = validateAndGetStatusIds(statusIdsRaw)
     bookmakerIds = validateAndGetBookmakerIdsBySportId(sportId, sportIdToBookmakerIds)
+    validateLimit(limit)
+    validateStartAfterGameId(startAfterGameId)
   } catch (error) {
     const message = (error as Error).message
     throw new AdapterError({
@@ -130,6 +156,10 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     return Requester.success(jobRunID, response, config.verbose)
   }
 
+  // TODO: sort items by date and something else?
+  // TODO: filter by startAfterGameId (if exists), and break at limit (if exists). Create a proper
+  // filtering function... requires breaking for..of loop.
+  // TODO: shape the response including 'hasMore', also add in the JSON result the latest gameId.
   if (market === Market.CREATE) {
     const statuses = marketToStatus.get(Market.CREATE) as string[]
     const filteredEvents = events.filter((event: Event) => {
