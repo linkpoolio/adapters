@@ -81,3 +81,26 @@ export interface Odds {
   awayOdds: number
   drawOdds: number
 }
+
+export interface OddsEndpointResult {
+  hasMore: boolean
+  remainder: number
+  games: string[]
+}
+
+export interface ScheduleEndpointResult {
+  hasMore: boolean
+  remainder: number
+  games: string[]
+}
+
+export type ExternalAdapterResult = OddsEndpointResult | ScheduleEndpointResult
+export interface ResponseSchema {
+  events: Event[]
+  result?: ExternalAdapterResult
+}
+
+export interface EventsPageData {
+  events: Event[]
+  remainder: number
+}

@@ -4611,7 +4611,7 @@ __metadata:
     ajv: ^8.6.2
     axios: ^0.24.0
     decimal.js: ^10.3.1
-    ethers: ^5.6.2
+    ethers: ^5.7.2
     express: ^4.17.1
     fast-redact: ^3.0.1
     fastify: ^3.27.1
@@ -4619,7 +4619,7 @@ __metadata:
     lodash: ^4.17.21
     lru-cache: ^6.0.0
     mock-socket: 9.1.3
-    nock: ^13.2.4
+    nock: ^13.2.9
     object-hash: ^2.2.0
     object-path: ^0.11.5
     pino: ^6.13.0
@@ -4633,7 +4633,7 @@ __metadata:
     remote-redux-devtools: ^0.5.16
     rxjs: ^6.6.3
     sinon: 12.0.1
-    supertest: ^6.2.2
+    supertest: ^6.3.1
     tslib: ^2.3.3
     typescript: 4.3.5
     uuid: ^8.3.0
@@ -10732,7 +10732,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ethers@npm:^5.5.0, ethers@npm:^5.5.2, ethers@npm:^5.6.2, ethers@npm:^5.6.4, ethers@npm:^5.6.5, ethers@npm:^5.6.9":
+"ethers@npm:^5.5.0, ethers@npm:^5.5.2, ethers@npm:^5.6.4, ethers@npm:^5.6.5, ethers@npm:^5.6.9, ethers@npm:^5.7.2":
   version: 5.7.2
   resolution: "ethers@npm:5.7.2"
   dependencies:
@@ -14338,7 +14338,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nock@npm:^13.2.4":
+"nock@npm:^13.2.4, nock@npm:^13.2.9":
   version: 13.2.9
   resolution: "nock@npm:13.2.9"
   dependencies:
@@ -15149,7 +15149,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:6.11.0, qs@npm:^6.10.3, qs@npm:^6.7.0":
+"qs@npm:6.11.0, qs@npm:^6.10.3, qs@npm:^6.11.0, qs@npm:^6.7.0":
   version: 6.11.0
   resolution: "qs@npm:6.11.0"
   dependencies:
@@ -15963,7 +15963,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:7.x, semver@npm:^7.2.1, semver@npm:^7.3.2, semver@npm:^7.3.5, semver@npm:^7.3.7":
+"semver@npm:7.x, semver@npm:^7.2.1, semver@npm:^7.3.2, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8":
   version: 7.3.8
   resolution: "semver@npm:7.3.8"
   dependencies:
@@ -16721,6 +16721,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"superagent@npm:^8.0.3":
+  version: 8.0.3
+  resolution: "superagent@npm:8.0.3"
+  dependencies:
+    component-emitter: ^1.3.0
+    cookiejar: ^2.1.3
+    debug: ^4.3.4
+    fast-safe-stringify: ^2.1.1
+    form-data: ^4.0.0
+    formidable: ^2.0.1
+    methods: ^1.1.2
+    mime: 2.6.0
+    qs: ^6.11.0
+    semver: ^7.3.8
+  checksum: 5329310f3f9fe1217ccd515a2f06dd99c97d08355ae5e4c387349c9bffdd52115fe02ba6b0fb37199f05977522778e1350d0a68caef1363c8079aa49af8ce6c8
+  languageName: node
+  linkType: hard
+
 "supertest@npm:6.2.2":
   version: 6.2.2
   resolution: "supertest@npm:6.2.2"
@@ -16738,6 +16756,16 @@ __metadata:
     methods: ^1.1.2
     superagent: ^8.0.0
   checksum: 95062161af3a16669231dcde0375f89a8c57339ca8e5820b483959dd77c88a89c9d63241cad000f6178822666ae818fd2e158b44a10d865366809e173737720e
+  languageName: node
+  linkType: hard
+
+"supertest@npm:^6.3.1":
+  version: 6.3.1
+  resolution: "supertest@npm:6.3.1"
+  dependencies:
+    methods: ^1.1.2
+    superagent: ^8.0.3
+  checksum: 024d10e305bbaf926efff3d2dc68d339ae8d8650917a82ad121886c4a3a70707af92fdd1a1fd139054235d65ddab842ec54d48bb7161f6969bf98ef29eea3740
   languageName: node
   linkType: hard
 

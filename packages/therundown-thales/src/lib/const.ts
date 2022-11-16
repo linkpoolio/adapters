@@ -1,5 +1,9 @@
+export const EVENT_ODDS_EXPONENT = 100
 export const MIN_LIMIT = 1
 export const GAME_ID_NUMBER_OF_CHARACTERS = 32 // UUID without dashes
+export const THERUNDOWN_API_MAX_LIMIT = 500
+export const NO_EVENT_ODDS = 0.0001
+export const WORLD_CUP_SCORE_PERIOD = 2
 
 export enum SportId {
   NCAA_Football = 1,
@@ -25,9 +29,7 @@ export enum Market {
   RESOLVE = 'resolve',
 }
 
-export const maxLimit = 500
-
-export const WORLD_CUP_SCORE_PERIOD = 2
+export const marketsRequireSportIdToBookmakerIds = new Set([Market.CREATE])
 
 export const supportedSportIdSchedule = [
   SportId.NFL,
@@ -126,10 +128,6 @@ export const marketToStatus: Map<Market, string[]> = new Map([
     ],
   ],
 ])
-
-export const NO_EVENT_ODDS = 0.0001
-
-export const EVENT_ODDS_EXPONENT = 100
 
 export const noDrawOddsSportIds: Set<number> = new Set([
   SportId.MLB,

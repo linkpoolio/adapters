@@ -2,45 +2,24 @@ import { AdapterError, Requester, Validator, util } from '@chainlink/ea-bootstra
 import type { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
 import { join } from 'path'
 
-import { Market, marketToStatus, maxLimit, supportedSportIdOdds } from '../lib/const'
-import type { Event, GameOdds } from '../lib/types'
+import { Market, THERUNDOWN_API_MAX_LIMIT, marketToStatus } from '../lib/const'
+import { encodeGameOdds } from '../lib/encoders'
+import { getGameOdds } from '../lib/eventProcessors'
+import { filterByEventId, filterEventStatus } from '../lib/filters'
+import { sharedInputParameters } from '../lib/inputParameters'
+import { getEventsPageData } from '../lib/pagination'
+import type { Event, GameOdds, ResponseSchema } from '../lib/types'
 import {
-  encodeGameOdds,
-  filterByEventId,
-  filterEventStatus,
-  getGameOdds,
   validateAndGetBookmakerIdsBySportId,
   validateAndGetDate,
   validateAndGetGameIds,
+  validateLimit,
   validateSportId,
-} from '../lib/utils'
+  validateStartAfterGameId,
+} from '../lib/validations'
 
 export const supportedEndpoints = ['odds']
-
-export const inputParameters: InputParameters = {
-  sportId: {
-    description: 'The ID of the sport to query',
-    required: true,
-    type: 'number',
-    options: supportedSportIdOdds,
-  },
-  date: {
-    description: 'The date of the games to query as a Unix timestamp seconds.',
-    required: true,
-    type: 'number',
-  },
-  gameIds: {
-    description:
-      'The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]`',
-    required: false,
-  },
-  sportIdToBookmakerIds: {
-    description:
-      `A JSON object with sportId as key and an Array of bookmaker IDs (Integer) as value. ` +
-      `The order of the bookmakers' IDs set the priority where to fetch the game odds)`,
-    required: true,
-  },
-}
+export const inputParameters: InputParameters = { ...sharedInputParameters }
 
 export const execute: ExecuteWithConfig<Config> = async (request, _, config) => {
   const validator = new Validator(request, inputParameters)
@@ -50,6 +29,8 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   const dateRaw = validator.validated.data.date
   const gameIdsRaw = validator.validated.data.gameIds
   const sportIdToBookmakerIds = validator.validated.data.sportIdToBookmakerIds
+  const limit = validator.validated.data.limit
+  const startAfterGameId = validator.validated.data.startAfterGameId
 
   let gameIds: string[] = []
   let date: string
@@ -59,6 +40,8 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     date = validateAndGetDate(dateRaw)
     gameIds = validateAndGetGameIds(gameIdsRaw)
     bookmakerIds = validateAndGetBookmakerIdsBySportId(sportId, sportIdToBookmakerIds)
+    validateLimit(limit)
+    validateStartAfterGameId(startAfterGameId)
   } catch (error) {
     const message = (error as Error).message
     throw new AdapterError({
@@ -73,9 +56,8 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     sportId,
     date,
     include: 'scores',
-    limit: maxLimit,
+    limit: THERUNDOWN_API_MAX_LIMIT,
   })
-
   const reqConfig = {
     ...config.api,
     headers: {
@@ -84,11 +66,9 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     },
     url,
   }
-
-  const response = await Requester.request(reqConfig)
+  const response = await Requester.request<ResponseSchema>(reqConfig)
 
   const events: Event[] = response.data.events
-
   if (!Array.isArray(events)) {
     throw new AdapterError({
       jobRunID,
@@ -96,22 +76,35 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
       url: join(reqConfig.baseURL, reqConfig.url),
     })
   }
-
   if (events.length === 0) {
-    response.data.result = []
-
+    response.data.result = {
+      hasMore: false,
+      remainder: 0,
+      games: [],
+    }
     return Requester.success(jobRunID, response, config.verbose)
   }
-
+  // NB: make sure events are sorted by `event_date` in ascending mode
+  events.sort(
+    (eventA, eventB) =>
+      new Date(eventA.event_date).getTime() - new Date(eventB.event_date).getTime(),
+  )
   const statuses = marketToStatus.get(Market.CREATE) as string[]
-
+  // NB: make sure to filter first all the events and know in advance the remainder. We must
+  // prevent the case where an extra request would get 0 games back. Filtering the list twice is
+  // less expensive than paying an extra Chainlink request.
   const filteredEvents = events.filter((event: Event) => {
     return filterByEventId(event, gameIds) && filterEventStatus(event, statuses)
   })
+  const { events: pageEvents, remainder } = getEventsPageData(
+    filteredEvents,
+    limit,
+    startAfterGameId,
+  )
   let oddsList: GameOdds[]
   let encodedOddsList: string[]
   try {
-    oddsList = filteredEvents.map((event: Event) => getGameOdds(event, sportId, bookmakerIds))
+    oddsList = pageEvents.map((event: Event) => getGameOdds(event, sportId, bookmakerIds))
     encodedOddsList = oddsList.map((gameOdds: GameOdds) => encodeGameOdds(gameOdds))
   } catch (error) {
     const message = (error as Error).message
@@ -122,7 +115,10 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
       url: join(reqConfig.baseURL, reqConfig.url),
     })
   }
-  response.data.result = encodedOddsList
-
+  response.data.result = {
+    hasMore: !!remainder,
+    remainder,
+    games: encodedOddsList,
+  }
   return Requester.success(jobRunID, response, config.verbose)
 }
