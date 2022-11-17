@@ -2,7 +2,7 @@ import { AdapterError, Requester, Validator, util } from '@chainlink/ea-bootstra
 import type { Config, ExecuteWithConfig, InputParameters } from '@chainlink/types'
 import { join } from 'path'
 
-import { Market, THERUNDOWN_API_MAX_LIMIT, marketToStatus } from '../lib/const'
+import { Endpoint, Market, THERUNDOWN_API_MAX_LIMIT, marketToStatus } from '../lib/const'
 import { encodeGameOdds } from '../lib/encoders'
 import { getGameOdds } from '../lib/eventProcessors'
 import { filterByEventId, filterEventStatus } from '../lib/filters'
@@ -18,7 +18,7 @@ import {
   validateStartAfterGameId,
 } from '../lib/validations'
 
-export const supportedEndpoints = ['odds']
+export const supportedEndpoints = [Endpoint.ODDS]
 export const inputParameters: InputParameters = { ...sharedInputParameters }
 
 export const execute: ExecuteWithConfig<Config> = async (request, _, config) => {
@@ -28,7 +28,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   const sportId = validator.validated.data.sportId
   const dateRaw = validator.validated.data.date
   const gameIdsRaw = validator.validated.data.gameIds
-  const sportIdToBookmakerIds = validator.validated.data.sportIdToBookmakerIds
+  const sportIdToBookmakerIds = validator.validated.data.sportIdToBookmakerIds || {}
   const limit = validator.validated.data.limit
   const startAfterGameId = validator.validated.data.startAfterGameId
 
@@ -96,11 +96,10 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   const filteredEvents = events.filter((event: Event) => {
     return filterByEventId(event, gameIds) && filterEventStatus(event, statuses)
   })
-  const { events: pageEvents, remainder } = getEventsPageData(
-    filteredEvents,
+  const { events: pageEvents, remainder } = getEventsPageData(filteredEvents, {
     limit,
     startAfterGameId,
-  )
+  })
   let oddsList: GameOdds[]
   let encodedOddsList: string[]
   try {

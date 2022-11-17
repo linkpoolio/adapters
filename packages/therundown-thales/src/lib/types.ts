@@ -100,6 +100,11 @@ export interface ResponseSchema {
   result?: ExternalAdapterResult
 }
 
+export interface PaginationConfig {
+  limit?: number
+  startAfterGameId?: string
+}
+
 export interface EventsPageData {
   events: Event[]
   remainder: number

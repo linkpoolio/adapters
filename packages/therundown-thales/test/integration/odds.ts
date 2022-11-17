@@ -1,6 +1,7 @@
 import { assertError, assertSuccess } from '@chainlink/ea-test-helpers'
 import { AdapterRequest } from '@chainlink/types'
 
+import { Endpoint, SportId } from '../../src/lib/const'
 import type { SuiteContext } from './adapter.test'
 import {
   mockScheduleResponseError,
@@ -18,12 +19,13 @@ export function oddsTests(context: SuiteContext): void {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'odds',
-            sportId: 4,
+            endpoint: Endpoint.ODDS,
+            sportId: SportId.NBA,
             date: 1635529231,
             sportIdToBookmakerIds: {
-              '4': [11, 3],
+              [SportId.NBA]: [11, 3],
             },
+            limit: 20,
           },
         }
         mockScheduleResponseError()
@@ -45,12 +47,13 @@ export function oddsTests(context: SuiteContext): void {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'odds',
-            sportId: 4,
+            endpoint: Endpoint.ODDS,
+            sportId: SportId.NBA,
             date: 1635529231,
             sportIdToBookmakerIds: {
-              '4': [11, 3],
+              [SportId.NBA]: [11, 3],
             },
+            limit: 20,
           },
         }
         mockScheduleResponseMalformedMarketCreate()
@@ -75,12 +78,13 @@ export function oddsTests(context: SuiteContext): void {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'odds',
-            sportId: 4,
+            endpoint: Endpoint.ODDS,
+            sportId: SportId.NBA,
             date: 1635529231,
             sportIdToBookmakerIds: {
-              '4': [11, 3],
+              [SportId.NBA]: [11, 3],
             },
+            limit: 20,
           },
         }
         mockScheduleResponseSuccessMarketCreate()
@@ -101,13 +105,14 @@ export function oddsTests(context: SuiteContext): void {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'odds',
-            sportId: 1,
+            endpoint: Endpoint.ODDS,
+            sportId: SportId.NCAA_Football,
             date: 1662817303,
             sportIdToBookmakerIds: {
-              '1': [3, 11],
+              [SportId.NCAA_Football]: [3, 11],
             },
             gameIds: ['0017049a376cd9c73345507767295c74', '03a242a346a63835d9ba1797f3a10ff8'],
+            limit: 20,
           },
         }
         mockScheduleResponseSuccessMarketCreate2()
@@ -128,13 +133,42 @@ export function oddsTests(context: SuiteContext): void {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'odds',
-            sportId: 1,
+            endpoint: Endpoint.ODDS,
+            sportId: SportId.NCAA_Football,
             date: 1662817303,
             sportIdToBookmakerIds: {
-              '1': [3, 11],
+              [SportId.NCAA_Football]: [3, 11],
             },
             gameIds: ['00000000000000000000000000000000'],
+            limit: 20,
+          },
+        }
+        mockScheduleResponseSuccessMarketCreate2()
+
+        const response = await context.req
+          .post('/')
+          .send(data)
+          .set('Accept', '*/*')
+          .set('Content-Type', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+
+        assertSuccess({ expected: 200, actual: response.statusCode }, response.body, id)
+        expect(response.body).toMatchSnapshot()
+      })
+
+      it('should return 2 results and has 1 more (case starting after a game ID and with limit 2)', async () => {
+        const data: AdapterRequest = {
+          id,
+          data: {
+            endpoint: Endpoint.ODDS,
+            sportId: SportId.NCAA_Football,
+            date: 1662817303,
+            sportIdToBookmakerIds: {
+              [SportId.NCAA_Football]: [3, 11],
+            },
+            limit: 2,
+            startAfterGameId: '0017049a376cd9c73345507767295c74',
           },
         }
         mockScheduleResponseSuccessMarketCreate2()

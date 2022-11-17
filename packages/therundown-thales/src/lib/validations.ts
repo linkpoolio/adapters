@@ -117,7 +117,7 @@ export const validateStartAfterGameId = (gameId: string): void => {
 
   if (gameId.length !== GAME_ID_NUMBER_OF_CHARACTERS) {
     throw new Error(
-      `Invalid 'startAfterGameId': ${gameId}. Expected format is ${GAME_ID_NUMBER_OF_CHARACTERS} hex digits.`,
+      `Invalid 'startAfterGameId': ${gameId}. Expected format is ${GAME_ID_NUMBER_OF_CHARACTERS} hex digits`,
     )
   }
 }

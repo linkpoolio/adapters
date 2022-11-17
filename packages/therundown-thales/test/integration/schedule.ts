@@ -1,6 +1,7 @@
 import { assertError, assertSuccess } from '@chainlink/ea-test-helpers'
 import { AdapterRequest } from '@chainlink/types'
 
+import { Endpoint, Market, SportId } from '../../src/lib/const'
 import type { SuiteContext } from './adapter.test'
 import {
   mockScheduleResponseError,
@@ -23,14 +24,15 @@ export function scheduleTests(context: SuiteContext): void {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'schedule',
-            sportId: 4,
+            endpoint: Endpoint.SCHEDULE,
+            market: Market.CREATE,
+            sportId: SportId.NBA,
             date: 1635529231,
-            market: 'create',
             sportIdToBookmakerIds: {
-              '4': [3, 11],
+              [SportId.NBA]: [3, 11],
             },
             hasScoresByPeriod: true,
+            limit: 20,
           },
         }
         mockScheduleResponseError()
@@ -52,14 +54,15 @@ export function scheduleTests(context: SuiteContext): void {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'schedule',
-            sportId: 4,
+            endpoint: Endpoint.SCHEDULE,
+            market: Market.CREATE,
+            sportId: SportId.NBA,
             date: 1635529231,
-            market: 'create',
             sportIdToBookmakerIds: {
-              '4': [3, 11],
+              [SportId.NBA]: [3, 11],
             },
             hasScoresByPeriod: true,
+            limit: 20,
           },
         }
         mockScheduleResponseMalformedMarketCreate()
@@ -78,14 +81,12 @@ export function scheduleTests(context: SuiteContext): void {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'schedule',
-            sportId: 4,
+            endpoint: Endpoint.SCHEDULE,
+            market: Market.RESOLVE,
+            sportId: SportId.NBA,
             date: 1635529231,
-            market: 'resolve',
-            sportIdToBookmakerIds: {
-              '4': [3, 11],
-            },
             hasScoresByPeriod: true,
+            limit: 20,
           },
         }
         mockScheduleResponseMalformedMarketResolve()
@@ -109,14 +110,15 @@ export function scheduleTests(context: SuiteContext): void {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'schedule',
-            sportId: 4,
+            endpoint: Endpoint.SCHEDULE,
+            market: Market.CREATE,
+            sportId: SportId.NBA,
             date: 1635529231,
-            market: 'create',
             sportIdToBookmakerIds: {
-              '4': [3, 11],
+              [SportId.NBA]: [3, 11],
             },
             hasScoresByPeriod: true,
+            limit: 20,
           },
         }
         mockScheduleResponseSuccessMarketCreateNoLines()
@@ -137,14 +139,15 @@ export function scheduleTests(context: SuiteContext): void {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'schedule',
-            sportId: 4,
+            endpoint: Endpoint.SCHEDULE,
+            market: Market.CREATE,
+            sportId: SportId.NBA,
             date: 1635529231,
-            market: 'create',
             sportIdToBookmakerIds: {
-              '4': [3, 11],
+              [SportId.NBA]: [3, 11],
             },
             hasScoresByPeriod: true,
+            limit: 20,
           },
         }
         mockScheduleResponseSuccessMarketCreate()
@@ -165,15 +168,16 @@ export function scheduleTests(context: SuiteContext): void {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'schedule',
-            sportId: 1,
+            endpoint: Endpoint.SCHEDULE,
+            market: Market.CREATE,
+            sportId: SportId.NCAA_Football,
             date: 1662817303,
-            market: 'create',
             sportIdToBookmakerIds: {
-              '1': [3, 11],
+              [SportId.NCAA_Football]: [3, 11],
             },
             gameIds: ['0017049a376cd9c73345507767295c74', '03a242a346a63835d9ba1797f3a10ff8'],
             hasScoresByPeriod: true,
+            limit: 20,
           },
         }
         mockScheduleResponseSuccessMarketCreate2()
@@ -194,15 +198,45 @@ export function scheduleTests(context: SuiteContext): void {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'schedule',
-            sportId: 1,
+            endpoint: Endpoint.SCHEDULE,
+            market: Market.CREATE,
+            sportId: SportId.NCAA_Football,
             date: 1662817303,
-            market: 'create',
             sportIdToBookmakerIds: {
-              '1': [3, 11],
+              [SportId.NCAA_Football]: [3, 11],
             },
             gameIds: ['00000000000000000000000000000000'],
             hasScoresByPeriod: true,
+            limit: 20,
+          },
+        }
+        mockScheduleResponseSuccessMarketCreate2()
+
+        const response = await context.req
+          .post('/')
+          .send(data)
+          .set('Accept', '*/*')
+          .set('Content-Type', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+
+        assertSuccess({ expected: 200, actual: response.statusCode }, response.body, id)
+        expect(response.body).toMatchSnapshot()
+      })
+
+      it('should return 2 results and has 1 more (case create market, starting after a game ID and with limit 2)', async () => {
+        const data: AdapterRequest = {
+          id,
+          data: {
+            endpoint: Endpoint.SCHEDULE,
+            market: Market.CREATE,
+            sportId: SportId.NCAA_Football,
+            date: 1662817303,
+            sportIdToBookmakerIds: {
+              [SportId.NCAA_Football]: [3, 11],
+            },
+            limit: 2,
+            startAfterGameId: '0017049a376cd9c73345507767295c74',
           },
         }
         mockScheduleResponseSuccessMarketCreate2()
@@ -223,14 +257,12 @@ export function scheduleTests(context: SuiteContext): void {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'schedule',
-            sportId: 4,
+            endpoint: Endpoint.SCHEDULE,
+            market: Market.RESOLVE,
+            sportId: SportId.NBA,
             date: 1635529231,
-            market: 'resolve',
-            sportIdToBookmakerIds: {
-              '4': [3, 11],
-            },
             hasScoresByPeriod: true,
+            limit: 20,
           },
         }
         mockScheduleResponseSuccessMarketResolve()
@@ -251,15 +283,12 @@ export function scheduleTests(context: SuiteContext): void {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'schedule',
-            sportId: 1,
+            endpoint: Endpoint.SCHEDULE,
+            market: Market.RESOLVE,
+            sportId: SportId.NCAA_Football,
             date: 1662222667,
-            market: 'resolve',
-            sportIdToBookmakerIds: {
-              '1': [3, 11],
-            },
             gameIds: ['392546e145079d0d3d3282b4075d7127', '040265cdc1022e13ef1764b9a72cca43'],
-            hasScoresByPeriod: false,
+            limit: 20,
           },
         }
         mockScheduleResponseSuccessMarketResolve2()
@@ -275,18 +304,16 @@ export function scheduleTests(context: SuiteContext): void {
         assertSuccess({ expected: 200, actual: response.statusCode }, response.body, id)
         expect(response.body).toMatchSnapshot()
       })
+
       it('should return 1 result (case resolve market for FIFA World Cup)', async () => {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'schedule',
-            sportId: 18,
+            endpoint: Endpoint.SCHEDULE,
+            market: Market.RESOLVE,
+            sportId: SportId.FIFA,
             date: 1662222667,
-            market: 'resolve',
-            sportIdToBookmakerIds: {
-              '18': [3, 11],
-            },
-            hasScoresByPeriod: false,
+            limit: 20,
           },
         }
         mockScheduleResponseSuccessMarketResolveWorldCup()
@@ -307,15 +334,38 @@ export function scheduleTests(context: SuiteContext): void {
         const data: AdapterRequest = {
           id,
           data: {
-            endpoint: 'schedule',
-            sportId: 1,
+            endpoint: Endpoint.SCHEDULE,
+            market: Market.RESOLVE,
+            sportId: SportId.NCAA_Football,
             date: 1662222667,
-            market: 'resolve',
-            sportIdToBookmakerIds: {
-              '1': [3, 11],
-            },
             gameIds: ['00000000000000000000000000000000'],
-            hasScoresByPeriod: false,
+            limit: 20,
+          },
+        }
+        mockScheduleResponseSuccessMarketResolve2()
+
+        const response = await context.req
+          .post('/')
+          .send(data)
+          .set('Accept', '*/*')
+          .set('Content-Type', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200)
+
+        assertSuccess({ expected: 200, actual: response.statusCode }, response.body, id)
+        expect(response.body).toMatchSnapshot()
+      })
+
+      it('should return 1 results and has 1 more (case resolve market, starting after a game ID and with limit 1)', async () => {
+        const data: AdapterRequest = {
+          id,
+          data: {
+            endpoint: Endpoint.SCHEDULE,
+            market: Market.RESOLVE,
+            sportId: SportId.NCAA_Football,
+            date: 1662222667,
+            limit: 1,
+            startAfterGameId: '16e079e20382533f0d3548d5146c057f',
           },
         }
         mockScheduleResponseSuccessMarketResolve2()

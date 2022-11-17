@@ -5,6 +5,11 @@ export const THERUNDOWN_API_MAX_LIMIT = 500
 export const NO_EVENT_ODDS = 0.0001
 export const WORLD_CUP_SCORE_PERIOD = 2
 
+export enum Endpoint {
+  ODDS = 'odds',
+  SCHEDULE = 'schedule',
+}
+
 export enum SportId {
   NCAA_Football = 1,
   NFL = 2,

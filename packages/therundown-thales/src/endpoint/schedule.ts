@@ -3,6 +3,7 @@ import type { Config, ExecuteWithConfig, InputParameters } from '@chainlink/type
 import { join } from 'path'
 
 import {
+  Endpoint,
   Market,
   THERUNDOWN_API_MAX_LIMIT,
   marketToStatus,
@@ -25,7 +26,7 @@ import {
   validateStartAfterGameId,
 } from '../lib/validations'
 
-export const supportedEndpoints = ['schedule']
+export const supportedEndpoints = [Endpoint.SCHEDULE]
 export const inputParameters: InputParameters = {
   ...sharedInputParameters,
   // Filtering params
@@ -35,12 +36,19 @@ export const inputParameters: InputParameters = {
     type: 'string',
     options: [Market.CREATE, Market.RESOLVE],
   },
+  statusIds: {
+    description:
+      'The statuses of the games to query in this moment. Examples: `["1","2","3"]. ' +
+      'Bear in mind that the status of an unfinished game can change on the Data Provider side',
+    required: false,
+  },
   // Result format params
   hasScoresByPeriod: {
     description:
       'The scores are returned for each team as 2 uint8 arrays. ' +
       'Each element of the array represents the score from each period.',
     required: false,
+    default: false,
     type: 'boolean',
   },
 }
@@ -54,7 +62,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   const dateRaw = validator.validated.data.date
   const gameIdsRaw = validator.validated.data.gameIds
   const statusIdsRaw = validator.validated.data.statusIds
-  const sportIdToBookmakerIds = validator.validated.data.sportIdToBookmakerIds
+  const sportIdToBookmakerIds = validator.validated.data.sportIdToBookmakerIds || {}
   const hasScoresByPeriod = validator.validated.data.hasScoresByPeriod
   const limit = validator.validated.data.limit
   const startAfterGameId = validator.validated.data.startAfterGameId
@@ -129,11 +137,10 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     const filteredEvents = events.filter((event: Event) => {
       return filterByEventId(event, gameIds) && filterEventStatus(event, statuses)
     })
-    const { events: pageEvents, remainder } = getEventsPageData(
-      filteredEvents,
+    const { events: pageEvents, remainder } = getEventsPageData(filteredEvents, {
       limit,
       startAfterGameId,
-    )
+    })
     let gameCreateList: GameCreate[]
     let encodedGameCreateList: string[]
     try {
@@ -173,11 +180,10 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     const filteredEvents = events.filter((event: Event) => {
       return filterByEventId(event, gameIds) && filterEventStatus(event, statuses)
     })
-    const { events: pageEvents, remainder } = getEventsPageData(
-      filteredEvents,
+    const { events: pageEvents, remainder } = getEventsPageData(filteredEvents, {
       limit,
       startAfterGameId,
-    )
+    })
     let gameResolveList: GameResolve[]
     let encodedGameResolveList: string[]
     try {

@@ -11,6 +11,45 @@ export const encodeGameCreate = (gameCreate: GameCreate): string => {
       ],
       [gameCreate],
     )
+    // gameCreate = {
+    //   gameId: "0x3736313636626436623464653934653131633562643230636466336662313965",
+    //   homeOdds: "-27000",
+    //   awayOdds: "23400",
+    //   drawOdds: "0",
+    //   spreadHome: "700",
+    //   spreadHomeOdds: "-10300",
+    //   spreadAway: "700",
+    //   spreadAwayOdds: "-10700",
+    //   totalOver: "21100",
+    //   totalOverOdds: "-10400",
+    //   totalUnder: "21100",
+    //   totalUnderOdds: "-10800",
+    //   startTime: "1668694795",
+    //   homeTeam: "LinkPool",
+    //   awayTeam: "Thales",
+    // }
+    // encodedGameCreate = utils.defaultAbiCoder.encode(
+    //   [
+    //     'tuple(' +
+    //     'bytes32 gameId,'+
+    //     'int24 homeOdds,' +
+    //     'int24 awayOdds,' +
+    //     'int24 drawOdds,' +
+    //     'int16 spreadHome,' +
+    //     'int24 spreadHomeOdds,' +
+    //     'int16 spreadAway,' +
+    //     'int24 spreadAwayOdds,' +
+    //     'uint24 totalOver,' +
+    //     'int24 totalOverOdds,' +
+    //     'uint24 totalUnder,' +
+    //     'int24 totalUnderOdds,' +
+    //     'uint40 startTime,' +
+    //     'string homeTeam,' +
+    //     'string awayTeam' +
+    //     ')',
+    //   ],
+    //   [gameCreate],
+    // )
   } catch (error) {
     throw new Error(
       `Unexpected error encoding result: '${JSON.stringify(gameCreate)}'. Reason: ${error}.`,

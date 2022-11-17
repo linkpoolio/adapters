@@ -20,12 +20,6 @@ export const sharedInputParameters: InputParameters = {
       'The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]`.',
     required: false,
   },
-  statusIds: {
-    description:
-      'The statuses of the games to query in this moment. Examples: `["1","2","3"]. ' +
-      'Bear in mind that the status of an unfinished game can change on the Data Provider side',
-    required: false,
-  },
   // Odds logic params
   sportIdToBookmakerIds: {
     description:
