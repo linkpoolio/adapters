@@ -16,6 +16,20 @@ export interface Score {
   updated_at: string
 }
 
+export interface Spread {
+  point_spread_away: number
+  point_spread_away_money: number
+  point_spread_home: number
+  point_spread_home_money: number
+}
+
+export interface Total {
+  total_over: number
+  total_over_money: number
+  total_under: number
+  total_under_money: number
+}
+
 export interface Moneyline {
   moneyline_away: number
   moneyline_home: number
@@ -24,6 +38,8 @@ export interface Moneyline {
 
 export interface Line {
   moneyline: Moneyline
+  spread: Spread
+  total: Total
 }
 
 export interface Event {
@@ -66,10 +82,32 @@ export interface GameCreateOdds {
 }
 
 export interface GameOdds {
+  gameId: string
   homeOdds: number
   awayOdds: number
   drawOdds: number
-  gameId: string
+  spreadHome: number
+  spreadHomeOdds: number
+  spreadAway: number
+  spreadAwayOdds: number
+  totalOver: number
+  totalOverOdds: number
+  totalUnder: number
+  totalUnderOdds: number
+}
+
+export interface BookmakerLineData {
+  homeOdds: number
+  awayOdds: number
+  drawOdds: number
+  spreadHome: number
+  spreadHomeOdds: number
+  spreadAway: number
+  spreadAwayOdds: number
+  totalOver: number
+  totalOverOdds: number
+  totalUnder: number
+  totalUnderOdds: number
 }
 
 export interface Odds {

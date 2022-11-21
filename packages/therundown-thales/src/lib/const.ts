@@ -55,25 +55,6 @@ export const supportedSportIdSchedule = [
   SportId.FIFA,
 ]
 
-export const supportedSportIdOdds = [
-  SportId.NFL,
-  SportId.MLB,
-  SportId.NBA,
-  SportId.NHL,
-  SportId.MMA,
-  SportId.NCAA_Football,
-  SportId.NCAA_Basketball,
-  SportId.WNBA,
-  SportId.MLS,
-  SportId.EPL,
-  SportId.FRA1,
-  SportId.GER1,
-  SportId.ESP1,
-  SportId.ITA1,
-  SportId.UEFACHAMP,
-  SportId.FIFA,
-]
-
 export const sportIdsRequireMascot = [
   SportId.NCAA_Football,
   SportId.NFL,
@@ -84,6 +65,9 @@ export const sportIdsRequireMascot = [
   SportId.WNBA,
   SportId.MLS,
 ]
+
+// NB: returns odds from moneyline, spread & totals
+export const supportedSportIdExtendedOdds = new Set([SportId.NBA, SportId.NFL])
 
 export const statusIdToStatus: Map<number, string> = new Map([
   [1, 'STATUS_CANCELED'],
