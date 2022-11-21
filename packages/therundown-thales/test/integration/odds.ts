@@ -22,9 +22,7 @@ export function oddsTests(context: SuiteContext): void {
             endpoint: Endpoint.ODDS,
             sportId: SportId.NBA,
             date: 1635529231,
-            sportIdToBookmakerIds: {
-              [SportId.NBA]: [11, 3],
-            },
+            bookmakerIds: [11, 3],
             limit: 20,
           },
         }
@@ -50,9 +48,7 @@ export function oddsTests(context: SuiteContext): void {
             endpoint: Endpoint.ODDS,
             sportId: SportId.NBA,
             date: 1635529231,
-            sportIdToBookmakerIds: {
-              [SportId.NBA]: [11, 3],
-            },
+            bookmakerIds: [11, 3],
             limit: 20,
           },
         }
@@ -81,9 +77,7 @@ export function oddsTests(context: SuiteContext): void {
             endpoint: Endpoint.ODDS,
             sportId: SportId.NBA,
             date: 1635529231,
-            sportIdToBookmakerIds: {
-              [SportId.NBA]: [11, 3],
-            },
+            bookmakerIds: [11, 3],
             limit: 20,
           },
         }
@@ -108,9 +102,7 @@ export function oddsTests(context: SuiteContext): void {
             endpoint: Endpoint.ODDS,
             sportId: SportId.NCAA_Football,
             date: 1662817303,
-            sportIdToBookmakerIds: {
-              [SportId.NCAA_Football]: [3, 11],
-            },
+            bookmakerIds: [3, 11],
             gameIds: ['0017049a376cd9c73345507767295c74', '03a242a346a63835d9ba1797f3a10ff8'],
             limit: 20,
           },
@@ -136,9 +128,7 @@ export function oddsTests(context: SuiteContext): void {
             endpoint: Endpoint.ODDS,
             sportId: SportId.NCAA_Football,
             date: 1662817303,
-            sportIdToBookmakerIds: {
-              [SportId.NCAA_Football]: [3, 11],
-            },
+            bookmakerIds: [3, 11],
             gameIds: ['00000000000000000000000000000000'],
             limit: 20,
           },
@@ -164,9 +154,7 @@ export function oddsTests(context: SuiteContext): void {
             endpoint: Endpoint.ODDS,
             sportId: SportId.NCAA_Football,
             date: 1662817303,
-            sportIdToBookmakerIds: {
-              [SportId.NCAA_Football]: [3, 11],
-            },
+            bookmakerIds: [3, 11],
             limit: 2,
             startAfterGameId: '0017049a376cd9c73345507767295c74',
           },

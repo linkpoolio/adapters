@@ -3,7 +3,7 @@
 exports[`execute odds endpoint error calls when successfully requesting Therundown API should throw and exception if the response is malformed 1`] = `
 Object {
   "error": Object {
-    "feedID": "{\\"data\\":{\\"endpoint\\":\\"odds\\",\\"sportId\\":4,\\"date\\":1635529231,\\"sportIdToBookmakerIds\\":{\\"4\\":[11,3]},\\"limit\\":20}}",
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"odds\\",\\"sportId\\":4,\\"date\\":1635529231,\\"bookmakerIds\\":[11,3],\\"limit\\":20}}",
     "message": "The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received type number (777)",
     "name": "AdapterError",
     "url": "https:/therundown-therundown-v1.p.rapidapi.com/sports/4/events/2021-10-29?include=scores&limit=500",
@@ -113,7 +113,7 @@ Object {
 exports[`execute schedule endpoint error calls when successfully requesting Therundown API should throw an exception if a game attribute is malformed while creating market 1`] = `
 Object {
   "error": Object {
-    "feedID": "{\\"data\\":{\\"endpoint\\":\\"schedule\\",\\"market\\":\\"create\\",\\"sportId\\":4,\\"date\\":1635529231,\\"sportIdToBookmakerIds\\":{\\"4\\":[3,11]},\\"hasScoresByPeriod\\":true,\\"limit\\":20}}",
+    "feedID": "{\\"data\\":{\\"endpoint\\":\\"schedule\\",\\"market\\":\\"create\\",\\"sportId\\":4,\\"date\\":1635529231,\\"bookmakerIds\\":[3,11],\\"hasScoresByPeriod\\":true,\\"limit\\":20}}",
     "message": "Missing 'teams_normalized' in event: {\\"event_id\\":777,\\"event_uuid\\":\\"11ec-384b-28cf0000-823d-cd821c1e16bb\\",\\"score\\":{\\"event_status\\":\\"STATUS_SCHEDULED\\",\\"score_away\\":23,\\"score_home\\":91,\\"winner_away\\":1,\\"winner_home\\":0,\\"score_away_by_period\\":[36,25,25,29],\\"score_home_by_period\\":[35,24,32,29]},\\"teams\\":[{\\"team_id\\":152,\\"team_normalized_id\\":20,\\"is_away\\":true,\\"is_home\\":false},{\\"team_id\\":188,\\"team_normalized_id\\":27,\\"name\\":\\"Houston Rockets\\",\\"is_away\\":false,\\"is_home\\":true}]}",
     "name": "AdapterError",
     "url": "https:/therundown-therundown-v1.p.rapidapi.com/sports/4/events/2021-10-29?include=scores&limit=500",

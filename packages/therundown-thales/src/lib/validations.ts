@@ -7,45 +7,6 @@ import {
   SportId,
   statusIdToStatus,
 } from '../lib/const'
-import type { SportIdToBookmakerIds } from '../lib/types'
-
-export const validateAndGetBookmakerIdsBySportId = (
-  sportId: SportId,
-  sportIdToBookmakerIds: SportIdToBookmakerIds,
-): number[] => {
-  const keys = Object.keys(sportIdToBookmakerIds)
-  // NB: sportId must have an Array of bookmaker IDs. Validator should prevent an empty object
-  if (!keys.length || !keys.includes(sportId.toString())) {
-    throw new Error(
-      `Missing 'sportIdToBookmakerIds' entry for 'sportId': ${sportId}. Expected formats is an ` +
-        `object with sportId as key and an Array of bookmaker IDs (Integer) as value. ` +
-        `'sportIdToBookmakerIds' ${JSON.stringify(sportIdToBookmakerIds)}`,
-    )
-  }
-  for (const [keySportId, bookmakerIds] of Object.entries(sportIdToBookmakerIds)) {
-    if (!Object.values(SportId).includes(Number(keySportId) as SportId)) {
-      throw new Error(
-        `Unsupported 'sportId': ${keySportId}. 'sportIdToBookmakerIds': ${JSON.stringify(
-          sportIdToBookmakerIds,
-        )}`,
-      )
-    }
-    if (
-      !Array.isArray(bookmakerIds) ||
-      !bookmakerIds.length ||
-      bookmakerIds.some((bookmakerId) => !Number.isInteger(bookmakerId))
-    ) {
-      throw new Error(
-        `Invalid bookmaker IDs by 'sportId' ${keySportId}: ${JSON.stringify(
-          bookmakerIds,
-        )}. Expected formats is an Array of Integer with at least one item. 'sportIdToBookmakerIds': ${JSON.stringify(
-          sportIdToBookmakerIds,
-        )}`,
-      )
-    }
-  }
-  return sportIdToBookmakerIds[sportId]
-}
 
 export const validateAndGetDate = (dateRaw: number): string => {
   if (isNaN(dateRaw)) {
@@ -55,30 +16,21 @@ export const validateAndGetDate = (dateRaw: number): string => {
   return date
 }
 
-export const validateAndGetGameIds = (gameIdsRaw: string[]): string[] => {
-  if (!gameIdsRaw) return []
-  if (gameIdsRaw === null) return []
-  gameIdsRaw.forEach((gameId: string) => {
-    if (gameId.length !== GAME_ID_NUMBER_OF_CHARACTERS) {
-      throw new Error(
-        `Invalid 'gameIds': ${gameId}. Expected format is ${GAME_ID_NUMBER_OF_CHARACTERS} hex digits.`,
-      )
-    }
-  })
-
-  return gameIdsRaw
-}
-
 export const validateAndGetStatusIds = (statusIdsRaw: string[]): string[] => {
-  if (!statusIdsRaw) return []
-  if (statusIdsRaw === null) return []
+  if (!Array.isArray(statusIdsRaw)) {
+    throw new Error(
+      `Invalid 'statusIds': ${JSON.stringify(
+        statusIdsRaw,
+      )}. Expected format is an Array of numbers`,
+    )
+  }
   const statusIds = statusIdsRaw.map(
     (statusId: string) => statusIdToStatus.get(Number(statusId)) as string,
   )
   statusIdsRaw.forEach((statusIdRaw: string) => {
     if (!statusIdToStatus.has(Number(statusIdRaw))) {
       throw new Error(
-        `Invalid 'statusIds': ${statusIdRaw}. Valid status ID are ${[
+        `Invalid item in 'statusIds': ${statusIdRaw}. Valid status ID are ${[
           ...statusIdToStatus.keys(),
         ].join()}.}`,
       )
@@ -86,6 +38,37 @@ export const validateAndGetStatusIds = (statusIdsRaw: string[]): string[] => {
   })
 
   return statusIds
+}
+
+export const validateBookmakerIds = (bookmakerIds: number[]): void => {
+  if (
+    !Array.isArray(bookmakerIds) ||
+    !bookmakerIds.length ||
+    bookmakerIds.some((bookmakerId) => !Number.isInteger(bookmakerId))
+  ) {
+    throw new Error(
+      `Invalid 'bookmakerIDs': ${JSON.stringify(
+        bookmakerIds,
+      )}. Expected formats is an Array of integers with at least one item`,
+    )
+  }
+}
+
+export const validateGameIds = (gameIds: string[]): void => {
+  if (!Array.isArray(gameIds)) {
+    throw new Error(
+      `Invalid 'gameIds': ${JSON.stringify(
+        gameIds,
+      )}. Expected format is an Array of ${GAME_ID_NUMBER_OF_CHARACTERS} hex digits items`,
+    )
+  }
+  gameIds.forEach((gameId: string) => {
+    if (gameId.length !== GAME_ID_NUMBER_OF_CHARACTERS) {
+      throw new Error(
+        `Invalid item in 'gameIds': ${gameId}. Expected format is ${GAME_ID_NUMBER_OF_CHARACTERS} hex digits`,
+      )
+    }
+  })
 }
 
 export const validateLimit = (limit: number): void => {

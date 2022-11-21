@@ -34,7 +34,7 @@ export enum Market {
   RESOLVE = 'resolve',
 }
 
-export const marketsRequireSportIdToBookmakerIds = new Set([Market.CREATE])
+export const marketsRequireBookmakerIds = new Set([Market.CREATE])
 
 export const supportedSportIdSchedule = [
   SportId.NFL,

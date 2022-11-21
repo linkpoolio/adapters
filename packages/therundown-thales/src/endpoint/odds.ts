@@ -10,9 +10,9 @@ import { sharedInputParameters } from '../lib/inputParameters'
 import { getEventsPageData } from '../lib/pagination'
 import type { Event, GameOdds, ResponseSchema } from '../lib/types'
 import {
-  validateAndGetBookmakerIdsBySportId,
   validateAndGetDate,
-  validateAndGetGameIds,
+  validateBookmakerIds,
+  validateGameIds,
   validateLimit,
   validateSportId,
   validateStartAfterGameId,
@@ -27,19 +27,17 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   const jobRunID = validator.validated.id
   const sportId = validator.validated.data.sportId
   const dateRaw = validator.validated.data.date
-  const gameIdsRaw = validator.validated.data.gameIds
-  const sportIdToBookmakerIds = validator.validated.data.sportIdToBookmakerIds || {}
+  const gameIds = validator.validated.data.gameIds
+  const bookmakerIds = validator.validated.data.bookmakerIds
   const limit = validator.validated.data.limit
   const startAfterGameId = validator.validated.data.startAfterGameId
 
-  let gameIds: string[] = []
   let date: string
-  let bookmakerIds: number[]
   try {
     validateSportId(sportId)
     date = validateAndGetDate(dateRaw)
-    gameIds = validateAndGetGameIds(gameIdsRaw)
-    bookmakerIds = validateAndGetBookmakerIdsBySportId(sportId, sportIdToBookmakerIds)
+    validateGameIds(gameIds)
+    validateBookmakerIds(bookmakerIds)
     validateLimit(limit)
     validateStartAfterGameId(startAfterGameId)
   } catch (error) {

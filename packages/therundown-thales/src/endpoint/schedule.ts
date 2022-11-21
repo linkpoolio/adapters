@@ -7,7 +7,7 @@ import {
   Market,
   THERUNDOWN_API_MAX_LIMIT,
   marketToStatus,
-  marketsRequireSportIdToBookmakerIds,
+  marketsRequireBookmakerIds,
 } from '../lib/const'
 import { encodeGameCreate, encodeGameResolve } from '../lib/encoders'
 import { getGameCreate, getGameResolve } from '../lib/eventProcessors'
@@ -16,10 +16,10 @@ import { sharedInputParameters } from '../lib/inputParameters'
 import { getEventsPageData } from '../lib/pagination'
 import type { Event, GameCreate, GameResolve, ResponseSchema } from '../lib/types'
 import {
-  validateAndGetBookmakerIdsBySportId,
   validateAndGetDate,
-  validateAndGetGameIds,
   validateAndGetStatusIds,
+  validateBookmakerIds,
+  validateGameIds,
   validateLimit,
   validateMarket,
   validateSportId,
@@ -41,6 +41,7 @@ export const inputParameters: InputParameters = {
       'The statuses of the games to query in this moment. Examples: `["1","2","3"]. ' +
       'Bear in mind that the status of an unfinished game can change on the Data Provider side',
     required: false,
+    default: [],
   },
   // Result format params
   hasScoresByPeriod: {
@@ -60,25 +61,23 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   const market = validator.validated.data.market
   const sportId = validator.validated.data.sportId
   const dateRaw = validator.validated.data.date
-  const gameIdsRaw = validator.validated.data.gameIds
+  const gameIds = validator.validated.data.gameIds
   const statusIdsRaw = validator.validated.data.statusIds
-  const sportIdToBookmakerIds = validator.validated.data.sportIdToBookmakerIds || {}
+  const bookmakerIds = validator.validated.data.bookmakerIds
   const hasScoresByPeriod = validator.validated.data.hasScoresByPeriod
   const limit = validator.validated.data.limit
   const startAfterGameId = validator.validated.data.startAfterGameId
 
-  let gameIds: string[] = []
   let statusIds: string[] = []
   let date: string
-  let bookmakerIds: number[]
   try {
     validateMarket(market as Market)
     validateSportId(sportId)
     date = validateAndGetDate(dateRaw)
-    gameIds = validateAndGetGameIds(gameIdsRaw)
+    validateGameIds(gameIds)
     statusIds = validateAndGetStatusIds(statusIdsRaw)
-    if (marketsRequireSportIdToBookmakerIds.has(market)) {
-      bookmakerIds = validateAndGetBookmakerIdsBySportId(sportId, sportIdToBookmakerIds)
+    if (marketsRequireBookmakerIds.has(market)) {
+      validateBookmakerIds(bookmakerIds)
     }
     validateLimit(limit)
     validateStartAfterGameId(startAfterGameId)

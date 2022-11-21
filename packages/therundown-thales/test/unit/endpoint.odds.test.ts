@@ -19,9 +19,7 @@ describe('validation error', () => {
         data: {
           endpoint: Endpoint.ODDS,
           date: 1638297631,
-          sportIdToBookmakerIds: {
-            [SportId.NBA]: [11, 3],
-          },
+          bookmakerIds: [11, 3],
           limit: 1,
         },
       },
@@ -35,9 +33,7 @@ describe('validation error', () => {
           endpoint: Endpoint.ODDS,
           sportId: 'linkpool',
           date: 1638297631,
-          sportIdToBookmakerIds: {
-            [SportId.NBA]: [11, 3],
-          },
+          bookmakerIds: [11, 3],
           limit: 1,
         },
       },
@@ -51,9 +47,7 @@ describe('validation error', () => {
         data: {
           endpoint: Endpoint.ODDS,
           sportId: SportId.NBA,
-          sportIdToBookmakerIds: {
-            [SportId.NBA]: [11, 3],
-          },
+          bookmakerIds: [11, 3],
           limit: 1,
         },
       },
@@ -67,17 +61,15 @@ describe('validation error', () => {
           endpoint: Endpoint.ODDS,
           sportId: SportId.NBA,
           date: 'linkpool',
-          sportIdToBookmakerIds: {
-            [SportId.NBA]: [11, 3],
-          },
+          bookmakerIds: [11, 3],
           limit: 1,
         },
       },
       errorMessage: `date parameter must be of type number`,
     },
-    // sportIdToBookmakerIds
+    // bookmakerIds
     {
-      name: 'sportIdToBookmakerIds not supplied',
+      name: 'bookmakerIds not supplied',
       testData: {
         id: jobID,
         data: {
@@ -87,88 +79,35 @@ describe('validation error', () => {
           limit: 1,
         },
       },
-      errorMessage: `Missing 'sportIdToBookmakerIds' entry for 'sportId': 4. Expected formats is an object with sportId as key and an Array of bookmaker IDs (Integer) as value. 'sportIdToBookmakerIds' {}`,
+      errorMessage: `Invalid 'bookmakerIDs': []. Expected formats is an Array of integers with at least one item`,
     },
     {
-      name: 'sportIdToBookmakerIds invalid (missing sportId entry)',
+      name: 'bookmakerIds invalid (entry value is an empty Array)',
       testData: {
         id: jobID,
         data: {
           endpoint: Endpoint.ODDS,
           sportId: SportId.NBA,
           date: 1638297631,
-          sportIdToBookmakerIds: {
-            [SportId.MLB]: [1, 2, 3],
-          },
+          bookmakerIds: [],
           limit: 1,
         },
       },
-      errorMessage: `Missing 'sportIdToBookmakerIds' entry for 'sportId': 4. Expected formats is an object with sportId as key and an Array of bookmaker IDs (Integer) as value. 'sportIdToBookmakerIds' {"3":[1,2,3]}`,
+      errorMessage: `Invalid 'bookmakerIDs': []. Expected formats is an Array of integers with at least one item`,
     },
     {
-      name: 'sportIdToBookmakerIds invalid (unsupported sportId entry)',
+      name: 'bookmakerIds invalid (is not an Array of integers)',
       testData: {
         id: jobID,
         data: {
           endpoint: Endpoint.ODDS,
           sportId: SportId.NBA,
           date: 1638297631,
-          sportIdToBookmakerIds: {
-            [SportId.NBA]: [1, 2, 3],
-            '30': [4, 5, 6],
-          },
+          bookmakerIds: [11, 'linkpool'],
           limit: 1,
         },
       },
-      errorMessage: `Unsupported 'sportId': 30. 'sportIdToBookmakerIds': {"4":[1,2,3],"30":[4,5,6]}`,
-    },
-    {
-      name: 'sportIdToBookmakerIds invalid (entry value is not an Array of Integer)',
-      testData: {
-        id: jobID,
-        data: {
-          endpoint: Endpoint.ODDS,
-          sportId: SportId.NBA,
-          date: 1638297631,
-          sportIdToBookmakerIds: {
-            [SportId.NBA]: 'linkpool',
-          },
-          limit: 1,
-        },
-      },
-      errorMessage: `Invalid bookmaker IDs by 'sportId' 4: "linkpool". Expected formats is an Array of Integer with at least one item. 'sportIdToBookmakerIds': {"4":"linkpool"}`,
-    },
-    {
-      name: 'sportIdToBookmakerIds invalid (entry value is an empty Array)',
-      testData: {
-        id: jobID,
-        data: {
-          endpoint: Endpoint.ODDS,
-          sportId: SportId.NBA,
-          date: 1638297631,
-          sportIdToBookmakerIds: {
-            [SportId.NBA]: [],
-          },
-          limit: 1,
-        },
-      },
-      errorMessage: `Invalid bookmaker IDs by 'sportId' 4: []. Expected formats is an Array of Integer with at least one item. 'sportIdToBookmakerIds': {"4":[]}`,
-    },
-    {
-      name: 'sportIdToBookmakerIds invalid (entry value has an invalid bookmaker ID)',
-      testData: {
-        id: jobID,
-        data: {
-          endpoint: Endpoint.ODDS,
-          sportId: SportId.NBA,
-          date: 1638297631,
-          sportIdToBookmakerIds: {
-            [SportId.NBA]: [1, 'linkpool'],
-          },
-          limit: 1,
-        },
-      },
-      errorMessage: `Invalid bookmaker IDs by 'sportId' 4: [1,"linkpool"]. Expected formats is an Array of Integer with at least one item. 'sportIdToBookmakerIds': {"4":[1,"linkpool"]}`,
+      errorMessage: `Invalid 'bookmakerIDs': [11,"linkpool"]. Expected formats is an Array of integers with at least one item`,
     },
     // limit
     {
@@ -179,9 +118,7 @@ describe('validation error', () => {
           endpoint: Endpoint.ODDS,
           sportId: SportId.NBA,
           date: 1638297631,
-          sportIdToBookmakerIds: {
-            [SportId.NBA]: [11, 3],
-          },
+          bookmakerIds: [11, 3],
         },
       },
       errorMessage: `Required parameter limit must be non-null and non-empty`,
@@ -194,9 +131,7 @@ describe('validation error', () => {
           endpoint: Endpoint.ODDS,
           sportId: SportId.NBA,
           date: 1638297631,
-          sportIdToBookmakerIds: {
-            [SportId.NBA]: [11, 3],
-          },
+          bookmakerIds: [11, 3],
           limit: 'linkpool',
         },
       },
@@ -210,9 +145,7 @@ describe('validation error', () => {
           endpoint: Endpoint.ODDS,
           sportId: SportId.NBA,
           date: 1638297631,
-          sportIdToBookmakerIds: {
-            [SportId.NBA]: [11, 3],
-          },
+          bookmakerIds: [11, 3],
           limit: 0,
         },
       },
@@ -227,9 +160,7 @@ describe('validation error', () => {
           endpoint: Endpoint.ODDS,
           sportId: SportId.NBA,
           date: 1638297631,
-          sportIdToBookmakerIds: {
-            [SportId.NBA]: [11, 3],
-          },
+          bookmakerIds: [11, 3],
           limit: 10,
           startAfterGameId: 777,
         },
@@ -244,14 +175,43 @@ describe('validation error', () => {
           endpoint: Endpoint.ODDS,
           sportId: SportId.NBA,
           date: 1638297631,
-          sportIdToBookmakerIds: {
-            [SportId.NBA]: [11, 3],
-          },
+          bookmakerIds: [11, 3],
           limit: 10,
           startAfterGameId: 'LinkPool',
         },
       },
       errorMessage: `Invalid 'startAfterGameId': LinkPool. Expected format is ${GAME_ID_NUMBER_OF_CHARACTERS} hex digits`,
+    },
+    // gameIds
+    {
+      name: 'gameIds is invalid',
+      testData: {
+        id: jobID,
+        data: {
+          endpoint: Endpoint.ODDS,
+          sportId: SportId.NBA,
+          date: 1638297631,
+          bookmakerIds: [11, 3],
+          gameIds: 'linkpool',
+          limit: 1,
+        },
+      },
+      errorMessage: `Invalid 'gameIds': "linkpool". Expected format is an Array of ${GAME_ID_NUMBER_OF_CHARACTERS} hex digits items`,
+    },
+    {
+      name: 'gameIds is invalid',
+      testData: {
+        id: jobID,
+        data: {
+          endpoint: Endpoint.ODDS,
+          sportId: SportId.NBA,
+          date: 1638297631,
+          bookmakerIds: [11, 3],
+          gameIds: ['010f30bc9a1c9bff08de504cf1648031', 'linkpool'],
+          limit: 1,
+        },
+      },
+      errorMessage: `Invalid item in 'gameIds': linkpool. Expected format is ${GAME_ID_NUMBER_OF_CHARACTERS} hex digits`,
     },
   ]
   requests.forEach((req) => {

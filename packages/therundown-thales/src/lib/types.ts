@@ -1,7 +1,3 @@
-export interface SportIdToBookmakerIds {
-  [key: string]: number[]
-}
-
 export interface Team {
   name: string
   mascot: string

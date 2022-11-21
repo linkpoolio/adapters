@@ -19,13 +19,13 @@ export const sharedInputParameters: InputParameters = {
     description:
       'The IDs of games to query. Example: `["23660869053591173981da79133fe4c2","fb78cede8c9aa942b2569b048e649a3f"]`.',
     required: false,
+    default: [],
   },
   // Odds logic params
-  sportIdToBookmakerIds: {
-    description:
-      `A JSON object with sportId as key and an Array of bookmaker IDs (Integer) as value. ` +
-      `The order of the bookmaker IDs sets the priority for where to fetch the game odds.`,
+  bookmakerIds: {
+    description: `An array of bookmaker IDs (Integer). The order of the IDs sets the priority for where to fetch the game odds.`,
     required: false,
+    default: [],
   },
   // Pagination params
   // NB: do not default `limit` as it will vary depending on the combination of sportId, market and network
