@@ -119,7 +119,7 @@ export interface Odds {
 export interface OddsEndpointResult {
   hasMore: boolean
   remainder: number
-  games: string[]
+  odds: string[]
 }
 
 export interface ScheduleEndpointResult {

@@ -78,7 +78,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
     response.data.result = {
       hasMore: false,
       remainder: 0,
-      games: [],
+      odds: [],
     }
     return Requester.success(jobRunID, response, config.verbose)
   }
@@ -89,7 +89,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   )
   const statuses = marketToStatus.get(Market.CREATE) as string[]
   // NB: make sure to filter first all the events and know in advance the remainder. We must
-  // prevent the case where an extra request would get 0 games back. Filtering the list twice is
+  // prevent the case where an extra request would get 0 odds back. Filtering the list twice is
   // less expensive than paying an extra Chainlink request.
   const filteredEvents = events.filter((event: Event) => {
     return filterByEventId(event, gameIds) && filterEventStatus(event, statuses)
@@ -115,7 +115,7 @@ export const execute: ExecuteWithConfig<Config> = async (request, _, config) => 
   response.data.result = {
     hasMore: !!remainder,
     remainder,
-    games: encodedOddsList,
+    odds: encodedOddsList,
   }
   return Requester.success(jobRunID, response, config.verbose)
 }
