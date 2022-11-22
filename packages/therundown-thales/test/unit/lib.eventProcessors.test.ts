@@ -680,7 +680,7 @@ describe('getLineDataByBookmakerIds()', () => {
       },
     },
     {
-      name: 'case: sport with draw odds, 2 bookmakers, 1st and 2nd bookmaker IDs are missing. Returns default odds',
+      name: 'case: sport with draw odds, 2 bookmakers, 1st and 2nd bookmaker IDs are missing. Returns default line data',
       testData: {
         event: eventMLS1,
         sportId: SportId.MLS,
@@ -743,7 +743,7 @@ describe('getLineDataByBookmakerIds()', () => {
       },
     },
     {
-      name: 'case: sport with no draw odds, 1 bookmaker, 1st bookmaker ID is missing. Returns default odds',
+      name: 'case: sport with no draw odds, 1 bookmaker, 1st bookmaker ID is missing. Returns default line data',
       testData: {
         event: eventNBA1,
         sportId: SportId.NBA,
@@ -806,7 +806,7 @@ describe('getLineDataByBookmakerIds()', () => {
       },
     },
     {
-      name: 'case: sport with no draw odds, 2 bookmakers, 1st and 2nd bookmaker IDs are missing. Returns default odds',
+      name: 'case: sport with no draw odds, 2 bookmakers, 1st and 2nd bookmaker IDs are missing. Returns default line data',
       testData: {
         event: eventNBA1,
         sportId: SportId.NBA,
@@ -869,7 +869,7 @@ describe('getLineDataByBookmakerIds()', () => {
       },
     },
     {
-      name: 'case: sport with draw odds, 2 bookmakers, 1st bookmaker has odds. Returns 1st bookmaker odds',
+      name: 'case: sport with draw odds, 2 bookmakers, 1st bookmaker has odds. Returns 1st bookmaker line data',
       testData: {
         event: eventMLS1,
         sportId: SportId.MLS,
@@ -931,192 +931,1077 @@ describe('getLineDataByBookmakerIds()', () => {
         },
       },
     },
-    // {
-    //   name: 'case: sport with draw odds, 2 bookmakers, 1st bookmaker has no odds. 2nd bookmaker has odds. Returns 2nd bookmaker odds',
-    //   testData: {
-    //     event: eventMLS1,
-    //     sportId: SportId.MLS,
-    //     sportIdToBookmakers: {
-    //       [`${SportId.MLS}`]: [3, 11],
-    //     },
-    //     lines: {
-    //       '3': {
-    //         moneyline: {
-    //           moneyline_home: 1,
-    //           moneyline_away: 2,
-    //           moneyline_draw: NO_EVENT_ODDS,
-    //         },
-    //       },
-    //       '11': {
-    //         moneyline: {
-    //           moneyline_home: 4,
-    //           moneyline_away: 5,
-    //           moneyline_draw: 6,
-    //         },
-    //       },
-    //     },
-    //     expectedGameOdds: {
-    //       homeOdds: 400,
-    //       awayOdds: 500,
-    //       drawOdds: 600,
-    //     },
-    //   },
-    // },
-    // {
-    //   name: 'case: sport with draw odds, 2 bookmakers, 1st and 2nd bookmaker have no draw odds. Falls back to 2nd bookmaker',
-    //   testData: {
-    //     event: eventMLS1,
-    //     sportId: SportId.MLS,
-    //     sportIdToBookmakers: {
-    //       [`${SportId.MLS}`]: [3, 11],
-    //     },
-    //     lines: {
-    //       '3': {
-    //         moneyline: {
-    //           moneyline_home: 1,
-    //           moneyline_away: 2,
-    //           moneyline_draw: NO_EVENT_ODDS,
-    //         },
-    //       },
-    //       '11': {
-    //         moneyline: {
-    //           moneyline_home: 4,
-    //           moneyline_away: 5,
-    //           moneyline_draw: NO_EVENT_ODDS,
-    //         },
-    //       },
-    //     },
-    //     expectedGameOdds: {
-    //       homeOdds: 400,
-    //       awayOdds: 500,
-    //       drawOdds: 0,
-    //     },
-    //   },
-    // },
-    // {
-    //   name: 'case: sport with draw odds, 2 bookmakers, 1st and 2nd bookmaker have no odds. Returns default odds',
-    //   testData: {
-    //     event: eventMLS1,
-    //     sportId: SportId.MLS,
-    //     sportIdToBookmakers: {
-    //       [`${SportId.MLS}`]: [3, 11],
-    //     },
-    //     lines: {
-    //       '3': {
-    //         moneyline: {
-    //           moneyline_home: 1,
-    //           moneyline_away: NO_EVENT_ODDS,
-    //           moneyline_draw: 3,
-    //         },
-    //       },
-    //       '11': {
-    //         moneyline: {
-    //           moneyline_home: NO_EVENT_ODDS,
-    //           moneyline_away: 5,
-    //           moneyline_draw: NO_EVENT_ODDS,
-    //         },
-    //       },
-    //     },
-    //     expectedGameOdds: {
-    //       homeOdds: 0,
-    //       awayOdds: 0,
-    //       drawOdds: 0,
-    //     },
-    //   },
-    // },
-    // {
-    //   name: 'case: sport with no draw odds, 2 bookmakers, 1st bookmaker has odds. Returns 1st bookmaker odds with drawOdds default value',
-    //   testData: {
-    //     event: eventNBA1,
-    //     sportId: SportId.NBA,
-    //     sportIdToBookmakers: {
-    //       [`${SportId.NBA}`]: [3, 11],
-    //     },
-    //     lines: {
-    //       '3': {
-    //         moneyline: {
-    //           moneyline_home: 1,
-    //           moneyline_away: 2,
-    //           moneyline_draw: 3,
-    //         },
-    //       },
-    //       '11': {
-    //         moneyline: {
-    //           moneyline_home: 4,
-    //           moneyline_away: 5,
-    //           moneyline_draw: 6,
-    //         },
-    //       },
-    //     },
-    //     expectedGameOdds: {
-    //       homeOdds: 100,
-    //       awayOdds: 200,
-    //       drawOdds: 0,
-    //     },
-    //   },
-    // },
-    // {
-    //   name: 'case: sport with no draw odds, 2 bookmakers, 1st bookmaker has no odds. 2nd bookmaker has odds. Returns 2nd bookmaker odds with drawOdds default value',
-    //   testData: {
-    //     event: eventNBA1,
-    //     sportId: SportId.NBA,
-    //     sportIdToBookmakers: {
-    //       [`${SportId.NBA}`]: [3, 11],
-    //     },
-    //     lines: {
-    //       '3': {
-    //         moneyline: {
-    //           moneyline_home: NO_EVENT_ODDS,
-    //           moneyline_away: 2,
-    //           moneyline_draw: 3,
-    //         },
-    //       },
-    //       '11': {
-    //         moneyline: {
-    //           moneyline_home: 4,
-    //           moneyline_away: 5,
-    //           moneyline_draw: 6,
-    //         },
-    //       },
-    //     },
-    //     expectedGameOdds: {
-    //       homeOdds: 400,
-    //       awayOdds: 500,
-    //       drawOdds: 0,
-    //     },
-    //   },
-    // },
-    // {
-    //   name: 'case: sport with no draw odds, 2 bookmakers, 1st and 2nd bookmaker have no odds. Returns default odds',
-    //   testData: {
-    //     event: eventNBA1,
-    //     sportId: SportId.NBA,
-    //     sportIdToBookmakers: {
-    //       [`${SportId.NBA}`]: [3, 11],
-    //     },
-    //     lines: {
-    //       '3': {
-    //         moneyline: {
-    //           moneyline_home: NO_EVENT_ODDS,
-    //           moneyline_away: 2,
-    //           moneyline_draw: 3,
-    //         },
-    //       },
-    //       '11': {
-    //         moneyline: {
-    //           moneyline_home: NO_EVENT_ODDS,
-    //           moneyline_away: 5,
-    //           moneyline_draw: 6,
-    //         },
-    //       },
-    //     },
-    //     expectedGameOdds: {
-    //       homeOdds: 0,
-    //       awayOdds: 0,
-    //       drawOdds: 0,
-    //     },
-    //   },
-    // },
+    {
+      name: 'case: sport with draw odds, 2 bookmakers, 1st bookmaker has no odds (missing moneyline_home). 2nd bookmaker has odds. Returns 2nd bookmaker line data',
+      testData: {
+        event: eventMLS1,
+        sportId: SportId.MLS,
+        sportIdToBookmakers: {
+          [`${SportId.MLS}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: NO_EVENT_ODDS,
+              moneyline_away: 2,
+              moneyline_draw: 3,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: 5,
+              point_spread_away: 6,
+              point_spread_away_money: 7,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: 9,
+              total_under: 10,
+              total_under_money: 11,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 10,
+              moneyline_away: 20,
+              moneyline_draw: 30,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 1000,
+          awayOdds: 2000,
+          drawOdds: 3000,
+          spreadHome: 4000,
+          spreadHomeOdds: 5000,
+          spreadAway: 6000,
+          spreadAwayOdds: 7000,
+          totalOver: 8000,
+          totalOverOdds: 9000,
+          totalUnder: 10000,
+          totalUnderOdds: 11000,
+        },
+      },
+    },
+    {
+      name: 'case: sport with draw odds, 2 bookmakers, 1st bookmaker has no odds (missing moneyline_away). 2nd bookmaker has odds. Returns 2nd bookmaker line data',
+      testData: {
+        event: eventMLS1,
+        sportId: SportId.MLS,
+        sportIdToBookmakers: {
+          [`${SportId.MLS}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: NO_EVENT_ODDS,
+              moneyline_draw: 3,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: 5,
+              point_spread_away: 6,
+              point_spread_away_money: 7,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: 9,
+              total_under: 10,
+              total_under_money: 11,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 10,
+              moneyline_away: 20,
+              moneyline_draw: 30,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 1000,
+          awayOdds: 2000,
+          drawOdds: 3000,
+          spreadHome: 4000,
+          spreadHomeOdds: 5000,
+          spreadAway: 6000,
+          spreadAwayOdds: 7000,
+          totalOver: 8000,
+          totalOverOdds: 9000,
+          totalUnder: 10000,
+          totalUnderOdds: 11000,
+        },
+      },
+    },
+    {
+      name: 'case: sport with draw odds, 2 bookmakers, 1st bookmaker has no odds (missing moneyline_draw). 2nd bookmaker has odds. Returns 2nd bookmaker line data',
+      testData: {
+        event: eventMLS1,
+        sportId: SportId.MLS,
+        sportIdToBookmakers: {
+          [`${SportId.MLS}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: 5,
+              point_spread_away: 6,
+              point_spread_away_money: 7,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: 9,
+              total_under: 10,
+              total_under_money: 11,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 10,
+              moneyline_away: 20,
+              moneyline_draw: 30,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 1000,
+          awayOdds: 2000,
+          drawOdds: 3000,
+          spreadHome: 4000,
+          spreadHomeOdds: 5000,
+          spreadAway: 6000,
+          spreadAwayOdds: 7000,
+          totalOver: 8000,
+          totalOverOdds: 9000,
+          totalUnder: 10000,
+          totalUnderOdds: 11000,
+        },
+      },
+    },
+    {
+      name: 'case: sport with draw odds, 2 bookmakers, 1st bookmaker has no odds (missing point_spread_home_money). 2nd bookmaker has odds. Returns 2nd bookmaker line data',
+      testData: {
+        event: eventMLS1,
+        sportId: SportId.MLS,
+        sportIdToBookmakers: {
+          [`${SportId.MLS}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: 3,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: NO_EVENT_ODDS,
+              point_spread_away: 6,
+              point_spread_away_money: 7,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: 9,
+              total_under: 10,
+              total_under_money: 11,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 10,
+              moneyline_away: 20,
+              moneyline_draw: 30,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 1000,
+          awayOdds: 2000,
+          drawOdds: 3000,
+          spreadHome: 4000,
+          spreadHomeOdds: 5000,
+          spreadAway: 6000,
+          spreadAwayOdds: 7000,
+          totalOver: 8000,
+          totalOverOdds: 9000,
+          totalUnder: 10000,
+          totalUnderOdds: 11000,
+        },
+      },
+    },
+    {
+      name: 'case: sport with draw odds, 2 bookmakers, 1st bookmaker has no odds (missing point_spread_away_money). 2nd bookmaker has odds. Returns 2nd bookmaker line data',
+      testData: {
+        event: eventMLS1,
+        sportId: SportId.MLS,
+        sportIdToBookmakers: {
+          [`${SportId.MLS}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: 3,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: 5,
+              point_spread_away: 6,
+              point_spread_away_money: NO_EVENT_ODDS,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: 9,
+              total_under: 10,
+              total_under_money: 11,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 10,
+              moneyline_away: 20,
+              moneyline_draw: 30,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 1000,
+          awayOdds: 2000,
+          drawOdds: 3000,
+          spreadHome: 4000,
+          spreadHomeOdds: 5000,
+          spreadAway: 6000,
+          spreadAwayOdds: 7000,
+          totalOver: 8000,
+          totalOverOdds: 9000,
+          totalUnder: 10000,
+          totalUnderOdds: 11000,
+        },
+      },
+    },
+    {
+      name: 'case: sport with draw odds, 2 bookmakers, 1st bookmaker has no odds (missing total_over_money). 2nd bookmaker has odds. Returns 2nd bookmaker line data',
+      testData: {
+        event: eventMLS1,
+        sportId: SportId.MLS,
+        sportIdToBookmakers: {
+          [`${SportId.MLS}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: 3,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: 5,
+              point_spread_away: 6,
+              point_spread_away_money: 7,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: NO_EVENT_ODDS,
+              total_under: 10,
+              total_under_money: 11,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 10,
+              moneyline_away: 20,
+              moneyline_draw: 30,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 1000,
+          awayOdds: 2000,
+          drawOdds: 3000,
+          spreadHome: 4000,
+          spreadHomeOdds: 5000,
+          spreadAway: 6000,
+          spreadAwayOdds: 7000,
+          totalOver: 8000,
+          totalOverOdds: 9000,
+          totalUnder: 10000,
+          totalUnderOdds: 11000,
+        },
+      },
+    },
+    {
+      name: 'case: sport with draw odds, 2 bookmakers, 1st bookmaker has no odds (missing total_under_money). 2nd bookmaker has odds. Returns 2nd bookmaker line data',
+      testData: {
+        event: eventMLS1,
+        sportId: SportId.MLS,
+        sportIdToBookmakers: {
+          [`${SportId.MLS}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: 3,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: 5,
+              point_spread_away: 6,
+              point_spread_away_money: 7,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: 9,
+              total_under: 10,
+              total_under_money: NO_EVENT_ODDS,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 10,
+              moneyline_away: 20,
+              moneyline_draw: 30,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 1000,
+          awayOdds: 2000,
+          drawOdds: 3000,
+          spreadHome: 4000,
+          spreadHomeOdds: 5000,
+          spreadAway: 6000,
+          spreadAwayOdds: 7000,
+          totalOver: 8000,
+          totalOverOdds: 9000,
+          totalUnder: 10000,
+          totalUnderOdds: 11000,
+        },
+      },
+    },
+    {
+      name: 'case: sport with draw odds, 2 bookmakers, 1st and 2nd bookmaker have no draw odds (missing moneyline_draw). Returns 2nd bookmaker line data',
+      testData: {
+        event: eventMLS1,
+        sportId: SportId.MLS,
+        sportIdToBookmakers: {
+          [`${SportId.MLS}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: 5,
+              point_spread_away: 6,
+              point_spread_away_money: 7,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: 9,
+              total_under: 10,
+              total_under_money: 11,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 10,
+              moneyline_away: 20,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 1000,
+          awayOdds: 2000,
+          drawOdds: 0,
+          spreadHome: 4000,
+          spreadHomeOdds: 5000,
+          spreadAway: 6000,
+          spreadAwayOdds: 7000,
+          totalOver: 8000,
+          totalOverOdds: 9000,
+          totalUnder: 10000,
+          totalUnderOdds: 11000,
+        },
+      },
+    },
+    {
+      name: 'case: sport with draw odds, 2 bookmakers, 1st and 2nd bookmaker have no odds (missing moneyline_away). Returns default line data',
+      testData: {
+        event: eventMLS1,
+        sportId: SportId.MLS,
+        sportIdToBookmakers: {
+          [`${SportId.MLS}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: NO_EVENT_ODDS,
+              moneyline_draw: 3,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: 5,
+              point_spread_away: 6,
+              point_spread_away_money: 7,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: 9,
+              total_under: 10,
+              total_under_money: 11,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: NO_EVENT_ODDS,
+              moneyline_away: 20,
+              moneyline_draw: NO_EVENT_ODDS,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 0,
+          awayOdds: 0,
+          drawOdds: 0,
+          spreadHome: 0,
+          spreadHomeOdds: 0,
+          spreadAway: 0,
+          spreadAwayOdds: 0,
+          totalOver: 0,
+          totalOverOdds: 0,
+          totalUnder: 0,
+          totalUnderOdds: 0,
+        },
+      },
+    },
+    {
+      name: 'case: sport with no draw odds, 2 bookmakers, 1st bookmaker has odds. Returns 1st bookmaker line data with drawOdds default value',
+      testData: {
+        event: eventNBA1,
+        sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          [`${SportId.NBA}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: 3,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: 5,
+              point_spread_away: 6,
+              point_spread_away_money: 7,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: 9,
+              total_under: 10,
+              total_under_money: 11,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 10,
+              moneyline_away: 20,
+              moneyline_draw: 30,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 100,
+          awayOdds: 200,
+          drawOdds: 0,
+          spreadHome: 400,
+          spreadHomeOdds: 500,
+          spreadAway: 600,
+          spreadAwayOdds: 700,
+          totalOver: 800,
+          totalOverOdds: 900,
+          totalUnder: 1000,
+          totalUnderOdds: 1100,
+        },
+      },
+    },
+    {
+      name: 'case: sport with no draw odds, 2 bookmakers, 1st bookmaker has no odds (missing moneyline_home). 2nd bookmaker has odds. Returns 2nd bookmaker line data with drawOdds default value',
+      testData: {
+        event: eventNBA1,
+        sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          [`${SportId.NBA}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: NO_EVENT_ODDS,
+              moneyline_away: 2,
+              moneyline_draw: 3,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: 5,
+              point_spread_away: 6,
+              point_spread_away_money: 7,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: 9,
+              total_under: 10,
+              total_under_money: 11,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 10,
+              moneyline_away: 20,
+              moneyline_draw: 30,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 1000,
+          awayOdds: 2000,
+          drawOdds: 0,
+          spreadHome: 4000,
+          spreadHomeOdds: 5000,
+          spreadAway: 6000,
+          spreadAwayOdds: 7000,
+          totalOver: 8000,
+          totalOverOdds: 9000,
+          totalUnder: 10000,
+          totalUnderOdds: 11000,
+        },
+      },
+    },
+    {
+      name: 'case: sport with no draw odds, 2 bookmakers, 1st bookmaker has no odds (missing moneyline_away). 2nd bookmaker has odds. Returns 2nd bookmaker line data with drawOdds default value',
+      testData: {
+        event: eventNBA1,
+        sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          [`${SportId.NBA}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: NO_EVENT_ODDS,
+              moneyline_draw: 3,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: 5,
+              point_spread_away: 6,
+              point_spread_away_money: 7,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: 9,
+              total_under: 10,
+              total_under_money: 11,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 10,
+              moneyline_away: 20,
+              moneyline_draw: 30,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 1000,
+          awayOdds: 2000,
+          drawOdds: 0,
+          spreadHome: 4000,
+          spreadHomeOdds: 5000,
+          spreadAway: 6000,
+          spreadAwayOdds: 7000,
+          totalOver: 8000,
+          totalOverOdds: 9000,
+          totalUnder: 10000,
+          totalUnderOdds: 11000,
+        },
+      },
+    },
+    {
+      name: 'case: sport with no draw odds, 2 bookmakers, 1st bookmaker has no odds (missing point_spread_home_money). 2nd bookmaker has odds. Returns 2nd bookmaker line data with drawOdds default value',
+      testData: {
+        event: eventNBA1,
+        sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          [`${SportId.NBA}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: 3,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: NO_EVENT_ODDS,
+              point_spread_away: 6,
+              point_spread_away_money: 7,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: 9,
+              total_under: 10,
+              total_under_money: 11,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 10,
+              moneyline_away: 20,
+              moneyline_draw: 30,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 1000,
+          awayOdds: 2000,
+          drawOdds: 0,
+          spreadHome: 4000,
+          spreadHomeOdds: 5000,
+          spreadAway: 6000,
+          spreadAwayOdds: 7000,
+          totalOver: 8000,
+          totalOverOdds: 9000,
+          totalUnder: 10000,
+          totalUnderOdds: 11000,
+        },
+      },
+    },
+    {
+      name: 'case: sport with no draw odds, 2 bookmakers, 1st bookmaker has no odds (missing point_spread_away_money). 2nd bookmaker has odds. Returns 2nd bookmaker line data with drawOdds default value',
+      testData: {
+        event: eventNBA1,
+        sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          [`${SportId.NBA}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: 3,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: 5,
+              point_spread_away: 6,
+              point_spread_away_money: NO_EVENT_ODDS,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: 9,
+              total_under: 10,
+              total_under_money: 11,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 10,
+              moneyline_away: 20,
+              moneyline_draw: 30,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 1000,
+          awayOdds: 2000,
+          drawOdds: 0,
+          spreadHome: 4000,
+          spreadHomeOdds: 5000,
+          spreadAway: 6000,
+          spreadAwayOdds: 7000,
+          totalOver: 8000,
+          totalOverOdds: 9000,
+          totalUnder: 10000,
+          totalUnderOdds: 11000,
+        },
+      },
+    },
+    {
+      name: 'case: sport with no draw odds, 2 bookmakers, 1st bookmaker has no odds (missing total_over_money). 2nd bookmaker has odds. Returns 2nd bookmaker line data with drawOdds default value',
+      testData: {
+        event: eventNBA1,
+        sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          [`${SportId.NBA}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: 3,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: 5,
+              point_spread_away: 6,
+              point_spread_away_money: 7,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: NO_EVENT_ODDS,
+              total_under: 10,
+              total_under_money: 11,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 10,
+              moneyline_away: 20,
+              moneyline_draw: 30,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 1000,
+          awayOdds: 2000,
+          drawOdds: 0,
+          spreadHome: 4000,
+          spreadHomeOdds: 5000,
+          spreadAway: 6000,
+          spreadAwayOdds: 7000,
+          totalOver: 8000,
+          totalOverOdds: 9000,
+          totalUnder: 10000,
+          totalUnderOdds: 11000,
+        },
+      },
+    },
+    {
+      name: 'case: sport with no draw odds, 2 bookmakers, 1st bookmaker has no odds (missing total_under_money). 2nd bookmaker has odds. Returns 2nd bookmaker line data with drawOdds default value',
+      testData: {
+        event: eventNBA1,
+        sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          [`${SportId.NBA}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: 1,
+              moneyline_away: 2,
+              moneyline_draw: 3,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: 5,
+              point_spread_away: 6,
+              point_spread_away_money: 7,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: 9,
+              total_under: 10,
+              total_under_money: NO_EVENT_ODDS,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: 10,
+              moneyline_away: 20,
+              moneyline_draw: 30,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 1000,
+          awayOdds: 2000,
+          drawOdds: 0,
+          spreadHome: 4000,
+          spreadHomeOdds: 5000,
+          spreadAway: 6000,
+          spreadAwayOdds: 7000,
+          totalOver: 8000,
+          totalOverOdds: 9000,
+          totalUnder: 10000,
+          totalUnderOdds: 11000,
+        },
+      },
+    },
+    {
+      name: 'case: sport with no draw odds, 2 bookmakers, 1st and 2nd bookmaker have no odds. Returns default line data',
+      testData: {
+        event: eventNBA1,
+        sportId: SportId.NBA,
+        sportIdToBookmakers: {
+          [`${SportId.NBA}`]: [3, 11],
+        },
+        lines: {
+          '3': {
+            moneyline: {
+              moneyline_home: NO_EVENT_ODDS,
+              moneyline_away: 2,
+              moneyline_draw: 3,
+            },
+            spread: {
+              point_spread_home: 4,
+              point_spread_home_money: 5,
+              point_spread_away: 6,
+              point_spread_away_money: 7,
+            },
+            total: {
+              total_over: 8,
+              total_over_money: 9,
+              total_under: 10,
+              total_under_money: 11,
+            },
+          },
+          '11': {
+            moneyline: {
+              moneyline_home: NO_EVENT_ODDS,
+              moneyline_away: 20,
+              moneyline_draw: 30,
+            },
+            spread: {
+              point_spread_home: 40,
+              point_spread_home_money: 50,
+              point_spread_away: 60,
+              point_spread_away_money: 70,
+            },
+            total: {
+              total_over: 80,
+              total_over_money: 90,
+              total_under: 100,
+              total_under_money: 110,
+            },
+          },
+        },
+        expectedGameOdds: {
+          homeOdds: 0,
+          awayOdds: 0,
+          drawOdds: 0,
+          spreadHome: 0,
+          spreadHomeOdds: 0,
+          spreadAway: 0,
+          spreadAwayOdds: 0,
+          totalOver: 0,
+          totalOverOdds: 0,
+          totalUnder: 0,
+          totalUnderOdds: 0,
+        },
+      },
+    },
   ]
   it.only.each(getLineDataByBookmakerIdsTestCases)(
     'returns the game odds ($name)',

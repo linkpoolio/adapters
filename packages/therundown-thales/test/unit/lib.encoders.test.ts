@@ -24,12 +24,20 @@ describe('encodeGameOdds()', () => {
   it('returns a GameOdds encoded', () => {
     const gameOdds = {
       gameId: '0x3736313636626436623464653934653131633562643230636466336662313965',
-      homeOdds: -16000,
-      awayOdds: 14000,
+      homeOdds: 31800,
+      awayOdds: -38600,
       drawOdds: 0,
+      spreadHome: 900,
+      spreadAway: -900,
+      spreadHomeOdds: -11200,
+      spreadAwayOdds: -10000,
+      totalOver: 5350,
+      totalOverOdds: -10300,
+      totalUnder: 5350,
+      totalUnderOdds: -10900,
     }
     const expectedEncodedGameOdds =
-      '0x3736313636626436623464653934653131633562643230636466336662313965ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc18000000000000000000000000000000000000000000000000000000000000036b00000000000000000000000000000000000000000000000000000000000000000'
+      '0x37363136366264366234646539346531316335626432306364663366623139650000000000000000000000000000000000000000000000000000000000007c38ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff693800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000384ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd440fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc7cffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd8f000000000000000000000000000000000000000000000000000000000000014e6ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd7c400000000000000000000000000000000000000000000000000000000000014e6ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd56c'
 
     const encodedGameOdds = encodeGameOdds(gameOdds)
 
