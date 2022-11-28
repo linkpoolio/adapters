@@ -1,6 +1,6 @@
 # kyc Adapter
 
-![1.1.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/kyc/package.json)
+![1.1.1](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/kyc/package.json)
 
 This adapter demonstrates leveraging two data providers for the same data types.
 
@@ -32,7 +32,6 @@ This endpoint returns the address details, e.g. KYC, AML
 `addresses` is the only supported name for this endpoint.
 
 ### Input Params
-
 | Required? |  Name   | Aliases |                                    Description                                    |  Type  | Options | Default | Depends On | Not Valid With |
 | :-------: | :-----: | :-----: | :-------------------------------------------------------------------------------: | :----: | :-----: | :-----: | :--------: | :------------: |
 |    ✅     | method  |         |                            The endpoint request method                            | string |  `get`  |         |            |                |
@@ -41,9 +40,7 @@ This endpoint returns the address details, e.g. KYC, AML
 |           | network |         | The network name, e.g. ETH, BTC. Only for the following API_PROVIDER: ciphertrace | string |         |         |            |                |
 
 ### Example
-
 Request:
-
 ```json
 {
   "id": 1,
@@ -57,9 +54,7 @@ Request:
   }
 }
 ```
-
 Response:
-
 ```json
 {
   "jobRunID": 1,
@@ -78,12 +73,10 @@ Response:
   "statusCode": 200
 }
 ```
-
 <details>
 <summary>Additional Examples</summary>
 
 Request:
-
 ```json
 {
   "id": 1,
@@ -97,9 +90,7 @@ Request:
   }
 }
 ```
-
 Response:
-
 ```json
 {
   "jobRunID": 1,
@@ -118,9 +109,7 @@ Response:
   "statusCode": 200
 }
 ```
-
 Request:
-
 ```json
 {
   "id": 1,
@@ -134,9 +123,7 @@ Request:
   }
 }
 ```
-
 Response:
-
 ```json
 {
   "jobRunID": 1,
@@ -155,9 +142,7 @@ Response:
   "statusCode": 200
 }
 ```
-
 </details>
 
 ---
-
-MIT License
+MIT License 
