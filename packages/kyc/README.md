@@ -1,6 +1,6 @@
 # kyc Adapter
 
-![1.1.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/kyc/package.json)
+![1.1.1](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/kyc/package.json)
 
 This adapter demonstrates leveraging two data providers for the same data types.
 

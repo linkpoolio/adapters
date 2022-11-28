@@ -4,7 +4,7 @@ export enum Provider {
 }
 
 export const providerToBaseUrl: ReadonlyMap<Provider, string> = new Map([
-  [Provider.EVEREST, 'https://distributedlab-everest-chainlink.3xm.dev.identitynetwork.io'],
+  [Provider.EVEREST, 'https://everest-chainlink.prod.identitynetwork.io'],
 ])
 
 export const addressesGetNotFoundResult = {
