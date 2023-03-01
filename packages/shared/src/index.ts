@@ -1,4 +1,5 @@
-import * as datetime from './datetime'
+import * as datetime from './date
+time'
 import * as enums from './enums'
 import * as errors from './errors'
 import injector from './injector'

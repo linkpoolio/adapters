@@ -29,23 +29,23 @@ const transformer = {
     return {
       valuation: {
         priceEstimate: {
-          currency: payload.price_estimate.unit,
+          currency: payload.metric_values.price_estimate.unit,
           amount: ethers.utils
-            .parseUnits(payload.price_estimate.value.toString(), 'ether')
+            .parseUnits(payload.metric_values.price_estimate.value.toString(), 'ether')
             .toString(),
           units: 'wei',
         },
         priceEstimateUpperBound: {
-          currency: payload.price_estimate_upper_bound.unit,
+          currency: payload.metric_values.price_estimate_upper_bound.unit,
           amount: ethers.utils
-            .parseUnits(payload.price_estimate_upper_bound.value.toString(), 'ether')
+            .parseUnits(payload.metric_values.price_estimate_upper_bound.value.toString(), 'ether')
             .toString(),
           units: 'wei',
         },
         priceEstimateLowerBound: {
-          currency: payload.price_estimate_lower_bound.unit,
+          currency: payload.metric_values.price_estimate_lower_bound.unit,
           amount: ethers.utils
-            .parseUnits(payload.price_estimate_lower_bound.value.toString(), 'ether')
+            .parseUnits(payload.metric_values.price_estimate_lower_bound.value.toString(), 'ether')
             .toString(),
           units: 'wei',
         },
