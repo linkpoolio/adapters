@@ -188,17 +188,17 @@ Response:
     "valuation": {
       "priceEstimate": {
         "currency": "ETH",
-        "amount": "26798414565161245000",
+        "amount": "18746314209468810000",
         "units": "wei"
       },
       "priceEstimateUpperBound": {
         "currency": "ETH",
-        "amount": "110165986056929110000",
+        "amount": "154811129262219250000",
         "units": "wei"
       },
       "priceEstimateLowerBound": {
         "currency": "ETH",
-        "amount": "10930285452745508000",
+        "amount": "1344708589490849300",
         "units": "wei"
       }
     }
