@@ -1,6 +1,6 @@
 # nft-analytics Adapter
 
-![1.2.0](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/nft-analytics/package.json)
+![1.2.1](https://img.shields.io/github/package-json/v/linkpoolio/adapters?filename=packages/nft-analytics/package.json)
 
 An adapter to query NFT analytics
 
