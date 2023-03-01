@@ -7,17 +7,19 @@ describe('models', () => {
   describe('bitscrunch transformer', () => {
     it('hydrates an IValuation object', async () => {
       const getValuationPayload = {
-        price_estimate: {
-          value: 26.798414565161245,
-          unit: 'ETH',
-        },
-        price_estimate_upper_bound: {
-          value: 110.16598605692911,
-          unit: 'ETH',
-        },
-        price_estimate_lower_bound: {
-          value: 10.930285452745508,
-          unit: 'ETH',
+        metric_values: {
+          price_estimate: {
+            value: 26.798414565161245,
+            unit: 'ETH',
+          },
+          price_estimate_upper_bound: {
+            value: 110.16598605692911,
+            unit: 'ETH',
+          },
+          price_estimate_lower_bound: {
+            value: 10.930285452745508,
+            unit: 'ETH',
+          },
         },
       }
       const expectedValuation = {

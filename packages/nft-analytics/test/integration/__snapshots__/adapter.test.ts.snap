@@ -79,17 +79,17 @@ Object {
   "data": Object {
     "valuation": Object {
       "priceEstimate": Object {
-        "amount": "26798414565161245000",
+        "amount": "18746314209468810000",
         "currency": "ETH",
         "units": "wei",
       },
       "priceEstimateLowerBound": Object {
-        "amount": "10930285452745508000",
+        "amount": "1344708589490849300",
         "currency": "ETH",
         "units": "wei",
       },
       "priceEstimateUpperBound": Object {
-        "amount": "110165986056929110000",
+        "amount": "154811129262219250000",
         "currency": "ETH",
         "units": "wei",
       },
