@@ -23,9 +23,6 @@
     "server:dist": "node -e 'require(\"./dist/index.js\").server()'",
     "start": "yarn server:dist"
   },
-  "config": {
-    "public": true
-  },
   "installConfig": {
     "hoistingLimits": "workspaces"
   },

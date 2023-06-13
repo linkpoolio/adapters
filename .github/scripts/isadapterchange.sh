@@ -2,11 +2,14 @@
 
 adapter=$1
 
+# TODO remove these three lines, temporarily added to force override to first-time publish on github registry
+echo "This diff contains $adapter adapter src code change."
+echo "::set-output name=result::true"
+exit 0;
+
 # echo "========== check paths of modified files =========="
 filename=$(date +%s)
 git diff --name-only HEAD^ HEAD > $filename.txt
-has_generic_adapter_change=0
-has_changeset=0
 
 while IFS= read -r file
 do
