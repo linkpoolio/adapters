@@ -90,4 +90,4 @@ jobs:
         if: steps.adapter_did_change.outputs.result == 'true'
         run: |
           docker tag ${{ matrix.adapter.image }} ghcr.io/linkpoolio/adapters/${{ matrix.adapter.image }}
-          docker push ghcr.io/linkpoolio/adapters//${{ matrix.adapter.image }}
+          docker push ghcr.io/linkpoolio/adapters/${{ matrix.adapter.image }}
