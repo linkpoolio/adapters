@@ -98,3 +98,17 @@ jobs:
         run: |
           docker tag ${{ matrix.adapter.image }} ${{ steps.set_publish_url.outputs.url }}/${{ matrix.adapter.image }}
           docker push ${{ steps.set_publish_url.outputs.url }}/${{ matrix.adapter.image }}
+
+      - name: Login to GitHub Container Registry
+        if: steps.adapter_did_change.outputs.result == 'true'
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy Image in github registry
+        if: steps.adapter_did_change.outputs.result == 'true'
+        run: |
+          docker tag ${{ matrix.adapter.image }} ghcr.io/linkpoolio/adapters/${{ matrix.adapter.image }}
+          docker push ghcr.io/linkpoolio/adapters//${{ matrix.adapter.image }}
